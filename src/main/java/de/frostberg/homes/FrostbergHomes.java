@@ -6,6 +6,7 @@ import de.frostberg.homes.commands.HomesCommand;
 import de.frostberg.homes.commands.SetHomeCommand;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
+import de.frostberg.homes.tokens.commands.PayCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,6 +53,10 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("homes").setExecutor(homesCommand);
         getCommand("homes").setTabCompleter(homesCommand);
 
+        PayCommand payCommand = new PayCommand(this);
+        getCommand("pay").setExecutor(payCommand);
+        getCommand("pay").setTabCompleter(payCommand);
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
@@ -67,7 +72,7 @@ public class FrostbergHomes extends JavaPlugin {
      */
     private void logSoftDependencies() {
         PluginManager pm = getServer().getPluginManager();
-        String[] softDependencies = {"LuckPerms", "Vault", "PlaceholderAPI", "PlotSquared", "Multiverse-Core", "TAB"};
+        String[] softDependencies = {"LuckPerms", "Vault", "PlaceholderAPI", "PlotSquared", "Multiverse-Core", "TAB", "PlayerPoints"};
 
         for (String dependency : softDependencies) {
             boolean found = pm.getPlugin(dependency) != null;
