@@ -6,7 +6,12 @@ author: Frostberg
 description: Eigenes Homes-Plugin fuer Paper - farbenfroh, konfigurierbar, kein Essentials noetig.
 
 # Laedt NACH diesen Plugins, falls vorhanden - keine Pflicht-Abhaengigkeit
-softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB, PlayerPoints]
+softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB, PlayerPoints, EssentialEconomy]
+
+# Muss VOR EssentialEconomy laden, damit unser eigener /pay-Befehl den Namen
+# bekommt (EssentialEconomy hat selbst keine Moeglichkeit, seinen /pay-Befehl
+# umzubenennen - siehe PayCommand.java fuer Details)
+loadbefore: [EssentialEconomy]
 
 commands:
   set:
@@ -30,8 +35,8 @@ commands:
     permission: homes.list
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   pay:
-    description: 'Sendet Tokens an einen anderen Spieler (Nutzung: /pay tokens <spieler> <anzahl>)'
-    usage: /pay tokens <spieler> <anzahl>
+    description: 'Sendet Tokens oder Gold an einen anderen Spieler (Nutzung: /pay <tokens|gold> <spieler> <anzahl>)'
+    usage: /pay <tokens|gold> <spieler> <anzahl>
     permission: frostberg.pay.tokens
     permission-message: '&cDu hast keine Berechtigung dafuer.'
 
