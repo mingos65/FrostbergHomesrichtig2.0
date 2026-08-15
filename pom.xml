@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.frostberg</groupId>
+    <artifactId>frostberg-homes</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>FrostbergHomes</name>
+    <description>Eigenes Homes-Plugin fuer Paper - farbenfroh, konfigurierbar, kompatibel mit LuckPerms/Vault/PlaceholderAPI/PlotSquared/Multiverse/TAB</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- Repository fuer die Paper-API -->
+    <repositories>
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <!--
+        Bewusst KEINE Abhaengigkeiten zu LuckPerms/Vault/PlaceholderAPI/PlotSquared/
+        Multiverse/TAB im Classpath - das Plugin ist nur "kompatibel" (softdepend in
+        plugin.yml, damit es nach diesen Plugins laedt und nicht mit ihnen kollidiert),
+        benoetigt sie aber nicht zwingend zur Laufzeit. So bleibt die jar schlank.
+    -->
+    <dependencies>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}-${project.version}</finalName>
+
+        <!-- Damit ${project.version} in plugin.yml automatisch ersetzt wird -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

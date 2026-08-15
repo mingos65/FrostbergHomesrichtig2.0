@@ -1,0 +1,103 @@
+name: FrostbergHomes
+version: '${project.version}'
+main: de.frostberg.homes.FrostbergHomes
+api-version: '1.21'
+author: Frostberg
+description: Eigenes Homes-Plugin fuer Paper - farbenfroh, konfigurierbar, kein Essentials noetig.
+
+# Laedt NACH diesen Plugins, falls vorhanden - keine Pflicht-Abhaengigkeit
+softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB]
+
+commands:
+  set:
+    description: Setzt ein Home (Nutzung: /set home [nr])
+    usage: /set home [nr]
+    permission: homes.set
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  delete:
+    description: Loescht ein Home (Nutzung: /delete home [nr])
+    usage: /delete home [nr]
+    permission: homes.delete
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  home:
+    description: Teleportiert dich zu einem Home
+    usage: /home [nr]
+    permission: homes.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  homes:
+    description: Zeigt alle deine Homes an
+    usage: /homes [reload]
+    permission: homes.list
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+
+permissions:
+  homes.*:
+    description: Gibt Zugriff auf alle Homes-Funktionen
+    default: false
+    children:
+      homes.set: true
+      homes.use: true
+      homes.delete: true
+      homes.list: true
+      homes.reload: true
+      homes.bypass.cooldown: true
+      homes.bypass.warmup: true
+      homes.limit.unlimited: true
+
+  homes.set:
+    description: Erlaubt das Setzen von Homes
+    default: true
+  homes.use:
+    description: Erlaubt das Teleportieren zu Homes
+    default: true
+  homes.delete:
+    description: Erlaubt das Loeschen von Homes
+    default: true
+  homes.list:
+    description: Erlaubt das Anzeigen der Homes-Liste
+    default: true
+  homes.reload:
+    description: Erlaubt das Neuladen der Config (/homes reload)
+    default: op
+
+  homes.bypass.cooldown:
+    description: Umgeht den Cooldown zwischen Teleports
+    default: op
+  homes.bypass.warmup:
+    description: Umgeht den Warmup/Countdown vor dem Teleport
+    default: op
+
+  # Home-Limits, typischerweise pro LuckPerms-Gruppe vergeben
+  homes.limit.1:
+    description: Erlaubt 1 Home
+    default: false
+  homes.limit.2:
+    description: Erlaubt 2 Homes
+    default: false
+  homes.limit.3:
+    description: Erlaubt 3 Homes
+    default: false
+  homes.limit.4:
+    description: Erlaubt 4 Homes
+    default: false
+  homes.limit.5:
+    description: Erlaubt 5 Homes
+    default: false
+  homes.limit.6:
+    description: Erlaubt 6 Homes
+    default: false
+  homes.limit.7:
+    description: Erlaubt 7 Homes
+    default: false
+  homes.limit.8:
+    description: Erlaubt 8 Homes
+    default: false
+  homes.limit.9:
+    description: Erlaubt 9 Homes
+    default: false
+  homes.limit.10:
+    description: Erlaubt 10 Homes
+    default: false
+  homes.limit.unlimited:
+    description: Erlaubt unbegrenzt viele Homes
+    default: false
