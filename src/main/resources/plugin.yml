@@ -10,12 +10,12 @@ softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB
 
 commands:
   set:
-    description: Setzt ein Home (Nutzung: /set home [nr])
+    description: 'Setzt ein Home (Nutzung: /set home [nr])'
     usage: /set home [nr]
     permission: homes.set
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   delete:
-    description: Loescht ein Home (Nutzung: /delete home [nr])
+    description: 'Loescht ein Home (Nutzung: /delete home [nr])'
     usage: /delete home [nr]
     permission: homes.delete
     permission-message: '&cDu hast keine Berechtigung dafuer.'
@@ -67,7 +67,6 @@ permissions:
     description: Umgeht den Warmup/Countdown vor dem Teleport
     default: op
 
-  # Home-Limits, typischerweise pro LuckPerms-Gruppe vergeben
   homes.limit.1:
     description: Erlaubt 1 Home
     default: false
