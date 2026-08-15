@@ -1,91 +1,76 @@
 # =====================================================
 #                FrostbergHomes - Config
-#  Alle Texte unterstuetzen &-Farbcodes (z.B. &a, &c, &l)
+#  Alle Texte unterstützen &-Farbcodes (z.B. &a, &c, &l)
 #  Platzhalter wie %nr%, %world% werden vom Plugin ersetzt
 # =====================================================
-
 settings:
   # Prefix, der vor die meisten Nachrichten gesetzt wird (%prefix%)
   prefix: "&b&lFrostberg &8» &7"
-
   # Cooldown zwischen zwei Home-Teleports in Sekunden. 0 = deaktiviert
   cooldown-seconds: 30
-
   # Warmup / Countdown vor dem Teleport in Sekunden. 0 = sofortiger Teleport
   warmup-seconds: 3
-
   # Bricht der Warmup ab, sobald sich der Spieler bewegt (nicht nur umschaut)?
   cancel-warmup-on-move: true
-
   # Sicherer Teleport: sucht eine sichere Position, falls das Home z.B.
-  # in Lava, Luft ueber einem Abgrund oder in einem Block liegt
+  # in Lava, Luft über einem Abgrund oder in einem Block liegt
   safe-teleport: true
-
   # Home-Limit, falls der Spieler keine homes.limit.<n> / homes.limit.unlimited
   # Permission von LuckPerms besitzt (Fallback)
   default-home-limit: 1
-
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
   sound-warmup: "BLOCK_NOTE_BLOCK_PLING"
   sound-warmup-volume: 1.0
   sound-warmup-pitch: 1.0
-
   # Sound bei erfolgreichem Teleport
   sound-on-teleport: true
   sound-teleport: "ENTITY_ENDERMAN_TELEPORT"
   sound-teleport-volume: 1.0
   sound-teleport-pitch: 1.0
-
   # Partikel am Zielort beim Teleport
   particles-on-teleport: true
   particle-teleport: "PORTAL"
   particle-amount: 40
-
-  # Kurzer Title beim Ankommen, z.B. "Home #2"
-  title-on-teleport: true
+  # Kurzer Title beim Ankommen, z.B. "Home 2"
+  title-on-teleport: false
   title-fade-in: 5
   title-stay: 30
   title-fade-out: 10
-
 messages:
   # ---------- Allgemein / Fehler ----------
-  no-permission: "%prefix%&cDu hast keine Berechtigung dafuer."
-  player-only: "&cDieser Befehl ist nur fuer Spieler nutzbar."
+  no-permission: "%prefix%&cDu hast keine Berechtigung dafür."
+  player-only: "&cDieser Befehl ist nur für Spieler nutzbar."
   unknown-error: "%prefix%&cEs ist ein unbekannter Fehler aufgetreten."
-  invalid-number: "%prefix%&cBitte gib eine gueltige Nummer an."
-
+  invalid-number: "%prefix%&cBitte gib eine gültige Nummer an."
   # ---------- Nutzungshinweise ----------
   usage-set: "%prefix%&cNutzung: &f/set home [nr]"
   usage-delete: "%prefix%&cNutzung: &f/delete home [nr]"
   usage-home: "%prefix%&cNutzung: &f/home [nr]"
-
-  # ---------- Home setzen / loeschen ----------
-  home-set: "%prefix%&aHome &e#%nr% &awurde gesetzt."
-  home-overwritten: "%prefix%&aHome &e#%nr% &awurde ueberschrieben."
-  home-deleted: "%prefix%&aHome &e#%nr% &awurde geloescht."
-  home-not-found: "%prefix%&cHome &e#%nr% &cexistiert nicht."
+  usage-pay: "%prefix%&cNutzung: &f/pay tokens <spieler> <anzahl>"
+  tokens-not-installed: "%prefix%&cTokens sind aktuell nicht verfügbar (PlayerPoints fehlt)."
+  # ---------- Home setzen / löschen ----------
+  home-set: "%prefix%&aHome &e%nr% &awurde gesetzt."
+  home-overwritten: "%prefix%&aHome &e%nr% &awurde überschrieben."
+  home-deleted: "%prefix%&aHome &e%nr% &awurde gelöscht."
+  home-not-found: "%prefix%&cHome &e%nr% &cexistiert nicht."
   home-limit-reached: "%prefix%&cDu hast dein Home-Limit erreicht &7(&e%limit%&7)&c."
-
   # ---------- /homes Liste ----------
   no-homes: "%prefix%&7Du hast noch keine Homes gesetzt. Nutze &f/set home&7."
   homes-list-header: "&b&lDeine Homes"
-  homes-list-entry: "&8▪ &e#%nr% &7→ &f%world% &7(&a%x%&7, &a%y%&7, &a%z%&7)"
+  homes-list-entry: "&8▪ &e%nr% &7→ &f%world% &7(&a%x%&7, &a%y%&7, &a%z%&7)"
   homes-list-footer: "&8» &7Insgesamt &e%count%&7/&e%limit% &7Homes"
-
   # ---------- Teleport / Warmup ----------
-  # Wird fuer jede Sekunde des Countdowns gesendet: &eTeleport in &c3&e...
+  # Wird für jede Sekunde des Countdowns gesendet: &eTeleport in &c3&e...
   teleport-warmup: "&eTeleport in &c%seconds%&e..."
   teleport-cancelled-move: "%prefix%&cTeleport abgebrochen &7- &cdu hast dich bewegt."
-  teleport-success: "%prefix%&aDu wurdest zu Home &e#%nr% &ateleportiert."
-  teleport-title: "&b&lHome #%nr%"
-  teleport-subtitle: "&7Willkommen zurueck"
-  safe-teleport-not-found: "%prefix%&cEs konnte kein sicherer Ort in der Naehe gefunden werden."
+  teleport-success: "%prefix%&7Home &e%nr% &8» &aTeleportiert"
+  teleport-title: "&b&lHome %nr%"
+  teleport-subtitle: "&7Willkommen zurück"
+  safe-teleport-not-found: "%prefix%&cEs konnte kein sicherer Ort in der Nähe gefunden werden."
   world-not-loaded: "%prefix%&cDie Welt dieses Homes ist aktuell nicht geladen."
-
   # ---------- Cooldown ----------
   cooldown-active: "%prefix%&cWarte noch &e%seconds% Sekunden&c, bevor du dich erneut teleportierst."
-
   # ---------- Admin ----------
   reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."
