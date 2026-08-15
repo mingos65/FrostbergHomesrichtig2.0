@@ -6,7 +6,7 @@ author: Frostberg
 description: Eigenes Homes-Plugin fuer Paper - farbenfroh, konfigurierbar, kein Essentials noetig.
 
 # Laedt NACH diesen Plugins, falls vorhanden - keine Pflicht-Abhaengigkeit
-softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB]
+softdepend: [LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse-Core, TAB, PlayerPoints]
 
 commands:
   set:
@@ -28,6 +28,11 @@ commands:
     description: Zeigt alle deine Homes an
     usage: /homes [reload]
     permission: homes.list
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  pay:
+    description: 'Sendet Tokens an einen anderen Spieler (Nutzung: /pay tokens <spieler> <anzahl>)'
+    usage: /pay tokens <spieler> <anzahl>
+    permission: frostberg.pay.tokens
     permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
@@ -100,3 +105,7 @@ permissions:
   homes.limit.unlimited:
     description: Erlaubt unbegrenzt viele Homes
     default: false
+
+  frostberg.pay.tokens:
+    description: Erlaubt das Senden von Tokens per /pay tokens
+    default: true
