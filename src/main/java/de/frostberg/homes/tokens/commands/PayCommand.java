@@ -2,30 +2,36 @@ package de.frostberg.homes.tokens.commands;
 
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.util.MessageUtil;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * /pay tokens <spieler> <anzahl>
+ * /pay gold <spieler> <betrag>
  *
- * Bewusst KEINE eigene Geld-Logik: Dieser Befehl prueft nur das Format und
- * reicht die eigentliche Ueberweisung an PlayerPoints weiter (dessen
- * "/tokens pay"-Befehl kuemmert sich um Guthabenpruefung, Selbstzahlung,
- * Spam-Schutz usw. - das wollen wir nicht neu erfinden).
- *
- * WICHTIG: PlayerPoints' Hauptbefehl wurde in commands/points.yml von
- * "points" auf "tokens" umbenannt - genau dieser Name wird hier unten
- * beim Weiterleiten verwendet. Falls der Name dort nochmal geaendert wird,
- * muss die Zeile mit player.performCommand(...) entsprechend mitgeaendert
- * werden.
+ * Bewusst KEINE eigene Geld-Logik in beiden Zweigen:
+ * - "tokens": wird 1:1 an PlayerPoints weitergereicht (dessen "/tokens pay"
+ *   kuemmert sich um Guthabenpruefung, Selbstzahlung, Spam-Schutz usw.)
+ * - "gold": wir sprechen direkt mit Vault (net.milkbowl.vault.economy.Economy),
+ *   der Vermittlungsschicht, bei der EssentialEconomy sich registriert hat.
+ *   EssentialEconomy hat selbst keine Moeglichkeit, seinen eigenen "/pay"-
+ *   Befehl umzubenennen, deshalb sichern wir uns "/pay" ueber "loadbefore"
+ *   in der plugin.yml und rufen die Ueberweisung direkt ueber die Vault-API
+ *   auf statt ueber einen Befehl - das ist zuverlaessiger als zu versuchen,
+ *   einen fremden, nicht umbenannten Befehl anzusprechen.
  */
 public class PayCommand implements CommandExecutor, TabCompleter {
 
@@ -42,48 +48,168 @@ public class PayCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (args.length < 3 || !args[0].equalsIgnoreCase("tokens")) {
+        if (args.length < 3) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-pay"));
             return true;
         }
 
+        String type = args[0].toLowerCase();
+
+        if (type.equals("tokens")) {
+            handleTokens(player, args);
+            return true;
+        }
+
+        if (type.equals("gold")) {
+            handleGold(player, args);
+            return true;
+        }
+
+        player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-pay"));
+        return true;
+    }
+
+    // ---------------------------------------------------------------
+    // /pay tokens <spieler> <anzahl> - Bruecke zu PlayerPoints
+    // ---------------------------------------------------------------
+
+    private void handleTokens(Player player, String[] args) {
         if (Bukkit.getPluginManager().getPlugin("PlayerPoints") == null) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "tokens-not-installed"));
-            return true;
+            return;
         }
 
         String targetName = args[1];
         String amountText = args[2];
 
-        // Nur Format pruefen (positive ganze Zahl) - ob genug Guthaben da ist,
-        // entscheidet PlayerPoints selbst beim eigentlichen Ausfuehren.
         long amount;
         try {
             amount = Long.parseLong(amountText);
         } catch (NumberFormatException ex) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
-            return true;
+            return;
         }
 
         if (amount <= 0) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
-            return true;
+            return;
         }
 
         // 1:1-Weiterleitung an PlayerPoints (dort umbenannt zu "tokens") -
         // alle Sicherheits- und Fehlermeldungen (Guthaben, Selbstzahlung,
         // Spam) kommen von dort.
         player.performCommand("tokens pay " + targetName + " " + amount);
-        return true;
     }
+
+    // ---------------------------------------------------------------
+    // /pay gold <spieler> <betrag> - direkter Vault-Aufruf (EssentialEconomy)
+    // ---------------------------------------------------------------
+
+    private void handleGold(Player player, String[] args) {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-not-installed"));
+            return;
+        }
+
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-not-installed"));
+            return;
+        }
+        Economy economy = rsp.getProvider();
+
+        String targetName = args[1];
+        String amountText = args[2];
+
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException ex) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            return;
+        }
+
+        if (amount <= 0) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            return;
+        }
+
+        OfflinePlayer target = resolveTarget(targetName);
+        if (target == null) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "player-not-found")
+                    .replace("%player%", targetName));
+            return;
+        }
+
+        if (target.getUniqueId().equals(player.getUniqueId())) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-self"));
+            return;
+        }
+
+        if (!economy.has(player, amount)) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-insufficient"));
+            return;
+        }
+
+        EconomyResponse withdraw = economy.withdrawPlayer(player, amount);
+        if (!withdraw.transactionSuccess()) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-insufficient"));
+            return;
+        }
+
+        EconomyResponse deposit = economy.depositPlayer(target, amount);
+        if (!deposit.transactionSuccess()) {
+            // Fehlgeschlagene Einzahlung beim Ziel wieder gutschreiben, damit
+            // das Geld nicht verloren geht.
+            economy.depositPlayer(player, amount);
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "unknown-error"));
+            return;
+        }
+
+        String amountFormatted = economy.format(amount);
+
+        player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-sent")
+                .replace("%player%", targetName)
+                .replace("%amount%", amountFormatted));
+
+        if (target.isOnline() && target.getPlayer() != null) {
+            target.getPlayer().sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-received")
+                    .replace("%player%", player.getName())
+                    .replace("%amount%", amountFormatted));
+        }
+    }
+
+    /**
+     * Sucht einen Spieler zuerst online (exakter Name), sonst offline ueber
+     * dessen bekannten Namen. Gibt null zurueck, wenn niemand mit diesem
+     * Namen je auf dem Server war.
+     */
+    @SuppressWarnings("deprecation")
+    private OfflinePlayer resolveTarget(String name) {
+        Player online = Bukkit.getPlayerExact(name);
+        if (online != null) {
+            return online;
+        }
+
+        OfflinePlayer offline = Bukkit.getOfflinePlayer(name);
+        if (offline.hasPlayedBefore() || offline.isOnline()) {
+            return offline;
+        }
+
+        return null;
+    }
+
+    // ---------------------------------------------------------------
+    // Tab-Complete
+    // ---------------------------------------------------------------
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1) {
-            return filter(Collections.singletonList("tokens"), args[0]);
+            return filter(Arrays.asList("tokens", "gold"), args[0]);
         }
 
-        if (args.length == 2 && args[0].equalsIgnoreCase("tokens")) {
+        if (args.length == 2 && (args[0].equalsIgnoreCase("tokens") || args[0].equalsIgnoreCase("gold"))) {
             List<String> names = new ArrayList<>();
             for (Player online : Bukkit.getOnlinePlayers()) {
                 names.add(online.getName());
