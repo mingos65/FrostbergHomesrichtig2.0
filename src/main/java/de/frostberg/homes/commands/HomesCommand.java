@@ -1,7 +1,6 @@
 package de.frostberg.homes.commands;
 
 import de.frostberg.homes.FrostbergHomes;
-import de.frostberg.homes.model.Home;
 import de.frostberg.homes.util.MessageUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,10 +11,9 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
- * /homes         -> farbenfrohe Liste aller eigenen Homes
+ * /homes         -> oeffnet dasselbe GUI wie /home (siehe HomesGuiListener)
  * /homes reload  -> laedt die config.yml neu (benoetigt homes.reload)
  *
  * Die Basis-Permission (homes.list) fuer /homes wird bereits automatisch ueber
@@ -47,32 +45,7 @@ public class HomesCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        Map<Integer, Home> homes = plugin.getHomeManager().getHomes(player.getUniqueId());
-
-        if (homes.isEmpty()) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "no-homes"));
-            return true;
-        }
-
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-list-header"));
-
-        for (Home home : homes.values()) {
-            String line = MessageUtil.get(plugin.getConfig(), "homes-list-entry")
-                    .replace("%nr%", String.valueOf(home.getNumber()))
-                    .replace("%world%", home.getWorldName())
-                    .replace("%x%", String.valueOf(Math.round(home.getX())))
-                    .replace("%y%", String.valueOf(Math.round(home.getY())))
-                    .replace("%z%", String.valueOf(Math.round(home.getZ())));
-            player.sendMessage(line);
-        }
-
-        int limit = plugin.getHomeManager().getHomeLimit(player);
-        String limitDisplay = (limit == Integer.MAX_VALUE) ? "unbegrenzt" : String.valueOf(limit);
-
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-list-footer")
-                .replace("%count%", String.valueOf(homes.size()))
-                .replace("%limit%", limitDisplay));
-
+        plugin.getHomesGuiListener().openMenu(player);
         return true;
     }
 

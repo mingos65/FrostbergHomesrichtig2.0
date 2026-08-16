@@ -81,7 +81,7 @@ unabhängiger TPA-Cooldown (`settings.cooldown-seconds`).
 | `homes.reload`              | op       | `/homes reload` nutzen                          |
 | `homes.bypass.cooldown`     | op       | Ignoriert den Teleport-Cooldown                 |
 | `homes.bypass.warmup`       | op       | Ignoriert den Warmup-Countdown (sofortiger TP)  |
-| `homes.limit.1` … `homes.limit.10` | false | Erlaubt die jeweilige Anzahl an Homes    |
+| `homes.limit.1` … `homes.limit.14` | false | Erlaubt die jeweilige Anzahl an Homes (14 = alle Slots im /homes-GUI) |
 | `homes.limit.unlimited`     | false    | Unbegrenzt viele Homes                          |
 | `homes.*`                   | false    | Sammel-Permission für alles Obige               |
 | `tpa.use`                   | true     | `/tpa`, `/tpahere`, `/tpaccept`, `/tpdeny` nutzen |
@@ -96,23 +96,33 @@ Ist mehr als eine `homes.limit.<n>`-Permission gesetzt, zählt die höchste Zahl
 
 ### Beispiel-Setup mit LuckPerms
 
+Passend zu den tatsächlich auf FrostbergMC konfigurierten Rängen (`default`,
+`helfer`, `builder`, `mod`, `srmod`, `dev`, `admin`, `owner`):
+
 ```
-# Standard-Gruppe: Grundfunktionen + 1 Home
+# default: Grundfunktionen + 3 Homes
 /lp group default permission set homes.set true
 /lp group default permission set homes.use true
 /lp group default permission set homes.delete true
 /lp group default permission set homes.list true
-/lp group default permission set homes.limit.1 true
+/lp group default permission set homes.limit.3 true
 
-# VIP-Gruppe: 5 Homes
-/lp group vip permission set homes.limit.5 true
+# helfer: 5 Homes
+/lp group helfer permission set homes.limit.5 true
 
-# MVP-Gruppe: 10 Homes, kein Cooldown
-/lp group mvp permission set homes.limit.10 true
-/lp group mvp permission set homes.bypass.cooldown true
+# builder & mod: 8 Homes
+/lp group builder permission set homes.limit.8 true
+/lp group mod permission set homes.limit.8 true
 
-# Admin-Gruppe: alles
-/lp group admin permission set homes.* true
+# srmod & dev: 12 Homes
+/lp group srmod permission set homes.limit.12 true
+/lp group dev permission set homes.limit.12 true
+
+# admin & owner: 14 Homes (Maximum), kein Cooldown/Warmup
+/lp group admin permission set homes.limit.14 true
+/lp group admin permission set homes.bypass.cooldown true
+/lp group admin permission set homes.bypass.warmup true
+/lp group owner permission set homes.* true
 ```
 
 ## Konfiguration (`config.yml`)

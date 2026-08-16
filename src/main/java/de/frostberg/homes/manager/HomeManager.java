@@ -80,7 +80,9 @@ public class HomeManager {
                         double z = yaml.getDouble(path + "z");
                         float yaw = (float) yaml.getDouble(path + "yaw");
                         float pitch = (float) yaml.getDouble(path + "pitch");
-                        homes.put(nr, new Home(nr, world, x, y, z, yaw, pitch));
+                        Home home = new Home(nr, world, x, y, z, yaw, pitch);
+                        home.setName(yaml.getString(path + "name"));
+                        homes.put(nr, home);
                     } catch (NumberFormatException ex) {
                         plugin.getLogger().warning("Ungueltiger Home-Schluessel '" + key
                                 + "' in " + file.getName() + " - wird uebersprungen.");
@@ -119,6 +121,7 @@ public class HomeManager {
             yaml.set(path + "z", home.getZ());
             yaml.set(path + "yaw", home.getYaw());
             yaml.set(path + "pitch", home.getPitch());
+            yaml.set(path + "name", home.getName());
         }
 
         try {
@@ -188,6 +191,22 @@ public class HomeManager {
     }
 
     /**
+     * Setzt den Anzeigenamen eines Homes (z.B. ueber das /homes-GUI) und
+     * speichert sofort. Gibt false zurueck, wenn das Home nicht existiert.
+     */
+    public boolean renameHome(UUID uuid, int number, String name) {
+        loadHomes(uuid);
+        Home home = homesCache.get(uuid).get(number);
+        if (home == null) {
+            return false;
+        }
+
+        home.setName(name);
+        saveHomes(uuid);
+        return true;
+    }
+
+    /**
      * Loescht ein Home und speichert sofort. Gibt true zurueck, wenn es existierte.
      */
     public boolean deleteHome(UUID uuid, int number) {
@@ -208,7 +227,8 @@ public class HomeManager {
     /**
      * Ermittelt das Home-Limit eines Spielers:
      * - homes.limit.unlimited  -> unbegrenzt
-     * - hoechste zutreffende   homes.limit.&lt;n&gt; (1-10)
+     * - hoechste zutreffende   homes.limit.&lt;n&gt; (1-14, entspricht den 14
+     *   Slots im /homes-GUI)
      * - sonst Fallback auf settings.default-home-limit aus der config.yml
      */
     public int getHomeLimit(Player player) {
@@ -217,7 +237,7 @@ public class HomeManager {
         }
 
         int highest = -1;
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 14; i++) {
             if (player.hasPermission("homes.limit." + i)) {
                 highest = Math.max(highest, i);
             }

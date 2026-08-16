@@ -55,37 +55,50 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
             return true;
         }
 
-        int number = 1;
-        if (args.length >= 1) {
-            try {
-                number = Integer.parseInt(args[0]);
-            } catch (NumberFormatException ex) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
-                return true;
-            }
+        if (args.length == 0) {
+            plugin.getHomesGuiListener().openMenu(player);
+            return true;
         }
 
+        int number;
+        try {
+            number = Integer.parseInt(args[0]);
+        } catch (NumberFormatException ex) {
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            return true;
+        }
+
+        teleportToHome(player, number);
+        return true;
+    }
+
+    /**
+     * Fuehrt den kompletten Teleport-Ablauf (Home suchen -> Cooldown pruefen
+     * -> Safe-Teleport -> Warmup) fuer eine Home-Nummer aus. Oeffentlich, damit
+     * HomesGuiListener beim Linksklick auf ein Home denselben Ablauf nutzen
+     * kann statt ihn zu duplizieren.
+     */
+    public void teleportToHome(Player player, int number) {
         Optional<Home> homeOptional = plugin.getHomeManager().getHome(player.getUniqueId(), number);
         if (homeOptional.isEmpty()) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-not-found")
                     .replace("%nr%", String.valueOf(number)));
-            return true;
+            return;
         }
 
         long remainingCooldown = plugin.getHomeManager().getRemainingCooldown(player);
         if (remainingCooldown > 0) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "cooldown-active")
                     .replace("%seconds%", String.valueOf(remainingCooldown)));
-            return true;
+            return;
         }
 
         Location target = resolveTargetLocation(player, homeOptional.get());
         if (target == null) {
-            return true; // passende Fehlermeldung wurde bereits gesendet
+            return; // passende Fehlermeldung wurde bereits gesendet
         }
 
         startTeleport(player, number, target);
-        return true;
     }
 
     /**

@@ -24,6 +24,16 @@ commands:
     usage: /delete home [nr]
     permission: homes.delete
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  sethome:
+    description: 'Setzt ein Home mit Namen (Nutzung: /sethome <name>)'
+    usage: /sethome <name>
+    permission: homes.set
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  delhome:
+    description: 'Loescht ein Home anhand seines Namens (Nutzung: /delhome <name>)'
+    usage: /delhome <name>
+    permission: homes.delete
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   home:
     description: Teleportiert dich zu einem Home
     usage: /home [nr]
@@ -156,6 +166,18 @@ permissions:
     default: false
   homes.limit.10:
     description: Erlaubt 10 Homes
+    default: false
+  homes.limit.11:
+    description: Erlaubt 11 Homes
+    default: false
+  homes.limit.12:
+    description: Erlaubt 12 Homes
+    default: false
+  homes.limit.13:
+    description: Erlaubt 13 Homes
+    default: false
+  homes.limit.14:
+    description: Erlaubt 14 Homes (Maximum, alle Slots im /homes-GUI)
     default: false
   homes.limit.unlimited:
     description: Erlaubt unbegrenzt viele Homes

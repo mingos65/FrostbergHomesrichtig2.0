@@ -1,15 +1,18 @@
 package de.frostberg.homes;
 
 import de.frostberg.homes.commands.AdminTpCommand;
+import de.frostberg.homes.commands.DeleteHomeByNameCommand;
 import de.frostberg.homes.commands.DeleteHomeCommand;
 import de.frostberg.homes.commands.HomeCommand;
 import de.frostberg.homes.commands.HomesCommand;
+import de.frostberg.homes.commands.SetHomeByNameCommand;
 import de.frostberg.homes.commands.SetHomeCommand;
 import de.frostberg.homes.commands.SetSpawnCommand;
 import de.frostberg.homes.commands.SpawnCommand;
 import de.frostberg.homes.commands.TpaAcceptCommand;
 import de.frostberg.homes.commands.TpaCommand;
 import de.frostberg.homes.commands.TpaDenyCommand;
+import de.frostberg.homes.gui.HomesGuiListener;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
 import de.frostberg.homes.manager.TpaManager;
@@ -21,6 +24,8 @@ public class FrostbergHomes extends JavaPlugin {
 
     private HomeManager homeManager;
     private TpaManager tpaManager;
+    private HomeCommand homeCommand;
+    private HomesGuiListener homesGuiListener;
 
     @Override
     public void onEnable() {
@@ -28,6 +33,7 @@ public class FrostbergHomes extends JavaPlugin {
 
         this.homeManager = new HomeManager(this);
         this.tpaManager = new TpaManager(this);
+        this.homesGuiListener = new HomesGuiListener(this);
 
         registerCommands();
         registerListeners();
@@ -47,7 +53,7 @@ public class FrostbergHomes extends JavaPlugin {
     private void registerCommands() {
         SetHomeCommand setHomeCommand = new SetHomeCommand(this);
         DeleteHomeCommand deleteHomeCommand = new DeleteHomeCommand(this);
-        HomeCommand homeCommand = new HomeCommand(this);
+        this.homeCommand = new HomeCommand(this);
         HomesCommand homesCommand = new HomesCommand(this);
 
         getCommand("set").setExecutor(setHomeCommand);
@@ -55,6 +61,9 @@ public class FrostbergHomes extends JavaPlugin {
 
         getCommand("delete").setExecutor(deleteHomeCommand);
         getCommand("delete").setTabCompleter(deleteHomeCommand);
+
+        getCommand("sethome").setExecutor(new SetHomeByNameCommand(this));
+        getCommand("delhome").setExecutor(new DeleteHomeByNameCommand(this));
 
         getCommand("home").setExecutor(homeCommand);
         getCommand("home").setTabCompleter(homeCommand);
@@ -100,6 +109,8 @@ public class FrostbergHomes extends JavaPlugin {
 
         // Raeumt offene TPA-Anfragen und laufende Warmup-Countdowns beim Quit auf
         getServer().getPluginManager().registerEvents(tpaManager, this);
+
+        getServer().getPluginManager().registerEvents(homesGuiListener, this);
     }
 
     /**
@@ -122,5 +133,13 @@ public class FrostbergHomes extends JavaPlugin {
 
     public TpaManager getTpaManager() {
         return tpaManager;
+    }
+
+    public HomeCommand getHomeCommand() {
+        return homeCommand;
+    }
+
+    public HomesGuiListener getHomesGuiListener() {
+        return homesGuiListener;
     }
 }

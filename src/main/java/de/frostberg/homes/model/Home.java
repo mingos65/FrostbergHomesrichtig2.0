@@ -18,6 +18,9 @@ public class Home {
     private double z;
     private float yaw;
     private float pitch;
+    // Optionaler, vom Spieler frei vergebener Anzeigename (z.B. ueber das
+    // /homes-GUI gesetzt). null = es wird der Standardname "Home <nr>" gezeigt.
+    private String name;
 
     public Home(int number, String worldName, double x, double y, double z, float yaw, float pitch) {
         this.number = number;
@@ -96,6 +99,14 @@ public class Home {
 
     public void setPitch(float pitch) {
         this.pitch = pitch;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
