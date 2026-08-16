@@ -49,3 +49,16 @@ effects:
   title-fade-in: 5
   title-stay: 30
   title-fade-out: 10
+clan:
+  # Maximale Mitgliederzahl pro Clan
+  max-members: 20
+  # Erlaubte Länge des Clan-Tags (z.B. "FBM"), in Zeichen
+  tag-min-length: 2
+  tag-max-length: 6
+  # Zeit in Sekunden, nach der eine unbeantwortete Clan-Einladung automatisch abläuft
+  invite-expiry-seconds: 60
+  # Wörter, die weder im Clan-Namen noch im Tag vorkommen dürfen (Kleinschreibung wird ignoriert)
+  blocked-words:
+    - "admin"
+    - "mod"
+    - "owner"

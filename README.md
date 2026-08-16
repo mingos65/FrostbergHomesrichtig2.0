@@ -162,12 +162,31 @@ frostberg-homes/
     │   ├── commands/
     │   │   ├── SetHomeCommand.java      (/set home [nr])
     │   │   ├── DeleteHomeCommand.java   (/delete home [nr])
-    │   │   ├── HomeCommand.java         (/home [nr] - Warmup, Cooldown, Safe-TP)
+    │   │   ├── SetHomeByNameCommand.java   (/sethome <name>)
+    │   │   ├── DeleteHomeByNameCommand.java (/delhome <name>)
+    │   │   ├── HomeCommand.java         (/home [nr] - Warmup, Cooldown, Safe-TP, GUI)
     │   │   ├── HomesCommand.java        (/homes, /homes reload)
     │   │   ├── TpaCommand.java          (/tpa, /tpahere - klickbare Anfrage)
     │   │   ├── TpaAcceptCommand.java    (/tpaccept)
     │   │   ├── TpaDenyCommand.java      (/tpdeny)
-    │   │   └── AdminTpCommand.java      (/tp, /tphere - sofort, ohne Anfrage)
+    │   │   ├── AdminTpCommand.java      (/tp, /tphere - sofort, ohne Anfrage)
+    │   │   ├── SpawnCommand.java        (/spawn, /farmwelt)
+    │   │   └── SetSpawnCommand.java     (/setspawn, /setfarmwelt)
+    │   ├── gui/
+    │   │   ├── HomeGuiHolder.java       (Marker fuer die Homes-GUI-Fenster)
+    │   │   └── HomesGuiListener.java    (Klick-Logik: Uebersicht, Detail, Umbenennen, Loeschen)
+    │   ├── clan/
+    │   │   ├── commands/
+    │   │   │   ├── ClanCommand.java     (/clan <unterbefehl> - kompletter Router)
+    │   │   │   └── ClanChatCommand.java (/cc - Alias fuer /clan chat)
+    │   │   ├── gui/
+    │   │   │   ├── ClanGuiHolder.java   (Marker fuer die Clan-GUI-Fenster)
+    │   │   │   └── ClanGuiListener.java (Clan-Liste mit Koepfen, Loesch-Bestaetigung)
+    │   │   ├── manager/
+    │   │   │   └── ClanManager.java     (YAML-Speicherung, Mitglieder, Einladungen)
+    │   │   └── model/
+    │   │       ├── Clan.java            (Datenmodell eines Clans)
+    │   │       └── ClanInvite.java      (Datenmodell einer offenen Einladung)
     │   ├── listener/
     │   │   └── PlayerDataListener.java  (Laden/Entladen bei Join/Quit)
     │   ├── manager/
@@ -180,10 +199,13 @@ frostberg-homes/
     │   │   └── PayCommand.java          (/pay tokens|gold)
     │   └── util/
     │       ├── MessageUtil.java         (Farbcodes, %prefix%-Ersetzung, Klick-Komponenten)
-    │       └── TeleportWarmup.java      (gemeinsamer Warmup-Countdown fuer /home & TPA)
+    │       ├── TeleportWarmup.java      (gemeinsamer Warmup-Countdown fuer /home, TPA & Clan-Base)
+    │       ├── SafeTeleport.java        (gemeinsame sichere-Landestelle-Suche fuer /home & /farmwelt)
+    │       └── ClanPlaceholderExpansion.java (PlaceholderAPI: %frostbergclans_...% fuer TAB/Chat)
     └── resources/
         ├── plugin.yml
-        └── config.yml
+        ├── config.yml                  (Einstellungen)
+        └── messages.yml                (alle Chat-/GUI-Texte)
 ```
 
 ## Bekannte Grenzen

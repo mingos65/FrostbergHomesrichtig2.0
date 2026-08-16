@@ -1,5 +1,9 @@
 package de.frostberg.homes;
 
+import de.frostberg.homes.clan.commands.ClanChatCommand;
+import de.frostberg.homes.clan.commands.ClanCommand;
+import de.frostberg.homes.clan.gui.ClanGuiListener;
+import de.frostberg.homes.clan.manager.ClanManager;
 import de.frostberg.homes.commands.AdminTpCommand;
 import de.frostberg.homes.commands.DeleteHomeByNameCommand;
 import de.frostberg.homes.commands.DeleteHomeCommand;
@@ -17,6 +21,7 @@ import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
 import de.frostberg.homes.manager.TpaManager;
 import de.frostberg.homes.tokens.commands.PayCommand;
+import de.frostberg.homes.util.ClanPlaceholderExpansion;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -30,6 +35,9 @@ public class FrostbergHomes extends JavaPlugin {
     private TpaManager tpaManager;
     private HomeCommand homeCommand;
     private HomesGuiListener homesGuiListener;
+    private ClanManager clanManager;
+    private ClanCommand clanCommand;
+    private ClanGuiListener clanGuiListener;
     private FileConfiguration messages;
 
     @Override
@@ -40,9 +48,15 @@ public class FrostbergHomes extends JavaPlugin {
         this.homeManager = new HomeManager(this);
         this.tpaManager = new TpaManager(this);
         this.homesGuiListener = new HomesGuiListener(this);
+        this.clanManager = new ClanManager(this);
+        this.clanGuiListener = new ClanGuiListener(this);
 
         registerCommands();
         registerListeners();
+
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new ClanPlaceholderExpansion(this).register();
+        }
 
         getLogger().info("FrostbergHomes wurde aktiviert.");
         logSoftDependencies();
@@ -53,7 +67,10 @@ public class FrostbergHomes extends JavaPlugin {
         if (homeManager != null) {
             homeManager.saveAll();
         }
-        getLogger().info("FrostbergHomes wurde deaktiviert - alle Homes wurden gespeichert.");
+        if (clanManager != null) {
+            clanManager.saveAll();
+        }
+        getLogger().info("FrostbergHomes wurde deaktiviert - alle Homes und Clans wurden gespeichert.");
     }
 
     /**
@@ -121,9 +138,18 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SetSpawnCommand(this, false));
         getCommand("setfarmwelt").setExecutor(new SetSpawnCommand(this, true));
 
+        this.clanCommand = new ClanCommand(this);
+        getCommand("clan").setExecutor(clanCommand);
+        getCommand("clan").setTabCompleter(clanCommand);
+        getCommand("cc").setExecutor(new ClanChatCommand(this));
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
+
+        // ClanCommand hoert ebenfalls auf PlayerQuitEvent, um einen laufenden
+        // Base-Warmup und offene Einladungen aufzuraeumen
+        getServer().getPluginManager().registerEvents(clanCommand, this);
     }
 
     private void registerListeners() {
@@ -133,6 +159,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(tpaManager, this);
 
         getServer().getPluginManager().registerEvents(homesGuiListener, this);
+        getServer().getPluginManager().registerEvents(clanGuiListener, this);
     }
 
     /**
@@ -167,5 +194,17 @@ public class FrostbergHomes extends JavaPlugin {
 
     public FileConfiguration getMessages() {
         return messages;
+    }
+
+    public ClanManager getClanManager() {
+        return clanManager;
+    }
+
+    public ClanCommand getClanCommand() {
+        return clanCommand;
+    }
+
+    public ClanGuiListener getClanGuiListener() {
+        return clanGuiListener;
     }
 }

@@ -99,6 +99,16 @@ commands:
     usage: /setfarmwelt
     permission: spawn.admin
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  clan:
+    description: 'Clan-Verwaltung (Nutzung: /clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank> ...)'
+    usage: /clan <unterbefehl> ...
+    permission: clan.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  cc:
+    description: 'Clan-Chat (Nutzung: /cc <nachricht>)'
+    usage: /cc <nachricht>
+    permission: clan.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -263,4 +273,18 @@ permissions:
     default: true
   spawn.admin:
     description: Erlaubt /setspawn und /setfarmwelt
+    default: op
+
+  clan.*:
+    description: Gibt Zugriff auf alle Clan-Funktionen inkl. Admin-Override
+    default: false
+    children:
+      clan.use: true
+      clan.admin: true
+
+  clan.use:
+    description: Erlaubt /clan und /cc (create/invite/leave/chat/info/list/base usw. - Leader/Mod-Rechte werden zusaetzlich pro Clan geprueft)
+    default: true
+  clan.admin:
+    description: Erlaubt das Loeschen fremder Clans und Umgehen des Warmups bei /clan base
     default: op
