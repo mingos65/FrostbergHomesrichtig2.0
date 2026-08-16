@@ -83,7 +83,10 @@ public class HomesGuiListener implements Listener {
 
     private ItemStack buildHomeItem(Player player, int nr, boolean unlocked) {
         if (!unlocked) {
-            return simpleItem(Material.GRAY_STAINED_GLASS_PANE, MessageUtil.get(plugin.getMessages(), "homes-gui-slot-locked"), null);
+            List<String> lockedLore = List.of(
+                    MessageUtil.get(plugin.getMessages(), "homes-gui-slot-locked-lore-1"),
+                    MessageUtil.get(plugin.getMessages(), "homes-gui-slot-locked-lore-2"));
+            return simpleItem(Material.GRAY_STAINED_GLASS_PANE, MessageUtil.get(plugin.getMessages(), "homes-gui-slot-locked"), lockedLore);
         }
 
         Optional<Home> homeOpt = plugin.getHomeManager().getHome(player.getUniqueId(), nr);
