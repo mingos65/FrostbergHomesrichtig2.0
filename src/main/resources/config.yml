@@ -21,6 +21,11 @@ settings:
   # Home-Limit, falls der Spieler keine homes.limit.<n> / homes.limit.unlimited
   # Permission von LuckPerms besitzt (Fallback)
   default-home-limit: 1
+  # Welt, zu der /spawn und /setspawn gehören (aktuell wird der Spawn in der
+  # Plotwelt gebaut, nicht in der Hauptwelt "world")
+  spawn-world: "plotwelt65"
+  # Welt, zu der /farmwelt und /setfarmwelt gehören
+  farm-world: "farm"
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
@@ -113,5 +118,6 @@ messages:
   spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinden, um den Spawn dort zu setzen."
   farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
   farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
+  spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
   # ---------- Admin ----------
   reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

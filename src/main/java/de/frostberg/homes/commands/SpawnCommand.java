@@ -34,9 +34,10 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        World world = farm ? Bukkit.getWorld("farm") : Bukkit.getWorlds().get(0);
+        String worldName = plugin.getConfig().getString(farm ? "settings.farm-world" : "settings.spawn-world");
+        World world = worldName == null ? null : Bukkit.getWorld(worldName);
         if (world == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-not-loaded"));
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
             return true;
         }
 
