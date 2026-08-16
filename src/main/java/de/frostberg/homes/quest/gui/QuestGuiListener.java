@@ -195,13 +195,13 @@ public class QuestGuiListener implements Listener {
                 : "quest-gui-bonus-status-locked";
         lore.add(MessageUtil.get(plugin.getMessages(), statusKey));
 
-        // Graues Glas = gesperrt, gruenes Glas = abholbereit (an fester
-        // Position ueber dem Hilfe-Buch findbar, daher ok dass es farblich
-        // an den Rand angelehnt ist). Abgeholt in einem anderen Grauton
-        // (hellgrau), damit "gesperrt" und "abgeholt" sich unterscheiden.
-        Material icon = claimed ? Material.LIGHT_GRAY_STAINED_GLASS_PANE
-                : allDone ? Material.LIME_STAINED_GLASS_PANE
-                : Material.GRAY_STAINED_GLASS_PANE;
+        // Farbstoff statt Glas fuers Bonus-Item: grauer Farbstoff = noch
+        // nicht abholbereit, gruener Farbstoff = abholbereit. Abgeholt in
+        // einem anderen Grauton (hellgrau), damit "gesperrt" und "abgeholt"
+        // sich unterscheiden. Die Rand-Deko (fillBorder) bleibt Glas.
+        Material icon = claimed ? Material.LIGHT_GRAY_DYE
+                : allDone ? Material.LIME_DYE
+                : Material.GRAY_DYE;
         String name = MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-name")
                 .replace("%category%", plugin.getQuestManager().categoryDisplayName(category));
         return simpleItem(icon, name, lore);
