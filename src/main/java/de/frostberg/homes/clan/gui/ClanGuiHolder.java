@@ -11,12 +11,14 @@ public class ClanGuiHolder implements InventoryHolder {
 
     public enum Type {
         LIST,
-        CONFIRM_DELETE
+        MEMBERS,
+        CONFIRM_DELETE,
+        CONFIRM_LEAVE
     }
 
     private final Type type;
-    private final String clanName; // nur relevant fuer CONFIRM_DELETE
-    private final int page; // nur relevant fuer LIST
+    private final String clanName; // relevant fuer MEMBERS/CONFIRM_DELETE/CONFIRM_LEAVE
+    private final int page; // relevant fuer LIST (aktuelle Seite) und MEMBERS (Ruecksprung-Seite)
     private Inventory inventory;
 
     public ClanGuiHolder(Type type, String clanName, int page) {

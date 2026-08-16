@@ -17,13 +17,15 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 /**
  * GUI-Teil des Clan-Systems: /clan list zeigt Spielerkoepfe der Clan-Leader
- * (paginiert, 45 pro Seite + Navigationsreihe), /clan delete oeffnet eine
- * Ja/Nein-Sicherheitsabfrage. Aufbau analog zu
+ * (paginiert, 45 pro Seite + Navigationsreihe), Klick auf einen Kopf zeigt
+ * alle Mitglieder dieses Clans als eigene Kopf-Uebersicht. /clan delete und
+ * /clan leave oeffnen je eine Ja/Nein-Sicherheitsabfrage. Aufbau analog zu
  * de.frostberg.homes.gui.HomesGuiListener - eigener Holder-Marker statt
  * Titel-Vergleich.
  */
@@ -32,12 +34,17 @@ public class ClanGuiListener implements Listener {
     private static final int PAGE_SIZE = 45; // Reihen 1-5, Reihe 6 = Navigation
     private static final int PREV_PAGE_SLOT = 45;
     private static final int NEXT_PAGE_SLOT = 53;
+    private static final int MEMBERS_BACK_SLOT = 49;
 
     private final FrostbergHomes plugin;
 
     public ClanGuiListener(FrostbergHomes plugin) {
         this.plugin = plugin;
     }
+
+    // ---------------------------------------------------------------
+    // Clan-Liste (Leader-Koepfe)
+    // ---------------------------------------------------------------
 
     public void openList(Player player, int page) {
         List<Clan> clans = new ArrayList<>(plugin.getClanManager().getAllClans());
@@ -79,11 +86,67 @@ public class ClanGuiListener implements Listener {
         lore.add(MessageUtil.get(plugin.getMessages(), "clan-list-entry-members")
                 .replace("%count%", String.valueOf(clan.getMemberCount()))
                 .replace("%max%", String.valueOf(plugin.getClanManager().getMaxMembers())));
+        lore.add(MessageUtil.get(plugin.getMessages(), "clan-list-entry-hint"));
         meta.setLore(lore);
 
         item.setItemMeta(meta);
         return item;
     }
+
+    // ---------------------------------------------------------------
+    // Mitglieder-Uebersicht (Koepfe + Namen + Rolle)
+    // ---------------------------------------------------------------
+
+    public void openMembers(Player player, String clanName, int returnPage) {
+        Optional<Clan> clanOpt = plugin.getClanManager().getClan(clanName);
+        if (clanOpt.isEmpty()) {
+            return;
+        }
+        Clan clan = clanOpt.get();
+
+        ClanGuiHolder holder = new ClanGuiHolder(ClanGuiHolder.Type.MEMBERS, clanName, returnPage);
+        String title = MessageUtil.get(plugin.getMessages(), "clan-members-title").replace("%clan%", clan.getName());
+        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        int slot = 0;
+        for (Map.Entry<UUID, Clan.Role> entry : clan.getMembers().entrySet()) {
+            if (slot >= PAGE_SIZE) {
+                break; // Sicherheitsnetz falls max-members sehr hoch konfiguriert wurde
+            }
+            inventory.setItem(slot, buildMemberHead(entry.getKey(), entry.getValue()));
+            slot++;
+        }
+
+        inventory.setItem(MEMBERS_BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "homes-gui-detail-back-name")));
+
+        player.openInventory(inventory);
+    }
+
+    private ItemStack buildMemberHead(UUID uuid, Clan.Role role) {
+        ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta meta = (SkullMeta) item.getItemMeta();
+
+        OfflinePlayer member = Bukkit.getOfflinePlayer(uuid);
+        meta.setOwningPlayer(member);
+        String color = switch (role) {
+            case LEADER -> "&c&l";
+            case MOD -> "&e&l";
+            case MEMBER -> "&f";
+        };
+        meta.setDisplayName(MessageUtil.color(color + (member.getName() != null ? member.getName() : "?")));
+
+        List<String> lore = new ArrayList<>();
+        lore.add(MessageUtil.get(plugin.getMessages(), "clan-members-entry-role").replace("%role%", role.name()));
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    // ---------------------------------------------------------------
+    // Loesch-Bestaetigung
+    // ---------------------------------------------------------------
 
     public void openConfirmDelete(Player player, String clanName) {
         ClanGuiHolder holder = new ClanGuiHolder(ClanGuiHolder.Type.CONFIRM_DELETE, clanName, 0);
@@ -95,43 +158,6 @@ public class ClanGuiListener implements Listener {
         inventory.setItem(6, simpleItem(Material.RED_CONCRETE, MessageUtil.get(plugin.getMessages(), "homes-gui-confirm-no-name")));
 
         player.openInventory(inventory);
-    }
-
-    @EventHandler
-    public void onClick(InventoryClickEvent event) {
-        if (!(event.getView().getTopInventory().getHolder() instanceof ClanGuiHolder holder)) {
-            return;
-        }
-
-        event.setCancelled(true);
-
-        if (!(event.getWhoClicked() instanceof Player player)) {
-            return;
-        }
-
-        if (!event.getView().getTopInventory().equals(event.getClickedInventory())) {
-            return;
-        }
-
-        int slot = event.getSlot();
-
-        if (holder.getType() == ClanGuiHolder.Type.LIST) {
-            if (slot == NEXT_PAGE_SLOT) {
-                openList(player, holder.getPage() + 1);
-            } else if (slot == PREV_PAGE_SLOT) {
-                openList(player, holder.getPage() - 1);
-            }
-            // Klick auf einen Kopf hat aktuell keine Aktion - reine Uebersicht
-            return;
-        }
-
-        if (holder.getType() == ClanGuiHolder.Type.CONFIRM_DELETE) {
-            if (slot == 2) {
-                confirmDelete(player, holder.getClanName());
-            } else if (slot == 6) {
-                player.closeInventory();
-            }
-        }
     }
 
     private void confirmDelete(Player player, String clanName) {
@@ -152,6 +178,119 @@ public class ClanGuiListener implements Listener {
         }
 
         player.closeInventory();
+    }
+
+    // ---------------------------------------------------------------
+    // Verlassen-Bestaetigung
+    // ---------------------------------------------------------------
+
+    public void openConfirmLeave(Player player, String clanName) {
+        ClanGuiHolder holder = new ClanGuiHolder(ClanGuiHolder.Type.CONFIRM_LEAVE, clanName, 0);
+        String title = MessageUtil.get(plugin.getMessages(), "clan-confirm-leave-title").replace("%clan%", clanName);
+        Inventory inventory = Bukkit.createInventory(holder, 9, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        inventory.setItem(2, simpleItem(Material.LIME_CONCRETE, MessageUtil.get(plugin.getMessages(), "clan-leave-confirm-yes-name")));
+        inventory.setItem(6, simpleItem(Material.RED_CONCRETE, MessageUtil.get(plugin.getMessages(), "clan-leave-confirm-no-name")));
+
+        player.openInventory(inventory);
+    }
+
+    private void confirmLeave(Player player, String clanName) {
+        Optional<Clan> clanOpt = plugin.getClanManager().getClan(clanName);
+        if (clanOpt.isEmpty()) {
+            player.closeInventory();
+            return;
+        }
+
+        Clan clan = clanOpt.get();
+        plugin.getClanManager().removeMember(clan, player.getUniqueId());
+
+        if (clan.getMemberCount() == 0) {
+            plugin.getClanManager().deleteClan(clan);
+        } else {
+            for (UUID uuid : clan.getMembers().keySet()) {
+                Player member = Bukkit.getPlayer(uuid);
+                if (member != null) {
+                    member.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-member-left").replace("%player%", player.getName()));
+                }
+            }
+        }
+
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-left").replace("%clan%", clan.getName()));
+        player.closeInventory();
+    }
+
+    // ---------------------------------------------------------------
+    // Klicks
+    // ---------------------------------------------------------------
+
+    @EventHandler
+    public void onClick(InventoryClickEvent event) {
+        if (!(event.getView().getTopInventory().getHolder() instanceof ClanGuiHolder holder)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+        if (!(event.getWhoClicked() instanceof Player player)) {
+            return;
+        }
+
+        if (!event.getView().getTopInventory().equals(event.getClickedInventory())) {
+            return;
+        }
+
+        int slot = event.getSlot();
+
+        switch (holder.getType()) {
+            case LIST -> handleListClick(player, holder, slot);
+            case MEMBERS -> handleMembersClick(player, holder, slot);
+            case CONFIRM_DELETE -> {
+                if (slot == 2) {
+                    confirmDelete(player, holder.getClanName());
+                } else if (slot == 6) {
+                    player.closeInventory();
+                }
+            }
+            case CONFIRM_LEAVE -> {
+                if (slot == 2) {
+                    confirmLeave(player, holder.getClanName());
+                } else if (slot == 6) {
+                    player.closeInventory();
+                }
+            }
+        }
+    }
+
+    private void handleListClick(Player player, ClanGuiHolder holder, int slot) {
+        if (slot == NEXT_PAGE_SLOT) {
+            openList(player, holder.getPage() + 1);
+            return;
+        }
+        if (slot == PREV_PAGE_SLOT) {
+            openList(player, holder.getPage() - 1);
+            return;
+        }
+
+        if (slot >= PAGE_SIZE) {
+            return; // Rand-/Fuellslot
+        }
+
+        List<Clan> clans = new ArrayList<>(plugin.getClanManager().getAllClans());
+        int index = holder.getPage() * PAGE_SIZE + slot;
+        if (index >= clans.size()) {
+            return;
+        }
+
+        openMembers(player, clans.get(index).getName(), holder.getPage());
+    }
+
+    private void handleMembersClick(Player player, ClanGuiHolder holder, int slot) {
+        if (slot == MEMBERS_BACK_SLOT) {
+            openList(player, holder.getPage());
+        }
+        // Klick auf einen Mitglied-Kopf hat aktuell keine Aktion - reine Uebersicht
     }
 
     private ItemStack simpleItem(Material material, String coloredName) {

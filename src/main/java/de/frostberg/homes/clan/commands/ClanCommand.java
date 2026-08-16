@@ -279,15 +279,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
             return;
         }
 
-        plugin.getClanManager().removeMember(clan, player.getUniqueId());
-
-        if (clan.getMemberCount() == 0) {
-            plugin.getClanManager().deleteClan(clan);
-        } else {
-            broadcastToClan(clan, MessageUtil.get(plugin.getMessages(), "clan-member-left").replace("%player%", player.getName()));
-        }
-
-        player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-left").replace("%clan%", clan.getName()));
+        plugin.getClanGuiListener().openConfirmLeave(player, clan.getName());
     }
 
     private void handleKick(Player player, String[] args) {
