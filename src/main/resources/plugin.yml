@@ -177,7 +177,49 @@ permissions:
     description: Erlaubt 13 Homes
     default: false
   homes.limit.14:
-    description: Erlaubt 14 Homes (Maximum, alle Slots im /homes-GUI)
+    description: Erlaubt 14 Homes (alle Slots auf Seite 1 im /homes-GUI)
+    default: false
+  homes.limit.15:
+    description: Erlaubt 15 Homes
+    default: false
+  homes.limit.16:
+    description: Erlaubt 16 Homes
+    default: false
+  homes.limit.17:
+    description: Erlaubt 17 Homes
+    default: false
+  homes.limit.18:
+    description: Erlaubt 18 Homes
+    default: false
+  homes.limit.19:
+    description: Erlaubt 19 Homes
+    default: false
+  homes.limit.20:
+    description: Erlaubt 20 Homes
+    default: false
+  homes.limit.21:
+    description: Erlaubt 21 Homes
+    default: false
+  homes.limit.22:
+    description: Erlaubt 22 Homes
+    default: false
+  homes.limit.23:
+    description: Erlaubt 23 Homes
+    default: false
+  homes.limit.24:
+    description: Erlaubt 24 Homes
+    default: false
+  homes.limit.25:
+    description: Erlaubt 25 Homes
+    default: false
+  homes.limit.26:
+    description: Erlaubt 26 Homes
+    default: false
+  homes.limit.27:
+    description: Erlaubt 27 Homes
+    default: false
+  homes.limit.28:
+    description: Erlaubt 28 Homes (Maximum, alle Slots auf beiden Seiten im /homes-GUI)
     default: false
   homes.limit.unlimited:
     description: Erlaubt unbegrenzt viele Homes

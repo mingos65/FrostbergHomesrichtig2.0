@@ -81,7 +81,9 @@ messages:
   home-set-named: "%prefix%&aHome &e%name% &a(Nr. %nr%) wurde gesetzt."
   delhome-not-found: "%prefix%&cKein Home mit dem Namen &e%name% &cgefunden."
   # ---------- /homes GUI ----------
-  homes-gui-title: "&b&lDeine Homes"
+  homes-gui-title: "&b&lDeine Homes &7(Seite %page%/%pages%)"
+  homes-gui-next-page: "&aNächste Seite »"
+  homes-gui-prev-page: "&a« Vorherige Seite"
   homes-gui-slot-name-free: "&bHome %nr% &8(frei)"
   homes-gui-slot-lore-free: "&7Setze dieses Home mit &f/set home %nr%"
   homes-gui-slot-name-set: "Home %nr%"

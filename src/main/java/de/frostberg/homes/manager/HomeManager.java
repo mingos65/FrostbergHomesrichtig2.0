@@ -227,8 +227,8 @@ public class HomeManager {
     /**
      * Ermittelt das Home-Limit eines Spielers:
      * - homes.limit.unlimited  -> unbegrenzt
-     * - hoechste zutreffende   homes.limit.&lt;n&gt; (1-14, entspricht den 14
-     *   Slots im /homes-GUI)
+     * - hoechste zutreffende   homes.limit.&lt;n&gt; (1-28, entspricht den 2
+     *   Seiten a 14 Slots im /homes-GUI)
      * - sonst Fallback auf settings.default-home-limit aus der config.yml
      */
     public int getHomeLimit(Player player) {
@@ -237,7 +237,7 @@ public class HomeManager {
         }
 
         int highest = -1;
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 28; i++) {
             if (player.hasPermission("homes.limit." + i)) {
                 highest = Math.max(highest, i);
             }

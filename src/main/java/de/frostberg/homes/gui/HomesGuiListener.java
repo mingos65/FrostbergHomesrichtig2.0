@@ -22,18 +22,24 @@ import java.util.Optional;
 
 /**
  * Klick-basiertes GUI fuer /home und /homes: 4x9-Uebersicht mit 14 zentrierten
- * Betten (gruen = gesetzt, blau = frei, grau = durch Rang gesperrt), pro
- * gesetztem Home ein Detail-Menu (Teleportieren/Koordinaten/Umbenennen/
- * Loeschen) sowie eine Amboss-Umbenennung und eine Loesch-Bestaetigung.
- * Alle Inventare tragen einen HomeGuiHolder, damit dieser Listener sie
- * zuverlaessig erkennt statt sich auf den Fenstertitel zu verlassen.
+ * Betten pro Seite (2 Seiten = 28 Homes maximal), gruen = gesetzt, blau =
+ * frei, grau = durch Rang gesperrt. Pro gesetztem Home ein Detail-Menu
+ * (Teleportieren/Koordinaten/Umbenennen/Loeschen) sowie eine Amboss-
+ * Umbenennung und eine Loesch-Bestaetigung. Alle Inventare tragen einen
+ * HomeGuiHolder, damit dieser Listener sie zuverlaessig erkennt statt sich
+ * auf den Fenstertitel zu verlassen.
  */
 public class HomesGuiListener implements Listener {
 
-    // Slot-Indizes der 14 Betten in der 36er-Uebersicht (Reihe 2 + 3, je 7
-    // Betten mittig, 1 Slot Rand links/rechts) - siehe Plan: Home-Nr -> Slot.
+    // Slot-Indizes der 14 Betten pro Seite in der 36er-Uebersicht (Reihe 2 + 3,
+    // je 7 Betten mittig, 1 Slot Rand links/rechts) - dieselben Slots auf
+    // beiden Seiten, nur die dahinterliegende Home-Nummer verschiebt sich.
     private static final int[] HOME_SLOTS = {10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25};
-    private static final int MAX_SLOTS = HOME_SLOTS.length;
+    private static final int HOMES_PER_PAGE = HOME_SLOTS.length;
+    private static final int TOTAL_PAGES = 2;
+    private static final int MAX_SLOTS = HOMES_PER_PAGE * TOTAL_PAGES; // 28
+    private static final int NEXT_PAGE_SLOT = 35;
+    private static final int PREV_PAGE_SLOT = 27;
 
     private final FrostbergHomes plugin;
 
@@ -46,13 +52,30 @@ public class HomesGuiListener implements Listener {
     // ---------------------------------------------------------------
 
     public void openMenu(Player player) {
-        HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.MENU, 0);
-        Inventory inventory = Bukkit.createInventory(holder, 36, MessageUtil.color(MessageUtil.get(plugin.getConfig(), "homes-gui-title")));
+        openMenu(player, 0);
+    }
+
+    private void openMenu(Player player, int page) {
+        HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.MENU, 0, page);
+        String title = MessageUtil.get(plugin.getConfig(), "homes-gui-title")
+                .replace("%page%", String.valueOf(page + 1))
+                .replace("%pages%", String.valueOf(TOTAL_PAGES));
+        Inventory inventory = Bukkit.createInventory(holder, 36, MessageUtil.color(title));
         holder.setInventory(inventory);
 
         int limit = Math.min(plugin.getHomeManager().getHomeLimit(player), MAX_SLOTS);
-        for (int nr = 1; nr <= MAX_SLOTS; nr++) {
-            inventory.setItem(HOME_SLOTS[nr - 1], buildHomeItem(player, nr, nr <= limit));
+        int offset = page * HOMES_PER_PAGE;
+
+        for (int i = 1; i <= HOMES_PER_PAGE; i++) {
+            int nr = offset + i;
+            inventory.setItem(HOME_SLOTS[i - 1], buildHomeItem(player, nr, nr <= limit));
+        }
+
+        if (page < TOTAL_PAGES - 1) {
+            inventory.setItem(NEXT_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getConfig(), "homes-gui-next-page"), null));
+        }
+        if (page > 0) {
+            inventory.setItem(PREV_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getConfig(), "homes-gui-prev-page"), null));
         }
 
         player.openInventory(inventory);
@@ -200,25 +223,36 @@ public class HomesGuiListener implements Listener {
         int slot = event.getSlot();
 
         switch (holder.getType()) {
-            case MENU -> handleMenuClick(player, event, slot);
+            case MENU -> handleMenuClick(player, event, slot, holder.getPage());
             case DETAIL -> handleDetailClick(player, holder.getHomeNumber(), slot);
             case CONFIRM_DELETE -> handleConfirmClick(player, holder.getHomeNumber(), slot);
             case RENAME -> handleRenameClick(player, holder.getHomeNumber(), slot, topInventory);
         }
     }
 
-    private void handleMenuClick(Player player, InventoryClickEvent event, int slot) {
-        int nr = -1;
+    private void handleMenuClick(Player player, InventoryClickEvent event, int slot, int page) {
+        if (slot == NEXT_PAGE_SLOT && page < TOTAL_PAGES - 1) {
+            openMenu(player, page + 1);
+            return;
+        }
+        if (slot == PREV_PAGE_SLOT && page > 0) {
+            openMenu(player, page - 1);
+            return;
+        }
+
+        int slotIndex = -1;
         for (int i = 0; i < HOME_SLOTS.length; i++) {
             if (HOME_SLOTS[i] == slot) {
-                nr = i + 1;
+                slotIndex = i;
                 break;
             }
         }
 
-        if (nr == -1) {
+        if (slotIndex == -1) {
             return; // Rand-/Fuellslot, keine Aktion
         }
+
+        int nr = page * HOMES_PER_PAGE + slotIndex + 1;
 
         int limit = Math.min(plugin.getHomeManager().getHomeLimit(player), MAX_SLOTS);
         if (nr > limit) {
@@ -255,7 +289,7 @@ public class HomesGuiListener implements Listener {
             }
             case 5 -> openRename(player, nr);
             case 7 -> openConfirmDelete(player, nr);
-            case 8 -> openMenu(player);
+            case 8 -> openMenu(player, pageForHomeNumber(nr));
             default -> {
                 // kein interaktiver Slot
             }
@@ -266,10 +300,14 @@ public class HomesGuiListener implements Listener {
         if (slot == 2) {
             plugin.getHomeManager().deleteHome(player.getUniqueId(), nr);
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-gui-deleted").replace("%nr%", String.valueOf(nr)));
-            openMenu(player);
+            openMenu(player, pageForHomeNumber(nr));
         } else if (slot == 6) {
-            openMenu(player);
+            openMenu(player, pageForHomeNumber(nr));
         }
+    }
+
+    private int pageForHomeNumber(int nr) {
+        return (nr - 1) / HOMES_PER_PAGE;
     }
 
     private void handleRenameClick(Player player, int nr, int slot, Inventory anvil) {
@@ -289,7 +327,7 @@ public class HomesGuiListener implements Listener {
         player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-gui-renamed")
                 .replace("%nr%", String.valueOf(nr))
                 .replace("%name%", MessageUtil.color(newName)));
-        openMenu(player);
+        openMenu(player, pageForHomeNumber(nr));
     }
 
     // ---------------------------------------------------------------

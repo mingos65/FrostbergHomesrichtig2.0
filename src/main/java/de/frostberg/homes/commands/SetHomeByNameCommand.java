@@ -37,7 +37,7 @@ public class SetHomeByNameCommand implements CommandExecutor {
             name = name.substring(0, 32);
         }
 
-        int limit = Math.min(plugin.getHomeManager().getHomeLimit(player), 14);
+        int limit = Math.min(plugin.getHomeManager().getHomeLimit(player), 28);
         int nextNumber = -1;
         for (int i = 1; i <= limit; i++) {
             if (!plugin.getHomeManager().hasHome(player.getUniqueId(), i)) {

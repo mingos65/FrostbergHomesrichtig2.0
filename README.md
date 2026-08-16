@@ -81,7 +81,7 @@ unabhängiger TPA-Cooldown (`settings.cooldown-seconds`).
 | `homes.reload`              | op       | `/homes reload` nutzen                          |
 | `homes.bypass.cooldown`     | op       | Ignoriert den Teleport-Cooldown                 |
 | `homes.bypass.warmup`       | op       | Ignoriert den Warmup-Countdown (sofortiger TP)  |
-| `homes.limit.1` … `homes.limit.14` | false | Erlaubt die jeweilige Anzahl an Homes (14 = alle Slots im /homes-GUI) |
+| `homes.limit.1` … `homes.limit.28` | false | Erlaubt die jeweilige Anzahl an Homes (28 = alle Slots auf beiden Seiten im /homes-GUI) |
 | `homes.limit.unlimited`     | false    | Unbegrenzt viele Homes                          |
 | `homes.*`                   | false    | Sammel-Permission für alles Obige               |
 | `tpa.use`                   | true     | `/tpa`, `/tpahere`, `/tpaccept`, `/tpdeny` nutzen |
