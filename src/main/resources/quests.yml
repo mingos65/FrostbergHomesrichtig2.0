@@ -6,16 +6,29 @@
 # Server "quest-count" Quests aus dem jeweiligen Pool - fuer ALLE Spieler
 # gleich, nicht zufaellig pro Spieler. Aenderungen werden mit /quest reload
 # uebernommen (wirkt sich erst auf die naechste Auswahl aus, laufende
-# Perioden werden nicht abgebrochen).
+# Perioden werden nicht abgebrochen - der Fortschritt bereits aktiver Quests
+# bleibt aber bestehen und ihre Zahlen aktualisieren sich sofort, wenn du
+# die ID unveraendert laesst und nur amount/reward/difficulty aenderst).
 #
 # Richtwerte fuer die Mengen (amount): Taeglich sollte in ein paar Minuten
 # machbar sein, Woechentlich etwas mehr Aufwand ueber die Woche verteilt,
 # Monatlich spuerbar schwerer aber ueber 30 Tage trotzdem entspannt machbar.
 #
-# Richtwert fuer difficulty/reward: je hoeher die Sterne (1-5), desto mehr
-# Tokens/Gold sollte die Quest im Vergleich zu den anderen ihrer eigenen
-# Kategorie geben - die Sterne sind KEIN reiner Deko-Wert, sondern sollen
-# den tatsaechlichen Aufwand der Quest innerhalb ihrer Kategorie widerspiegeln.
+# WICHTIG - Belohnungs-Logik: Die Belohnung haengt NUR von "difficulty"
+# (1-5 Sterne) und der Kategorie ab, nicht vom Quest-Typ - zwei Quests mit
+# gleicher Sternezahl in derselben Kategorie geben also immer die gleiche
+# Tokens-Zahl. Das verhindert Unsinn wie "150 Stein = 150 Tokens, aber
+# 500 Stein = 400 Tokens nur weil es eine andere Quest ist". Richtwerte,
+# an die sich alle Quests unten halten:
+#
+#   Taeglich:   1*=140  2*=190  3*=250  4*=320  5*=400   Tokens
+#   Woechentl.: 1*=400  2*=550  3*=700  4*=900  5*=1150  Tokens (+ Gold bei 4-5*)
+#   Monatlich:  1*=1200 2*=1600 3*=2100 4*=2700 5*=3400  Tokens (+ Gold bei 4-5*)
+#
+# Wenn du eine neue Quest hinzufuegst: ueberlege realistisch, wie viel
+# Aufwand/Zeit/Risiko sie im Vergleich zu den anderen ihrer Kategorie
+# braucht, vergib die passende Sternezahl und nimm die Tokens-Zahl aus der
+# Tabelle oben - nicht frei erfinden.
 #
 # Ein Quest-Eintrag sieht so aus:
 #
@@ -27,17 +40,19 @@
 #     amount: 200                   # wie oft/wie viel insgesamt noetig ist
 #     name: "Baue 200 Stein ab"     # Anzeigename im GUI (faerbbar mit &)
 #     description: "Baue 200 Stein-Bloecke in der Farmwelt ab."
-#     difficulty: 2                 # 1-5 Sterne im GUI, siehe Hinweis oben
+#     difficulty: 2                 # 1-5 Sterne - siehe Tabelle oben fuer die Belohnung
 #     reward:
-#       tokens: 600
+#       tokens: 550
 #       gold: 0
 #
 # Verfuegbare "type"-Werte und was bei "target" erlaubt ist:
-#   MINE_BLOCK     - target: exakter Material-Name (z.B. STONE, OAK_LOG)
-#                    oder eines der Tag-Keywords LOGS/PLANKS/LEAVES/WOOL/SAPLINGS
-#   PLACE_BLOCK    - target: wie MINE_BLOCK (z.B. TURTLE_EGG)
+#   MINE_BLOCK     - target: exakter Material-Name (z.B. STONE, OAK_LOG) oder
+#                    Tag-Keyword: LOGS/PLANKS/LEAVES/WOOL/SAPLINGS/
+#                    COAL_ORES/IRON_ORES/GOLD_ORES/REDSTONE_ORES/LAPIS_ORES/COPPER_ORES
+#                    (Tags fassen z.B. normales + Deepslate-Erz zusammen)
+#   PLACE_BLOCK    - target: wie MINE_BLOCK (z.B. TURTLE_EGG, SAPLINGS)
 #   KILL_ENTITY    - target: exakter Entity-Name (z.B. ZOMBIE, SKELETON)
-#   CRAFT_ITEM     - target: exaktes Ergebnis-Material (z.B. BREAD)
+#   CRAFT_ITEM     - target: exaktes Ergebnis-Material oder Tag (z.B. BREAD, PLANKS)
 #   FISH           - target: optional, sonst zaehlt jeder Fang
 #   WALK_DISTANCE  - kein target noetig, amount = Bloecke in der Farmwelt
 #   EARN_TOKENS    - kein target noetig, amount = verdiente Tokens (egal woher)
@@ -48,6 +63,45 @@
 daily:
   quest-count: 1
   pool:
+    - id: "daily_walk"
+      type: WALK_DISTANCE
+      amount: 600
+      name: "Laufe 600 Blöcke"
+      description: "Laufe 600 Blöcke in der Farmwelt."
+      difficulty: 1
+      reward:
+        tokens: 140
+        gold: 0
+    - id: "daily_mine_stone"
+      type: MINE_BLOCK
+      target: STONE
+      amount: 100
+      name: "Baue 100 Stein ab"
+      description: "Baue 100 Stein-Blöcke in der Farmwelt ab."
+      difficulty: 1
+      reward:
+        tokens: 140
+        gold: 0
+    - id: "daily_craft_planks"
+      type: CRAFT_ITEM
+      target: PLANKS
+      amount: 64
+      name: "Craft 64 Bretter"
+      description: "Stelle 64 Bretter (beliebige Holzart) her."
+      difficulty: 1
+      reward:
+        tokens: 140
+        gold: 0
+    - id: "daily_plant_saplings"
+      type: PLACE_BLOCK
+      target: SAPLINGS
+      amount: 4
+      name: "Pflanze 4 Setzlinge"
+      description: "Platziere 4 Setzlinge (beliebige Art) in der Farmwelt."
+      difficulty: 1
+      reward:
+        tokens: 140
+        gold: 0
     - id: "daily_turtle_eggs"
       type: PLACE_BLOCK
       target: TURTLE_EGG
@@ -56,7 +110,7 @@ daily:
       description: "Platziere 1 Schildkrötenei in der Farmwelt."
       difficulty: 2
       reward:
-        tokens: 200
+        tokens: 190
         gold: 0
     - id: "daily_fish"
       type: FISH
@@ -65,7 +119,27 @@ daily:
       description: "Fange 8 Fische in der Farmwelt."
       difficulty: 2
       reward:
-        tokens: 180
+        tokens: 190
+        gold: 0
+    - id: "daily_craft_bread"
+      type: CRAFT_ITEM
+      target: BREAD
+      amount: 16
+      name: "Craft 16 Brote"
+      description: "Stelle 16 Brote her."
+      difficulty: 2
+      reward:
+        tokens: 190
+        gold: 0
+    - id: "daily_mine_coal"
+      type: MINE_BLOCK
+      target: COAL_ORES
+      amount: 30
+      name: "Baue 30 Kohleerz ab"
+      description: "Baue 30 Kohleerz (auch Deepslate) in der Farmwelt ab."
+      difficulty: 2
+      reward:
+        tokens: 190
         gold: 0
     - id: "daily_kill_zombies"
       type: KILL_ENTITY
@@ -77,68 +151,20 @@ daily:
       reward:
         tokens: 250
         gold: 0
-    - id: "daily_mine_stone"
-      type: MINE_BLOCK
-      target: STONE
-      amount: 100
-      name: "Baue 100 Stein ab"
-      description: "Baue 100 Stein-Blöcke in der Farmwelt ab."
-      difficulty: 1
+    - id: "daily_kill_skeletons"
+      type: KILL_ENTITY
+      target: SKELETON
+      amount: 10
+      name: "Töte 10 Skelette"
+      description: "Besiege 10 Skelette in der Farmwelt."
+      difficulty: 3
       reward:
-        tokens: 130
-        gold: 0
-    - id: "daily_craft_bread"
-      type: CRAFT_ITEM
-      target: BREAD
-      amount: 16
-      name: "Craft 16 Brote"
-      description: "Stelle 16 Brote her."
-      difficulty: 2
-      reward:
-        tokens: 180
-        gold: 0
-    - id: "daily_walk"
-      type: WALK_DISTANCE
-      amount: 600
-      name: "Laufe 600 Blöcke"
-      description: "Laufe 600 Blöcke in der Farmwelt."
-      difficulty: 1
-      reward:
-        tokens: 120
+        tokens: 250
         gold: 0
 
 weekly:
   quest-count: 3
   pool:
-    - id: "weekly_mine_wood"
-      type: MINE_BLOCK
-      target: LOGS
-      amount: 350
-      name: "Baue 350 Holz ab"
-      description: "Baue insgesamt 350 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
-      difficulty: 2
-      reward:
-        tokens: 500
-        gold: 0
-    - id: "weekly_kill_zombies"
-      type: KILL_ENTITY
-      target: ZOMBIE
-      amount: 50
-      name: "Töte 50 Zombies"
-      description: "Besiege 50 Zombies in der Farmwelt."
-      difficulty: 4
-      reward:
-        tokens: 800
-        gold: 5
-    - id: "weekly_fish"
-      type: FISH
-      amount: 30
-      name: "Fische 30 Fische"
-      description: "Fange 30 Fische in der Farmwelt."
-      difficulty: 2
-      reward:
-        tokens: 500
-        gold: 0
     - id: "weekly_walk"
       type: WALK_DISTANCE
       amount: 3500
@@ -147,16 +173,6 @@ weekly:
       difficulty: 1
       reward:
         tokens: 400
-        gold: 0
-    - id: "weekly_craft_bread"
-      type: CRAFT_ITEM
-      target: BREAD
-      amount: 64
-      name: "Craft 64 Brote"
-      description: "Stelle 64 Brote her."
-      difficulty: 3
-      reward:
-        tokens: 650
         gold: 0
     - id: "weekly_mine_stone"
       type: MINE_BLOCK
@@ -168,6 +184,75 @@ weekly:
       reward:
         tokens: 400
         gold: 0
+    - id: "weekly_craft_planks"
+      type: CRAFT_ITEM
+      target: PLANKS
+      amount: 300
+      name: "Craft 300 Bretter"
+      description: "Stelle 300 Bretter (beliebige Holzart) her."
+      difficulty: 1
+      reward:
+        tokens: 400
+        gold: 0
+    - id: "weekly_plant_saplings"
+      type: PLACE_BLOCK
+      target: SAPLINGS
+      amount: 20
+      name: "Pflanze 20 Setzlinge"
+      description: "Platziere 20 Setzlinge (beliebige Art) in der Farmwelt."
+      difficulty: 1
+      reward:
+        tokens: 400
+        gold: 0
+    - id: "weekly_mine_wood"
+      type: MINE_BLOCK
+      target: LOGS
+      amount: 350
+      name: "Baue 350 Holz ab"
+      description: "Baue insgesamt 350 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
+      difficulty: 2
+      reward:
+        tokens: 550
+        gold: 0
+    - id: "weekly_fish"
+      type: FISH
+      amount: 30
+      name: "Fische 30 Fische"
+      description: "Fange 30 Fische in der Farmwelt."
+      difficulty: 2
+      reward:
+        tokens: 550
+        gold: 0
+    - id: "weekly_mine_coal"
+      type: MINE_BLOCK
+      target: COAL_ORES
+      amount: 150
+      name: "Baue 150 Kohleerz ab"
+      description: "Baue 150 Kohleerz (auch Deepslate) in der Farmwelt ab."
+      difficulty: 2
+      reward:
+        tokens: 550
+        gold: 0
+    - id: "weekly_craft_bread"
+      type: CRAFT_ITEM
+      target: BREAD
+      amount: 64
+      name: "Craft 64 Brote"
+      description: "Stelle 64 Brote her."
+      difficulty: 3
+      reward:
+        tokens: 700
+        gold: 0
+    - id: "weekly_mine_iron"
+      type: MINE_BLOCK
+      target: IRON_ORES
+      amount: 80
+      name: "Baue 80 Eisenerz ab"
+      description: "Baue 80 Eisenerz (auch Deepslate) in der Farmwelt ab."
+      difficulty: 3
+      reward:
+        tokens: 700
+        gold: 0
     - id: "weekly_earn_tokens"
       type: EARN_TOKENS
       amount: 30000
@@ -176,7 +261,27 @@ weekly:
       difficulty: 3
       reward:
         tokens: 0
-        gold: 25
+        gold: 30
+    - id: "weekly_kill_zombies"
+      type: KILL_ENTITY
+      target: ZOMBIE
+      amount: 50
+      name: "Töte 50 Zombies"
+      description: "Besiege 50 Zombies in der Farmwelt."
+      difficulty: 4
+      reward:
+        tokens: 900
+        gold: 5
+    - id: "weekly_kill_skeletons"
+      type: KILL_ENTITY
+      target: SKELETON
+      amount: 40
+      name: "Töte 40 Skelette"
+      description: "Besiege 40 Skelette in der Farmwelt."
+      difficulty: 4
+      reward:
+        tokens: 900
+        gold: 5
     - id: "weekly_turtle_eggs"
       type: PLACE_BLOCK
       target: TURTLE_EGG
@@ -185,41 +290,22 @@ weekly:
       description: "Platziere 3 Schildkröteneier in der Farmwelt."
       difficulty: 4
       reward:
-        tokens: 750
+        tokens: 900
         gold: 0
 
 monthly:
   quest-count: 5
   pool:
-    - id: "monthly_earn_tokens"
-      type: EARN_TOKENS
-      amount: 80000
-      name: "Verdiene 80.000 Tokens"
-      description: "Sammle insgesamt 80.000 Tokens, egal wie."
-      difficulty: 4
+    - id: "monthly_plant_saplings"
+      type: PLACE_BLOCK
+      target: SAPLINGS
+      amount: 80
+      name: "Pflanze 80 Setzlinge"
+      description: "Platziere 80 Setzlinge (beliebige Art) in der Farmwelt."
+      difficulty: 2
       reward:
-        tokens: 0
-        gold: 60
-    - id: "monthly_mine_wood"
-      type: MINE_BLOCK
-      target: LOGS
-      amount: 1200
-      name: "Baue 1.200 Holz ab"
-      description: "Baue insgesamt 1.200 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
-      difficulty: 3
-      reward:
-        tokens: 1800
+        tokens: 1600
         gold: 0
-    - id: "monthly_kill_zombies"
-      type: KILL_ENTITY
-      target: ZOMBIE
-      amount: 150
-      name: "Töte 150 Zombies"
-      description: "Besiege 150 Zombies in der Farmwelt."
-      difficulty: 5
-      reward:
-        tokens: 3000
-        gold: 15
     - id: "monthly_walk"
       type: WALK_DISTANCE
       amount: 12000
@@ -227,16 +313,7 @@ monthly:
       description: "Laufe 12.000 Blöcke in der Farmwelt."
       difficulty: 2
       reward:
-        tokens: 1500
-        gold: 0
-    - id: "monthly_fish"
-      type: FISH
-      amount: 100
-      name: "Fische 100 Fische"
-      description: "Fange 100 Fische in der Farmwelt."
-      difficulty: 3
-      reward:
-        tokens: 1800
+        tokens: 1600
         gold: 0
     - id: "monthly_mine_stone"
       type: MINE_BLOCK
@@ -246,7 +323,56 @@ monthly:
       description: "Baue 2.000 Stein-Blöcke in der Farmwelt ab."
       difficulty: 2
       reward:
-        tokens: 1500
+        tokens: 1600
+        gold: 0
+    - id: "monthly_mine_coal"
+      type: MINE_BLOCK
+      target: COAL_ORES
+      amount: 600
+      name: "Baue 600 Kohleerz ab"
+      description: "Baue 600 Kohleerz (auch Deepslate) in der Farmwelt ab."
+      difficulty: 2
+      reward:
+        tokens: 1600
+        gold: 0
+    - id: "monthly_craft_planks"
+      type: CRAFT_ITEM
+      target: PLANKS
+      amount: 1500
+      name: "Craft 1.500 Bretter"
+      description: "Stelle 1.500 Bretter (beliebige Holzart) her."
+      difficulty: 2
+      reward:
+        tokens: 1600
+        gold: 0
+    - id: "monthly_mine_wood"
+      type: MINE_BLOCK
+      target: LOGS
+      amount: 1200
+      name: "Baue 1.200 Holz ab"
+      description: "Baue insgesamt 1.200 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
+      difficulty: 3
+      reward:
+        tokens: 2100
+        gold: 0
+    - id: "monthly_fish"
+      type: FISH
+      amount: 100
+      name: "Fische 100 Fische"
+      description: "Fange 100 Fische in der Farmwelt."
+      difficulty: 3
+      reward:
+        tokens: 2100
+        gold: 0
+    - id: "monthly_mine_iron"
+      type: MINE_BLOCK
+      target: IRON_ORES
+      amount: 350
+      name: "Baue 350 Eisenerz ab"
+      description: "Baue 350 Eisenerz (auch Deepslate) in der Farmwelt ab."
+      difficulty: 3
+      reward:
+        tokens: 2100
         gold: 0
     - id: "monthly_craft_bread"
       type: CRAFT_ITEM
@@ -256,8 +382,37 @@ monthly:
       description: "Stelle 200 Brote her."
       difficulty: 4
       reward:
-        tokens: 2200
+        tokens: 2700
         gold: 0
+    - id: "monthly_earn_tokens"
+      type: EARN_TOKENS
+      amount: 80000
+      name: "Verdiene 80.000 Tokens"
+      description: "Sammle insgesamt 80.000 Tokens, egal wie."
+      difficulty: 4
+      reward:
+        tokens: 0
+        gold: 70
+    - id: "monthly_kill_zombies"
+      type: KILL_ENTITY
+      target: ZOMBIE
+      amount: 150
+      name: "Töte 150 Zombies"
+      description: "Besiege 150 Zombies in der Farmwelt."
+      difficulty: 5
+      reward:
+        tokens: 3400
+        gold: 15
+    - id: "monthly_kill_skeletons"
+      type: KILL_ENTITY
+      target: SKELETON
+      amount: 120
+      name: "Töte 120 Skelette"
+      description: "Besiege 120 Skelette in der Farmwelt."
+      difficulty: 5
+      reward:
+        tokens: 3400
+        gold: 15
     - id: "monthly_turtle_eggs"
       type: PLACE_BLOCK
       target: TURTLE_EGG
@@ -266,23 +421,24 @@ monthly:
       description: "Platziere 6 Schildkröteneier in der Farmwelt."
       difficulty: 5
       reward:
-        tokens: 2800
+        tokens: 3400
         gold: 0
 
-# Kategorie-Bonus: erscheint als eigenes Item im jeweiligen Kategorie-GUI,
-# grau/gesperrt solange nicht ALLE Quests dieser Kategorie fertig sind, gruen
-# und anklickbar sobald alle fertig sind. Muss wie jede andere Belohnung
-# manuell im GUI abgeholt werden (siehe QuestManager#claimCategoryBonus).
+# Kategorie-Bonus: erscheint als eigenes Item im jeweiligen Kategorie-GUI
+# (direkt ueber dem Hilfe-Buch), grau/gesperrt solange nicht ALLE Quests
+# dieser Kategorie fertig sind, gruen und anklickbar sobald alle fertig
+# sind. Muss wie jede andere Belohnung manuell im GUI abgeholt werden
+# (siehe QuestManager#claimCategoryBonus).
 category-bonus:
   daily:
-    tokens: 200
+    tokens: 250
     gold: 0
   weekly:
-    tokens: 1000
-    gold: 10
+    tokens: 1200
+    gold: 15
   monthly:
-    tokens: 5000
-    gold: 50
+    tokens: 6000
+    gold: 60
 
 # Bonus fuer aufeinanderfolgende Tage, an denen die Daily-Quest(s) komplett
 # geschafft wurden. Schluessel = Streak-Laenge in Tagen. Beliebig viele

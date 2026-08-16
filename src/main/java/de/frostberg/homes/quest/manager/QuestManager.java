@@ -526,6 +526,12 @@ public class QuestManager implements Listener {
             case "LEAVES" -> Tag.LEAVES;
             case "WOOL" -> Tag.WOOL;
             case "SAPLINGS" -> Tag.SAPLINGS;
+            case "COAL_ORES" -> Tag.COAL_ORES;
+            case "IRON_ORES" -> Tag.IRON_ORES;
+            case "GOLD_ORES" -> Tag.GOLD_ORES;
+            case "REDSTONE_ORES" -> Tag.REDSTONE_ORES;
+            case "LAPIS_ORES" -> Tag.LAPIS_ORES;
+            case "COPPER_ORES" -> Tag.COPPER_ORES;
             default -> null;
         };
         if (tag != null) {

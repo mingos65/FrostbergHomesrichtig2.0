@@ -38,8 +38,8 @@ public class QuestGuiListener implements Listener {
     private static final int HELP_SLOT_MAIN = 35;
 
     private static final int BACK_SLOT = 18;
-    private static final int BONUS_SLOT = 22;
     private static final int HELP_SLOT_CATEGORY = 26;
+    private static final int BONUS_SLOT = 17; // direkt ueber dem Hilfe-Buch (Slot 26)
 
     private final FrostbergHomes plugin;
 
@@ -191,7 +191,11 @@ public class QuestGuiListener implements Listener {
                 : "quest-gui-bonus-status-locked";
         lore.add(MessageUtil.get(plugin.getMessages(), statusKey));
 
-        Material icon = claimed ? Material.GRAY_DYE : allDone ? Material.CHEST : Material.GRAY_STAINED_GLASS_PANE;
+        // WICHTIG: hier bewusst NICHT GRAY_STAINED_GLASS_PANE fuer "gesperrt"
+        // verwenden - das ist genau das Material, mit dem fillBorder() alle
+        // leeren Slots als Deko auffuellt, das Bonus-Item waere also optisch
+        // unsichtbar (identisch mit dem Rand). BARRIER hebt sich klar ab.
+        Material icon = claimed ? Material.GRAY_DYE : allDone ? Material.CHEST : Material.BARRIER;
         String name = MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-name")
                 .replace("%category%", plugin.getQuestManager().categoryDisplayName(category));
         return simpleItem(icon, name, lore);
