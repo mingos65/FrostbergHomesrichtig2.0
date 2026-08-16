@@ -12,6 +12,11 @@
 # machbar sein, Woechentlich etwas mehr Aufwand ueber die Woche verteilt,
 # Monatlich spuerbar schwerer aber ueber 30 Tage trotzdem entspannt machbar.
 #
+# Richtwert fuer difficulty/reward: je hoeher die Sterne (1-5), desto mehr
+# Tokens/Gold sollte die Quest im Vergleich zu den anderen ihrer eigenen
+# Kategorie geben - die Sterne sind KEIN reiner Deko-Wert, sondern sollen
+# den tatsaechlichen Aufwand der Quest innerhalb ihrer Kategorie widerspiegeln.
+#
 # Ein Quest-Eintrag sieht so aus:
 #
 #   - id: "eindeutiger_name"        # frei waehlbar, muss innerhalb der
@@ -22,7 +27,7 @@
 #     amount: 200                   # wie oft/wie viel insgesamt noetig ist
 #     name: "Baue 200 Stein ab"     # Anzeigename im GUI (faerbbar mit &)
 #     description: "Baue 200 Stein-Bloecke in der Farmwelt ab."
-#     difficulty: 2                 # 1-5 Sterne im GUI
+#     difficulty: 2                 # 1-5 Sterne im GUI, siehe Hinweis oben
 #     reward:
 #       tokens: 600
 #       gold: 0
@@ -49,18 +54,18 @@ daily:
       amount: 1
       name: "Platziere 1 Schildkrötenei"
       description: "Platziere 1 Schildkrötenei in der Farmwelt."
-      difficulty: 1
+      difficulty: 2
       reward:
-        tokens: 150
+        tokens: 200
         gold: 0
     - id: "daily_fish"
       type: FISH
       amount: 8
       name: "Fische 8 Fische"
       description: "Fange 8 Fische in der Farmwelt."
-      difficulty: 1
+      difficulty: 2
       reward:
-        tokens: 200
+        tokens: 180
         gold: 0
     - id: "daily_kill_zombies"
       type: KILL_ENTITY
@@ -68,7 +73,7 @@ daily:
       amount: 12
       name: "Töte 12 Zombies"
       description: "Besiege 12 Zombies in der Farmwelt."
-      difficulty: 1
+      difficulty: 3
       reward:
         tokens: 250
         gold: 0
@@ -80,7 +85,7 @@ daily:
       description: "Baue 100 Stein-Blöcke in der Farmwelt ab."
       difficulty: 1
       reward:
-        tokens: 150
+        tokens: 130
         gold: 0
     - id: "daily_craft_bread"
       type: CRAFT_ITEM
@@ -88,9 +93,9 @@ daily:
       amount: 16
       name: "Craft 16 Brote"
       description: "Stelle 16 Brote her."
-      difficulty: 1
+      difficulty: 2
       reward:
-        tokens: 150
+        tokens: 180
         gold: 0
     - id: "daily_walk"
       type: WALK_DISTANCE
@@ -99,7 +104,7 @@ daily:
       description: "Laufe 600 Blöcke in der Farmwelt."
       difficulty: 1
       reward:
-        tokens: 150
+        tokens: 120
         gold: 0
 
 weekly:
@@ -113,7 +118,7 @@ weekly:
       description: "Baue insgesamt 350 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
       difficulty: 2
       reward:
-        tokens: 600
+        tokens: 500
         gold: 0
     - id: "weekly_kill_zombies"
       type: KILL_ENTITY
@@ -121,7 +126,7 @@ weekly:
       amount: 50
       name: "Töte 50 Zombies"
       description: "Besiege 50 Zombies in der Farmwelt."
-      difficulty: 2
+      difficulty: 4
       reward:
         tokens: 800
         gold: 5
@@ -139,9 +144,9 @@ weekly:
       amount: 3500
       name: "Laufe 3.500 Blöcke"
       description: "Laufe 3.500 Blöcke in der Farmwelt."
-      difficulty: 2
+      difficulty: 1
       reward:
-        tokens: 600
+        tokens: 400
         gold: 0
     - id: "weekly_craft_bread"
       type: CRAFT_ITEM
@@ -149,9 +154,9 @@ weekly:
       amount: 64
       name: "Craft 64 Brote"
       description: "Stelle 64 Brote her."
-      difficulty: 2
+      difficulty: 3
       reward:
-        tokens: 500
+        tokens: 650
         gold: 0
     - id: "weekly_mine_stone"
       type: MINE_BLOCK
@@ -159,28 +164,28 @@ weekly:
       amount: 500
       name: "Baue 500 Stein ab"
       description: "Baue 500 Stein-Blöcke in der Farmwelt ab."
-      difficulty: 2
+      difficulty: 1
       reward:
-        tokens: 600
+        tokens: 400
         gold: 0
     - id: "weekly_earn_tokens"
       type: EARN_TOKENS
       amount: 30000
       name: "Verdiene 30.000 Tokens"
       description: "Sammle insgesamt 30.000 Tokens, egal wie."
-      difficulty: 2
+      difficulty: 3
       reward:
         tokens: 0
-        gold: 20
+        gold: 25
     - id: "weekly_turtle_eggs"
       type: PLACE_BLOCK
       target: TURTLE_EGG
       amount: 3
       name: "Platziere 3 Schildkröteneier"
       description: "Platziere 3 Schildkröteneier in der Farmwelt."
-      difficulty: 2
+      difficulty: 4
       reward:
-        tokens: 500
+        tokens: 750
         gold: 0
 
 monthly:
@@ -191,10 +196,10 @@ monthly:
       amount: 80000
       name: "Verdiene 80.000 Tokens"
       description: "Sammle insgesamt 80.000 Tokens, egal wie."
-      difficulty: 3
+      difficulty: 4
       reward:
         tokens: 0
-        gold: 50
+        gold: 60
     - id: "monthly_mine_wood"
       type: MINE_BLOCK
       target: LOGS
@@ -203,7 +208,7 @@ monthly:
       description: "Baue insgesamt 1.200 Holz-Blöcke (beliebige Holzart) in der Farmwelt ab."
       difficulty: 3
       reward:
-        tokens: 2000
+        tokens: 1800
         gold: 0
     - id: "monthly_kill_zombies"
       type: KILL_ENTITY
@@ -211,18 +216,18 @@ monthly:
       amount: 150
       name: "Töte 150 Zombies"
       description: "Besiege 150 Zombies in der Farmwelt."
-      difficulty: 3
+      difficulty: 5
       reward:
-        tokens: 2500
-        gold: 10
+        tokens: 3000
+        gold: 15
     - id: "monthly_walk"
       type: WALK_DISTANCE
       amount: 12000
       name: "Laufe 12.000 Blöcke"
       description: "Laufe 12.000 Blöcke in der Farmwelt."
-      difficulty: 3
+      difficulty: 2
       reward:
-        tokens: 2000
+        tokens: 1500
         gold: 0
     - id: "monthly_fish"
       type: FISH
@@ -239,9 +244,9 @@ monthly:
       amount: 2000
       name: "Baue 2.000 Stein ab"
       description: "Baue 2.000 Stein-Blöcke in der Farmwelt ab."
-      difficulty: 3
+      difficulty: 2
       reward:
-        tokens: 2000
+        tokens: 1500
         gold: 0
     - id: "monthly_craft_bread"
       type: CRAFT_ITEM
@@ -249,9 +254,9 @@ monthly:
       amount: 200
       name: "Craft 200 Brote"
       description: "Stelle 200 Brote her."
-      difficulty: 3
+      difficulty: 4
       reward:
-        tokens: 1800
+        tokens: 2200
         gold: 0
     - id: "monthly_turtle_eggs"
       type: PLACE_BLOCK
@@ -259,9 +264,9 @@ monthly:
       amount: 6
       name: "Platziere 6 Schildkröteneier"
       description: "Platziere 6 Schildkröteneier in der Farmwelt."
-      difficulty: 2
+      difficulty: 5
       reward:
-        tokens: 1500
+        tokens: 2800
         gold: 0
 
 # Kategorie-Bonus: erscheint als eigenes Item im jeweiligen Kategorie-GUI,

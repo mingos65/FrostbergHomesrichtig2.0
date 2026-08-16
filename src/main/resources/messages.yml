@@ -240,6 +240,7 @@ quest-gui-quest-status-ready: "&7Status&8: &a&lAbholbereit &7(Klicken!)"
 quest-gui-quest-status-claimed: "&7Status&8: &8Abgeholt"
 # ---------- Quest: GUI Kategorie-Bonus ----------
 quest-gui-bonus-name: "&6&l%category%-Bonus"
+quest-gui-bonus-progress: "&7Fortschritt&8: &f%done%&7/&f%total% &7Quests abgeschlossen"
 quest-gui-bonus-lore-reward: "&7Belohnung&8: &e%tokens% Tokens &7| &6%gold% Gold"
 quest-gui-bonus-status-locked: "&7Status&8: &8Gesperrt &7(noch nicht alle Quests fertig)"
 # ---------- Quest: Hilfe-Buch ----------

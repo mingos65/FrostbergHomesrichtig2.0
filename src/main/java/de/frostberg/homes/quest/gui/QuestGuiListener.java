@@ -162,12 +162,25 @@ public class QuestGuiListener implements Listener {
      * danach wie eine abgeholte Quest gefaerbt (siehe claimCategoryBonus).
      */
     private ItemStack buildCategoryBonusItem(Player player, QuestCategory category) {
+        List<Quest> active = plugin.getQuestManager().getActiveQuests(category);
+        PlayerQuestData data = plugin.getQuestManager().getData(player.getUniqueId());
+
+        int done = 0;
+        for (Quest quest : active) {
+            if (data.getProgress(category, quest.getId()) >= quest.getAmount()) {
+                done++;
+            }
+        }
+
         boolean claimed = plugin.getQuestManager().isCategoryBonusClaimed(player.getUniqueId(), category);
         boolean allDone = plugin.getQuestManager().areAllQuestsDone(player.getUniqueId(), category);
         long tokens = plugin.getQuestManager().getCategoryBonusTokens(category);
         double gold = plugin.getQuestManager().getCategoryBonusGold(category);
 
         List<String> lore = new ArrayList<>();
+        lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-progress")
+                .replace("%done%", String.valueOf(done))
+                .replace("%total%", String.valueOf(active.size())));
         lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-lore-reward")
                 .replace("%tokens%", String.valueOf(tokens))
                 .replace("%gold%", String.valueOf(gold)));
