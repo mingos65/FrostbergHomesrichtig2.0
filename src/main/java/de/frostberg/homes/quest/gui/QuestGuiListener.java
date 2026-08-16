@@ -150,7 +150,12 @@ public class QuestGuiListener implements Listener {
         }
 
         inventory.setItem(BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "quest-gui-back-name"), null));
-        inventory.setItem(BONUS_SLOT, buildCategoryBonusItem(player, category));
+        // Bei Taeglich gibt es bewusst keinen Kategorie-Bonus - da nur 1
+        // Quest aktiv ist, waere "alle Quests der Kategorie fertig" exakt
+        // derselbe Moment wie das Abholen der einzigen Quest selbst.
+        if (category != QuestCategory.DAILY) {
+            inventory.setItem(BONUS_SLOT, buildCategoryBonusItem(player, category));
+        }
         inventory.setItem(HELP_SLOT_CATEGORY, buildHelpItem());
         fillBorder(inventory);
 
@@ -193,8 +198,9 @@ public class QuestGuiListener implements Listener {
         // WICHTIG: hier bewusst NICHT GRAY_STAINED_GLASS_PANE fuer "gesperrt"
         // verwenden - das ist genau das Material, mit dem fillBorder() alle
         // leeren Slots als Deko auffuellt, das Bonus-Item waere also optisch
-        // unsichtbar (identisch mit dem Rand). BARRIER hebt sich klar ab.
-        Material icon = claimed ? Material.GRAY_DYE : allDone ? Material.CHEST : Material.BARRIER;
+        // unsichtbar (identisch mit dem Rand). GRAY_CONCRETE ist ein solider
+        // Block statt eines Glas-Panels und hebt sich klar vom Rand ab.
+        Material icon = claimed ? Material.GRAY_DYE : allDone ? Material.LIME_CONCRETE : Material.GRAY_CONCRETE;
         String name = MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-name")
                 .replace("%category%", plugin.getQuestManager().categoryDisplayName(category));
         return simpleItem(icon, name, lore);
@@ -338,7 +344,7 @@ public class QuestGuiListener implements Listener {
             openHelpBook(player);
             return;
         }
-        if (slot == BONUS_SLOT) {
+        if (slot == BONUS_SLOT && category != QuestCategory.DAILY) {
             if (plugin.getQuestManager().areAllQuestsDone(player.getUniqueId(), category)
                     && !plugin.getQuestManager().isCategoryBonusClaimed(player.getUniqueId(), category)) {
                 plugin.getQuestManager().claimCategoryBonus(player, category);

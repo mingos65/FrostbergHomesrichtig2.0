@@ -437,12 +437,11 @@ monthly:
 # dieser Kategorie fertig sind, gruen und anklickbar sobald alle fertig
 # sind. Muss wie jede andere Belohnung manuell im GUI abgeholt werden
 # (siehe QuestManager#claimCategoryBonus). Gold nach derselben Regel wie
-# oben (1 Gold = 1.000 Tokens), bei Taeglich zu klein fuer eine sinnvolle
-# Gold-Zahl und deshalb 0.
+# oben (1 Gold = 1.000 Tokens). KEIN Eintrag fuer "daily" - bei nur 1
+# aktiver Quest pro Tag waere "alle Quests fertig" exakt derselbe Moment
+# wie das Abholen der einzigen Quest selbst, das GUI zeigt dort bewusst
+# gar kein Bonus-Item an (siehe QuestGuiListener#openCategory).
 category-bonus:
-  daily:
-    tokens: 800
-    gold: 0
   weekly:
     tokens: 4000
     gold: 4
