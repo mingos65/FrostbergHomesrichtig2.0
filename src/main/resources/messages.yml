@@ -109,6 +109,7 @@ farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
 spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
 # ---------- Clan: Platzhalter (TAB/Scoreboard/Chat, siehe ClanPlaceholderExpansion) ----------
 clan-placeholder-none: "&7Kein Clan"
+clan-placeholder-tag-format: " &7[&b%tag%&7]"
 # ---------- Clan: Allgemein / Erstellen / Löschen ----------
 clan-usage: "%prefix%&cNutzung: &f/clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank>"
 clan-create-usage: "%prefix%&cNutzung: &f/clan create <name> [tag]"

@@ -14,9 +14,15 @@ import org.bukkit.OfflinePlayer;
  *
  * Verfuegbare Platzhalter:
  * %frostbergclans_name%        - Clan-Name, ohne Clan messages.clan-placeholder-none ("Kein Clan")
- * %frostbergclans_tag%         - Clan-Tag oder leer
- * %frostbergclans_role%        - LEADER/MOD/MEMBER oder leer
- * %frostbergclans_membercount% - Mitgliederanzahl oder leer
+ * %frostbergclans_tag%         - Clan-Tag, ohne Clan leer
+ * %frostbergclans_role%        - LEADER/MOD/MEMBER, ohne Clan leer
+ * %frostbergclans_membercount% - Mitgliederanzahl, ohne Clan leer
+ * %frostbergclans_tagdisplay%  - Fertig formatiertes Tag inkl. Klammern
+ *                                 (messages.clan-placeholder-tag-format),
+ *                                 ohne Clan komplett leer (kein "[]") -
+ *                                 gedacht zum direkten Einsetzen in TAB-
+ *                                 Tabliste/Chat-Format, ohne eigene Klammern
+ *                                 dort zu brauchen
  */
 public class ClanPlaceholderExpansion extends PlaceholderExpansion {
 
@@ -65,6 +71,9 @@ public class ClanPlaceholderExpansion extends PlaceholderExpansion {
                 yield role != null ? role.name() : "";
             }
             case "membercount" -> String.valueOf(clan.getMemberCount());
+            case "tagdisplay" -> clan.getTag() != null
+                    ? MessageUtil.get(plugin.getMessages(), "clan-placeholder-tag-format").replace("%tag%", clan.getTag())
+                    : "";
             default -> "";
         };
     }
