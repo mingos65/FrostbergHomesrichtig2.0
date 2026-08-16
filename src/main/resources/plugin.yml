@@ -315,11 +315,11 @@ permissions:
     description: Erlaubt /quest reload, reset, info und broadcast sowie die Vorschau auf die naechste Periode im GUI
     default: op
   quest.bypass.world:
-    description: Quest-Fortschritt zaehlt auch ausserhalb der Farmwelt (zum Testen)
-    default: op
+    description: Quest-Fortschritt zaehlt auch ausserhalb der Farmwelt (nicht mal OP hat das automatisch - bewusst nur ueber quest.* oder explizite Vergabe)
+    default: false
   quest.bypass.creative:
-    description: Quest-Fortschritt zaehlt auch im Creative-Modus (zum Testen)
-    default: op
+    description: Quest-Fortschritt zaehlt auch im Creative-Modus (nicht mal OP hat das automatisch - bewusst nur ueber quest.* oder explizite Vergabe)
+    default: false
   quest.multiplier.vip:
     description: Belohnungs-Multiplikator fuer Quest-Belohnungen (siehe config.yml quest.reward-multipliers)
     default: false
