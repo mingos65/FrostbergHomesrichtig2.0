@@ -2,7 +2,9 @@
 
 Eigenes Homes-Plugin für Paper 1.21.x (Java 21) - kein Essentials nötig.
 Nummerierte Homes, farbenfrohe Chat-Nachrichten, Warmup-Countdown im Chat,
-Cooldown, Safe-Teleport und optionale Sound-/Partikel-/Title-Effekte.
+Cooldown, Safe-Teleport und optionale Sound-/Partikel-/Title-Effekte. Dazu ein
+TPA-System (`/tpa`, `/tpahere`) mit klickbaren Annehmen/Ablehnen-Buttons im
+Chat und ein sofortiger Admin-Teleport (`/tp`, `/tphere`).
 Kompatibel mit LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse und
 TAB (nur `softdepend`, keine Pflicht-Abhängigkeit).
 
@@ -49,9 +51,24 @@ Beim ersten Start legt das Plugin automatisch an:
 | `/delete home <nr>`     | Löscht Home #nr                        | `homes.delete` |
 | `/homes`                | Zeigt alle eigenen Homes an            | `homes.list`   |
 | `/homes reload`         | Lädt die config.yml neu                | `homes.reload` |
+| `/tpa <spieler>`        | Fragt, ob du dich zu ihm teleportieren darfst | `tpa.use` |
+| `/tpahere <spieler>`    | Fragt, ob er sich zu dir teleportieren soll | `tpa.use` |
+| `/tpaccept`             | Nimmt die offene Anfrage an (auch per Klick) | `tpa.use` |
+| `/tpdeny`               | Lehnt die offene Anfrage ab (auch per Klick) | `tpa.use` |
+| `/tp <spieler>`         | Sofortiger Teleport zu einem Spieler, ohne Anfrage | `tpa.admin` |
+| `/tphere <spieler>`     | Teleportiert einen Spieler sofort zu dir | `tpa.admin` |
 
 Alle Befehle unterstützen Tab-Complete (z.B. Vorschläge für vorhandene
-Home-Nummern bei `/home` und `/delete home`).
+Home-Nummern bei `/home` und `/delete home`, Online-Spielernamen bei den
+TPA-Befehlen).
+
+Bei `/tpa`/`/tpahere` bekommt der Zielspieler eine anklickbare Chat-Zeile mit
+`[Annehmen]`/`[Ablehnen]`-Buttons (funktioniert genauso wie das Eintippen von
+`/tpaccept`/`/tpdeny`). Eine unbeantwortete Anfrage läuft nach
+`settings.tpa-expiry-seconds` (Standard 60s) automatisch ab. Nach Annahme
+läuft derselbe Warmup-Countdown wie bei `/home` (`settings.warmup-seconds`,
+abbrechbar bei Bewegung), danach greift ein eigener, vom Homes-Cooldown
+unabhängiger TPA-Cooldown (`settings.cooldown-seconds`).
 
 ## Permissions - Übersicht
 
@@ -67,6 +84,11 @@ Home-Nummern bei `/home` und `/delete home`).
 | `homes.limit.1` … `homes.limit.10` | false | Erlaubt die jeweilige Anzahl an Homes    |
 | `homes.limit.unlimited`     | false    | Unbegrenzt viele Homes                          |
 | `homes.*`                   | false    | Sammel-Permission für alles Obige               |
+| `tpa.use`                   | true     | `/tpa`, `/tpahere`, `/tpaccept`, `/tpdeny` nutzen |
+| `tpa.admin`                 | op       | `/tp`, `/tphere` (sofort, ohne Anfrage) nutzen  |
+| `tpa.bypass.cooldown`       | op       | Ignoriert den TPA-Cooldown                      |
+| `tpa.bypass.warmup`         | op       | Ignoriert den Warmup-Countdown nach TPA-Annahme |
+| `tpa.*`                     | false    | Sammel-Permission für alles TPA-Obige           |
 
 Besitzt ein Spieler keine `homes.limit.*`-Permission, greift der Fallback-Wert
 `settings.default-home-limit` aus der `config.yml` (Standard: `1`).
@@ -127,15 +149,24 @@ frostberg-homes/
     │   │   ├── SetHomeCommand.java      (/set home [nr])
     │   │   ├── DeleteHomeCommand.java   (/delete home [nr])
     │   │   ├── HomeCommand.java         (/home [nr] - Warmup, Cooldown, Safe-TP)
-    │   │   └── HomesCommand.java        (/homes, /homes reload)
+    │   │   ├── HomesCommand.java        (/homes, /homes reload)
+    │   │   ├── TpaCommand.java          (/tpa, /tpahere - klickbare Anfrage)
+    │   │   ├── TpaAcceptCommand.java    (/tpaccept)
+    │   │   ├── TpaDenyCommand.java      (/tpdeny)
+    │   │   └── AdminTpCommand.java      (/tp, /tphere - sofort, ohne Anfrage)
     │   ├── listener/
     │   │   └── PlayerDataListener.java  (Laden/Entladen bei Join/Quit)
     │   ├── manager/
-    │   │   └── HomeManager.java         (YAML-Speicherung, Limits, Cooldown)
+    │   │   ├── HomeManager.java         (YAML-Speicherung, Limits, Cooldown)
+    │   │   └── TpaManager.java          (Anfragen, Ablauf-Timer, TPA-Cooldown)
     │   ├── model/
-    │   │   └── Home.java                (Datenmodell eines Homes)
+    │   │   ├── Home.java                (Datenmodell eines Homes)
+    │   │   └── TpaRequest.java          (Datenmodell einer TPA-Anfrage)
+    │   ├── tokens/commands/
+    │   │   └── PayCommand.java          (/pay tokens|gold)
     │   └── util/
-    │       └── MessageUtil.java         (Farbcodes, %prefix%-Ersetzung)
+    │       ├── MessageUtil.java         (Farbcodes, %prefix%-Ersetzung, Klick-Komponenten)
+    │       └── TeleportWarmup.java      (gemeinsamer Warmup-Countdown fuer /home & TPA)
     └── resources/
         ├── plugin.yml
         └── config.yml

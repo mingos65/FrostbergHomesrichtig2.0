@@ -1,5 +1,7 @@
 package de.frostberg.homes.util;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -11,6 +13,8 @@ import org.bukkit.configuration.file.FileConfiguration;
  * dafuer kennen.
  */
 public final class MessageUtil {
+
+    private static final LegacyComponentSerializer LEGACY_SECTION = LegacyComponentSerializer.legacySection();
 
     private MessageUtil() {
     }
@@ -39,5 +43,14 @@ public final class MessageUtil {
         raw = raw.replace("%prefix%", prefix);
 
         return color(raw);
+    }
+
+    /**
+     * Wandelt einen bereits eingefaerbten Text (z.B. das Ergebnis von get())
+     * in eine Adventure-Component um, damit Klick-/Hover-Events angehaengt
+     * werden koennen (siehe TpaCommand fuer die [Annehmen]/[Ablehnen]-Buttons).
+     */
+    public static Component toComponent(String coloredText) {
+        return LEGACY_SECTION.deserialize(coloredText == null ? "" : coloredText);
     }
 }

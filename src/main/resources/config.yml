@@ -9,9 +9,12 @@ settings:
   # Cooldown zwischen zwei Home-Teleports in Sekunden. 0 = deaktiviert
   cooldown-seconds: 30
   # Warmup / Countdown vor dem Teleport in Sekunden. 0 = sofortiger Teleport
+  # Gilt sowohl fuer /home als auch fuer /tpa und /tpahere (nach Annahme)
   warmup-seconds: 3
   # Bricht der Warmup ab, sobald sich der Spieler bewegt (nicht nur umschaut)?
   cancel-warmup-on-move: true
+  # Zeit in Sekunden, nach der eine unbeantwortete /tpa- bzw. /tpahere-Anfrage automatisch abläuft
+  tpa-expiry-seconds: 60
   # Sicherer Teleport: sucht eine sichere Position, falls das Home z.B.
   # in Lava, Luft über einem Abgrund oder in einem Block liegt
   safe-teleport: true
@@ -78,5 +81,29 @@ messages:
   world-not-loaded: "%prefix%&cDie Welt dieses Homes ist aktuell nicht geladen."
   # ---------- Cooldown ----------
   cooldown-active: "%prefix%&cWarte noch &e%seconds% Sekunden&c, bevor du dich erneut teleportierst."
+  # ---------- TPA (/tpa, /tpahere, /tpaccept, /tpdeny) ----------
+  tpa-usage: "%prefix%&cNutzung: &f/tpa <spieler>"
+  tpahere-usage: "%prefix%&cNutzung: &f/tpahere <spieler>"
+  tpa-cannot-self: "%prefix%&cDu kannst dir nicht selbst eine Anfrage senden."
+  tpa-already-pending: "%prefix%&cDu hast bereits eine offene Anfrage an &e%player%&c."
+  tpa-request-sent: "%prefix%&aAnfrage an &e%player% &agesendet."
+  # An das Ziel gesendet - die Buttons davor/danach kommen aus tpa-accept-button
+  # / tpa-button-separator / tpa-deny-button und sind klickbar (siehe TpaCommand)
+  tpa-request-received: "%prefix%&e%player% &7möchte sich zu dir teleportieren &8» "
+  tpahere-request-received: "%prefix%&e%player% &7möchte, dass du zu ihm teleportierst &8» "
+  tpa-accept-button: "&a[Annehmen]"
+  tpa-accept-hover: "&aKlicken zum Annehmen"
+  tpa-deny-button: "&c[Ablehnen]"
+  tpa-deny-hover: "&cKlicken zum Ablehnen"
+  tpa-button-separator: "&8/"
+  tpa-accepted: "%prefix%&e%player% &ahat deine Anfrage angenommen."
+  tpa-denied: "%prefix%&e%player% &chat deine Anfrage abgelehnt."
+  tpa-deny-confirm: "%prefix%&7Anfrage abgelehnt."
+  tpa-expired: "%prefix%&cDeine Anfrage an &e%player% &cist abgelaufen."
+  tpa-no-pending-request: "%prefix%&cDu hast keine offene Anfrage."
+  # ---------- Admin-Teleport (/tp, /tphere) ----------
+  tp-usage: "%prefix%&cNutzung: &f/tp <spieler>"
+  tphere-usage: "%prefix%&cNutzung: &f/tphere <spieler>"
+  tp-success: "%prefix%&7Zu &e%player% &8» &aTeleportiert"
   # ---------- Admin ----------
   reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

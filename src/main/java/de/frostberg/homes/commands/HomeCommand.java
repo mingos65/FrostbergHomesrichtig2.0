@@ -3,6 +3,7 @@ package de.frostberg.homes.commands;
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.model.Home;
 import de.frostberg.homes.util.MessageUtil;
+import de.frostberg.homes.util.TeleportWarmup;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -115,79 +116,25 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
     }
 
     // ---------------------------------------------------------------
-    // Warmup-Countdown (im Chat)
+    // Warmup-Countdown (im Chat) - eigentliche Logik in TeleportWarmup,
+    // damit sie sich die TPA-Commands (siehe manager/TpaManager) teilen
     // ---------------------------------------------------------------
 
     private void startTeleport(Player player, int number, Location target) {
-        UUID uuid = player.getUniqueId();
-
-        // Falls schon ein Countdown laeuft (z.B. Befehl doppelt ausgefuehrt), zuerst abbrechen
-        cancelPending(uuid);
-
-        int warmupSeconds = plugin.getConfig().getInt("settings.warmup-seconds", 0);
-        boolean bypassWarmup = player.hasPermission("homes.bypass.warmup");
-
-        if (warmupSeconds <= 0 || bypassWarmup) {
-            teleportNow(player, number, target);
-            return;
-        }
-
-        boolean cancelOnMove = plugin.getConfig().getBoolean("settings.cancel-warmup-on-move", true);
-        Location startLocation = player.getLocation();
-
-        if (plugin.getConfig().getBoolean("effects.sound-on-warmup-start", true)) {
-            playConfiguredSound(player, player.getLocation(), "effects.sound-warmup",
-                    "effects.sound-warmup-volume", "effects.sound-warmup-pitch");
-        }
-
-        // Zaehler als Array, damit die Lambda-Task ihn zwischen den Ticks veraendern kann
-        int[] secondsLeft = {warmupSeconds};
-
-        BukkitTask task = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            if (!player.isOnline()) {
-                cancelPending(uuid);
-                return;
+        Runnable onWarmupStart = () -> {
+            if (plugin.getConfig().getBoolean("effects.sound-on-warmup-start", true)) {
+                playConfiguredSound(player, player.getLocation(), "effects.sound-warmup",
+                        "effects.sound-warmup-volume", "effects.sound-warmup-pitch");
             }
+        };
 
-            if (cancelOnMove && hasMoved(startLocation, player.getLocation())) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "teleport-cancelled-move"));
-                cancelPending(uuid);
-                return;
-            }
-
-            if (secondsLeft[0] <= 0) {
-                cancelPending(uuid);
-                teleportNow(player, number, target);
-                return;
-            }
-
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "teleport-warmup")
-                    .replace("%seconds%", String.valueOf(secondsLeft[0])));
-            secondsLeft[0]--;
-        }, 0L, 20L);
-
-        pendingTeleports.put(uuid, task);
-    }
-
-    private boolean hasMoved(Location from, Location to) {
-        if (from.getWorld() == null || to.getWorld() == null || !from.getWorld().equals(to.getWorld())) {
-            return true;
-        }
-        return from.getBlockX() != to.getBlockX()
-                || from.getBlockY() != to.getBlockY()
-                || from.getBlockZ() != to.getBlockZ();
-    }
-
-    private void cancelPending(UUID uuid) {
-        BukkitTask task = pendingTeleports.remove(uuid);
-        if (task != null) {
-            task.cancel();
-        }
+        TeleportWarmup.start(plugin, player, pendingTeleports, "homes.bypass.warmup", onWarmupStart,
+                () -> teleportNow(player, number, target));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        cancelPending(event.getPlayer().getUniqueId());
+        TeleportWarmup.cancel(pendingTeleports, event.getPlayer().getUniqueId());
     }
 
     // ---------------------------------------------------------------

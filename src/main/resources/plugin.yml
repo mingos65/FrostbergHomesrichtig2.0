@@ -39,6 +39,36 @@ commands:
     usage: /pay <tokens|gold> <spieler> <anzahl>
     permission: frostberg.pay.tokens
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tpa:
+    description: 'Fragt einen Spieler, ob du dich zu ihm teleportieren darfst (Nutzung: /tpa <spieler>)'
+    usage: /tpa <spieler>
+    permission: tpa.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tpahere:
+    description: 'Fragt einen Spieler, ob er sich zu dir teleportieren soll (Nutzung: /tpahere <spieler>)'
+    usage: /tpahere <spieler>
+    permission: tpa.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tpaccept:
+    description: Nimmt eine offene Teleport-Anfrage an
+    usage: /tpaccept
+    permission: tpa.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tpdeny:
+    description: Lehnt eine offene Teleport-Anfrage ab
+    usage: /tpdeny
+    permission: tpa.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tp:
+    description: 'Teleportiert dich sofort zu einem Spieler, ohne Anfrage (Nutzung: /tp <spieler>)'
+    usage: /tp <spieler>
+    permission: tpa.admin
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tphere:
+    description: 'Teleportiert einen Spieler sofort zu dir, ohne Anfrage (Nutzung: /tphere <spieler>)'
+    usage: /tphere <spieler>
+    permission: tpa.admin
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -114,3 +144,25 @@ permissions:
   frostberg.pay.tokens:
     description: Erlaubt das Senden von Tokens per /pay tokens
     default: true
+
+  tpa.*:
+    description: Gibt Zugriff auf alle TPA-Funktionen inkl. Admin-Teleport
+    default: false
+    children:
+      tpa.use: true
+      tpa.admin: true
+      tpa.bypass.cooldown: true
+      tpa.bypass.warmup: true
+
+  tpa.use:
+    description: Erlaubt /tpa, /tpahere, /tpaccept und /tpdeny
+    default: true
+  tpa.admin:
+    description: Erlaubt sofortigen Teleport ohne Anfrage (/tp, /tphere)
+    default: op
+  tpa.bypass.cooldown:
+    description: Umgeht den Cooldown zwischen TPA-Teleports
+    default: op
+  tpa.bypass.warmup:
+    description: Umgeht den Warmup/Countdown vor dem TPA-Teleport
+    default: op

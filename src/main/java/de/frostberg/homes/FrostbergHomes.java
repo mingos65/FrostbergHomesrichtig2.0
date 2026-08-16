@@ -1,11 +1,16 @@
 package de.frostberg.homes;
 
+import de.frostberg.homes.commands.AdminTpCommand;
 import de.frostberg.homes.commands.DeleteHomeCommand;
 import de.frostberg.homes.commands.HomeCommand;
 import de.frostberg.homes.commands.HomesCommand;
 import de.frostberg.homes.commands.SetHomeCommand;
+import de.frostberg.homes.commands.TpaAcceptCommand;
+import de.frostberg.homes.commands.TpaCommand;
+import de.frostberg.homes.commands.TpaDenyCommand;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
+import de.frostberg.homes.manager.TpaManager;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,12 +18,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class FrostbergHomes extends JavaPlugin {
 
     private HomeManager homeManager;
+    private TpaManager tpaManager;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         this.homeManager = new HomeManager(this);
+        this.tpaManager = new TpaManager(this);
 
         registerCommands();
         registerListeners();
@@ -57,6 +64,25 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("pay").setExecutor(payCommand);
         getCommand("pay").setTabCompleter(payCommand);
 
+        TpaCommand tpaCommand = new TpaCommand(this, false);
+        getCommand("tpa").setExecutor(tpaCommand);
+        getCommand("tpa").setTabCompleter(tpaCommand);
+
+        TpaCommand tpaHereCommand = new TpaCommand(this, true);
+        getCommand("tpahere").setExecutor(tpaHereCommand);
+        getCommand("tpahere").setTabCompleter(tpaHereCommand);
+
+        getCommand("tpaccept").setExecutor(new TpaAcceptCommand(this));
+        getCommand("tpdeny").setExecutor(new TpaDenyCommand(this));
+
+        AdminTpCommand tpCommand = new AdminTpCommand(this, false);
+        getCommand("tp").setExecutor(tpCommand);
+        getCommand("tp").setTabCompleter(tpCommand);
+
+        AdminTpCommand tpHereCommand = new AdminTpCommand(this, true);
+        getCommand("tphere").setExecutor(tpHereCommand);
+        getCommand("tphere").setTabCompleter(tpHereCommand);
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
@@ -64,6 +90,9 @@ public class FrostbergHomes extends JavaPlugin {
 
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(new PlayerDataListener(this), this);
+
+        // Raeumt offene TPA-Anfragen und laufende Warmup-Countdowns beim Quit auf
+        getServer().getPluginManager().registerEvents(tpaManager, this);
     }
 
     /**
@@ -82,5 +111,9 @@ public class FrostbergHomes extends JavaPlugin {
 
     public HomeManager getHomeManager() {
         return homeManager;
+    }
+
+    public TpaManager getTpaManager() {
+        return tpaManager;
     }
 }
