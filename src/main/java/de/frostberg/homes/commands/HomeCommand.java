@@ -3,13 +3,12 @@ package de.frostberg.homes.commands;
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.model.Home;
 import de.frostberg.homes.util.MessageUtil;
+import de.frostberg.homes.util.SafeTeleport;
 import de.frostberg.homes.util.TeleportWarmup;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -106,7 +105,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
             return raw;
         }
 
-        Location safe = findSafeLocation(raw);
+        Location safe = SafeTeleport.findSafeLocation(raw);
         if (safe == null) {
             player.sendMessage(MessageUtil.get(plugin.getConfig(), "safe-teleport-not-found"));
             return null;
@@ -205,68 +204,6 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
         int fadeOut = plugin.getConfig().getInt("effects.title-fade-out", 10);
 
         player.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
-    }
-
-    // ---------------------------------------------------------------
-    // Safe-Teleport (ohne externe Abhaengigkeiten wie PaperLib)
-    // ---------------------------------------------------------------
-
-    private Location findSafeLocation(Location location) {
-        World world = location.getWorld();
-        if (world == null) {
-            return null;
-        }
-
-        int x = location.getBlockX();
-        int z = location.getBlockZ();
-
-        int minY = world.getMinHeight();
-        int maxY = world.getMaxHeight() - 2;
-        int clampedStart = Math.max(minY, Math.min(location.getBlockY(), maxY));
-
-        // Zuerst ab der Home-Hoehe nach oben suchen - deckt den haeufigsten Fall ab
-        // (z.B. das Gelaende wurde seit dem Setzen des Homes veraendert)
-        for (int y = clampedStart; y <= maxY; y++) {
-            if (isSafe(world, x, y, z)) {
-                return centered(world, x, y, z, location.getYaw(), location.getPitch());
-            }
-        }
-
-        // Danach nach unten suchen
-        for (int y = clampedStart - 1; y >= minY; y--) {
-            if (isSafe(world, x, y, z)) {
-                return centered(world, x, y, z, location.getYaw(), location.getPitch());
-            }
-        }
-
-        return null;
-    }
-
-    private boolean isSafe(World world, int x, int y, int z) {
-        Block feet = world.getBlockAt(x, y, z);
-        Block head = world.getBlockAt(x, y + 1, z);
-        Block ground = world.getBlockAt(x, y - 1, z);
-
-        return isPassable(feet.getType()) && isPassable(head.getType())
-                && ground.getType().isSolid() && !isHarmful(ground.getType());
-    }
-
-    private boolean isPassable(Material material) {
-        return !material.isSolid() && !isHarmful(material);
-    }
-
-    private boolean isHarmful(Material material) {
-        return material == Material.LAVA
-                || material == Material.FIRE
-                || material == Material.SOUL_FIRE
-                || material == Material.MAGMA_BLOCK
-                || material == Material.CACTUS
-                || material == Material.SWEET_BERRY_BUSH
-                || material == Material.POWDER_SNOW;
-    }
-
-    private Location centered(World world, int x, int y, int z, float yaw, float pitch) {
-        return new Location(world, x + 0.5, y, z + 0.5, yaw, pitch);
     }
 
     // ---------------------------------------------------------------

@@ -26,6 +26,9 @@ settings:
   spawn-world: "plotwelt65"
   # Welt, zu der /farmwelt und /setfarmwelt gehören
   farm-world: "farm"
+  # Radius in Blöcken um den mit /setfarmwelt gesetzten Mittelpunkt, innerhalb
+  # dessen /farmwelt eine zufällige, sichere Position auswählt
+  farm-teleport-radius: 200
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
@@ -114,7 +117,7 @@ messages:
   spawn-success: "%prefix%&7Spawn &8» &aTeleportiert"
   farmwelt-success: "%prefix%&7Farmwelt &8» &aTeleportiert"
   spawn-set: "%prefix%&aSpawnpunkt wurde auf deine Position gesetzt."
-  farmwelt-set: "%prefix%&aFarmwelt-Spawnpunkt wurde auf deine Position gesetzt."
+  farmwelt-set: "%prefix%&aMittelpunkt der Farmwelt-Teleports wurde auf deine Position gesetzt."
   spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinden, um den Spawn dort zu setzen."
   farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
   farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."

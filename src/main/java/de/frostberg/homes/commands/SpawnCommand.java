@@ -2,6 +2,7 @@ package de.frostberg.homes.commands;
 
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.util.MessageUtil;
+import de.frostberg.homes.util.SafeTeleport;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -10,12 +11,20 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
- * /spawn und /farmwelt - sofortiger Teleport zum Spawnpunkt der Hauptwelt
- * bzw. der Farmwelt. Beide Befehle teilen sich diese Klasse (per "farm"-Flag
- * im Konstruktor), analog zu TpaCommand/AdminTpCommand. Ersetzt die vorher
- * per commands.yml auf Multiverse gemappten Aliase, damit die Nachrichten im
- * Frostberg-Stil (Prefix, Farben) statt in Multiverse's Standardtexten kommen.
+ * /spawn und /farmwelt. Beide Befehle teilen sich diese Klasse (per
+ * "farm"-Flag im Konstruktor), analog zu TpaCommand/AdminTpCommand. Ersetzt
+ * die vorher per commands.yml auf Multiverse gemappten Aliase, damit die
+ * Nachrichten im Frostberg-Stil (Prefix, Farben) statt in Multiverse's
+ * Standardtexten kommen.
+ *
+ * /spawn teleportiert immer exakt zum gesetzten Spawnpunkt der Spawn-Welt.
+ * /farmwelt teleportiert dagegen zu einer zufaelligen, sicheren Position
+ * innerhalb von settings.farm-teleport-radius um den per /setfarmwelt
+ * gesetzten Mittelpunkt - damit sich Spieler in der Farmwelt verteilen statt
+ * sich immer an derselben Stelle zu stapeln.
  */
 public class SpawnCommand implements CommandExecutor {
 
@@ -41,10 +50,37 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        Location target = world.getSpawnLocation();
+        Location target = farm ? findRandomFarmLocation(world) : world.getSpawnLocation();
         player.teleport(target);
 
         player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-success" : "spawn-success"));
         return true;
+    }
+
+    /**
+     * Wuerfelt bis zu 10 Positionen innerhalb des konfigurierten Radius um
+     * den Farmwelt-Mittelpunkt und sucht dort jeweils per SafeTeleport eine
+     * sichere Landestelle. Findet keiner der Versuche eine, wird als
+     * Rueckfallebene der exakte Mittelpunkt zurueckgegeben.
+     */
+    private Location findRandomFarmLocation(World world) {
+        Location center = world.getSpawnLocation();
+        int radius = Math.max(1, plugin.getConfig().getInt("settings.farm-teleport-radius", 200));
+
+        for (int attempt = 0; attempt < 10; attempt++) {
+            double angle = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI;
+            double distance = ThreadLocalRandom.current().nextDouble() * radius;
+
+            int x = center.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
+            int z = center.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);
+
+            Location probe = new Location(world, x, center.getY(), z);
+            Location safe = SafeTeleport.findSafeLocation(probe);
+            if (safe != null) {
+                return safe;
+            }
+        }
+
+        return center;
     }
 }
