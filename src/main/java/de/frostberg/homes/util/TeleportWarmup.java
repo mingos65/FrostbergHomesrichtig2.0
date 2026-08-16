@@ -56,7 +56,7 @@ public final class TeleportWarmup {
             }
 
             if (cancelOnMove && hasMoved(startLocation, player.getLocation())) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "teleport-cancelled-move"));
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "teleport-cancelled-move"));
                 cancel(pendingTeleports, uuid);
                 return;
             }
@@ -67,7 +67,7 @@ public final class TeleportWarmup {
                 return;
             }
 
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "teleport-warmup")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "teleport-warmup")
                     .replace("%seconds%", String.valueOf(secondsLeft[0])));
             secondsLeft[0]--;
         }, 0L, 20L);

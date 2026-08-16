@@ -25,12 +25,12 @@ public class DeleteHomeByNameCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length < 1) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-delhome"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-delhome"));
             return true;
         }
 
@@ -46,13 +46,13 @@ public class DeleteHomeByNameCommand implements CommandExecutor {
         }
 
         if (matchedNumber == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "delhome-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "delhome-not-found")
                     .replace("%name%", name));
             return true;
         }
 
         plugin.getHomeManager().deleteHome(player.getUniqueId(), matchedNumber);
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-deleted")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-deleted")
                 .replace("%nr%", String.valueOf(matchedNumber)));
         return true;
     }

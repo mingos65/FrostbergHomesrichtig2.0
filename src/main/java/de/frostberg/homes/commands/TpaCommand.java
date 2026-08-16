@@ -37,30 +37,30 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length < 1) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), here ? "tpahere-usage" : "tpa-usage"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), here ? "tpahere-usage" : "tpa-usage"));
             return true;
         }
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "player-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "player-not-found")
                     .replace("%player%", args[0]));
             return true;
         }
 
         if (target.equals(player)) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-cannot-self"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-cannot-self"));
             return true;
         }
 
         Optional<TpaRequest> existing = plugin.getTpaManager().getPendingRequestFrom(player.getUniqueId());
         if (existing.isPresent()) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-already-pending")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-already-pending")
                     .replace("%player%", existing.get().getTargetName()));
             return true;
         }
@@ -68,10 +68,10 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
         TpaRequest.Type type = here ? TpaRequest.Type.TPA_HERE : TpaRequest.Type.TPA;
 
         plugin.getTpaManager().createRequest(player, target, type, () ->
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-expired")
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-expired")
                         .replace("%player%", target.getName())));
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-request-sent")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-request-sent")
                 .replace("%player%", target.getName()));
 
         sendClickableRequest(target, player);
@@ -80,20 +80,20 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
 
     private void sendClickableRequest(Player target, Player sender) {
         String templatePath = here ? "tpahere-request-received" : "tpa-request-received";
-        String text = MessageUtil.get(plugin.getConfig(), templatePath).replace("%player%", sender.getName());
+        String text = MessageUtil.get(plugin.getMessages(), templatePath).replace("%player%", sender.getName());
 
         Component message = MessageUtil.toComponent(text)
                 .append(button("tpa-accept-button", "tpa-accept-hover", "/tpaccept"))
-                .append(MessageUtil.toComponent(MessageUtil.get(plugin.getConfig(), "tpa-button-separator")))
+                .append(MessageUtil.toComponent(MessageUtil.get(plugin.getMessages(), "tpa-button-separator")))
                 .append(button("tpa-deny-button", "tpa-deny-hover", "/tpdeny"));
 
         target.sendMessage(message);
     }
 
     private Component button(String labelPath, String hoverPath, String runCommand) {
-        return MessageUtil.toComponent(MessageUtil.get(plugin.getConfig(), labelPath))
+        return MessageUtil.toComponent(MessageUtil.get(plugin.getMessages(), labelPath))
                 .clickEvent(ClickEvent.runCommand(runCommand))
-                .hoverEvent(HoverEvent.showText(MessageUtil.toComponent(MessageUtil.get(plugin.getConfig(), hoverPath))));
+                .hoverEvent(HoverEvent.showText(MessageUtil.toComponent(MessageUtil.get(plugin.getMessages(), hoverPath))));
     }
 
     @Override

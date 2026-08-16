@@ -125,19 +125,23 @@ Passend zu den tatsächlich auf FrostbergMC konfigurierten Rängen (`default`,
 /lp group owner permission set homes.* true
 ```
 
-## Konfiguration (`config.yml`)
+## Konfiguration (`config.yml` + `messages.yml`)
 
-Die Datei ist in drei Bereiche gegliedert:
+Zwei getrennte Dateien:
 
-- **settings** - Prefix, Cooldown, Warmup-Dauer, `cancel-warmup-on-move`,
-  Safe-Teleport an/aus, Fallback-Home-Limit
+**`config.yml`** - reine Einstellungen, in zwei Bereiche gegliedert:
+- **settings** - Cooldown, Warmup-Dauer, `cancel-warmup-on-move`,
+  Safe-Teleport an/aus, Fallback-Home-Limit, Spawn-/Farmwelt-Namen und -Radius
 - **effects** - Sounds (Warmup-Start, Teleport), Partikel (Typ + Menge),
   Title beim Ankommen (Fade-in/Stay/Fade-out), jeweils einzeln an-/abschaltbar
-- **messages** - alle Chat-Texte, unterstützen `&`-Farbcodes sowie Platzhalter
-  wie `%prefix%`, `%nr%`, `%world%`, `%x%`/`%y%`/`%z%`, `%count%`, `%limit%`,
-  `%seconds%` (je nach Nachricht - siehe Kommentare in der Datei)
 
-Änderungen werden mit `/homes reload` ohne Neustart übernommen.
+**`messages.yml`** - alle Chat- und GUI-Texte an einer Stelle, inkl. Prefix
+(oberster Eintrag `prefix:`). Unterstützen `&`-Farbcodes sowie Platzhalter wie
+`%prefix%`, `%nr%`, `%world%`, `%x%`/`%y%`/`%z%`, `%count%`, `%limit%`,
+`%seconds%`, `%name%`, `%page%`/`%pages%` (je nach Nachricht - siehe
+Kommentare in der Datei).
+
+Änderungen an beiden Dateien werden mit `/homes reload` ohne Neustart übernommen.
 
 ## Kompatibilität
 

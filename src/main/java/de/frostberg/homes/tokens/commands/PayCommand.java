@@ -44,12 +44,12 @@ public class PayCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length < 3) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-pay"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-pay"));
             return true;
         }
 
@@ -65,7 +65,7 @@ public class PayCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-pay"));
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-pay"));
         return true;
     }
 
@@ -75,7 +75,7 @@ public class PayCommand implements CommandExecutor, TabCompleter {
 
     private void handleTokens(Player player, String[] args) {
         if (Bukkit.getPluginManager().getPlugin("PlayerPoints") == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "tokens-not-installed"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "tokens-not-installed"));
             return;
         }
 
@@ -86,12 +86,12 @@ public class PayCommand implements CommandExecutor, TabCompleter {
         try {
             amount = Long.parseLong(amountText);
         } catch (NumberFormatException ex) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return;
         }
 
         if (amount <= 0) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return;
         }
 
@@ -107,13 +107,13 @@ public class PayCommand implements CommandExecutor, TabCompleter {
 
     private void handleGold(Player player, String[] args) {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-not-installed"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-not-installed"));
             return;
         }
 
         RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-not-installed"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-not-installed"));
             return;
         }
         Economy economy = rsp.getProvider();
@@ -125,35 +125,35 @@ public class PayCommand implements CommandExecutor, TabCompleter {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException ex) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return;
         }
 
         if (amount <= 0) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return;
         }
 
         OfflinePlayer target = resolveTarget(targetName);
         if (target == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "player-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "player-not-found")
                     .replace("%player%", targetName));
             return;
         }
 
         if (target.getUniqueId().equals(player.getUniqueId())) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-self"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-pay-self"));
             return;
         }
 
         if (!economy.has(player, amount)) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-insufficient"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-pay-insufficient"));
             return;
         }
 
         EconomyResponse withdraw = economy.withdrawPlayer(player, amount);
         if (!withdraw.transactionSuccess()) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-insufficient"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-pay-insufficient"));
             return;
         }
 
@@ -162,18 +162,18 @@ public class PayCommand implements CommandExecutor, TabCompleter {
             // Fehlgeschlagene Einzahlung beim Ziel wieder gutschreiben, damit
             // das Geld nicht verloren geht.
             economy.depositPlayer(player, amount);
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "unknown-error"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "unknown-error"));
             return;
         }
 
         String amountFormatted = economy.format(amount);
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-sent")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-pay-sent")
                 .replace("%player%", targetName)
                 .replace("%amount%", amountFormatted));
 
         if (target.isOnline() && target.getPlayer() != null) {
-            target.getPlayer().sendMessage(MessageUtil.get(plugin.getConfig(), "gold-pay-received")
+            target.getPlayer().sendMessage(MessageUtil.get(plugin.getMessages(), "gold-pay-received")
                     .replace("%player%", player.getName())
                     .replace("%amount%", amountFormatted));
         }

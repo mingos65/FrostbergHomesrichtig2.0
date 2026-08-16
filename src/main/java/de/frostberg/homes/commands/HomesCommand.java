@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * /homes         -> oeffnet dasselbe GUI wie /home (siehe HomesGuiListener)
- * /homes reload  -> laedt die config.yml neu (benoetigt homes.reload)
+ * /homes reload  -> laedt config.yml UND messages.yml neu (benoetigt homes.reload)
  *
  * Die Basis-Permission (homes.list) fuer /homes wird bereits automatisch ueber
  * plugin.yml geprueft. homes.reload wird zusaetzlich manuell geprueft, da es
@@ -32,16 +32,17 @@ public class HomesCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("homes.reload")) {
-                sender.sendMessage(MessageUtil.get(plugin.getConfig(), "no-permission"));
+                sender.sendMessage(MessageUtil.get(plugin.getMessages(), "no-permission"));
                 return true;
             }
             plugin.reloadConfig();
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "reload-success"));
+            plugin.reloadMessages();
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "reload-success"));
             return true;
         }
 
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 

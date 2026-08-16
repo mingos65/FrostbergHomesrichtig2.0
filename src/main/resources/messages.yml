@@ -1,0 +1,111 @@
+# =====================================================
+#           FrostbergHomes - Alle Chat-/GUI-Texte
+#  Alle Texte unterstützen &-Farbcodes (z.B. &a, &c, &l)
+#  Platzhalter wie %nr%, %world% werden vom Plugin ersetzt
+#  Änderungen werden mit /homes reload übernommen
+# =====================================================
+
+# Prefix, der vor die meisten Nachrichten gesetzt wird (%prefix%)
+prefix: "&b&lFrostberg &8» &7"
+
+# ---------- Allgemein / Fehler ----------
+no-permission: "%prefix%&cDu hast keine Berechtigung dafür."
+player-only: "&cDieser Befehl ist nur für Spieler nutzbar."
+unknown-error: "%prefix%&cEs ist ein unbekannter Fehler aufgetreten."
+invalid-number: "%prefix%&cBitte gib eine gültige Nummer an."
+# ---------- Nutzungshinweise ----------
+usage-set: "%prefix%&cNutzung: &f/set home [nr]"
+usage-delete: "%prefix%&cNutzung: &f/delete home [nr]"
+usage-sethome: "%prefix%&cNutzung: &f/sethome <name>"
+usage-delhome: "%prefix%&cNutzung: &f/delhome <name>"
+usage-home: "%prefix%&cNutzung: &f/home [nr]"
+usage-pay: "%prefix%&cNutzung: &f/pay <tokens|gold> <spieler> <anzahl>"
+tokens-not-installed: "%prefix%&cTokens sind aktuell nicht verfügbar (PlayerPoints fehlt)."
+gold-not-installed: "%prefix%&cGold ist aktuell nicht verfügbar (EssentialEconomy fehlt)."
+player-not-found: "%prefix%&cSpieler wurde nicht gefunden: &e%player%"
+gold-pay-self: "%prefix%&cDu kannst dir nicht selbst Gold senden!"
+gold-pay-insufficient: "%prefix%&cDu hast nicht genug Gold dafür."
+gold-pay-sent: "%prefix%&aDu hast &e%player% &b%amount% &agesendet."
+gold-pay-received: "%prefix%&aDu hast &b%amount% &evon &e%player% &eerhalten."
+# ---------- Home setzen / löschen ----------
+home-set: "%prefix%&aHome &e%nr% &awurde gesetzt."
+home-overwritten: "%prefix%&aHome &e%nr% &awurde überschrieben."
+home-deleted: "%prefix%&aHome &e%nr% &awurde gelöscht."
+home-not-found: "%prefix%&cHome &e%nr% &cexistiert nicht."
+home-limit-reached: "%prefix%&cDu hast dein Home-Limit erreicht &7(&e%limit%&7)&c."
+home-set-named: "%prefix%&aHome &e%name% &a(Nr. %nr%) wurde gesetzt."
+delhome-not-found: "%prefix%&cKein Home mit dem Namen &e%name% &cgefunden."
+# ---------- /homes GUI ----------
+homes-gui-title: "&b&lDeine Homes &7(Seite %page%/%pages%)"
+homes-gui-next-page: "&aNächste Seite »"
+homes-gui-prev-page: "&a« Vorherige Seite"
+homes-gui-slot-name-free: "&bHome %nr% &8(frei)"
+homes-gui-slot-lore-free: "&7Setze dieses Home mit &f/set home %nr%"
+homes-gui-slot-name-set: "Home %nr%"
+homes-gui-slot-lore-coords: "&7%world% &8(&a%x%&7, &a%y%&7, &a%z%&7)"
+homes-gui-slot-lore-hint: "&7Linksklick&8: &7Teleportieren &8| &7Rechtsklick&8: &7Optionen"
+homes-gui-slot-locked: "&8Gesperrt &7(höherer Rang nötig)"
+homes-gui-detail-title: "&b&lHome %nr%"
+homes-gui-detail-teleport-name: "&aTeleportieren"
+homes-gui-detail-teleport-lore: "&7Teleportiert dich zu diesem Home"
+homes-gui-detail-coords-name: "&eKoordinaten anzeigen"
+homes-gui-detail-coords-lore: "&7Zeigt die Koordinaten im Chat an"
+homes-gui-detail-rename-name: "&eUmbenennen"
+homes-gui-detail-rename-lore: "&7Öffnet ein Fenster zum Umbenennen"
+homes-gui-detail-delete-name: "&cLöschen"
+homes-gui-detail-delete-lore: "&7Löscht dieses Home unwiderruflich"
+homes-gui-detail-back-name: "&7« Zurück"
+homes-gui-confirm-title: "&cHome %nr% löschen?"
+homes-gui-confirm-yes-name: "&a&lJa, löschen"
+homes-gui-confirm-no-name: "&c&lAbbrechen"
+homes-gui-rename-title: "Neuer Name für Home %nr%"
+homes-gui-coords-chat: "%prefix%&7Home &e%nr% &7steht in &f%world% &8(&a%x%&7, &a%y%&7, &a%z%&7)&7."
+homes-gui-renamed: "%prefix%&aHome &e%nr% &awurde umbenannt in &e%name%&a."
+homes-gui-deleted: "%prefix%&aHome &e%nr% &awurde gelöscht."
+# ---------- Teleport / Warmup ----------
+# Wird für jede Sekunde des Countdowns gesendet: &eTeleport in &c3&e...
+teleport-warmup: "&eTeleport in &c%seconds%&e..."
+teleport-cancelled-move: "%prefix%&cTeleport abgebrochen &7- &cdu hast dich bewegt."
+teleport-success: "%prefix%&7Home &e%nr% &8» &aTeleportiert"
+teleport-title: "&b&lHome %nr%"
+teleport-subtitle: "&7Willkommen zurück"
+safe-teleport-not-found: "%prefix%&cEs konnte kein sicherer Ort in der Nähe gefunden werden."
+world-not-loaded: "%prefix%&cDie Welt dieses Homes ist aktuell nicht geladen."
+# ---------- Cooldown ----------
+cooldown-active: "%prefix%&cWarte noch &e%seconds% Sekunden&c, bevor du dich erneut teleportierst."
+# ---------- TPA (/tpa, /tpahere, /tpaccept, /tpdeny) ----------
+tpa-usage: "%prefix%&cNutzung: &f/tpa <spieler>"
+tpahere-usage: "%prefix%&cNutzung: &f/tpahere <spieler>"
+tpa-cannot-self: "%prefix%&cDu kannst dir nicht selbst eine Anfrage senden."
+tpa-already-pending: "%prefix%&cDu hast bereits eine offene Anfrage an &e%player%&c."
+tpa-request-sent: "%prefix%&aAnfrage an &e%player% &agesendet."
+# An das Ziel gesendet - die Buttons davor/danach kommen aus tpa-accept-button
+# / tpa-button-separator / tpa-deny-button und sind klickbar (siehe TpaCommand)
+tpa-request-received: "%prefix%&e%player% &7möchte sich zu dir teleportieren &8» "
+tpahere-request-received: "%prefix%&e%player% &7möchte, dass du zu ihm teleportierst &8» "
+tpa-accept-button: "&a[Annehmen]"
+tpa-accept-hover: "&aKlicken zum Annehmen"
+tpa-deny-button: "&c[Ablehnen]"
+tpa-deny-hover: "&cKlicken zum Ablehnen"
+tpa-button-separator: "&8/"
+tpa-accepted: "%prefix%&e%player% &ahat deine Anfrage angenommen."
+tpa-denied: "%prefix%&e%player% &chat deine Anfrage abgelehnt."
+tpa-deny-confirm: "%prefix%&7Anfrage abgelehnt."
+tpa-expired: "%prefix%&cDeine Anfrage an &e%player% &cist abgelaufen."
+tpa-no-pending-request: "%prefix%&cDu hast keine offene Anfrage."
+# ---------- Admin-Teleport (/tp, /tphere) ----------
+tp-usage: "%prefix%&cNutzung: &f/tp <spieler>"
+tphere-usage: "%prefix%&cNutzung: &f/tphere <spieler>"
+tp-success: "%prefix%&7Zu &e%player% &8» &aTeleportiert"
+# ---------- Spawn (/spawn, /farmwelt, /setspawn, /setfarmwelt) ----------
+spawn-success: "%prefix%&7Spawn &8» &aTeleportiert"
+farmwelt-searching: "%prefix%&7Suche eine neue Stelle &8..."
+farmwelt-success: "%prefix%&7Farmwelt &8» &aTeleportiert"
+spawn-set: "%prefix%&aSpawnpunkt wurde auf deine Position gesetzt."
+farmwelt-set: "%prefix%&aMittelpunkt der Farmwelt-Teleports wurde auf deine Position gesetzt."
+spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinden, um den Spawn dort zu setzen."
+farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
+farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
+spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
+# ---------- Admin ----------
+reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

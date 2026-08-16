@@ -30,12 +30,12 @@ public class DeleteHomeCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length == 0 || !args[0].equalsIgnoreCase("home")) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-delete"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-delete"));
             return true;
         }
 
@@ -44,7 +44,7 @@ public class DeleteHomeCommand implements CommandExecutor, TabCompleter {
             try {
                 number = Integer.parseInt(args[1]);
             } catch (NumberFormatException ex) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
                 return true;
             }
         }
@@ -52,12 +52,12 @@ public class DeleteHomeCommand implements CommandExecutor, TabCompleter {
         boolean deleted = plugin.getHomeManager().deleteHome(player.getUniqueId(), number);
 
         if (!deleted) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-not-found")
                     .replace("%nr%", String.valueOf(number)));
             return true;
         }
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-deleted")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-deleted")
                 .replace("%nr%", String.valueOf(number)));
         return true;
     }

@@ -28,12 +28,12 @@ public class SetHomeCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length == 0 || !args[0].equalsIgnoreCase("home")) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-set"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-set"));
             return true;
         }
 
@@ -42,13 +42,13 @@ public class SetHomeCommand implements CommandExecutor, TabCompleter {
             try {
                 number = Integer.parseInt(args[1]);
             } catch (NumberFormatException ex) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
                 return true;
             }
         }
 
         if (number < 1) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return true;
         }
 
@@ -61,7 +61,7 @@ public class SetHomeCommand implements CommandExecutor, TabCompleter {
             int current = plugin.getHomeManager().getHomeCount(player.getUniqueId());
 
             if (current >= limit) {
-                player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-limit-reached")
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-limit-reached")
                         .replace("%limit%", limitDisplay(limit)));
                 return true;
             }
@@ -70,7 +70,7 @@ public class SetHomeCommand implements CommandExecutor, TabCompleter {
         boolean overwritten = plugin.getHomeManager().setHome(player, number, player.getLocation());
 
         String messageKey = overwritten ? "home-overwritten" : "home-set";
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), messageKey)
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), messageKey)
                 .replace("%nr%", String.valueOf(number)));
 
         return true;

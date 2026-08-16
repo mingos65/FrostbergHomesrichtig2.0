@@ -29,25 +29,25 @@ public class SetSpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         String worldName = plugin.getConfig().getString(farm ? "settings.farm-world" : "settings.spawn-world");
         World expectedWorld = worldName == null ? null : Bukkit.getWorld(worldName);
         if (expectedWorld == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
             return true;
         }
 
         if (!player.getWorld().equals(expectedWorld)) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-wrong-world" : "spawn-wrong-world")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-wrong-world" : "spawn-wrong-world")
                     .replace("%world%", expectedWorld.getName()));
             return true;
         }
 
         expectedWorld.setSpawnLocation(player.getLocation());
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-set" : "spawn-set"));
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-set" : "spawn-set"));
         return true;
     }
 }

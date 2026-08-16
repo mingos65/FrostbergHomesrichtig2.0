@@ -25,13 +25,13 @@ public class TpaAcceptCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         TpaRequest request = plugin.getTpaManager().getPendingRequestTo(player.getUniqueId());
         if (request == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-no-pending-request"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-no-pending-request"));
             return true;
         }
 
@@ -39,7 +39,7 @@ public class TpaAcceptCommand implements CommandExecutor {
 
         Player requester = Bukkit.getPlayer(request.getSenderUuid());
         if (requester != null) {
-            requester.sendMessage(MessageUtil.get(plugin.getConfig(), "tpa-accepted")
+            requester.sendMessage(MessageUtil.get(plugin.getMessages(), "tpa-accepted")
                     .replace("%player%", player.getName()));
         }
 

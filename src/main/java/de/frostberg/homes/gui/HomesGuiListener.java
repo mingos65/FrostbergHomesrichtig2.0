@@ -57,7 +57,7 @@ public class HomesGuiListener implements Listener {
 
     private void openMenu(Player player, int page) {
         HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.MENU, 0, page);
-        String title = MessageUtil.get(plugin.getConfig(), "homes-gui-title")
+        String title = MessageUtil.get(plugin.getMessages(), "homes-gui-title")
                 .replace("%page%", String.valueOf(page + 1))
                 .replace("%pages%", String.valueOf(TOTAL_PAGES));
         Inventory inventory = Bukkit.createInventory(holder, 36, MessageUtil.color(title));
@@ -72,10 +72,10 @@ public class HomesGuiListener implements Listener {
         }
 
         if (page < TOTAL_PAGES - 1) {
-            inventory.setItem(NEXT_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getConfig(), "homes-gui-next-page"), null));
+            inventory.setItem(NEXT_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "homes-gui-next-page"), null));
         }
         if (page > 0) {
-            inventory.setItem(PREV_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getConfig(), "homes-gui-prev-page"), null));
+            inventory.setItem(PREV_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "homes-gui-prev-page"), null));
         }
 
         player.openInventory(inventory);
@@ -83,31 +83,31 @@ public class HomesGuiListener implements Listener {
 
     private ItemStack buildHomeItem(Player player, int nr, boolean unlocked) {
         if (!unlocked) {
-            return simpleItem(Material.GRAY_STAINED_GLASS_PANE, MessageUtil.get(plugin.getConfig(), "homes-gui-slot-locked"), null);
+            return simpleItem(Material.GRAY_STAINED_GLASS_PANE, MessageUtil.get(plugin.getMessages(), "homes-gui-slot-locked"), null);
         }
 
         Optional<Home> homeOpt = plugin.getHomeManager().getHome(player.getUniqueId(), nr);
 
         if (homeOpt.isEmpty()) {
             List<String> lore = new ArrayList<>();
-            lore.add(MessageUtil.get(plugin.getConfig(), "homes-gui-slot-lore-free").replace("%nr%", String.valueOf(nr)));
+            lore.add(MessageUtil.get(plugin.getMessages(), "homes-gui-slot-lore-free").replace("%nr%", String.valueOf(nr)));
             return simpleItem(Material.LIGHT_BLUE_BED,
-                    MessageUtil.get(plugin.getConfig(), "homes-gui-slot-name-free").replace("%nr%", String.valueOf(nr)),
+                    MessageUtil.get(plugin.getMessages(), "homes-gui-slot-name-free").replace("%nr%", String.valueOf(nr)),
                     lore);
         }
 
         Home home = homeOpt.get();
         String displayName = home.getName() != null
                 ? MessageUtil.color("&a" + home.getName())
-                : MessageUtil.color("&a" + MessageUtil.get(plugin.getConfig(), "homes-gui-slot-name-set").replace("%nr%", String.valueOf(nr)));
+                : MessageUtil.color("&a" + MessageUtil.get(plugin.getMessages(), "homes-gui-slot-name-set").replace("%nr%", String.valueOf(nr)));
 
         List<String> lore = new ArrayList<>();
-        lore.add(MessageUtil.get(plugin.getConfig(), "homes-gui-slot-lore-coords")
+        lore.add(MessageUtil.get(plugin.getMessages(), "homes-gui-slot-lore-coords")
                 .replace("%world%", home.getWorldName())
                 .replace("%x%", String.valueOf(Math.round(home.getX())))
                 .replace("%y%", String.valueOf(Math.round(home.getY())))
                 .replace("%z%", String.valueOf(Math.round(home.getZ()))));
-        lore.add(MessageUtil.get(plugin.getConfig(), "homes-gui-slot-lore-hint"));
+        lore.add(MessageUtil.get(plugin.getMessages(), "homes-gui-slot-lore-hint"));
 
         ItemStack item = new ItemStack(Material.LIME_BED);
         ItemMeta meta = item.getItemMeta();
@@ -123,23 +123,23 @@ public class HomesGuiListener implements Listener {
 
     private void openDetail(Player player, int nr) {
         HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.DETAIL, nr);
-        String title = MessageUtil.get(plugin.getConfig(), "homes-gui-detail-title").replace("%nr%", String.valueOf(nr));
+        String title = MessageUtil.get(plugin.getMessages(), "homes-gui-detail-title").replace("%nr%", String.valueOf(nr));
         Inventory inventory = Bukkit.createInventory(holder, 9, MessageUtil.color(title));
         holder.setInventory(inventory);
 
         inventory.setItem(1, simpleItem(Material.ENDER_PEARL,
-                MessageUtil.get(plugin.getConfig(), "homes-gui-detail-teleport-name"),
-                List.of(MessageUtil.get(plugin.getConfig(), "homes-gui-detail-teleport-lore"))));
+                MessageUtil.get(plugin.getMessages(), "homes-gui-detail-teleport-name"),
+                List.of(MessageUtil.get(plugin.getMessages(), "homes-gui-detail-teleport-lore"))));
         inventory.setItem(3, simpleItem(Material.PAPER,
-                MessageUtil.get(plugin.getConfig(), "homes-gui-detail-coords-name"),
-                List.of(MessageUtil.get(plugin.getConfig(), "homes-gui-detail-coords-lore"))));
+                MessageUtil.get(plugin.getMessages(), "homes-gui-detail-coords-name"),
+                List.of(MessageUtil.get(plugin.getMessages(), "homes-gui-detail-coords-lore"))));
         inventory.setItem(5, simpleItem(Material.NAME_TAG,
-                MessageUtil.get(plugin.getConfig(), "homes-gui-detail-rename-name"),
-                List.of(MessageUtil.get(plugin.getConfig(), "homes-gui-detail-rename-lore"))));
+                MessageUtil.get(plugin.getMessages(), "homes-gui-detail-rename-name"),
+                List.of(MessageUtil.get(plugin.getMessages(), "homes-gui-detail-rename-lore"))));
         inventory.setItem(7, simpleItem(Material.BARRIER,
-                MessageUtil.get(plugin.getConfig(), "homes-gui-detail-delete-name"),
-                List.of(MessageUtil.get(plugin.getConfig(), "homes-gui-detail-delete-lore"))));
-        inventory.setItem(8, simpleItem(Material.ARROW, MessageUtil.get(plugin.getConfig(), "homes-gui-detail-back-name"), null));
+                MessageUtil.get(plugin.getMessages(), "homes-gui-detail-delete-name"),
+                List.of(MessageUtil.get(plugin.getMessages(), "homes-gui-detail-delete-lore"))));
+        inventory.setItem(8, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "homes-gui-detail-back-name"), null));
 
         player.openInventory(inventory);
     }
@@ -150,12 +150,12 @@ public class HomesGuiListener implements Listener {
 
     private void openConfirmDelete(Player player, int nr) {
         HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.CONFIRM_DELETE, nr);
-        String title = MessageUtil.get(plugin.getConfig(), "homes-gui-confirm-title").replace("%nr%", String.valueOf(nr));
+        String title = MessageUtil.get(plugin.getMessages(), "homes-gui-confirm-title").replace("%nr%", String.valueOf(nr));
         Inventory inventory = Bukkit.createInventory(holder, 9, MessageUtil.color(title));
         holder.setInventory(inventory);
 
-        inventory.setItem(2, simpleItem(Material.LIME_CONCRETE, MessageUtil.get(plugin.getConfig(), "homes-gui-confirm-yes-name"), null));
-        inventory.setItem(6, simpleItem(Material.RED_CONCRETE, MessageUtil.get(plugin.getConfig(), "homes-gui-confirm-no-name"), null));
+        inventory.setItem(2, simpleItem(Material.LIME_CONCRETE, MessageUtil.get(plugin.getMessages(), "homes-gui-confirm-yes-name"), null));
+        inventory.setItem(6, simpleItem(Material.RED_CONCRETE, MessageUtil.get(plugin.getMessages(), "homes-gui-confirm-no-name"), null));
 
         player.openInventory(inventory);
     }
@@ -171,13 +171,13 @@ public class HomesGuiListener implements Listener {
         }
 
         HomeGuiHolder holder = new HomeGuiHolder(HomeGuiHolder.Type.RENAME, nr);
-        String title = MessageUtil.get(plugin.getConfig(), "homes-gui-rename-title").replace("%nr%", String.valueOf(nr));
+        String title = MessageUtil.get(plugin.getMessages(), "homes-gui-rename-title").replace("%nr%", String.valueOf(nr));
         Inventory inventory = Bukkit.createInventory(holder, InventoryType.ANVIL, MessageUtil.color(title));
         holder.setInventory(inventory);
 
         String currentName = homeOpt.get().getName() != null
                 ? homeOpt.get().getName()
-                : MessageUtil.get(plugin.getConfig(), "homes-gui-slot-name-set").replace("%nr%", String.valueOf(nr));
+                : MessageUtil.get(plugin.getMessages(), "homes-gui-slot-name-set").replace("%nr%", String.valueOf(nr));
 
         ItemStack input = new ItemStack(Material.NAME_TAG);
         ItemMeta meta = input.getItemMeta();
@@ -280,7 +280,7 @@ public class HomesGuiListener implements Listener {
             }
             case 3 -> {
                 Optional<Home> homeOpt = plugin.getHomeManager().getHome(player.getUniqueId(), nr);
-                homeOpt.ifPresent(home -> player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-gui-coords-chat")
+                homeOpt.ifPresent(home -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "homes-gui-coords-chat")
                         .replace("%nr%", String.valueOf(nr))
                         .replace("%world%", home.getWorldName())
                         .replace("%x%", String.valueOf(Math.round(home.getX())))
@@ -299,7 +299,7 @@ public class HomesGuiListener implements Listener {
     private void handleConfirmClick(Player player, int nr, int slot) {
         if (slot == 2) {
             plugin.getHomeManager().deleteHome(player.getUniqueId(), nr);
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-gui-deleted").replace("%nr%", String.valueOf(nr)));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "homes-gui-deleted").replace("%nr%", String.valueOf(nr)));
             openMenu(player, pageForHomeNumber(nr));
         } else if (slot == 6) {
             openMenu(player, pageForHomeNumber(nr));
@@ -324,7 +324,7 @@ public class HomesGuiListener implements Listener {
         plugin.getHomeManager().renameHome(player.getUniqueId(), nr, newName);
 
         player.closeInventory();
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "homes-gui-renamed")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "homes-gui-renamed")
                 .replace("%nr%", String.valueOf(nr))
                 .replace("%name%", MessageUtil.color(newName)));
         openMenu(player, pageForHomeNumber(nr));

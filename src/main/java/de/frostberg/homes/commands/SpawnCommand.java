@@ -44,24 +44,24 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         String worldName = plugin.getConfig().getString(farm ? "settings.farm-world" : "settings.spawn-world");
         World world = worldName == null ? null : Bukkit.getWorld(worldName);
         if (world == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
             return true;
         }
 
         if (!farm) {
             player.teleport(world.getSpawnLocation());
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "spawn-success"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "spawn-success"));
             return true;
         }
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-searching"));
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "farmwelt-searching"));
         attemptRandomFarmTeleport(player, world, world.getSpawnLocation(), 0);
         return true;
     }
@@ -81,7 +81,7 @@ public class SpawnCommand implements CommandExecutor {
 
         if (attempt >= MAX_ATTEMPTS) {
             player.teleport(center);
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-success"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "farmwelt-success"));
             return;
         }
 
@@ -105,7 +105,7 @@ public class SpawnCommand implements CommandExecutor {
 
                     if (safe != null) {
                         player.teleport(safe);
-                        player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-success"));
+                        player.sendMessage(MessageUtil.get(plugin.getMessages(), "farmwelt-success"));
                     } else {
                         attemptRandomFarmTeleport(player, world, center, attempt + 1);
                     }

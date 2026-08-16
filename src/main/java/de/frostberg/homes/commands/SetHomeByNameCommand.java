@@ -23,12 +23,12 @@ public class SetHomeByNameCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length < 1) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "usage-sethome"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "usage-sethome"));
             return true;
         }
 
@@ -49,7 +49,7 @@ public class SetHomeByNameCommand implements CommandExecutor {
         if (nextNumber == -1) {
             String limitDisplay = plugin.getHomeManager().getHomeLimit(player) == Integer.MAX_VALUE
                     ? "unbegrenzt" : String.valueOf(limit);
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-limit-reached")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-limit-reached")
                     .replace("%limit%", limitDisplay));
             return true;
         }
@@ -57,7 +57,7 @@ public class SetHomeByNameCommand implements CommandExecutor {
         plugin.getHomeManager().setHome(player, nextNumber, player.getLocation());
         plugin.getHomeManager().renameHome(player.getUniqueId(), nextNumber, name);
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-set-named")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-set-named")
                 .replace("%name%", MessageUtil.color(name))
                 .replace("%nr%", String.valueOf(nextNumber)));
         return true;

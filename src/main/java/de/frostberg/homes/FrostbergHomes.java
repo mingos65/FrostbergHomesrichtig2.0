@@ -17,8 +17,12 @@ import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
 import de.frostberg.homes.manager.TpaManager;
 import de.frostberg.homes.tokens.commands.PayCommand;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public class FrostbergHomes extends JavaPlugin {
 
@@ -26,10 +30,12 @@ public class FrostbergHomes extends JavaPlugin {
     private TpaManager tpaManager;
     private HomeCommand homeCommand;
     private HomesGuiListener homesGuiListener;
+    private FileConfiguration messages;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        loadMessages();
 
         this.homeManager = new HomeManager(this);
         this.tpaManager = new TpaManager(this);
@@ -48,6 +54,22 @@ public class FrostbergHomes extends JavaPlugin {
             homeManager.saveAll();
         }
         getLogger().info("FrostbergHomes wurde deaktiviert - alle Homes wurden gespeichert.");
+    }
+
+    /**
+     * Speichert die mitgelieferte messages.yml beim ersten Start (falls noch
+     * nicht vorhanden) und laedt sie danach in den Speicher. Getrennt von
+     * config.yml, damit alle Chat-/GUI-Texte an einer eigenen, uebersichtlichen
+     * Stelle stehen (siehe MessageUtil).
+     */
+    private void loadMessages() {
+        saveResource("messages.yml", false);
+        this.messages = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml"));
+    }
+
+    /** Laedt die messages.yml neu von der Festplatte (siehe /homes reload). */
+    public void reloadMessages() {
+        loadMessages();
     }
 
     private void registerCommands() {
@@ -141,5 +163,9 @@ public class FrostbergHomes extends JavaPlugin {
 
     public HomesGuiListener getHomesGuiListener() {
         return homesGuiListener;
+    }
+
+    public FileConfiguration getMessages() {
+        return messages;
     }
 }

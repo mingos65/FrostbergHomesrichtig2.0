@@ -32,18 +32,18 @@ public class AdminTpCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
         if (args.length < 1) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), here ? "tphere-usage" : "tp-usage"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), here ? "tphere-usage" : "tp-usage"));
             return true;
         }
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "player-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "player-not-found")
                     .replace("%player%", args[0]));
             return true;
         }
@@ -53,7 +53,7 @@ public class AdminTpCommand implements CommandExecutor, TabCompleter {
 
         teleportingPlayer.teleport(destinationPlayer.getLocation());
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "tp-success")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "tp-success")
                 .replace("%player%", target.getName()));
 
         return true;

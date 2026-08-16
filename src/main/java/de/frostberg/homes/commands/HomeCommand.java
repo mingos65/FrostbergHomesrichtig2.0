@@ -51,7 +51,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageUtil.get(plugin.getConfig(), "player-only"));
+            sender.sendMessage(MessageUtil.get(plugin.getMessages(), "player-only"));
             return true;
         }
 
@@ -64,7 +64,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
         try {
             number = Integer.parseInt(args[0]);
         } catch (NumberFormatException ex) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "invalid-number"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "invalid-number"));
             return true;
         }
 
@@ -81,14 +81,14 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
     public void teleportToHome(Player player, int number) {
         Optional<Home> homeOptional = plugin.getHomeManager().getHome(player.getUniqueId(), number);
         if (homeOptional.isEmpty()) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "home-not-found")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "home-not-found")
                     .replace("%nr%", String.valueOf(number)));
             return;
         }
 
         long remainingCooldown = plugin.getHomeManager().getRemainingCooldown(player);
         if (remainingCooldown > 0) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "cooldown-active")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "cooldown-active")
                     .replace("%seconds%", String.valueOf(remainingCooldown)));
             return;
         }
@@ -108,7 +108,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
      */
     private Location resolveTargetLocation(Player player, Home home) {
         if (!home.isWorldLoaded()) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "world-not-loaded"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "world-not-loaded"));
             return null;
         }
 
@@ -120,7 +120,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
 
         Location safe = SafeTeleport.findSafeLocation(raw);
         if (safe == null) {
-            player.sendMessage(MessageUtil.get(plugin.getConfig(), "safe-teleport-not-found"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "safe-teleport-not-found"));
             return null;
         }
 
@@ -157,7 +157,7 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
         player.teleport(target);
         plugin.getHomeManager().setCooldown(player);
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), "teleport-success")
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "teleport-success")
                 .replace("%nr%", String.valueOf(number)));
 
         if (plugin.getConfig().getBoolean("effects.sound-on-teleport", true)) {
@@ -209,8 +209,8 @@ public class HomeCommand implements CommandExecutor, TabCompleter, Listener {
     }
 
     private void showConfiguredTitle(Player player, int number) {
-        String title = MessageUtil.get(plugin.getConfig(), "teleport-title").replace("%nr%", String.valueOf(number));
-        String subtitle = MessageUtil.get(plugin.getConfig(), "teleport-subtitle");
+        String title = MessageUtil.get(plugin.getMessages(), "teleport-title").replace("%nr%", String.valueOf(number));
+        String subtitle = MessageUtil.get(plugin.getMessages(), "teleport-subtitle");
 
         int fadeIn = plugin.getConfig().getInt("effects.title-fade-in", 5);
         int stay = plugin.getConfig().getInt("effects.title-stay", 30);

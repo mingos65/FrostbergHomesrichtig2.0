@@ -104,7 +104,7 @@ public class TpaManager implements Listener {
     public void startAcceptedTeleport(Player teleportingPlayer, Player destinationPlayer) {
         long remainingCooldown = getRemainingCooldown(teleportingPlayer);
         if (remainingCooldown > 0) {
-            teleportingPlayer.sendMessage(MessageUtil.get(plugin.getConfig(), "cooldown-active")
+            teleportingPlayer.sendMessage(MessageUtil.get(plugin.getMessages(), "cooldown-active")
                     .replace("%seconds%", String.valueOf(remainingCooldown)));
             return;
         }
@@ -113,7 +113,7 @@ public class TpaManager implements Listener {
             teleportingPlayer.teleport(destinationPlayer.getLocation());
             setCooldown(teleportingPlayer);
 
-            teleportingPlayer.sendMessage(MessageUtil.get(plugin.getConfig(), "tp-success")
+            teleportingPlayer.sendMessage(MessageUtil.get(plugin.getMessages(), "tp-success")
                     .replace("%player%", destinationPlayer.getName()));
         });
     }
