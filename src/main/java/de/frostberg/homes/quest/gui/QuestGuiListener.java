@@ -1,6 +1,7 @@
 package de.frostberg.homes.quest.gui;
 
 import de.frostberg.homes.FrostbergHomes;
+import de.frostberg.homes.quest.manager.QuestManager;
 import de.frostberg.homes.quest.model.PlayerQuestData;
 import de.frostberg.homes.quest.model.Quest;
 import de.frostberg.homes.quest.model.QuestCategory;
@@ -181,9 +182,7 @@ public class QuestGuiListener implements Listener {
         lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-progress")
                 .replace("%done%", String.valueOf(done))
                 .replace("%total%", String.valueOf(active.size())));
-        lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-lore-reward")
-                .replace("%tokens%", String.valueOf(tokens))
-                .replace("%gold%", String.valueOf(gold)));
+        lore.add(buildRewardLore(tokens, gold));
         lore.add("");
 
         String statusKey = claimed ? "quest-gui-quest-status-claimed"
@@ -211,6 +210,21 @@ public class QuestGuiListener implements Listener {
         return slots;
     }
 
+    /**
+     * Baut die Belohnungs-Lore-Zeile - laesst Tokens bzw. Gold weg, wenn der
+     * jeweilige Betrag 0 ist (z.B. bei "Verdiene X Tokens"-Quests, die nur
+     * Gold geben), statt sinnlos "0 Tokens" mit anzuzeigen. Nutzt dieselbe
+     * Gold-Formatierung wie die Chat-Nachrichten (z.B. "3" statt "3.0").
+     */
+    private String buildRewardLore(long tokens, double gold) {
+        String key = tokens > 0 && gold > 0 ? "quest-gui-quest-lore-reward"
+                : gold > 0 ? "quest-gui-quest-lore-reward-gold-only"
+                : "quest-gui-quest-lore-reward-tokens-only";
+        return MessageUtil.get(plugin.getMessages(), key)
+                .replace("%tokens%", String.valueOf(tokens))
+                .replace("%gold%", QuestManager.formatGold(gold));
+    }
+
     private ItemStack buildQuestItem(QuestCategory category, Quest quest, PlayerQuestData data) {
         long progress = data.getProgress(category, quest.getId());
         boolean claimed = data.isClaimed(category, quest.getId());
@@ -222,9 +236,7 @@ public class QuestGuiListener implements Listener {
         lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-quest-lore-progress")
                 .replace("%progress%", String.valueOf(Math.min(progress, quest.getAmount())))
                 .replace("%target%", String.valueOf(quest.getAmount())));
-        lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-quest-lore-reward")
-                .replace("%tokens%", String.valueOf(quest.getRewardTokens()))
-                .replace("%gold%", String.valueOf(quest.getRewardGold())));
+        lore.add(buildRewardLore(quest.getRewardTokens(), quest.getRewardGold()));
         // Nicht MessageUtil.get() nutzen: das faerbt den Basistext SOFORT ein,
         // bevor %stars% ersetzt wird - der eingefuegte Sternen-Text bliebe
         // dadurch roh (sichtbare "&e"-Codes statt echter Farbe). Stattdessen

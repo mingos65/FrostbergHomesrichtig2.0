@@ -817,7 +817,8 @@ public class QuestManager implements Listener {
         return best;
     }
 
-    private String formatGold(double amount) {
+    /** Oeffentlich, damit das GUI dieselbe Formatierung nutzt (z.B. "3" statt "3.0"). */
+    public static String formatGold(double amount) {
         if (amount == Math.floor(amount)) {
             return String.valueOf((long) amount);
         }
