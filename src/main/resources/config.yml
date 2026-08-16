@@ -28,10 +28,10 @@ settings:
   farm-world: "farm"
   # Maximaler Radius in Blöcken um den mit /setfarmwelt gesetzten Mittelpunkt,
   # innerhalb dessen /farmwelt eine zufällige, sichere Position auswählt
-  farm-teleport-radius: 200
+  farm-teleport-radius: 4000
   # Mindestabstand in Blöcken vom Mittelpunkt - verhindert, dass Spieler direkt
   # neben dem Zentrum (und damit evtl. schon abgebauten Flächen) landen
-  farm-teleport-min-radius: 50
+  farm-teleport-min-radius: 2000
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
@@ -118,6 +118,7 @@ messages:
   tp-success: "%prefix%&7Zu &e%player% &8» &aTeleportiert"
   # ---------- Spawn (/spawn, /farmwelt, /setspawn, /setfarmwelt) ----------
   spawn-success: "%prefix%&7Spawn &8» &aTeleportiert"
+  farmwelt-searching: "%prefix%&7Suche eine neue Stelle &8..."
   farmwelt-success: "%prefix%&7Farmwelt &8» &aTeleportiert"
   spawn-set: "%prefix%&aSpawnpunkt wurde auf deine Position gesetzt."
   farmwelt-set: "%prefix%&aMittelpunkt der Farmwelt-Teleports wurde auf deine Position gesetzt."

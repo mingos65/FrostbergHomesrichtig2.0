@@ -22,11 +22,16 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * /spawn teleportiert immer exakt zum gesetzten Spawnpunkt der Spawn-Welt.
  * /farmwelt teleportiert dagegen zu einer zufaelligen, sicheren Position
- * innerhalb von settings.farm-teleport-radius um den per /setfarmwelt
- * gesetzten Mittelpunkt - damit sich Spieler in der Farmwelt verteilen statt
- * sich immer an derselben Stelle zu stapeln.
+ * zwischen settings.farm-teleport-min-radius und -radius um den per
+ * /setfarmwelt gesetzten Mittelpunkt - damit sich Spieler in der Farmwelt
+ * verteilen statt sich immer an derselben Stelle zu stapeln. Da der Radius im
+ * Bereich mehrerer tausend Bloecke liegt, ist die Ziel-Chunk oft noch nicht
+ * generiert - das Laden passiert deshalb asynchron (World#getChunkAtAsync),
+ * damit der Server dabei nicht kurz einfriert.
  */
 public class SpawnCommand implements CommandExecutor {
+
+    private static final int MAX_ATTEMPTS = 10;
 
     private final FrostbergHomes plugin;
     private final boolean farm;
@@ -50,39 +55,60 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        Location target = farm ? findRandomFarmLocation(world) : world.getSpawnLocation();
-        player.teleport(target);
+        if (!farm) {
+            player.teleport(world.getSpawnLocation());
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "spawn-success"));
+            return true;
+        }
 
-        player.sendMessage(MessageUtil.get(plugin.getConfig(), farm ? "farmwelt-success" : "spawn-success"));
+        player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-searching"));
+        attemptRandomFarmTeleport(player, world, world.getSpawnLocation(), 0);
         return true;
     }
 
     /**
-     * Wuerfelt bis zu 10 Positionen innerhalb des konfigurierten Radius um
-     * den Farmwelt-Mittelpunkt und sucht dort jeweils per SafeTeleport eine
-     * sichere Landestelle. Findet keiner der Versuche eine, wird als
-     * Rueckfallebene der exakte Mittelpunkt zurueckgegeben.
+     * Wuerfelt eine Position zwischen min- und maximalem Radius um {@code center},
+     * laedt deren Chunk asynchron und sucht dort per SafeTeleport eine sichere
+     * Landestelle. Klappt das nicht, wird erneut gewuerfelt (bis MAX_ATTEMPTS);
+     * danach als Rueckfallebene der exakte Mittelpunkt genutzt. Der Spieler
+     * kann in der Zwischenzeit den Server verlassen - das wird vor jedem
+     * Teleport-Versuch geprueft.
      */
-    private Location findRandomFarmLocation(World world) {
-        Location center = world.getSpawnLocation();
-        int radius = Math.max(1, plugin.getConfig().getInt("settings.farm-teleport-radius", 200));
-        int minRadius = Math.min(plugin.getConfig().getInt("settings.farm-teleport-min-radius", 0), radius - 1);
-        minRadius = Math.max(minRadius, 0);
-
-        for (int attempt = 0; attempt < 10; attempt++) {
-            double angle = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI;
-            double distance = minRadius + ThreadLocalRandom.current().nextDouble() * (radius - minRadius);
-
-            int x = center.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
-            int z = center.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);
-
-            Location probe = new Location(world, x, center.getY(), z);
-            Location safe = SafeTeleport.findSafeLocation(probe);
-            if (safe != null) {
-                return safe;
-            }
+    private void attemptRandomFarmTeleport(Player player, World world, Location center, int attempt) {
+        if (!player.isOnline()) {
+            return;
         }
 
-        return center;
+        if (attempt >= MAX_ATTEMPTS) {
+            player.teleport(center);
+            player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-success"));
+            return;
+        }
+
+        int radius = Math.max(1, plugin.getConfig().getInt("settings.farm-teleport-radius", 4000));
+        int minRadius = Math.max(0, Math.min(plugin.getConfig().getInt("settings.farm-teleport-min-radius", 2000), radius - 1));
+
+        double angle = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI;
+        double distance = minRadius + ThreadLocalRandom.current().nextDouble() * (radius - minRadius);
+
+        int x = center.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
+        int z = center.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);
+
+        world.getChunkAtAsync(x >> 4, z >> 4).thenAccept(chunk ->
+                Bukkit.getScheduler().runTask(plugin, () -> {
+                    if (!player.isOnline()) {
+                        return;
+                    }
+
+                    Location probe = new Location(world, x, center.getY(), z);
+                    Location safe = SafeTeleport.findSafeLocation(probe);
+
+                    if (safe != null) {
+                        player.teleport(safe);
+                        player.sendMessage(MessageUtil.get(plugin.getConfig(), "farmwelt-success"));
+                    } else {
+                        attemptRandomFarmTeleport(player, world, center, attempt + 1);
+                    }
+                }));
     }
 }
