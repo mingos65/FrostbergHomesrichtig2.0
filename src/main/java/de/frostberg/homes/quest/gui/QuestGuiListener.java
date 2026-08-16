@@ -225,8 +225,13 @@ public class QuestGuiListener implements Listener {
         lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-quest-lore-reward")
                 .replace("%tokens%", String.valueOf(quest.getRewardTokens()))
                 .replace("%gold%", String.valueOf(quest.getRewardGold())));
-        lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-quest-difficulty")
-                .replace("%stars%", starString(quest.getDifficulty())));
+        // Nicht MessageUtil.get() nutzen: das faerbt den Basistext SOFORT ein,
+        // bevor %stars% ersetzt wird - der eingefuegte Sternen-Text bliebe
+        // dadurch roh (sichtbare "&e"-Codes statt echter Farbe). Stattdessen
+        // erst den kompletten Text zusammenbauen, dann in einem Rutsch faerben.
+        String rawDifficulty = plugin.getMessages().getString("quest-gui-quest-difficulty", "&7Schwierigkeit&8: %stars%")
+                .replace("%stars%", starString(quest.getDifficulty()));
+        lore.add(MessageUtil.color(rawDifficulty));
         lore.add("");
 
         String statusKey = claimed ? "quest-gui-quest-status-claimed"

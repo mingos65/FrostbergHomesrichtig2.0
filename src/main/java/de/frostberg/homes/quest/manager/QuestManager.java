@@ -119,7 +119,16 @@ public class QuestManager implements Listener {
     // ---------------------------------------------------------------
 
     private void loadQuestsConfig() {
-        plugin.saveResource("quests.yml", false);
+        // Bewusst true (ueberschreiben): anders als messages.yml/config.yml
+        // ist quests.yml aktuell noch keine vom Admin von Hand gepflegte
+        // Datei - Aenderungen an Mengen/Belohnungen kommen ueber Updates
+        // dieses Plugins. Mit "false" (wie zuerst implementiert) wurde die
+        // Datei nach dem allerersten Start nie wieder aktualisiert, jedes
+        // Update haette also wirkungslos auf dem Server gelegen. Falls du
+        // quests.yml irgendwann selbst von Hand auf dem Server anpassen
+        // willst, sag Bescheid - dann bauen wir das auf ein Merge-Verfahren
+        // wie bei messages.yml um, damit eigene Aenderungen erhalten bleiben.
+        plugin.saveResource("quests.yml", true);
         File file = new File(plugin.getDataFolder(), "quests.yml");
         questConfig = YamlConfiguration.loadConfiguration(file);
 
