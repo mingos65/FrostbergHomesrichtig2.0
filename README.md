@@ -4,7 +4,10 @@ Eigenes Homes-Plugin für Paper 1.21.x (Java 21) - kein Essentials nötig.
 Nummerierte Homes, farbenfrohe Chat-Nachrichten, Warmup-Countdown im Chat,
 Cooldown, Safe-Teleport und optionale Sound-/Partikel-/Title-Effekte. Dazu ein
 TPA-System (`/tpa`, `/tpahere`) mit klickbaren Annehmen/Ablehnen-Buttons im
-Chat und ein sofortiger Admin-Teleport (`/tp`, `/tphere`).
+Chat, ein sofortiger Admin-Teleport (`/tp`, `/tphere`), ein Spawn-/Farmwelt-
+System (`/spawn`, `/farmwelt`), ein komplettes Clan-System (`/clan`, `/cc`)
+sowie ein Daily/Weekly/Monthly-Quest-System (`/quest`) mit eigenem GUI,
+Streak- und Kategorie-Boni.
 Kompatibel mit LuckPerms, Vault, PlaceholderAPI, PlotSquared, Multiverse und
 TAB (nur `softdepend`, keine Pflicht-Abhängigkeit).
 
@@ -70,6 +73,37 @@ läuft derselbe Warmup-Countdown wie bei `/home` (`settings.warmup-seconds`,
 abbrechbar bei Bewegung), danach greift ein eigener, vom Homes-Cooldown
 unabhängiger TPA-Cooldown (`settings.cooldown-seconds`).
 
+## Quest-System
+
+`/quest` (Alias `/quests`) öffnet ein GUI mit drei Kategorien: Täglich (1
+Quest, Reset jeden Tag 00:00), Wöchentlich (3 Quests, Reset jeden Montag
+00:00) und Monatlich (5 Quests, Reset am 1. jedes Monats 00:00). Pro Periode
+wird die aktive Auswahl zufällig aus dem Pool in `quests.yml` gezogen - für
+**alle Spieler gleich**, nicht pro Spieler. War der Server zum Reset-
+Zeitpunkt offline, wird der Reset beim nächsten Start automatisch nachgeholt.
+
+Unterstützte Quest-Typen: Blöcke abbauen/platzieren, Mobs töten, craften,
+fischen, Strecke laufen, Tokens verdienen - alles zählt nur in der Farmwelt
+(`settings.farm-world`). Belohnungen (Tokens/Gold) müssen manuell im GUI
+abgeholt werden; ein Rang-Multiplikator, ein automatischer Kategorie-Bonus
+(alle Quests einer Periode geschafft) und ein Streak-Bonus für aufeinander-
+folgende Daily-Tage sind über `quests.yml`/`config.yml` einstellbar.
+
+| Befehl | Beschreibung | Permission |
+|---|---|---|
+| `/quest`, `/quests` | Öffnet das Quest-GUI | `quest.use` |
+| `/quest top` | Bestenliste nach abgeschlossenen Quests | `quest.use` |
+| `/quest reload` | Lädt `quests.yml` neu (Pool-Änderungen) | `quest.admin` |
+| `/quest reset <spieler> <daily\|weekly\|monthly>` | Setzt Fortschritt einer Kategorie zurück | `quest.admin` |
+| `/quest info <spieler>` | Zeigt Fortschritt/Streak/Statistik eines Spielers | `quest.admin` |
+| `/quest broadcast <text>` | Sendet eine Nachricht an alle Online-Spieler | `quest.admin` |
+
+Quest-Definitionen (Namen, Ziele, Mengen, Belohnungen, Pool-Größe je
+Kategorie) stehen komplett in `plugins/FrostbergHomes/quests.yml` mit
+Beispielen zum einfachen Anpassen. Die technischen Einstellungen (Fortschritts-
+Nachrichten, Erinnerungen, Effekte, Rang-Multiplikatoren) stehen im neuen
+`quest:`-Block der `config.yml` und werden mit `/homes reload` übernommen.
+
 ## Permissions - Übersicht
 
 | Permission                | Standard | Bedeutung                                      |
@@ -89,6 +123,12 @@ unabhängiger TPA-Cooldown (`settings.cooldown-seconds`).
 | `tpa.bypass.cooldown`       | op       | Ignoriert den TPA-Cooldown                      |
 | `tpa.bypass.warmup`         | op       | Ignoriert den Warmup-Countdown nach TPA-Annahme |
 | `tpa.*`                     | false    | Sammel-Permission für alles TPA-Obige           |
+| `quest.use`                 | true     | `/quest`, `/quests`, `/quest top` nutzen        |
+| `quest.admin`                | op       | `/quest reload/reset/info/broadcast` + Vorschau der naechsten Periode im GUI |
+| `quest.bypass.world`        | op       | Quest-Fortschritt zählt auch außerhalb der Farmwelt |
+| `quest.bypass.creative`     | op       | Quest-Fortschritt zählt auch im Creative-Modus  |
+| `quest.multiplier.vip` / `.premium` | false | Rang-Multiplikator für Quest-Belohnungen (siehe `config.yml`) |
+| `quest.*`                   | false    | Sammel-Permission für alles Quest-Obige         |
 
 Besitzt ein Spieler keine `homes.limit.*`-Permission, greift der Fallback-Wert
 `settings.default-home-limit` aus der `config.yml` (Standard: `1`).
@@ -195,17 +235,35 @@ frostberg-homes/
     │   ├── model/
     │   │   ├── Home.java                (Datenmodell eines Homes)
     │   │   └── TpaRequest.java          (Datenmodell einer TPA-Anfrage)
+    │   ├── quest/
+    │   │   ├── commands/
+    │   │   │   └── QuestCommand.java    (/quest, /quests - Router inkl. Admin-Unterbefehle)
+    │   │   ├── gui/
+    │   │   │   ├── QuestGuiHolder.java  (Marker fuer die Quest-GUI-Fenster)
+    │   │   │   └── QuestGuiListener.java (Hauptmenue, Kategorie-Ansicht, Hilfe-Buch, Abholen)
+    │   │   ├── listener/
+    │   │   │   └── QuestProgressListener.java (Abbauen/Platzieren/Toeten/Craften/Fischen/Laufen)
+    │   │   ├── manager/
+    │   │   │   └── QuestManager.java    (Pool-Auswahl, Reset-Engine, Persistenz, Belohnungen)
+    │   │   └── model/
+    │   │       ├── Quest.java           (Datenmodell einer Quest-Definition)
+    │   │       ├── QuestType.java       (Abbauen/Platzieren/Toeten/Craften/Fischen/Laufen/Tokens)
+    │   │       ├── QuestCategory.java   (DAILY/WEEKLY/MONTHLY)
+    │   │       └── PlayerQuestData.java (Fortschritt/Abholungen/Streak/Statistik eines Spielers)
     │   ├── tokens/commands/
     │   │   └── PayCommand.java          (/pay tokens|gold)
     │   └── util/
     │       ├── MessageUtil.java         (Farbcodes, %prefix%-Ersetzung, Klick-Komponenten)
     │       ├── TeleportWarmup.java      (gemeinsamer Warmup-Countdown fuer /home, TPA & Clan-Base)
     │       ├── SafeTeleport.java        (gemeinsame sichere-Landestelle-Suche fuer /home & /farmwelt)
-    │       └── ClanPlaceholderExpansion.java (PlaceholderAPI: %frostbergclans_...% fuer TAB/Chat)
+    │       ├── CurrencyBridge.java      (Tokens/Gold-Bruecke fuer Quest-Belohnungen)
+    │       ├── ClanPlaceholderExpansion.java (PlaceholderAPI: %frostbergclans_...% fuer TAB/Chat)
+    │       └── QuestPlaceholderExpansion.java (PlaceholderAPI: %frostbergquests_...%)
     └── resources/
         ├── plugin.yml
         ├── config.yml                  (Einstellungen)
-        └── messages.yml                (alle Chat-/GUI-Texte)
+        ├── messages.yml                (alle Chat-/GUI-Texte)
+        └── quests.yml                  (Quest-Pool je Kategorie, Kategorie-/Streak-Boni)
 ```
 
 ## Bekannte Grenzen
@@ -215,3 +273,10 @@ frostberg-homes/
   nach zwei freien, ungefährlichen Blöcken über festem Untergrund.
 - PlaceholderAPI-Platzhalter (z.B. `%frostberghomes_count%`) sind nicht
   Teil dieser Version - das Plugin lädt lediglich kompatibel nach PAPI.
+- Quest-Fortschritt bei Shift-Klick-Craften ist eine Schätzung (kleinste
+  Zutaten-Stapelgröße im Crafting-Raster), kein exaktes Nachbauen der
+  Vanilla-Schleife.
+- "Verdiene X Tokens"-Quests laufen über einen periodischen Kontostand-
+  Vergleich per PlaceholderAPI (`%playerpoints_points%`), nicht über ein
+  PlayerPoints-Event - dafür müssen PlaceholderAPI und die PlayerPoints-
+  Erweiterung installiert sein.

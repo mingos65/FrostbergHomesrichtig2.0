@@ -62,3 +62,34 @@ clan:
     - "admin"
     - "mod"
     - "owner"
+quest:
+  # Fortschritt zaehlt nur in der Welt aus settings.farm-world (siehe oben) -
+  # keine eigene Welt-Einstellung noetig, das ist bewusst dieselbe Welt.
+  progress-messages-enabled: true
+  # Alle wie viele erledigte Einheiten eine Zwischen-Nachricht kommt (z.B.
+  # alle 100 abgebaute Bloecke). 0 deaktiviert die Zwischen-Nachrichten komplett.
+  progress-message-interval: 100
+  join-reminder-enabled: true
+  repeat-reminder-enabled: true
+  repeat-reminder-interval-minutes: 30
+  # Wie oft (Sekunden) der Tokens-Kontostand fuer "Verdiene X Tokens"-Quests
+  # geprueft wird (per PlaceholderAPI, keine eigene PlayerPoints-Abhaengigkeit)
+  token-balance-check-interval-seconds: 5
+  # Nachricht an alle Online-Spieler, wenn eine neue Periode startet
+  reset-broadcast-enabled: true
+  # Rang-Multiplikator fuer Quest-Belohnungen (Tokens/Gold). Der hoechste
+  # zutreffende Multiplikator gewinnt, Spieler ohne passende Permission
+  # bekommen die normale (1x) Belohnung. Die Permissions vergibst du selbst
+  # ueber LuckPerms an die gewuenschten Raenge.
+  reward-multipliers:
+    - permission: "quest.multiplier.vip"
+      multiplier: 1.25
+    - permission: "quest.multiplier.premium"
+      multiplier: 1.5
+  effects:
+    sound-on-complete: true
+    sound-complete: "ENTITY_PLAYER_LEVELUP"
+    particles-on-complete: true
+    particle-complete: "HAPPY_VILLAGER"
+    sound-on-claim: true
+    sound-claim: "ENTITY_EXPERIENCE_ORB_PICKUP"

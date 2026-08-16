@@ -109,6 +109,16 @@ commands:
     usage: /cc <nachricht>
     permission: clan.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  quest:
+    description: 'Quest-System (Nutzung: /quest [top|reload|reset|info|broadcast] ...)'
+    usage: /quest [unterbefehl] ...
+    permission: quest.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  quests:
+    description: 'Alias fuer /quest'
+    usage: /quests [unterbefehl] ...
+    permission: quest.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -288,3 +298,31 @@ permissions:
   clan.admin:
     description: Erlaubt das Loeschen fremder Clans und Umgehen des Warmups bei /clan base
     default: op
+
+  quest.*:
+    description: Gibt Zugriff auf alle Quest-Funktionen inkl. Admin-Befehle
+    default: false
+    children:
+      quest.use: true
+      quest.admin: true
+      quest.bypass.world: true
+      quest.bypass.creative: true
+
+  quest.use:
+    description: Erlaubt /quest, /quests und /quest top
+    default: true
+  quest.admin:
+    description: Erlaubt /quest reload, reset, info und broadcast sowie die Vorschau auf die naechste Periode im GUI
+    default: op
+  quest.bypass.world:
+    description: Quest-Fortschritt zaehlt auch ausserhalb der Farmwelt (zum Testen)
+    default: op
+  quest.bypass.creative:
+    description: Quest-Fortschritt zaehlt auch im Creative-Modus (zum Testen)
+    default: op
+  quest.multiplier.vip:
+    description: Belohnungs-Multiplikator fuer Quest-Belohnungen (siehe config.yml quest.reward-multipliers)
+    default: false
+  quest.multiplier.premium:
+    description: Belohnungs-Multiplikator fuer Quest-Belohnungen (siehe config.yml quest.reward-multipliers)
+    default: false

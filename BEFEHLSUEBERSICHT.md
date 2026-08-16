@@ -1,8 +1,8 @@
 # FrostbergHomes – Komplette Befehlsübersicht
 
 Stand: 2026-08-16. Alle Befehle aus dem eigenen Plugin FrostbergHomes (Home-,
-Teleport-, Clan-System), plus ein kurzer Überblick über die wichtigsten
-Befehle anderer, bereits installierter Plugins.
+Teleport-, Quest-, Clan-System), plus ein kurzer Überblick über die
+wichtigsten Befehle anderer, bereits installierter Plugins.
 
 **Spalten:** *Permission* zeigt die Bukkit-Permission und ihren Standardwert.
 *Neu?* zeigt, ob der Befehl in diesem großen Update (Home-GUI + Clan-System,
@@ -89,7 +89,34 @@ die eigene PlaceholderAPI-Erweiterung (`%frostbergclans_name%`,
 
 ---
 
-## 4) Wirtschaft (Pay-Brücke, Tokens, Gold)
+## 4) Quest-Befehle
+
+Daily-/Weekly-/Monthly-Quest-System, alle Befehle in diesem Abschnitt sind
+**komplett neu**. Alle Spieler bekommen pro Periode dieselben, zufällig aus
+dem Pool gewählten Quests (nicht individuell zufällig). Fortschritt zählt
+nur in der Farmwelt.
+
+| Befehl | Beschreibung | Permission |
+|---|---|---|
+| `/quest`, `/quests` | Öffnet das Quest-GUI (Täglich/Wöchentlich/Monatlich, Countdown, Statistik, Hilfe-Buch) | `quest.use` (Standard: an) |
+| `/quest top` | Zeigt die Bestenliste nach abgeschlossenen Quests | `quest.use` (Standard: an) |
+| `/quest reload` | Lädt `quests.yml` neu (Pool-Änderungen) | `quest.admin` (Standard: op) |
+| `/quest reset <spieler> <daily\|weekly\|monthly>` | Setzt den Fortschritt einer Kategorie für einen Spieler zurück | `quest.admin` (Standard: op) |
+| `/quest info <spieler>` | Zeigt Fortschritt, Streak und Statistik eines Spielers | `quest.admin` (Standard: op) |
+| `/quest broadcast <text>` | Sendet eine Nachricht an alle Online-Spieler | `quest.admin` (Standard: op) |
+
+Reset-Zeitpunkte: Täglich (1 Quest) jeden Tag 00:00, Wöchentlich (3 Quests)
+jeden Montag 00:00, Monatlich (5 Quests) am 1. jedes Monats 00:00. War der
+Server zum Reset-Zeitpunkt offline, wird der Reset beim nächsten Start
+automatisch nachgeholt und der Fortschritt der abgelaufenen Periode
+zurückgesetzt. Belohnungen (Tokens/Gold) müssen manuell im GUI abgeholt
+werden; ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`), ein
+automatischer Kategorie-Bonus (alle Quests einer Periode geschafft) und ein
+Streak-Bonus für aufeinanderfolgende Daily-Tage kommen automatisch dazu.
+Nur Spieler mit `quest.admin` sehen im Haupt-GUI zusätzlich eine Vorschau
+auf die schon vorgemerkte, aber noch nicht aktive nächste Periode.
+
+## 5) Wirtschaft (Pay-Brücke, Tokens, Gold)
 
 | Befehl | Beschreibung | Permission | Neu? |
 |---|---|---|---|
@@ -104,7 +131,7 @@ die eigene PlaceholderAPI-Erweiterung (`%frostbergclans_name%`,
 
 ---
 
-## 5) Allgemeine / bereits vorhandene Befehle (andere Plugins)
+## 6) Allgemeine / bereits vorhandene Befehle (andere Plugins)
 
 Diese Befehle stammen **nicht** aus FrostbergHomes, sondern aus den anderen
 auf dem Server installierten Plugins. Kurzübersicht, keine vollständige
@@ -126,8 +153,9 @@ im Detail hast du bereits als separate Datei von mir bekommen):
 ## Kurz gesagt
 
 - **Grün/"kann jeder Spieler"**: Homes verwalten, TPA senden/annehmen,
-  `/spawn`/`/farmwelt`, Clan gründen/beitreten/chatten/Base nutzen/einzahlen
+  `/spawn`/`/farmwelt`, Clan gründen/beitreten/chatten/Base nutzen/einzahlen,
+  `/quest` nutzen und Belohnungen abholen
 - **Braucht Clan-Rolle Leader/Mod**: Clan löschen, einladen, kicken,
   befördern, umbenennen, Base setzen, aus der Kasse abheben
 - **Braucht Admin/OP-Permission**: `/tp`/`/tphere`, `/setspawn`/`/setfarmwelt`,
-  `/homes reload`
+  `/homes reload`, `/quest reload`/`reset`/`info`/`broadcast`

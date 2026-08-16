@@ -20,8 +20,13 @@ import de.frostberg.homes.gui.HomesGuiListener;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
 import de.frostberg.homes.manager.TpaManager;
+import de.frostberg.homes.quest.commands.QuestCommand;
+import de.frostberg.homes.quest.gui.QuestGuiListener;
+import de.frostberg.homes.quest.listener.QuestProgressListener;
+import de.frostberg.homes.quest.manager.QuestManager;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
+import de.frostberg.homes.util.QuestPlaceholderExpansion;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -43,6 +48,8 @@ public class FrostbergHomes extends JavaPlugin {
     private ClanManager clanManager;
     private ClanCommand clanCommand;
     private ClanGuiListener clanGuiListener;
+    private QuestManager questManager;
+    private QuestGuiListener questGuiListener;
     private FileConfiguration messages;
 
     @Override
@@ -55,12 +62,19 @@ public class FrostbergHomes extends JavaPlugin {
         this.homesGuiListener = new HomesGuiListener(this);
         this.clanManager = new ClanManager(this);
         this.clanGuiListener = new ClanGuiListener(this);
+        this.questGuiListener = new QuestGuiListener(this);
+        // QuestManager erst NACH dem GUI-Listener bauen, da sein Konstruktor
+        // bereits Reset-Checks/Broadcasts ausloesen kann, die Nachrichten
+        // ueber plugin.getMessages() lesen - die steht zu diesem Zeitpunkt
+        // schon bereit (siehe loadMessages() oben).
+        this.questManager = new QuestManager(this);
 
         registerCommands();
         registerListeners();
 
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new ClanPlaceholderExpansion(this).register();
+            new QuestPlaceholderExpansion(this).register();
         }
 
         getLogger().info("FrostbergHomes wurde aktiviert.");
@@ -75,7 +89,10 @@ public class FrostbergHomes extends JavaPlugin {
         if (clanManager != null) {
             clanManager.saveAll();
         }
-        getLogger().info("FrostbergHomes wurde deaktiviert - alle Homes und Clans wurden gespeichert.");
+        if (questManager != null) {
+            questManager.saveAll();
+        }
+        getLogger().info("FrostbergHomes wurde deaktiviert - alle Homes, Clans und Quest-Fortschritte wurden gespeichert.");
     }
 
     /**
@@ -183,6 +200,12 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("clan").setTabCompleter(clanCommand);
         getCommand("cc").setExecutor(new ClanChatCommand(this));
 
+        QuestCommand questCommand = new QuestCommand(this);
+        getCommand("quest").setExecutor(questCommand);
+        getCommand("quest").setTabCompleter(questCommand);
+        getCommand("quests").setExecutor(questCommand);
+        getCommand("quests").setTabCompleter(questCommand);
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
@@ -200,6 +223,11 @@ public class FrostbergHomes extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(homesGuiListener, this);
         getServer().getPluginManager().registerEvents(clanGuiListener, this);
+
+        // QuestManager hoert selbst auf Join/Quit (Erinnerungen, Laden/Speichern)
+        getServer().getPluginManager().registerEvents(questManager, this);
+        getServer().getPluginManager().registerEvents(questGuiListener, this);
+        getServer().getPluginManager().registerEvents(new QuestProgressListener(this), this);
     }
 
     /**
@@ -246,5 +274,13 @@ public class FrostbergHomes extends JavaPlugin {
 
     public ClanGuiListener getClanGuiListener() {
         return clanGuiListener;
+    }
+
+    public QuestManager getQuestManager() {
+        return questManager;
+    }
+
+    public QuestGuiListener getQuestGuiListener() {
+        return questGuiListener;
     }
 }

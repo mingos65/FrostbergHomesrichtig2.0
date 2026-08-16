@@ -181,3 +181,68 @@ clan-bank-deposited: "%prefix%&aDu hast &e%amount% &ain die Clan-Kasse eingezahl
 clan-bank-withdrawn: "%prefix%&aDu hast &e%amount% &aaus der Clan-Kasse abgehoben."
 # ---------- Admin ----------
 reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."
+
+# =====================================================
+#                    Quest-System
+#  Eigenes Prefix (nicht %prefix%), damit Quest-Nachrichten
+#  eine eigene, aber erkennbar verwandte Optik haben.
+#  "quest-prefix" ist ein Rohtext (kein Nachrichten-Key) fuer
+#  /quest broadcast - alle anderen quest-*-Keys enthalten den
+#  Prefix bereits fest im Text.
+# =====================================================
+quest-prefix: "&d&lQuest &8» &7"
+# ---------- Quest: Kategorien ----------
+quest-category-daily-name: "&e&lTäglich"
+quest-category-weekly-name: "&6&lWöchentlich"
+quest-category-monthly-name: "&5&lMonatlich"
+# ---------- Quest: Fortschritt / Abschluss ----------
+quest-progress-update: "&d&lQuest &8» &7Fortschritt bei &d%quest%&7: &e%progress%&8/&e%target%"
+quest-completed: "&d&lQuest &8» &a✔ Abgeschlossen: &f%quest%&a! Belohnung wartet in &f/quest&a."
+quest-claimed: "&d&lQuest &8» &a+%tokens% Tokens &7| &6+%gold% Gold &7erhalten &8(&f%quest%&8)"
+quest-category-bonus: "&d&lQuest &8» &6★ Kategorie-Bonus! &7Alle %category% &7-Quests erledigt &8» &a+%tokens% Tokens &7| &6+%gold% Gold"
+quest-streak-bonus: "&d&lQuest &8» &b🔥 %streak% Tage Streak-Bonus &8» &a+%tokens% Tokens &7| &6+%gold% Gold"
+quest-reset-broadcast: "&d&lQuest &8» &7Neue %category% &7-Quests sind da! Öffne &f/quest&7."
+# ---------- Quest: Erinnerungen ----------
+quest-join-reminder: "&d&lQuest &8» &7Du hast offene oder abholbereite Quests. Öffne &f/quest&7!"
+quest-repeat-reminder: "&d&lQuest &8» &eErinnerung&8: &7Du hast abholbereite Belohnungen. Öffne &f/quest&7!"
+# ---------- Quest: Admin-Befehle ----------
+quest-reload-success: "&d&lQuest &8» &aDie Quest-Konfiguration wurde neu geladen."
+quest-reset-usage: "%prefix%&cNutzung: &f/quest reset <spieler> <daily|weekly|monthly>"
+quest-reset-success: "&d&lQuest &8» &aFortschritt von &e%player% &7(&f%category%&7) &awurde zurückgesetzt."
+quest-info-usage: "%prefix%&cNutzung: &f/quest info <spieler>"
+quest-info-header: "&d&lQuest-Info &7für &f%player%"
+quest-info-line: "&7%category%&8: &f%done%&7/&f%total% &7erledigt"
+quest-info-stats: "&7Streak&8: &f%streak% &7| Gesamt abgeschlossen&8: &f%total%"
+quest-broadcast-usage: "%prefix%&cNutzung: &f/quest broadcast <nachricht>"
+quest-top-header: "&d&l&nQuest-Bestenliste"
+quest-top-entry: "&7#%rank% &f%player% &8- &e%amount% Quests"
+quest-top-empty: "&d&lQuest &8» &7Noch hat niemand eine Quest abgeschlossen."
+quest-category-invalid: "%prefix%&cUngültige Kategorie. Nutze &fdaily&c, &fweekly &coder &fmonthly&c."
+# ---------- Quest: GUI Hauptmenü ----------
+quest-gui-main-title: "&d&lQuest-Zentrale"
+quest-gui-category-lore: "&7%done%&8/&7%total% &7erledigt &8» &7Klicken zum Öffnen"
+quest-gui-countdown-name: "&b&lNächste Resets"
+quest-gui-countdown-line: "&7%category%&8: &f%time%"
+quest-gui-stats-name: "&e&lDeine Statistik"
+quest-gui-stats-completed: "&7Insgesamt abgeschlossen&8: &f%amount% Quests"
+quest-gui-stats-streak: "&7Aktueller Streak&8: &f%streak% Tage"
+quest-gui-admin-preview-name: "&c&lVorschau: Nächste Periode &7(Admin)"
+quest-gui-help-name: "&f&lHilfe"
+quest-gui-help-lore: "&7Klicken für eine Erklärung"
+# ---------- Quest: GUI Kategorie-Ansicht ----------
+quest-gui-category-title: "&d&l%category%"
+quest-gui-back-name: "&7« Zurück"
+quest-gui-quest-lore-progress: "&7Fortschritt&8: &f%progress%&7/&f%target%"
+quest-gui-quest-lore-reward: "&7Belohnung&8: &e%tokens% Tokens &7| &6%gold% Gold"
+quest-gui-quest-difficulty: "&7Schwierigkeit&8: %stars%"
+quest-gui-quest-status-open: "&7Status&8: &7Offen"
+quest-gui-quest-status-ready: "&7Status&8: &a&lAbholbereit &7(Klicken!)"
+quest-gui-quest-status-claimed: "&7Status&8: &8Abgeholt"
+# ---------- Quest: Hilfe-Buch ----------
+quest-help-book-title: "&dQuest-Hilfe"
+quest-help-book-pages:
+  - "&l&dQuest-System\n\n&8Willkommen! Hier eine kurze Erklärung, wie /quest funktioniert."
+  - "&l&8Kategorien\n\n&8Es gibt Täglich-, Wöchentlich- und Monatlich-Quests. Jede Kategorie hat ihre eigenen Aufgaben und ihren eigenen Reset-Zeitpunkt."
+  - "&l&8Fortschritt\n\n&8Alle Quests zählen nur in der Farmwelt. Der Fortschritt wird automatisch gespeichert, auch über einen Neustart hinweg."
+  - "&l&8Belohnung abholen\n\n&8Ist eine Quest fertig, musst du die Belohnung im GUI manuell abholen - klicke einfach auf die fertige Quest."
+  - "&l&8Streak & Bonus\n\n&8Schaffst du an aufeinanderfolgenden Tagen alle Täglich-Quests, wächst dein Streak - ab bestimmten Längen gibt es einen Extra-Bonus. Schaffst du alle Quests einer Kategorie, gibt es zusätzlich automatisch einen Kategorie-Bonus."
