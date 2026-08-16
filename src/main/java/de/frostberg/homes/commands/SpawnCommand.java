@@ -66,10 +66,12 @@ public class SpawnCommand implements CommandExecutor {
     private Location findRandomFarmLocation(World world) {
         Location center = world.getSpawnLocation();
         int radius = Math.max(1, plugin.getConfig().getInt("settings.farm-teleport-radius", 200));
+        int minRadius = Math.min(plugin.getConfig().getInt("settings.farm-teleport-min-radius", 0), radius - 1);
+        minRadius = Math.max(minRadius, 0);
 
         for (int attempt = 0; attempt < 10; attempt++) {
             double angle = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI;
-            double distance = ThreadLocalRandom.current().nextDouble() * radius;
+            double distance = minRadius + ThreadLocalRandom.current().nextDouble() * (radius - minRadius);
 
             int x = center.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
             int z = center.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);

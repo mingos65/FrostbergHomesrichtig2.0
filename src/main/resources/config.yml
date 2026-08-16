@@ -26,9 +26,12 @@ settings:
   spawn-world: "plotwelt65"
   # Welt, zu der /farmwelt und /setfarmwelt gehören
   farm-world: "farm"
-  # Radius in Blöcken um den mit /setfarmwelt gesetzten Mittelpunkt, innerhalb
-  # dessen /farmwelt eine zufällige, sichere Position auswählt
+  # Maximaler Radius in Blöcken um den mit /setfarmwelt gesetzten Mittelpunkt,
+  # innerhalb dessen /farmwelt eine zufällige, sichere Position auswählt
   farm-teleport-radius: 200
+  # Mindestabstand in Blöcken vom Mittelpunkt - verhindert, dass Spieler direkt
+  # neben dem Zentrum (und damit evtl. schon abgebauten Flächen) landen
+  farm-teleport-min-radius: 50
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
