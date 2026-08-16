@@ -248,7 +248,7 @@ quest-help-book-title: "&dQuest-Hilfe"
 quest-help-book-pages:
   - "&l&dQuest-System\n\n&8Willkommen! Hier eine kurze Erklärung, wie /quest funktioniert."
   - "&l&8Kategorien\n\n&8Es gibt Täglich-, Wöchentlich- und Monatlich-Quests. Jede Kategorie hat ihre eigenen Aufgaben und ihren eigenen Reset-Zeitpunkt."
-  - "&l&8Fortschritt\n\n&8Alle Quests zählen nur in der Farmwelt. Der Fortschritt wird automatisch gespeichert, auch über einen Neustart hinweg."
+  - "&l&8Fortschritt\n\n&8Du kannst /quest von überall aus öffnen. Der Fortschritt selbst zählt aber nur in der Farmwelt. Er wird automatisch gespeichert, auch über einen Neustart hinweg."
   - "&l&8Belohnung abholen\n\n&8Ist eine Quest fertig, musst du die Belohnung im GUI manuell abholen - klicke einfach auf die fertige Quest."
   - "&l&8Streak & Bonus\n\n&8Schaffst du an aufeinanderfolgenden Tagen alle Täglich-Quests, wächst dein Streak - ab bestimmten Längen gibt es automatisch einen Extra-Bonus."
   - "&l&8Kategorie-Bonus\n\n&8Schaffst du ALLE Quests einer Kategorie, erscheint im GUI ein extra Bonus-Item. Solange nicht alles fertig ist, ist es grau und gesperrt - sind alle Quests erledigt, wird es grün und du kannst den Bonus zusätzlich zu den einzelnen Belohnungen abholen."
