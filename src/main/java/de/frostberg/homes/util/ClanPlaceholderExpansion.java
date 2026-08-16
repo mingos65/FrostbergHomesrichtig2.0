@@ -13,7 +13,7 @@ import org.bukkit.OfflinePlayer;
  * TAB-Config - die Umstellung dort ist reine Server-Config, kein Code.
  *
  * Verfuegbare Platzhalter:
- * %frostbergclans_name%        - Clan-Name oder leer
+ * %frostbergclans_name%        - Clan-Name, ohne Clan messages.clan-placeholder-none ("Kein Clan")
  * %frostbergclans_tag%         - Clan-Tag oder leer
  * %frostbergclans_role%        - LEADER/MOD/MEMBER oder leer
  * %frostbergclans_membercount% - Mitgliederanzahl oder leer
@@ -54,7 +54,7 @@ public class ClanPlaceholderExpansion extends PlaceholderExpansion {
 
         Clan clan = plugin.getClanManager().getClanOf(player.getUniqueId()).orElse(null);
         if (clan == null) {
-            return "";
+            return "name".equalsIgnoreCase(params) ? MessageUtil.get(plugin.getMessages(), "clan-placeholder-none") : "";
         }
 
         return switch (params.toLowerCase()) {

@@ -107,6 +107,8 @@ spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinde
 farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
 farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
 spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
+# ---------- Clan: Platzhalter (TAB/Scoreboard/Chat, siehe ClanPlaceholderExpansion) ----------
+clan-placeholder-none: "&7Kein Clan"
 # ---------- Clan: Allgemein / Erstellen / Löschen ----------
 clan-usage: "%prefix%&cNutzung: &f/clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank>"
 clan-create-usage: "%prefix%&cNutzung: &f/clan create <name> [tag]"
