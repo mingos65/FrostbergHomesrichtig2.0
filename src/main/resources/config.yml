@@ -105,5 +105,13 @@ messages:
   tp-usage: "%prefix%&cNutzung: &f/tp <spieler>"
   tphere-usage: "%prefix%&cNutzung: &f/tphere <spieler>"
   tp-success: "%prefix%&7Zu &e%player% &8» &aTeleportiert"
+  # ---------- Spawn (/spawn, /farmwelt, /setspawn, /setfarmwelt) ----------
+  spawn-success: "%prefix%&7Spawn &8» &aTeleportiert"
+  farmwelt-success: "%prefix%&7Farmwelt &8» &aTeleportiert"
+  spawn-set: "%prefix%&aSpawnpunkt wurde auf deine Position gesetzt."
+  farmwelt-set: "%prefix%&aFarmwelt-Spawnpunkt wurde auf deine Position gesetzt."
+  spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinden, um den Spawn dort zu setzen."
+  farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
+  farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
   # ---------- Admin ----------
   reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

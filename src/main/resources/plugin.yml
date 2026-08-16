@@ -69,6 +69,26 @@ commands:
     usage: /tphere <spieler>
     permission: tpa.admin
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  spawn:
+    description: Teleportiert dich zum Server-Spawn
+    usage: /spawn
+    permission: spawn.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  farmwelt:
+    description: Teleportiert dich zur Farmwelt
+    usage: /farmwelt
+    permission: spawn.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  setspawn:
+    description: Setzt den Spawnpunkt der Hauptwelt auf deine Position
+    usage: /setspawn
+    permission: spawn.admin
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  setfarmwelt:
+    description: Setzt den Spawnpunkt der Farmwelt auf deine Position
+    usage: /setfarmwelt
+    permission: spawn.admin
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -165,4 +185,18 @@ permissions:
     default: op
   tpa.bypass.warmup:
     description: Umgeht den Warmup/Countdown vor dem TPA-Teleport
+    default: op
+
+  spawn.*:
+    description: Gibt Zugriff auf alle Spawn-Funktionen
+    default: false
+    children:
+      spawn.use: true
+      spawn.admin: true
+
+  spawn.use:
+    description: Erlaubt /spawn und /farmwelt
+    default: true
+  spawn.admin:
+    description: Erlaubt /setspawn und /setfarmwelt
     default: op

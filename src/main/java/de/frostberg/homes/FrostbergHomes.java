@@ -5,6 +5,8 @@ import de.frostberg.homes.commands.DeleteHomeCommand;
 import de.frostberg.homes.commands.HomeCommand;
 import de.frostberg.homes.commands.HomesCommand;
 import de.frostberg.homes.commands.SetHomeCommand;
+import de.frostberg.homes.commands.SetSpawnCommand;
+import de.frostberg.homes.commands.SpawnCommand;
 import de.frostberg.homes.commands.TpaAcceptCommand;
 import de.frostberg.homes.commands.TpaCommand;
 import de.frostberg.homes.commands.TpaDenyCommand;
@@ -82,6 +84,11 @@ public class FrostbergHomes extends JavaPlugin {
         AdminTpCommand tpHereCommand = new AdminTpCommand(this, true);
         getCommand("tphere").setExecutor(tpHereCommand);
         getCommand("tphere").setTabCompleter(tpHereCommand);
+
+        getCommand("spawn").setExecutor(new SpawnCommand(this, false));
+        getCommand("farmwelt").setExecutor(new SpawnCommand(this, true));
+        getCommand("setspawn").setExecutor(new SetSpawnCommand(this, false));
+        getCommand("setfarmwelt").setExecutor(new SetSpawnCommand(this, true));
 
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
