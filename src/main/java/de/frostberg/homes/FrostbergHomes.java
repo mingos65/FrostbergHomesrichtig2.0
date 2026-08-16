@@ -28,6 +28,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
 
 public class FrostbergHomes extends JavaPlugin {
 
@@ -75,13 +80,48 @@ public class FrostbergHomes extends JavaPlugin {
 
     /**
      * Speichert die mitgelieferte messages.yml beim ersten Start (falls noch
-     * nicht vorhanden) und laedt sie danach in den Speicher. Getrennt von
-     * config.yml, damit alle Chat-/GUI-Texte an einer eigenen, uebersichtlichen
-     * Stelle stehen (siehe MessageUtil).
+     * nicht vorhanden), laedt sie danach in den Speicher und ergaenzt fehlende
+     * Schluessel aus neueren Updates automatisch (siehe mergeMissingDefaults).
+     * Getrennt von config.yml, damit alle Chat-/GUI-Texte an einer eigenen,
+     * uebersichtlichen Stelle stehen (siehe MessageUtil).
      */
     private void loadMessages() {
         saveResource("messages.yml", false);
-        this.messages = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml"));
+        File file = new File(getDataFolder(), "messages.yml");
+        this.messages = YamlConfiguration.loadConfiguration(file);
+        mergeMissingDefaults(file);
+    }
+
+    /**
+     * Ergaenzt Nachrichten-Schluessel, die in der mitgelieferten (neueren)
+     * messages.yml existieren, in der bereits vorhandenen Datei auf der
+     * Festplatte aber fehlen - ohne dort bestehende (ggf. angepasste) Werte
+     * zu ueberschreiben. Verhindert "[Fehlende Nachricht: ...]" nach einem
+     * Update, ohne dass die Datei jedes Mal manuell geloescht werden muss.
+     */
+    private void mergeMissingDefaults(File file) {
+        try (InputStream defaultStream = getResource("messages.yml")) {
+            if (defaultStream == null) {
+                return;
+            }
+
+            YamlConfiguration defaults = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream, StandardCharsets.UTF_8));
+            boolean changed = false;
+
+            for (String key : defaults.getKeys(false)) {
+                if (!messages.contains(key)) {
+                    messages.set(key, defaults.get(key));
+                    changed = true;
+                }
+            }
+
+            if (changed) {
+                messages.save(file);
+                getLogger().info("messages.yml wurde um neue Standard-Texte aus diesem Update ergaenzt.");
+            }
+        } catch (IOException ex) {
+            getLogger().log(Level.WARNING, "Konnte messages.yml nicht um fehlende Standard-Texte ergaenzen.", ex);
+        }
     }
 
     /** Laedt die messages.yml neu von der Festplatte (siehe /homes reload). */
