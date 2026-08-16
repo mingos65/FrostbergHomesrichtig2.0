@@ -1,6 +1,6 @@
 # FrostbergHomes – Komplette Befehlsübersicht
 
-Stand: 2026-08-16. Alle Befehle aus dem eigenen Plugin FrostbergHomes (Home-,
+Stand: 2026-08-17. Alle Befehle aus dem eigenen Plugin FrostbergHomes (Home-,
 Teleport-, Quest-, Clan-System), plus ein kurzer Überblick über die
 wichtigsten Befehle anderer, bereits installierter Plugins.
 
@@ -105,15 +105,23 @@ nur in der Farmwelt.
 | `/quest info <spieler>` | Zeigt Fortschritt, Streak und Statistik eines Spielers | `quest.admin` (Standard: op) |
 | `/quest broadcast <text>` | Sendet eine Nachricht an alle Online-Spieler | `quest.admin` (Standard: op) |
 
-Reset-Zeitpunkte: Täglich (1 Quest) jeden Tag 00:00, Wöchentlich (3 Quests)
-jeden Montag 00:00, Monatlich (5 Quests) am 1. jedes Monats 00:00. War der
-Server zum Reset-Zeitpunkt offline, wird der Reset beim nächsten Start
-automatisch nachgeholt und der Fortschritt der abgelaufenen Periode
-zurückgesetzt. Belohnungen (Tokens/Gold) müssen manuell im GUI abgeholt
-werden - das gilt auch für den Kategorie-Bonus: Er erscheint als eigenes
-Item im jeweiligen Kategorie-GUI, ist grau/gesperrt solange nicht alle
-Quests der Kategorie fertig sind und wird grün/abholbar sobald alle fertig
-sind. Ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`) und ein
+Reset-Zeitpunkte: Täglich (1 von 10 möglichen Quests) jeden Tag 00:00,
+Wöchentlich (3 von 13) jeden Montag 00:00, Monatlich (5 von 13) am 1. jedes
+Monats 00:00. War der Server zum Reset-Zeitpunkt offline, wird der Reset
+beim nächsten Start automatisch nachgeholt und der Fortschritt der
+abgelaufenen Periode zurückgesetzt.
+
+**Belohnung:** Jede Quest gibt immer Tokens, gestaffelt nach den 1-5
+Schwierigkeits-Sternen (Täglich 550-1.600, Wöchentlich 1.600-4.600,
+Monatlich 4.800-13.600). Ab 3 Sternen gibt es zusätzlich etwas Gold obendrauf
+(1 Gold = 1.000 Tokens). Belohnungen müssen manuell im GUI abgeholt werden.
+
+**Kategorie-Bonus:** eigenes Item im Kategorie-GUI (grauer Farbstoff =
+noch nicht abholbereit, grüner Farbstoff = abholbereit), muss ebenfalls
+manuell abgeholt werden. **Nur bei Wöchentlich und Monatlich** - bei
+Täglich gibt es keinen (nur 1 Quest pro Tag, wäre redundant).
+
+Ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`) und ein
 automatischer Streak-Bonus für aufeinanderfolgende Daily-Tage kommen
 zusätzlich dazu. Nur Spieler mit `quest.admin` sehen im Haupt-GUI zusätzlich
 eine Vorschau auf die schon vorgemerkte, aber noch nicht aktive nächste
