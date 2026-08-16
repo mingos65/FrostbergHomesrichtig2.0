@@ -238,6 +238,10 @@ quest-gui-quest-difficulty: "&7Schwierigkeit&8: %stars%"
 quest-gui-quest-status-open: "&7Status&8: &7Offen"
 quest-gui-quest-status-ready: "&7Status&8: &a&lAbholbereit &7(Klicken!)"
 quest-gui-quest-status-claimed: "&7Status&8: &8Abgeholt"
+# ---------- Quest: GUI Kategorie-Bonus ----------
+quest-gui-bonus-name: "&6&l%category%-Bonus"
+quest-gui-bonus-lore-reward: "&7Belohnung&8: &e%tokens% Tokens &7| &6%gold% Gold"
+quest-gui-bonus-status-locked: "&7Status&8: &8Gesperrt &7(noch nicht alle Quests fertig)"
 # ---------- Quest: Hilfe-Buch ----------
 quest-help-book-title: "&dQuest-Hilfe"
 quest-help-book-pages:
@@ -245,4 +249,5 @@ quest-help-book-pages:
   - "&l&8Kategorien\n\n&8Es gibt Täglich-, Wöchentlich- und Monatlich-Quests. Jede Kategorie hat ihre eigenen Aufgaben und ihren eigenen Reset-Zeitpunkt."
   - "&l&8Fortschritt\n\n&8Alle Quests zählen nur in der Farmwelt. Der Fortschritt wird automatisch gespeichert, auch über einen Neustart hinweg."
   - "&l&8Belohnung abholen\n\n&8Ist eine Quest fertig, musst du die Belohnung im GUI manuell abholen - klicke einfach auf die fertige Quest."
-  - "&l&8Streak & Bonus\n\n&8Schaffst du an aufeinanderfolgenden Tagen alle Täglich-Quests, wächst dein Streak - ab bestimmten Längen gibt es einen Extra-Bonus. Schaffst du alle Quests einer Kategorie, gibt es zusätzlich automatisch einen Kategorie-Bonus."
+  - "&l&8Streak & Bonus\n\n&8Schaffst du an aufeinanderfolgenden Tagen alle Täglich-Quests, wächst dein Streak - ab bestimmten Längen gibt es automatisch einen Extra-Bonus."
+  - "&l&8Kategorie-Bonus\n\n&8Schaffst du ALLE Quests einer Kategorie, erscheint im GUI ein extra Bonus-Item. Solange nicht alles fertig ist, ist es grau und gesperrt - sind alle Quests erledigt, wird es grün und du kannst den Bonus zusätzlich zu den einzelnen Belohnungen abholen."

@@ -38,6 +38,7 @@ public class QuestGuiListener implements Listener {
     private static final int HELP_SLOT_MAIN = 35;
 
     private static final int BACK_SLOT = 18;
+    private static final int BONUS_SLOT = 22;
     private static final int HELP_SLOT_CATEGORY = 26;
 
     private final FrostbergHomes plugin;
@@ -148,10 +149,39 @@ public class QuestGuiListener implements Listener {
         }
 
         inventory.setItem(BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "quest-gui-back-name"), null));
+        inventory.setItem(BONUS_SLOT, buildCategoryBonusItem(player, category));
         inventory.setItem(HELP_SLOT_CATEGORY, buildHelpItem());
         fillBorder(inventory);
 
         player.openInventory(inventory);
+    }
+
+    /**
+     * Kategorie-Bonus-Item: grau/gesperrt solange nicht ALLE Quests dieser
+     * Kategorie fertig sind, gruen und anklickbar sobald alle fertig sind,
+     * danach wie eine abgeholte Quest gefaerbt (siehe claimCategoryBonus).
+     */
+    private ItemStack buildCategoryBonusItem(Player player, QuestCategory category) {
+        boolean claimed = plugin.getQuestManager().isCategoryBonusClaimed(player.getUniqueId(), category);
+        boolean allDone = plugin.getQuestManager().areAllQuestsDone(player.getUniqueId(), category);
+        long tokens = plugin.getQuestManager().getCategoryBonusTokens(category);
+        double gold = plugin.getQuestManager().getCategoryBonusGold(category);
+
+        List<String> lore = new ArrayList<>();
+        lore.add(MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-lore-reward")
+                .replace("%tokens%", String.valueOf(tokens))
+                .replace("%gold%", String.valueOf(gold)));
+        lore.add("");
+
+        String statusKey = claimed ? "quest-gui-quest-status-claimed"
+                : allDone ? "quest-gui-quest-status-ready"
+                : "quest-gui-bonus-status-locked";
+        lore.add(MessageUtil.get(plugin.getMessages(), statusKey));
+
+        Material icon = claimed ? Material.GRAY_DYE : allDone ? Material.CHEST : Material.GRAY_STAINED_GLASS_PANE;
+        String name = MessageUtil.get(plugin.getMessages(), "quest-gui-bonus-name")
+                .replace("%category%", plugin.getQuestManager().categoryDisplayName(category));
+        return simpleItem(icon, name, lore);
     }
 
     private int[] centeredSlots(int count) {
@@ -272,6 +302,14 @@ public class QuestGuiListener implements Listener {
         }
         if (slot == HELP_SLOT_CATEGORY) {
             openHelpBook(player);
+            return;
+        }
+        if (slot == BONUS_SLOT) {
+            if (plugin.getQuestManager().areAllQuestsDone(player.getUniqueId(), category)
+                    && !plugin.getQuestManager().isCategoryBonusClaimed(player.getUniqueId(), category)) {
+                plugin.getQuestManager().claimCategoryBonus(player, category);
+            }
+            openCategory(player, category);
             return;
         }
 

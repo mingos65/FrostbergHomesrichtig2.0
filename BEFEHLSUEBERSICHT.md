@@ -110,11 +110,14 @@ jeden Montag 00:00, Monatlich (5 Quests) am 1. jedes Monats 00:00. War der
 Server zum Reset-Zeitpunkt offline, wird der Reset beim nächsten Start
 automatisch nachgeholt und der Fortschritt der abgelaufenen Periode
 zurückgesetzt. Belohnungen (Tokens/Gold) müssen manuell im GUI abgeholt
-werden; ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`), ein
-automatischer Kategorie-Bonus (alle Quests einer Periode geschafft) und ein
-Streak-Bonus für aufeinanderfolgende Daily-Tage kommen automatisch dazu.
-Nur Spieler mit `quest.admin` sehen im Haupt-GUI zusätzlich eine Vorschau
-auf die schon vorgemerkte, aber noch nicht aktive nächste Periode.
+werden - das gilt auch für den Kategorie-Bonus: Er erscheint als eigenes
+Item im jeweiligen Kategorie-GUI, ist grau/gesperrt solange nicht alle
+Quests der Kategorie fertig sind und wird grün/abholbar sobald alle fertig
+sind. Ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`) und ein
+automatischer Streak-Bonus für aufeinanderfolgende Daily-Tage kommen
+zusätzlich dazu. Nur Spieler mit `quest.admin` sehen im Haupt-GUI zusätzlich
+eine Vorschau auf die schon vorgemerkte, aber noch nicht aktive nächste
+Periode.
 
 ## 5) Wirtschaft (Pay-Brücke, Tokens, Gold)
 

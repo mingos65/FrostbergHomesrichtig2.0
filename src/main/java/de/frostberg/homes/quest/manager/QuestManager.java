@@ -599,33 +599,81 @@ public class QuestManager implements Listener {
             }
         }
 
-        if (allDone) {
-            grantCategoryBonus(player, category);
-            if (category == QuestCategory.DAILY) {
-                updateStreak(player, data);
-            }
+        if (allDone && category == QuestCategory.DAILY) {
+            updateStreak(player, data);
         }
     }
 
-    private void grantCategoryBonus(Player player, QuestCategory category) {
+    // ---------------------------------------------------------------
+    // Kategorie-Bonus (eigenes Item im Kategorie-GUI, grau/gesperrt bis alle
+    // Quests der Kategorie fertig sind, dann gruen und manuell abholbar -
+    // genau wie eine einzelne Quest-Belohnung, siehe claimReward)
+    // ---------------------------------------------------------------
+
+    private static final String CATEGORY_BONUS_ID = "__category_bonus__";
+
+    /** Ob ALLE aktiven Quests dieser Kategorie fuer diesen Spieler fertig sind. */
+    public boolean areAllQuestsDone(UUID uuid, QuestCategory category) {
+        List<Quest> active = activeQuests.getOrDefault(category, Collections.emptyList());
+        if (active.isEmpty()) {
+            return false;
+        }
+        PlayerQuestData data = getData(uuid);
+        for (Quest quest : active) {
+            if (data.getProgress(category, quest.getId()) < quest.getAmount()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isCategoryBonusClaimed(UUID uuid, QuestCategory category) {
+        return getData(uuid).isClaimed(category, CATEGORY_BONUS_ID);
+    }
+
+    public long getCategoryBonusTokens(QuestCategory category) {
         ConfigurationSection section = questConfig.getConfigurationSection("category-bonus." + category.getConfigKey());
-        if (section == null) {
-            return;
+        return section != null ? section.getLong("tokens", 0) : 0;
+    }
+
+    public double getCategoryBonusGold(QuestCategory category) {
+        ConfigurationSection section = questConfig.getConfigurationSection("category-bonus." + category.getConfigKey());
+        return section != null ? section.getDouble("gold", 0) : 0;
+    }
+
+    public ClaimResult claimCategoryBonus(Player player, QuestCategory category) {
+        UUID uuid = player.getUniqueId();
+        PlayerQuestData data = getData(uuid);
+
+        if (data.isClaimed(category, CATEGORY_BONUS_ID)) {
+            return ClaimResult.ALREADY_CLAIMED;
         }
-        long tokens = section.getLong("tokens", 0);
-        double gold = section.getDouble("gold", 0);
-        if (tokens <= 0 && gold <= 0) {
-            return;
+        if (!areAllQuestsDone(uuid, category)) {
+            return ClaimResult.NOT_COMPLETE;
         }
+
+        long tokens = getCategoryBonusTokens(category);
+        double gold = getCategoryBonusGold(category);
 
         CurrencyBridge.giveTokens(player, tokens);
         CurrencyBridge.giveGold(player, gold);
+
+        data.markClaimed(category, CATEGORY_BONUS_ID);
+        dirty.add(uuid);
 
         player.sendMessage(MessageUtil.get(plugin.getMessages(), "quest-category-bonus")
                 .replace("%category%", categoryDisplayName(category))
                 .replace("%tokens%", String.valueOf(tokens))
                 .replace("%gold%", formatGold(gold)));
-        logAction("CATEGORY_BONUS " + player.getName() + " " + category);
+
+        if (plugin.getConfig().getBoolean("quest.effects.sound-on-claim", true)) {
+            player.playSound(player.getLocation(),
+                    plugin.getConfig().getString("quest.effects.sound-claim", "ENTITY_EXPERIENCE_ORB_PICKUP"),
+                    1.0f, 1.0f);
+        }
+
+        logAction("CATEGORY_BONUS_CLAIMED " + player.getName() + " " + category);
+        return ClaimResult.SUCCESS;
     }
 
     private void updateStreak(Player player, PlayerQuestData data) {

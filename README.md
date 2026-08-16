@@ -85,9 +85,11 @@ Zeitpunkt offline, wird der Reset beim nächsten Start automatisch nachgeholt.
 Unterstützte Quest-Typen: Blöcke abbauen/platzieren, Mobs töten, craften,
 fischen, Strecke laufen, Tokens verdienen - alles zählt nur in der Farmwelt
 (`settings.farm-world`). Belohnungen (Tokens/Gold) müssen manuell im GUI
-abgeholt werden; ein Rang-Multiplikator, ein automatischer Kategorie-Bonus
-(alle Quests einer Periode geschafft) und ein Streak-Bonus für aufeinander-
-folgende Daily-Tage sind über `quests.yml`/`config.yml` einstellbar.
+abgeholt werden - genau wie der Kategorie-Bonus: erscheint dort als eigenes
+Item, grau/gesperrt solange nicht alle Quests der Kategorie fertig sind, grün
+und abholbar sobald alle fertig sind. Ein Rang-Multiplikator und ein
+automatischer Streak-Bonus für aufeinanderfolgende Daily-Tage sind über
+`quests.yml`/`config.yml` einstellbar.
 
 | Befehl | Beschreibung | Permission |
 |---|---|---|
