@@ -100,7 +100,7 @@ commands:
     permission: spawn.admin
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   clan:
-    description: 'Clan-Verwaltung (Nutzung: /clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank> ...)'
+    description: 'Clan-Verwaltung (Nutzung: /clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank|color> ...)'
     usage: /clan <unterbefehl> ...
     permission: clan.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
@@ -118,6 +118,26 @@ commands:
     description: 'Alias fuer /quest'
     usage: /quests [unterbefehl] ...
     permission: quest.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  chatcolor:
+    description: 'Eigene Chat-Farbe einstellen (Nutzung: /chatcolor <farbe|hex|gradient|bold|reset>)'
+    usage: /chatcolor <unterbefehl>
+    permission: frostbergchat.color.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  gm:
+    description: 'Schneller Gamemode-Wechsel (Nutzung: /gm <0|1|2|3>)'
+    usage: /gm <0|1|2|3>
+    permission: frostberg.gamemode
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  vanish:
+    description: Schaltet Unsichtbarkeit fuer normale Spieler um
+    usage: /vanish
+    permission: frostberg.vanish
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  v:
+    description: 'Alias fuer /vanish'
+    usage: /v
+    permission: frostberg.vanish
     permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
@@ -325,4 +345,24 @@ permissions:
     default: false
   quest.multiplier.premium:
     description: Belohnungs-Multiplikator fuer Quest-Belohnungen (siehe config.yml quest.reward-multipliers)
+    default: false
+
+  frostbergchat.color.use:
+    description: Erlaubt /chatcolor mit einer der normalen Farben
+    default: true
+  frostbergchat.color.rgb:
+    description: Erlaubt Hex-Farben und Farbverlaeufe bei /chatcolor
+    default: false
+  frostbergchat.color.bold:
+    description: Erlaubt Fettschrift bei /chatcolor
+    default: false
+  frostbergchat.teamline:
+    description: Fuegt vor jeder Chat-Nachricht dieses Spielers eine optische Leerzeile fuer alle ein
+    default: false
+
+  frostberg.gamemode:
+    description: Erlaubt /gm (eigenen Gamemode wechseln)
+    default: false
+  frostberg.vanish:
+    description: Erlaubt /vanish bzw. /v sowie das Sehen anderer vanishter Spieler
     default: false

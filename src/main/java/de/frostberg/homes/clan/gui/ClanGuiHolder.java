@@ -13,7 +13,8 @@ public class ClanGuiHolder implements InventoryHolder {
         LIST,
         MEMBERS,
         CONFIRM_DELETE,
-        CONFIRM_LEAVE
+        CONFIRM_LEAVE,
+        COLOR
     }
 
     private final Type type;

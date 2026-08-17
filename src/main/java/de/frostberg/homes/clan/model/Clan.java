@@ -20,6 +20,7 @@ public class Clan {
 
     private String name;
     private String tag;
+    private String tagColor; // z.B. "&b" oder "&#RRGGBB" - siehe util/ColorUtil, null = Standardfarbe
     private String description;
     private final Map<UUID, Role> members = new LinkedHashMap<>();
 
@@ -61,6 +62,14 @@ public class Clan {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getTagColor() {
+        return tagColor;
+    }
+
+    public void setTagColor(String tagColor) {
+        this.tagColor = tagColor;
     }
 
     public String getDescription() {

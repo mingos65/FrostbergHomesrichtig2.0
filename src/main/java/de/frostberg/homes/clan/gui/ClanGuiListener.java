@@ -2,7 +2,10 @@ package de.frostberg.homes.clan.gui;
 
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.clan.model.Clan;
+import de.frostberg.homes.util.ColorUtil;
 import de.frostberg.homes.util.MessageUtil;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -14,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,6 +226,122 @@ public class ClanGuiListener implements Listener {
     }
 
     // ---------------------------------------------------------------
+    // Farben-Shop (Clan-Tag-Farbe mit Gold kaufen)
+    // ---------------------------------------------------------------
+
+    private static final int[] COLOR_SLOTS = {10, 11, 12, 13, 14, 15, 16};
+    private static final int COLOR_BACK_SLOT = 22;
+
+    public void openColorShop(Player player, String clanName) {
+        ClanGuiHolder holder = new ClanGuiHolder(ClanGuiHolder.Type.COLOR, clanName, 0);
+        String title = MessageUtil.get(plugin.getMessages(), "clan-color-shop-title");
+        Inventory inventory = Bukkit.createInventory(holder, 27, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        Optional<Clan> clanOpt = plugin.getClanManager().getClan(clanName);
+        if (clanOpt.isEmpty()) {
+            player.openInventory(inventory);
+            return;
+        }
+        Clan clan = clanOpt.get();
+
+        List<Map<?, ?>> colors = plugin.getConfig().getMapList("clan.colors");
+        for (int i = 0; i < colors.size() && i < COLOR_SLOTS.length; i++) {
+            inventory.setItem(COLOR_SLOTS[i], buildColorItem(colors.get(i), clan));
+        }
+
+        inventory.setItem(COLOR_BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "homes-gui-detail-back-name")));
+
+        player.openInventory(inventory);
+    }
+
+    private ItemStack buildColorItem(Map<?, ?> entry, Clan clan) {
+        String name = String.valueOf(entry.get("name"));
+        String code = String.valueOf(entry.get("code"));
+        long price = Long.parseLong(String.valueOf(entry.get("price")));
+
+        boolean active = code.equals(clan.getTagColor()) || (clan.getTagColor() == null && code.equals("&b"));
+
+        ItemStack item = new ItemStack(active ? Material.LIME_DYE : Material.PAPER);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ColorUtil.applyColorCode(code, name));
+
+        List<String> lore = new ArrayList<>();
+        lore.add(MessageUtil.get(plugin.getMessages(), "clan-color-shop-price").replace("%price%", String.valueOf(price)));
+        lore.add(MessageUtil.get(plugin.getMessages(), active ? "clan-color-shop-active" : "clan-color-shop-select"));
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private void handleColorClick(Player player, String clanName, int slot) {
+        if (slot == COLOR_BACK_SLOT) {
+            player.closeInventory();
+            return;
+        }
+
+        int index = -1;
+        for (int i = 0; i < COLOR_SLOTS.length; i++) {
+            if (COLOR_SLOTS[i] == slot) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            return;
+        }
+
+        Optional<Clan> clanOpt = plugin.getClanManager().getClan(clanName);
+        if (clanOpt.isEmpty()) {
+            return;
+        }
+        Clan clan = clanOpt.get();
+
+        List<Map<?, ?>> colors = plugin.getConfig().getMapList("clan.colors");
+        if (index >= colors.size()) {
+            return;
+        }
+        Map<?, ?> entry = colors.get(index);
+        String code = String.valueOf(entry.get("code"));
+        long price = Long.parseLong(String.valueOf(entry.get("price")));
+
+        if (code.equals(clan.getTagColor()) || (clan.getTagColor() == null && code.equals("&b"))) {
+            openColorShop(player, clanName);
+            return; // bereits aktiv, kein erneuter Kauf noetig
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-not-installed"));
+            return;
+        }
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "gold-not-installed"));
+            return;
+        }
+        Economy economy = rsp.getProvider();
+
+        if (!economy.has(player, price)) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-color-shop-insufficient"));
+            return;
+        }
+        EconomyResponse response = economy.withdrawPlayer(player, price);
+        if (!response.transactionSuccess()) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "unknown-error"));
+            return;
+        }
+
+        clan.setTagColor(code);
+        plugin.getClanManager().saveClan(clan);
+
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-color-shop-bought")
+                .replace("%color%", ColorUtil.applyColorCode(code, String.valueOf(entry.get("name")))));
+
+        openColorShop(player, clanName);
+    }
+
+    // ---------------------------------------------------------------
     // Klicks
     // ---------------------------------------------------------------
 
@@ -260,6 +380,7 @@ public class ClanGuiListener implements Listener {
                     player.closeInventory();
                 }
             }
+            case COLOR -> handleColorClick(player, holder.getClanName(), slot);
         }
     }
 

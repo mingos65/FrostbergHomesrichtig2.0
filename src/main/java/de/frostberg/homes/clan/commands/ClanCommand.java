@@ -43,7 +43,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
 
     private static final List<String> SUBCOMMANDS = Arrays.asList(
             "create", "delete", "disband", "invite", "accept", "deny", "leave", "kick",
-            "promote", "demote", "info", "list", "chat", "setbase", "base", "rename", "bank"
+            "promote", "demote", "info", "list", "chat", "setbase", "base", "rename", "bank", "color"
     );
 
     private final FrostbergHomes plugin;
@@ -82,6 +82,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
             case "base" -> handleBase(player);
             case "rename" -> handleRename(player, args);
             case "bank" -> handleBank(player, args);
+            case "color" -> handleColor(player);
             default -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-usage"));
         }
         return true;
@@ -96,6 +97,12 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
             player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-create-usage"));
             return;
         }
+        // Tag ist seit dem Chat-System-Update Pflicht (vorher optional/automatisch
+        // aus dem Namen abgeleitet) - ohne Tag keine sinnvolle Chat-/Tab-Anzeige.
+        if (args.length < 3) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-tag-required"));
+            return;
+        }
 
         if (plugin.getClanManager().getClanOf(player.getUniqueId()).isPresent()) {
             player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-already-in-clan"));
@@ -103,7 +110,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
         }
 
         String name = args[1];
-        if (name.length() < 3 || name.length() > 24) {
+        if (name.length() < 3 || name.length() > 16) {
             player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-name-invalid-length"));
             return;
         }
@@ -113,7 +120,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
             return;
         }
 
-        String tag = args.length >= 3 ? args[2] : name.substring(0, Math.min(4, name.length())).toUpperCase();
+        String tag = args[2];
         int tagMin = plugin.getConfig().getInt("clan.tag-min-length", 2);
         int tagMax = plugin.getConfig().getInt("clan.tag-max-length", 6);
 
@@ -605,6 +612,25 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
         plugin.getClanManager().saveClan(clan);
         player.sendMessage(MessageUtil.get(plugin.getMessages(), withdraw ? "clan-bank-withdrawn" : "clan-bank-deposited")
                 .replace("%amount%", economy.format(amount)));
+    }
+
+    // ---------------------------------------------------------------
+    // color (Clan-Tag-Farbe mit Gold kaufen)
+    // ---------------------------------------------------------------
+
+    private void handleColor(Player player) {
+        Optional<Clan> clanOpt = requireClan(player);
+        if (clanOpt.isEmpty()) {
+            return;
+        }
+        Clan clan = clanOpt.get();
+
+        if (clan.getRole(player.getUniqueId()) == Clan.Role.MEMBER) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-no-permission-role"));
+            return;
+        }
+
+        plugin.getClanGuiListener().openColorShop(player, clan.getName());
     }
 
     // ---------------------------------------------------------------

@@ -111,10 +111,11 @@ farmwelt-death-respawn: "%prefix%&7Du bist in der Farmwelt gestorben und wurdest
 spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
 # ---------- Clan: Platzhalter (TAB/Scoreboard/Chat, siehe ClanPlaceholderExpansion) ----------
 clan-placeholder-none: "&7Kein Clan"
-clan-placeholder-tag-format: " &7[&b%tag%&7]"
+clan-placeholder-tag-format: "&8[%coloredtag%&8]"
 # ---------- Clan: Allgemein / Erstellen / Löschen ----------
-clan-usage: "%prefix%&cNutzung: &f/clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank>"
-clan-create-usage: "%prefix%&cNutzung: &f/clan create <name> [tag]"
+clan-usage: "%prefix%&cNutzung: &f/clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank|color>"
+clan-create-usage: "%prefix%&cNutzung: &f/clan create <name> <tag>"
+clan-tag-required: "%prefix%&cEin Tag ist Pflicht &7(z.B. &f/clan create Meinclan DSL&7)."
 clan-already-in-clan: "%prefix%&cDu bist bereits in einem Clan."
 clan-not-in-clan: "%prefix%&cDu bist in keinem Clan."
 clan-not-found: "%prefix%&cDieser Clan wurde nicht gefunden."
@@ -181,6 +182,38 @@ clan-bank-balance: "%prefix%&7Clan-Kasse&8: &e%tokens% Tokens &7| &6%gold% Gold"
 clan-bank-insufficient: "%prefix%&cSo viel ist nicht in der Clan-Kasse."
 clan-bank-deposited: "%prefix%&aDu hast &e%amount% &ain die Clan-Kasse eingezahlt."
 clan-bank-withdrawn: "%prefix%&aDu hast &e%amount% &aaus der Clan-Kasse abgehoben."
+# ---------- Clan: Farben-Shop ----------
+clan-color-shop-title: "&b&lClan-Farbe waehlen"
+clan-color-shop-price: "&7Preis&8: &6%price% Gold"
+clan-color-shop-active: "&a&lAktiv"
+clan-color-shop-select: "&7Klicken zum Auswaehlen"
+clan-color-shop-insufficient: "%prefix%&cDafuer hast du nicht genug Gold."
+clan-color-shop-bought: "%prefix%&aClan-Farbe geaendert zu %color%&a."
+# =====================================================
+#              Chat-Farbe (/chatcolor)
+# =====================================================
+chatcolor-usage: "%prefix%&cNutzung: &f/chatcolor <farbe|hex <RRGGBB>|gradient <RRGGBB> <RRGGBB>|bold|reset>"
+chatcolor-set: "%prefix%&aDeine Chat-Farbe ist jetzt %color%&a."
+chatcolor-reset: "%prefix%&aDeine Chat-Farbe wurde zurueckgesetzt."
+chatcolor-invalid-name: "%prefix%&cUnbekannte Farbe. Nutze &f/chatcolor &cfuer die Liste."
+chatcolor-invalid-hex: "%prefix%&cUngueltiger Hexcode &7(Beispiel&8: &fFF00AA&7)&c."
+chatcolor-no-permission-rgb: "%prefix%&cHex-/Verlauf-Farben sind ab einem hoeheren Rang freigeschaltet."
+chatcolor-no-permission-bold: "%prefix%&cFettschrift ist ab einem hoeheren Rang freigeschaltet."
+chatcolor-bold-on: "%prefix%&aDu schreibst jetzt &lfett&a."
+chatcolor-bold-off: "%prefix%&aFettschrift wurde deaktiviert."
+
+# =====================================================
+#              Gamemode & Vanish
+# =====================================================
+gamemode-usage: "%prefix%&cNutzung: &f/gm <0|1|2|3>"
+gamemode-set: "%prefix%&aGamemode auf &e%mode% &agesetzt."
+gamemode-name-survival: "Survival"
+gamemode-name-creative: "Creative"
+gamemode-name-adventure: "Adventure"
+gamemode-name-spectator: "Spectator"
+vanish-on: "%prefix%&aDu bist jetzt &7unsichtbar&a."
+vanish-off: "%prefix%&aDu bist wieder &asichtbar&a."
+
 # ---------- Admin ----------
 reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."
 

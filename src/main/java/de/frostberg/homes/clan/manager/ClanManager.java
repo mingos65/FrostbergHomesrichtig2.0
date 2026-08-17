@@ -82,6 +82,7 @@ public class ClanManager {
 
         Clan clan = new Clan(name);
         clan.setTag(yaml.getString("tag"));
+        clan.setTagColor(yaml.getString("tag-color"));
         clan.setDescription(yaml.getString("description"));
         clan.setCreatedAt(yaml.getLong("created-at", System.currentTimeMillis()));
         clan.setTokensBalance(yaml.getLong("tokens-balance", 0));
@@ -116,6 +117,7 @@ public class ClanManager {
         YamlConfiguration yaml = new YamlConfiguration();
         yaml.set("name", clan.getName());
         yaml.set("tag", clan.getTag());
+        yaml.set("tag-color", clan.getTagColor());
         yaml.set("description", clan.getDescription());
         yaml.set("created-at", clan.getCreatedAt());
         yaml.set("tokens-balance", clan.getTokensBalance());

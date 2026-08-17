@@ -62,6 +62,31 @@ clan:
     - "admin"
     - "mod"
     - "owner"
+  # Farben, die ein Clan sich per /clan color mit Gold kaufen kann (Leader/Mod).
+  # code: normaler Farbcode ("&c"), Hexcode ("&#RRGGBB") oder Verlauf
+  # ("gradient:RRGGBB:RRGGBB") - siehe util/ColorUtil.
+  colors:
+    - name: "Aqua"
+      code: "&b"
+      price: 0
+    - name: "Rot"
+      code: "&c"
+      price: 500
+    - name: "Gruen"
+      code: "&a"
+      price: 500
+    - name: "Gold"
+      code: "&6"
+      price: 750
+    - name: "Lila"
+      code: "&5"
+      price: 750
+    - name: "Pink"
+      code: "&#FF55FF"
+      price: 1500
+    - name: "Feuer-Verlauf"
+      code: "gradient:FF4500:FFD700"
+      price: 2000
 quest:
   # Fortschritt zaehlt nur in der Welt aus settings.farm-world (siehe oben) -
   # keine eigene Welt-Einstellung noetig, das ist bewusst dieselbe Welt.

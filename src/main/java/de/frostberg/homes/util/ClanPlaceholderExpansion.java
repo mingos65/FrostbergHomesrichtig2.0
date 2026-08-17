@@ -8,9 +8,7 @@ import org.bukkit.OfflinePlayer;
 /**
  * Stellt %frostbergclans_...%-Platzhalter fuer TAB, Scoreboard und Chat-
  * Plugins (z.B. FancyChat) bereit. Wird nur registriert, wenn
- * PlaceholderAPI installiert ist (siehe FrostbergHomes#onEnable). Ersetzt
- * den bisher unaufgeloesten %betterteams_name%-Platzhalter in der
- * TAB-Config - die Umstellung dort ist reine Server-Config, kein Code.
+ * PlaceholderAPI installiert ist (siehe FrostbergHomes#onEnable).
  *
  * Verfuegbare Platzhalter:
  * %frostbergclans_name%        - Clan-Name, ohne Clan messages.clan-placeholder-none ("Kein Clan")
@@ -19,10 +17,10 @@ import org.bukkit.OfflinePlayer;
  * %frostbergclans_membercount% - Mitgliederanzahl, ohne Clan leer
  * %frostbergclans_tagdisplay%  - Fertig formatiertes Tag inkl. Klammern
  *                                 (messages.clan-placeholder-tag-format),
- *                                 ohne Clan komplett leer (kein "[]") -
- *                                 gedacht zum direkten Einsetzen in TAB-
- *                                 Tabliste/Chat-Format, ohne eigene Klammern
- *                                 dort zu brauchen
+ *                                 in der per /clan color gekauften Farbe
+ *                                 (Legacy-Code, Hex oder Verlauf - siehe
+ *                                 ClanColorShop/ColorUtil), ohne eigene Farbe
+ *                                 Standard-Aqua. Ohne Clan komplett leer.
  */
 public class ClanPlaceholderExpansion extends PlaceholderExpansion {
 
@@ -71,10 +69,19 @@ public class ClanPlaceholderExpansion extends PlaceholderExpansion {
                 yield role != null ? role.name() : "";
             }
             case "membercount" -> String.valueOf(clan.getMemberCount());
-            case "tagdisplay" -> clan.getTag() != null
-                    ? MessageUtil.get(plugin.getMessages(), "clan-placeholder-tag-format").replace("%tag%", clan.getTag())
-                    : "";
+            case "tagdisplay" -> clan.getTag() != null ? buildTagDisplay(clan) : "";
             default -> "";
         };
+    }
+
+    private String buildTagDisplay(Clan clan) {
+        return MessageUtil.get(plugin.getMessages(), "clan-placeholder-tag-format")
+                .replace("%coloredtag%", colorizeTag(clan));
+    }
+
+    /** Faerbt den Clan-Tag mit der per /clan color gekauften Farbe (Standard: Aqua). */
+    private String colorizeTag(Clan clan) {
+        String tagColor = clan.getTagColor() != null ? clan.getTagColor() : "&b";
+        return ColorUtil.applyColorCode(tagColor, clan.getTag());
     }
 }

@@ -1,5 +1,8 @@
 package de.frostberg.homes;
 
+import de.frostberg.homes.chat.ChatColorManager;
+import de.frostberg.homes.chat.ChatFormatListener;
+import de.frostberg.homes.chat.commands.ChatColorCommand;
 import de.frostberg.homes.clan.commands.ClanChatCommand;
 import de.frostberg.homes.clan.commands.ClanCommand;
 import de.frostberg.homes.clan.gui.ClanGuiListener;
@@ -25,7 +28,12 @@ import de.frostberg.homes.quest.commands.QuestCommand;
 import de.frostberg.homes.quest.gui.QuestGuiListener;
 import de.frostberg.homes.quest.listener.QuestProgressListener;
 import de.frostberg.homes.quest.manager.QuestManager;
+import de.frostberg.homes.staff.VanishListener;
+import de.frostberg.homes.staff.VanishManager;
+import de.frostberg.homes.staff.commands.GameModeCommand;
+import de.frostberg.homes.staff.commands.VanishCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
+import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
 import de.frostberg.homes.util.QuestPlaceholderExpansion;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -46,6 +54,8 @@ public class FrostbergHomes extends JavaPlugin {
     private ClanGuiListener clanGuiListener;
     private QuestManager questManager;
     private QuestGuiListener questGuiListener;
+    private ChatColorManager chatColorManager;
+    private VanishManager vanishManager;
     private FileConfiguration messages;
 
     @Override
@@ -64,6 +74,8 @@ public class FrostbergHomes extends JavaPlugin {
         // ueber plugin.getMessages() lesen - die steht zu diesem Zeitpunkt
         // schon bereit (siehe loadMessages() oben).
         this.questManager = new QuestManager(this);
+        this.chatColorManager = new ChatColorManager(this);
+        this.vanishManager = new VanishManager(this);
 
         registerCommands();
         registerListeners();
@@ -71,6 +83,7 @@ public class FrostbergHomes extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new ClanPlaceholderExpansion(this).register();
             new QuestPlaceholderExpansion(this).register();
+            new ChatColorPlaceholderExpansion(this).register();
         }
 
         getLogger().info("FrostbergHomes wurde aktiviert.");
@@ -175,6 +188,18 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("quests").setExecutor(questCommand);
         getCommand("quests").setTabCompleter(questCommand);
 
+        ChatColorCommand chatColorCommand = new ChatColorCommand(this);
+        getCommand("chatcolor").setExecutor(chatColorCommand);
+        getCommand("chatcolor").setTabCompleter(chatColorCommand);
+
+        GameModeCommand gameModeCommand = new GameModeCommand(this);
+        getCommand("gm").setExecutor(gameModeCommand);
+        getCommand("gm").setTabCompleter(gameModeCommand);
+
+        VanishCommand vanishCommand = new VanishCommand(this);
+        getCommand("vanish").setExecutor(vanishCommand);
+        getCommand("v").setExecutor(vanishCommand);
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
@@ -198,6 +223,9 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(questManager, this);
         getServer().getPluginManager().registerEvents(questGuiListener, this);
         getServer().getPluginManager().registerEvents(new QuestProgressListener(this), this);
+
+        getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
+        getServer().getPluginManager().registerEvents(new VanishListener(this), this);
     }
 
     /**
@@ -252,5 +280,13 @@ public class FrostbergHomes extends JavaPlugin {
 
     public QuestGuiListener getQuestGuiListener() {
         return questGuiListener;
+    }
+
+    public ChatColorManager getChatColorManager() {
+        return chatColorManager;
+    }
+
+    public VanishManager getVanishManager() {
+        return vanishManager;
     }
 }
