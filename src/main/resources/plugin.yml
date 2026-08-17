@@ -362,7 +362,7 @@ permissions:
 
   frostberg.gamemode:
     description: Erlaubt /gm (eigenen Gamemode wechseln)
-    default: false
+    default: op
   frostberg.vanish:
     description: Erlaubt /vanish bzw. /v sowie das Sehen anderer vanishter Spieler
-    default: false
+    default: op
