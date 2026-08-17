@@ -17,6 +17,7 @@ import de.frostberg.homes.commands.TpaAcceptCommand;
 import de.frostberg.homes.commands.TpaCommand;
 import de.frostberg.homes.commands.TpaDenyCommand;
 import de.frostberg.homes.gui.HomesGuiListener;
+import de.frostberg.homes.listener.FarmDeathRespawnListener;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
 import de.frostberg.homes.manager.TpaManager;
@@ -185,6 +186,7 @@ public class FrostbergHomes extends JavaPlugin {
 
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(new PlayerDataListener(this), this);
+        getServer().getPluginManager().registerEvents(new FarmDeathRespawnListener(this), this);
 
         // Raeumt offene TPA-Anfragen und laufende Warmup-Countdowns beim Quit auf
         getServer().getPluginManager().registerEvents(tpaManager, this);

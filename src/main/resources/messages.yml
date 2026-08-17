@@ -107,6 +107,7 @@ farmwelt-set: "%prefix%&aMittelpunkt der Farmwelt-Teleports wurde auf deine Posi
 spawn-wrong-world: "%prefix%&cDu musst dich in der Hauptwelt &e%world% &cbefinden, um den Spawn dort zu setzen."
 farmwelt-wrong-world: "%prefix%&cDu musst dich in der Farmwelt befinden, um den Spawnpunkt dort zu setzen."
 farmwelt-not-loaded: "%prefix%&cDie Farmwelt ist aktuell nicht geladen."
+farmwelt-death-respawn: "%prefix%&7Du bist in der Farmwelt gestorben und wurdest zum Spawn gebracht."
 spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
 # ---------- Clan: Platzhalter (TAB/Scoreboard/Chat, siehe ClanPlaceholderExpansion) ----------
 clan-placeholder-none: "&7Kein Clan"
