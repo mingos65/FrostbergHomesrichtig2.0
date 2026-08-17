@@ -119,7 +119,7 @@ clan-tag-required: "%prefix%&cTag hinzufügen &7z.B. &f/clan create <Clanname> <
 clan-already-in-clan: "%prefix%&cDu bist bereits in einem Clan."
 clan-not-in-clan: "%prefix%&cDu bist in keinem Clan."
 clan-not-found: "%prefix%&cDieser Clan wurde nicht gefunden."
-clan-name-invalid-length: "%prefix%&cDer Clan-Name muss zwischen 3 und 24 Zeichen lang sein."
+clan-name-invalid-length: "%prefix%&cDer Clan-Name muss zwischen 3 und 15 Zeichen lang sein."
 clan-name-taken: "%prefix%&cDieser Clan-Name ist bereits vergeben."
 clan-tag-invalid: "%prefix%&cDer Clan-Tag muss zwischen &e%min% &cund &e%max% &cZeichen lang und erlaubt sein."
 clan-created: "%prefix%&aClan &e%clan% &awurde gegründet."

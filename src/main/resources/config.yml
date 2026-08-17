@@ -54,7 +54,7 @@ clan:
   max-members: 20
   # Erlaubte Länge des Clan-Tags (z.B. "FBM"), in Zeichen
   tag-min-length: 2
-  tag-max-length: 6
+  tag-max-length: 4
   # Zeit in Sekunden, nach der eine unbeantwortete Clan-Einladung automatisch abläuft
   invite-expiry-seconds: 60
   # Wörter, die weder im Clan-Namen noch im Tag vorkommen dürfen (Kleinschreibung wird ignoriert)
