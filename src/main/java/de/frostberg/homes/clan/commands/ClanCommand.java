@@ -110,7 +110,7 @@ public class ClanCommand implements CommandExecutor, TabCompleter, Listener {
         }
 
         String name = args[1];
-        if (name.length() < 3 || name.length() > 15) {
+        if (name.length() < 2 || name.length() > 15) {
             player.sendMessage(MessageUtil.get(plugin.getMessages(), "clan-name-invalid-length"));
             return;
         }
