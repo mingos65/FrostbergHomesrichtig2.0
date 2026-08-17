@@ -115,7 +115,7 @@ clan-placeholder-tag-format: "&8[%coloredtag%&8]"
 # ---------- Clan: Allgemein / Erstellen / Löschen ----------
 clan-usage: "%prefix%&cNutzung: &f/clan <create|delete|invite|accept|deny|leave|kick|promote|demote|info|list|chat|setbase|base|rename|bank|color>"
 clan-create-usage: "%prefix%&cNutzung: &f/clan create <name> <tag>"
-clan-tag-required: "%prefix%&cTag hinzufuegen &7z.B. &f/clan create <Clanname> <Clantag>&7."
+clan-tag-required: "%prefix%&cTag hinzufügen &7z.B. &f/clan create <Clanname> <Clantag>&7."
 clan-already-in-clan: "%prefix%&cDu bist bereits in einem Clan."
 clan-not-in-clan: "%prefix%&cDu bist in keinem Clan."
 clan-not-found: "%prefix%&cDieser Clan wurde nicht gefunden."
