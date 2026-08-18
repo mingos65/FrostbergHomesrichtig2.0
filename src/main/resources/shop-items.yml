@@ -1782,7 +1782,7 @@ categories:
             buy: 135
             sell: 34
           tripwire:
-            material: TRIPWIRE
+            material: STRING
             name: '&fStolperdraht'
             buy: 9
             sell: 3
