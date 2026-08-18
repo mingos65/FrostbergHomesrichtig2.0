@@ -67,6 +67,7 @@ public class ShopManager {
 
             String categoryDisplayName = MessageUtil.color(categorySection.getString("display-name", categoryId));
             Material categoryIcon = parseMaterial(categorySection.getString("icon"), Material.CHEST);
+            Material borderMaterial = parseMaterial(categorySection.getString("border"), Material.GRAY_STAINED_GLASS_PANE);
 
             List<ShopSubCategory> subCategories = new ArrayList<>();
             ConfigurationSection subSection = categorySection.getConfigurationSection("sub-categories");
@@ -80,7 +81,7 @@ public class ShopManager {
                 }
             }
 
-            categories.add(new ShopCategory(categoryId, categoryDisplayName, categoryIcon, subCategories));
+            categories.add(new ShopCategory(categoryId, categoryDisplayName, categoryIcon, borderMaterial, subCategories));
         }
     }
 

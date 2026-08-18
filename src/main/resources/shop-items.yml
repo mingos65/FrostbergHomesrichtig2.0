@@ -7,9 +7,10 @@ categories:
   combat:
     display-name: '&c&lKampf'
     icon: DIAMOND_SWORD
+    border: RED_STAINED_GLASS_PANE
     sub-categories:
       armor:
-        display-name: '&b&lRuestung'
+        display-name: '&b&lRüstung'
         icon: IRON_CHESTPLATE
         items:
           leather_helmet:
@@ -154,22 +155,22 @@ categories:
             sell: 38904
           netherite_upgrade_smithing_template:
             material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
-            name: '&5Netherit-Umruestungsvorlage'
+            name: '&5Netherit-Umrüstungsvorlage'
             buy: 1931
             sell: 483
           horse_armor_iron:
             material: IRON_HORSE_ARMOR
-            name: '&fEiserne Pferderuestung'
+            name: '&fEiserne Pferderüstung'
             buy: 900
             sell: 225
           horse_armor_gold:
             material: GOLDEN_HORSE_ARMOR
-            name: '&6Goldene Pferderuestung'
+            name: '&6Goldene Pferderüstung'
             buy: 1260
             sell: 315
           horse_armor_diamond:
             material: DIAMOND_HORSE_ARMOR
-            name: '&bDiamant-Pferderuestung'
+            name: '&bDiamant-Pferderüstung'
             buy: 11400
             sell: 2850
           shield:
@@ -458,9 +459,10 @@ categories:
   building:
     display-name: '&6&lBauen'
     icon: GRASS_BLOCK
+    border: ORANGE_STAINED_GLASS_PANE
     sub-categories:
       wood:
-        display-name: '&8&lHolzbloecke'
+        display-name: '&8&lHolzblöcke'
         icon: OAK_LOG
         items:
           birch_planks:
@@ -794,7 +796,7 @@ categories:
             buy: 24
             sell: 6
       stone:
-        display-name: '&7&lSteinbloecke'
+        display-name: '&7&lSteinblöcke'
         icon: STONE_BRICKS
         items:
           tuff_bricks:
@@ -918,7 +920,7 @@ categories:
             buy: 23
             sell: 6
       natural:
-        display-name: '&2&lNaturbloecke'
+        display-name: '&2&lNaturblöcke'
         icon: DIRT
         items:
           clay:
@@ -1002,7 +1004,7 @@ categories:
             buy: 12
             sell: 4
       decorative_blocks:
-        display-name: '&b&lDeko-Bloecke'
+        display-name: '&b&lDeko-Blöcke'
         icon: GLASS
         items:
           glass:
@@ -1012,7 +1014,7 @@ categories:
             sell: 3
           bookshelf:
             material: BOOKSHELF
-            name: '&6Buecherregal'
+            name: '&6Bücherregal'
             buy: 360
             sell: 90
           quartz_block:
@@ -1117,32 +1119,32 @@ categories:
             sell: 4
           green_wool:
             material: GREEN_WOOL
-            name: '&fWolle (Gruen)'
+            name: '&fWolle (Grün)'
             buy: 36
             sell: 9
           green_terracotta:
             material: GREEN_TERRACOTTA
-            name: '&fTerrakotta (Gruen)'
+            name: '&fTerrakotta (Grün)'
             buy: 28
             sell: 7
           green_concrete:
             material: GREEN_CONCRETE
-            name: '&fBeton (Gruen)'
+            name: '&fBeton (Grün)'
             buy: 16
             sell: 4
           white_wool:
             material: WHITE_WOOL
-            name: '&fWolle (Weiss)'
+            name: '&fWolle (Weiß)'
             buy: 36
             sell: 9
           white_terracotta:
             material: WHITE_TERRACOTTA
-            name: '&fTerrakotta (Weiss)'
+            name: '&fTerrakotta (Weiß)'
             buy: 28
             sell: 7
           white_concrete:
             material: WHITE_CONCRETE
-            name: '&fBeton (Weiss)'
+            name: '&fBeton (Weiß)'
             buy: 16
             sell: 4
           magenta_wool:
@@ -1162,17 +1164,17 @@ categories:
             sell: 4
           lime_wool:
             material: LIME_WOOL
-            name: '&fWolle (Hellgruen)'
+            name: '&fWolle (Hellgrün)'
             buy: 36
             sell: 9
           lime_terracotta:
             material: LIME_TERRACOTTA
-            name: '&fTerrakotta (Hellgruen)'
+            name: '&fTerrakotta (Hellgrün)'
             buy: 28
             sell: 7
           lime_concrete:
             material: LIME_CONCRETE
-            name: '&fBeton (Hellgruen)'
+            name: '&fBeton (Hellgrün)'
             buy: 16
             sell: 4
           light_blue_wool:
@@ -1252,23 +1254,24 @@ categories:
             sell: 4
           cyan_wool:
             material: CYAN_WOOL
-            name: '&fWolle (Tuerkis)'
+            name: '&fWolle (Türkis)'
             buy: 36
             sell: 9
           cyan_terracotta:
             material: CYAN_TERRACOTTA
-            name: '&fTerrakotta (Tuerkis)'
+            name: '&fTerrakotta (Türkis)'
             buy: 28
             sell: 7
           cyan_concrete:
             material: CYAN_CONCRETE
-            name: '&fBeton (Tuerkis)'
+            name: '&fBeton (Türkis)'
             buy: 16
             sell: 4
 
   decoration:
     display-name: '&d&lDekoration'
     icon: BLUE_CANDLE
+    border: MAGENTA_STAINED_GLASS_PANE
     sub-categories:
       decorative:
         display-name: '&9&lDekoration'
@@ -1296,7 +1299,7 @@ categories:
             sell: 26
           skull_banner_pattern:
             material: SKULL_BANNER_PATTERN
-            name: '&fBannermuster (Schaedel)'
+            name: '&fBannermuster (Schädel)'
             buy: 4000
             sell: 1000
           conduit:
@@ -1331,12 +1334,12 @@ categories:
             sell: 102
           painting:
             material: PAINTING
-            name: '&fGemaelde'
+            name: '&fGemälde'
             buy: 60
             sell: 15
           armor_stand:
             material: ARMOR_STAND
-            name: '&fRuestungsstaender'
+            name: '&fRüstungsständer'
             buy: 44
             sell: 11
           cauldron:
@@ -1395,12 +1398,12 @@ categories:
             sell: 8
           green_dye:
             material: GREEN_DYE
-            name: '&fFarbstoff (Gruen)'
+            name: '&fFarbstoff (Grün)'
             buy: 30
             sell: 8
           white_dye:
             material: WHITE_DYE
-            name: '&fFarbstoff (Weiss)'
+            name: '&fFarbstoff (Weiß)'
             buy: 30
             sell: 8
           magenta_dye:
@@ -1410,7 +1413,7 @@ categories:
             sell: 8
           lime_dye:
             material: LIME_DYE
-            name: '&fFarbstoff (Hellgruen)'
+            name: '&fFarbstoff (Hellgrün)'
             buy: 30
             sell: 8
           light_blue_dye:
@@ -1440,7 +1443,7 @@ categories:
             sell: 8
           cyan_dye:
             material: CYAN_DYE
-            name: '&fFarbstoff (Tuerkis)'
+            name: '&fFarbstoff (Türkis)'
             buy: 30
             sell: 8
           oxeye_daisy:
@@ -1485,12 +1488,13 @@ categories:
             sell: 5
           dandelion:
             material: DANDELION
-            name: '&fLoewenzahn'
+            name: '&fLöwenzahn'
             buy: 18
             sell: 5
   farming:
     display-name: '&a&lFarming'
     icon: WHEAT
+    border: LIME_STAINED_GLASS_PANE
     sub-categories:
       crops:
         display-name: '&a&lErnte'
@@ -1538,7 +1542,7 @@ categories:
             sell: 20
           pumpkin:
             material: PUMPKIN
-            name: '&fKuerbis'
+            name: '&fKürbis'
             buy: 30
             sell: 8
           bamboo:
@@ -1573,12 +1577,12 @@ categories:
             sell: 68
           pumpkin_seeds:
             material: PUMPKIN_SEEDS
-            name: '&fKuerbissamen'
+            name: '&fKürbissamen'
             buy: 9
             sell: 3
           sweet_berries:
             material: SWEET_BERRIES
-            name: '&fSuesse Beeren'
+            name: '&fSüße Beeren'
             buy: 27
             sell: 7
       food:
@@ -1597,7 +1601,7 @@ categories:
             sell: 12
           chicken:
             material: CHICKEN
-            name: '&fRohes Huehnchen'
+            name: '&fRohes Hühnchen'
             buy: 45
             sell: 12
           cooked_porkchop:
@@ -1677,7 +1681,7 @@ categories:
             sell: 68
           cooked_chicken:
             material: COOKED_CHICKEN
-            name: '&fGebratenes Huehnchen'
+            name: '&fGebratenes Hühnchen'
             buy: 45
             sell: 12
           honey_bottle:
@@ -1697,13 +1701,14 @@ categories:
             sell: 12
           pumpkin_pie:
             material: PUMPKIN_PIE
-            name: '&fKuerbiskuchen'
+            name: '&fKürbiskuchen'
             buy: 60
             sell: 15
 
   magic:
     display-name: '&5&lMagie'
     icon: ENCHANTED_BOOK
+    border: PURPLE_STAINED_GLASS_PANE
     sub-categories:
       enchanting:
         display-name: '&d&lVerzauberungen'
@@ -1731,12 +1736,12 @@ categories:
             sell: 150
           knockback2:
             material: ENCHANTED_BOOK
-            name: '&dRueckstoss II'
+            name: '&dRückstoß II'
             buy: 450
             sell: 113
           luck_of_the_sea3:
             material: ENCHANTED_BOOK
-            name: '&dMeeresglueck III'
+            name: '&dMeeresglück III'
             buy: 600
             sell: 150
           efficiency5:
@@ -1746,7 +1751,7 @@ categories:
             sell: 188
           depth_strider3:
             material: ENCHANTED_BOOK
-            name: '&dTiefenlaeufer III'
+            name: '&dTiefenläufer III'
             buy: 750
             sell: 188
           power5:
@@ -1781,7 +1786,7 @@ categories:
             sell: 225
           sharpness5:
             material: ENCHANTED_BOOK
-            name: '&dSchaerfe V'
+            name: '&dSchärfe V'
             buy: 750
             sell: 188
           thorns3:
@@ -1811,12 +1816,12 @@ categories:
             sell: 225
           aqua_affinity:
             material: ENCHANTED_BOOK
-            name: '&dWasseraffinitaet'
+            name: '&dWasseraffinität'
             buy: 450
             sell: 113
           impaling5:
             material: ENCHANTED_BOOK
-            name: '&dSpiessen V'
+            name: '&dSpießen V'
             buy: 750
             sell: 188
           silk_touch:
@@ -1831,12 +1836,12 @@ categories:
             sell: 113
           lure3:
             material: ENCHANTED_BOOK
-            name: '&dKoeder III'
+            name: '&dKöder III'
             buy: 600
             sell: 150
           fortune3:
             material: ENCHANTED_BOOK
-            name: '&dGluecksbringer III'
+            name: '&dGlücksbringer III'
             buy: 900
             sell: 225
           sweeping_edge3:
@@ -1850,7 +1855,7 @@ categories:
             buy: 1200
             sell: 300
       potions:
-        display-name: '&d&lTraenke'
+        display-name: '&d&lTränke'
         icon: POTION
         items:
           glass_bottle:
@@ -1883,7 +1888,7 @@ categories:
           weakness_potion:
             material: POTION
             potion: WEAKNESS
-            name: '&dSchwaeche'
+            name: '&dSchwäche'
             buy: 201
             sell: 51
           regeneration_splash_potion:
@@ -1913,13 +1918,13 @@ categories:
           slowness_potion:
             material: POTION
             potion: SLOWNESS
-            name: '&dTraegheit'
+            name: '&dTrägheit'
             buy: 231
             sell: 58
           strength_splash_potion:
             material: SPLASH_POTION
             potion: STRENGTH
-            name: '&dStaerke (geworfen)'
+            name: '&dStärke (geworfen)'
             buy: 582
             sell: 146
           slow_falling_splash_potion:
@@ -1931,13 +1936,13 @@ categories:
           strength_potion:
             material: POTION
             potion: STRENGTH
-            name: '&dStaerke'
+            name: '&dStärke'
             buy: 522
             sell: 131
           slowness_splash_potion:
             material: SPLASH_POTION
             potion: SLOWNESS
-            name: '&dTraegheit (geworfen)'
+            name: '&dTrägheit (geworfen)'
             buy: 291
             sell: 73
           poison_splash_potion:
@@ -1961,7 +1966,7 @@ categories:
           luck_potion:
             material: POTION
             potion: LUCK
-            name: '&dGlueck'
+            name: '&dGlück'
             buy: 900
             sell: 225
           regeneration_potion:
@@ -2003,7 +2008,7 @@ categories:
           weakness_splash_potion:
             material: SPLASH_POTION
             potion: WEAKNESS
-            name: '&dSchwaeche (geworfen)'
+            name: '&dSchwäche (geworfen)'
             buy: 261
             sell: 66
           night_vision_potion:
@@ -2051,6 +2056,7 @@ categories:
   mobs:
     display-name: '&2&lMobs'
     icon: ZOMBIE_HEAD
+    border: GREEN_STAINED_GLASS_PANE
     sub-categories:
       mob_drops:
         display-name: '&2&lMob-Beute'
@@ -2113,7 +2119,7 @@ categories:
             sell: 17
           gunpowder:
             material: GUNPOWDER
-            name: '&fSchiesspulver'
+            name: '&fSchießpulver'
             buy: 60
             sell: 20
           blaze_powder:
@@ -2163,7 +2169,7 @@ categories:
             sell: 4
           ghast_tear:
             material: GHAST_TEAR
-            name: '&fGhast-Traene'
+            name: '&fGhast-Träne'
             buy: 900
             sell: 225
           feather:
@@ -2195,6 +2201,7 @@ categories:
   sonstiges:
     display-name: '&f&lSonstiges'
     icon: CHEST
+    border: LIGHT_GRAY_STAINED_GLASS_PANE
     sub-categories:
       bauteile:
         display-name: '&7&lBauteile'
@@ -2202,12 +2209,12 @@ categories:
         items:
           birch_door:
             material: BIRCH_DOOR
-            name: '&fTuer (Birke)'
+            name: '&fTür (Birke)'
             buy: 12
             sell: 3
           birch_trapdoor:
             material: BIRCH_TRAPDOOR
-            name: '&fFalltuer (Birke)'
+            name: '&fFalltür (Birke)'
             buy: 18
             sell: 5
           birch_button:
@@ -2227,17 +2234,17 @@ categories:
             sell: 4
           birch_hanging_sign:
             material: BIRCH_HANGING_SIGN
-            name: '&fHaengeschild (Birke)'
+            name: '&fHängeschild (Birke)'
             buy: 26
             sell: 7
           bamboo_door:
             material: BAMBOO_DOOR
-            name: '&fTuer (Bambus)'
+            name: '&fTür (Bambus)'
             buy: 12
             sell: 3
           bamboo_trapdoor:
             material: BAMBOO_TRAPDOOR
-            name: '&fFalltuer (Bambus)'
+            name: '&fFalltür (Bambus)'
             buy: 18
             sell: 5
           bamboo_button:
@@ -2257,17 +2264,17 @@ categories:
             sell: 4
           bamboo_hanging_sign:
             material: BAMBOO_HANGING_SIGN
-            name: '&fHaengeschild (Bambus)'
+            name: '&fHängeschild (Bambus)'
             buy: 26
             sell: 7
           cherry_door:
             material: CHERRY_DOOR
-            name: '&fTuer (Kirsche)'
+            name: '&fTür (Kirsche)'
             buy: 12
             sell: 3
           cherry_trapdoor:
             material: CHERRY_TRAPDOOR
-            name: '&fFalltuer (Kirsche)'
+            name: '&fFalltür (Kirsche)'
             buy: 18
             sell: 5
           cherry_button:
@@ -2287,17 +2294,17 @@ categories:
             sell: 4
           cherry_hanging_sign:
             material: CHERRY_HANGING_SIGN
-            name: '&fHaengeschild (Kirsche)'
+            name: '&fHängeschild (Kirsche)'
             buy: 26
             sell: 7
           spruce_door:
             material: SPRUCE_DOOR
-            name: '&fTuer (Fichte)'
+            name: '&fTür (Fichte)'
             buy: 12
             sell: 3
           spruce_trapdoor:
             material: SPRUCE_TRAPDOOR
-            name: '&fFalltuer (Fichte)'
+            name: '&fFalltür (Fichte)'
             buy: 18
             sell: 5
           spruce_button:
@@ -2317,17 +2324,17 @@ categories:
             sell: 4
           spruce_hanging_sign:
             material: SPRUCE_HANGING_SIGN
-            name: '&fHaengeschild (Fichte)'
+            name: '&fHängeschild (Fichte)'
             buy: 26
             sell: 7
           mangrove_door:
             material: MANGROVE_DOOR
-            name: '&fTuer (Mangrove)'
+            name: '&fTür (Mangrove)'
             buy: 12
             sell: 3
           mangrove_trapdoor:
             material: MANGROVE_TRAPDOOR
-            name: '&fFalltuer (Mangrove)'
+            name: '&fFalltür (Mangrove)'
             buy: 18
             sell: 5
           mangrove_button:
@@ -2347,17 +2354,17 @@ categories:
             sell: 4
           mangrove_hanging_sign:
             material: MANGROVE_HANGING_SIGN
-            name: '&fHaengeschild (Mangrove)'
+            name: '&fHängeschild (Mangrove)'
             buy: 26
             sell: 7
           acacia_door:
             material: ACACIA_DOOR
-            name: '&fTuer (Akazie)'
+            name: '&fTür (Akazie)'
             buy: 12
             sell: 3
           acacia_trapdoor:
             material: ACACIA_TRAPDOOR
-            name: '&fFalltuer (Akazie)'
+            name: '&fFalltür (Akazie)'
             buy: 18
             sell: 5
           acacia_button:
@@ -2377,17 +2384,17 @@ categories:
             sell: 4
           acacia_hanging_sign:
             material: ACACIA_HANGING_SIGN
-            name: '&fHaengeschild (Akazie)'
+            name: '&fHängeschild (Akazie)'
             buy: 26
             sell: 7
           jungle_door:
             material: JUNGLE_DOOR
-            name: '&fTuer (Dschungel)'
+            name: '&fTür (Dschungel)'
             buy: 12
             sell: 3
           jungle_trapdoor:
             material: JUNGLE_TRAPDOOR
-            name: '&fFalltuer (Dschungel)'
+            name: '&fFalltür (Dschungel)'
             buy: 18
             sell: 5
           jungle_button:
@@ -2407,17 +2414,17 @@ categories:
             sell: 4
           jungle_hanging_sign:
             material: JUNGLE_HANGING_SIGN
-            name: '&fHaengeschild (Dschungel)'
+            name: '&fHängeschild (Dschungel)'
             buy: 26
             sell: 7
           crimson_door:
             material: CRIMSON_DOOR
-            name: '&fTuer (Karmesin)'
+            name: '&fTür (Karmesin)'
             buy: 12
             sell: 3
           crimson_trapdoor:
             material: CRIMSON_TRAPDOOR
-            name: '&fFalltuer (Karmesin)'
+            name: '&fFalltür (Karmesin)'
             buy: 18
             sell: 5
           crimson_button:
@@ -2437,17 +2444,17 @@ categories:
             sell: 4
           crimson_hanging_sign:
             material: CRIMSON_HANGING_SIGN
-            name: '&fHaengeschild (Karmesin)'
+            name: '&fHängeschild (Karmesin)'
             buy: 26
             sell: 7
           warped_door:
             material: WARPED_DOOR
-            name: '&fTuer (Verzerrt)'
+            name: '&fTür (Verzerrt)'
             buy: 12
             sell: 3
           warped_trapdoor:
             material: WARPED_TRAPDOOR
-            name: '&fFalltuer (Verzerrt)'
+            name: '&fFalltür (Verzerrt)'
             buy: 18
             sell: 5
           warped_button:
@@ -2467,17 +2474,17 @@ categories:
             sell: 4
           warped_hanging_sign:
             material: WARPED_HANGING_SIGN
-            name: '&fHaengeschild (Verzerrt)'
+            name: '&fHängeschild (Verzerrt)'
             buy: 26
             sell: 7
           dark_oak_door:
             material: DARK_OAK_DOOR
-            name: '&fTuer (Schwarzeiche)'
+            name: '&fTür (Schwarzeiche)'
             buy: 12
             sell: 3
           dark_oak_trapdoor:
             material: DARK_OAK_TRAPDOOR
-            name: '&fFalltuer (Schwarzeiche)'
+            name: '&fFalltür (Schwarzeiche)'
             buy: 18
             sell: 5
           dark_oak_button:
@@ -2497,17 +2504,17 @@ categories:
             sell: 4
           dark_oak_hanging_sign:
             material: DARK_OAK_HANGING_SIGN
-            name: '&fHaengeschild (Schwarzeiche)'
+            name: '&fHängeschild (Schwarzeiche)'
             buy: 26
             sell: 7
           oak_door:
             material: OAK_DOOR
-            name: '&fTuer (Eiche)'
+            name: '&fTür (Eiche)'
             buy: 12
             sell: 3
           oak_trapdoor:
             material: OAK_TRAPDOOR
-            name: '&fFalltuer (Eiche)'
+            name: '&fFalltür (Eiche)'
             buy: 18
             sell: 5
           oak_button:
@@ -2527,7 +2534,7 @@ categories:
             sell: 4
           oak_hanging_sign:
             material: OAK_HANGING_SIGN
-            name: '&fHaengeschild (Eiche)'
+            name: '&fHängeschild (Eiche)'
             buy: 26
             sell: 7
           stone_button:
@@ -2542,12 +2549,12 @@ categories:
             sell: 8
           iron_door:
             material: IRON_DOOR
-            name: '&fEisentuer'
+            name: '&fEisentür'
             buy: 180
             sell: 45
           iron_trapdoor:
             material: IRON_TRAPDOOR
-            name: '&fEisenfalltuer'
+            name: '&fEisenfalltür'
             buy: 360
             sell: 90
           light_weighted_pressure_plate:
@@ -2562,12 +2569,12 @@ categories:
             sell: 45
           exposed_copper_door:
             material: EXPOSED_COPPER_DOOR
-            name: '&fTuer (Verwittertes Kupfer)'
+            name: '&fTür (Verwittertes Kupfer)'
             buy: 102
             sell: 26
           exposed_copper_trapdoor:
             material: EXPOSED_COPPER_TRAPDOOR
-            name: '&fFalltuer (Verwittertes Kupfer)'
+            name: '&fFalltür (Verwittertes Kupfer)'
             buy: 204
             sell: 51
           exposed_copper_grate:
@@ -2587,12 +2594,12 @@ categories:
             sell: 115
           weathered_copper_door:
             material: WEATHERED_COPPER_DOOR
-            name: '&fTuer (Angelaufenes Kupfer)'
+            name: '&fTür (Angelaufenes Kupfer)'
             buy: 102
             sell: 26
           weathered_copper_trapdoor:
             material: WEATHERED_COPPER_TRAPDOOR
-            name: '&fFalltuer (Angelaufenes Kupfer)'
+            name: '&fFalltür (Angelaufenes Kupfer)'
             buy: 204
             sell: 51
           weathered_copper_grate:
@@ -2612,12 +2619,12 @@ categories:
             sell: 115
           oxidized_copper_door:
             material: OXIDIZED_COPPER_DOOR
-            name: '&fTuer (Oxidiertes Kupfer)'
+            name: '&fTür (Oxidiertes Kupfer)'
             buy: 102
             sell: 26
           oxidized_copper_trapdoor:
             material: OXIDIZED_COPPER_TRAPDOOR
-            name: '&fFalltuer (Oxidiertes Kupfer)'
+            name: '&fFalltür (Oxidiertes Kupfer)'
             buy: 204
             sell: 51
           oxidized_copper_grate:
@@ -2637,12 +2644,12 @@ categories:
             sell: 115
           copper_door:
             material: COPPER_DOOR
-            name: '&fTuer (Kupfer)'
+            name: '&fTür (Kupfer)'
             buy: 102
             sell: 26
           copper_trapdoor:
             material: COPPER_TRAPDOOR
-            name: '&fFalltuer (Kupfer)'
+            name: '&fFalltür (Kupfer)'
             buy: 204
             sell: 51
           copper_grate:
@@ -2662,127 +2669,127 @@ categories:
             sell: 115
           tuff_wall:
             material: TUFF_WALL
-            name: '&fMauer (tuff)'
+            name: '&fTuffsteinmauer'
             buy: 15
             sell: 4
           end_stone_brick_wall:
             material: END_STONE_BRICK_WALL
-            name: '&fMauer (end stone brick)'
+            name: '&fEndsteinziegelmauer'
             buy: 40
             sell: 10
           cobbled_deepslate_wall:
             material: COBBLED_DEEPSLATE_WALL
-            name: '&fMauer (cobbled deepslate)'
+            name: '&fBruch-Tiefenschiefermauer'
             buy: 18
             sell: 5
           tuff_brick_wall:
             material: TUFF_BRICK_WALL
-            name: '&fMauer (tuff brick)'
+            name: '&fTuffziegelmauer'
             buy: 15
             sell: 4
           deepslate_tile_wall:
             material: DEEPSLATE_TILE_WALL
-            name: '&fMauer (deepslate tile)'
+            name: '&fTiefenschieferfliesenmauer'
             buy: 18
             sell: 5
           blackstone_wall:
             material: BLACKSTONE_WALL
-            name: '&fMauer (blackstone)'
+            name: '&fSchwarzsteinmauer'
             buy: 20
             sell: 5
           mossy_cobblestone_wall:
             material: MOSSY_COBBLESTONE_WALL
-            name: '&fMauer (mossy cobblestone)'
+            name: '&fBemooste Bruchsteinmauer'
             buy: 23
             sell: 6
           stone_brick_wall:
             material: STONE_BRICK_WALL
-            name: '&fMauer (stone brick)'
+            name: '&fSteinziegelmauer'
             buy: 32
             sell: 8
           polished_blackstone_brick_wall:
             material: POLISHED_BLACKSTONE_BRICK_WALL
-            name: '&fMauer (polished blackstone brick)'
+            name: '&fPolierte Schwarzstein-Ziegelmauer'
             buy: 20
             sell: 5
           sandstone_wall:
             material: SANDSTONE_WALL
-            name: '&fMauer (sandstone)'
+            name: '&fSandsteinmauer'
             buy: 48
             sell: 12
           mud_brick_wall:
             material: MUD_BRICK_WALL
-            name: '&fMauer (mud brick)'
+            name: '&fLehmziegelmauer'
             buy: 24
             sell: 6
           prismarine_wall:
             material: PRISMARINE_WALL
-            name: '&fMauer (prismarine)'
+            name: '&fPrismarinmauer'
             buy: 300
             sell: 75
           red_sandstone_wall:
             material: RED_SANDSTONE_WALL
-            name: '&fMauer (red sandstone)'
+            name: '&fRoter-Sandstein-Mauer'
             buy: 48
             sell: 12
           andesite_wall:
             material: ANDESITE_WALL
-            name: '&fMauer (andesite)'
+            name: '&fAndesitmauer'
             buy: 15
             sell: 4
           brick_wall:
             material: BRICK_WALL
-            name: '&fMauer (brick)'
+            name: '&fZiegelmauer'
             buy: 24
             sell: 6
           granite_wall:
             material: GRANITE_WALL
-            name: '&fMauer (granite)'
+            name: '&fGranitmauer'
             buy: 15
             sell: 4
           diorite_wall:
             material: DIORITE_WALL
-            name: '&fMauer (diorite)'
+            name: '&fDioritmauer'
             buy: 15
             sell: 4
           red_nether_brick_wall:
             material: RED_NETHER_BRICK_WALL
-            name: '&fMauer (red nether brick)'
+            name: '&fRote Netherziegelmauer'
             buy: 90
             sell: 23
           nether_brick_wall:
             material: NETHER_BRICK_WALL
-            name: '&fMauer (nether brick)'
+            name: '&fNetherziegelmauer'
             buy: 27
             sell: 7
           polished_blackstone_wall:
             material: POLISHED_BLACKSTONE_WALL
-            name: '&fMauer (polished blackstone)'
+            name: '&fPolierte Schwarzsteinmauer'
             buy: 20
             sell: 5
           polished_deepslate_wall:
             material: POLISHED_DEEPSLATE_WALL
-            name: '&fMauer (polished deepslate)'
+            name: '&fPolierte Tiefenschiefermauer'
             buy: 18
             sell: 5
           mossy_stone_brick_wall:
             material: MOSSY_STONE_BRICK_WALL
-            name: '&fMauer (mossy stone brick)'
+            name: '&fBemooste Steinziegelmauer'
             buy: 40
             sell: 10
           polished_tuff_wall:
             material: POLISHED_TUFF_WALL
-            name: '&fMauer (polished tuff)'
+            name: '&fPolierte Tuffsteinmauer'
             buy: 15
             sell: 4
           cobblestone_wall:
             material: COBBLESTONE_WALL
-            name: '&fMauer (cobblestone)'
+            name: '&fBruchsteinmauer'
             buy: 15
             sell: 4
           deepslate_brick_wall:
             material: DEEPSLATE_BRICK_WALL
-            name: '&fMauer (deepslate brick)'
+            name: '&fTiefenschieferziegelmauer'
             buy: 18
             sell: 5
 
@@ -2882,32 +2889,32 @@ categories:
             sell: 6
           green_banner:
             material: GREEN_BANNER
-            name: '&fBanner (Gruen)'
+            name: '&fBanner (Grün)'
             buy: 219
             sell: 55
           green_bed:
             material: GREEN_BED
-            name: '&fBett (Gruen)'
+            name: '&fBett (Grün)'
             buy: 126
             sell: 32
           green_carpet:
             material: GREEN_CARPET
-            name: '&fTeppich (Gruen)'
+            name: '&fTeppich (Grün)'
             buy: 24
             sell: 6
           white_banner:
             material: WHITE_BANNER
-            name: '&fBanner (Weiss)'
+            name: '&fBanner (Weiß)'
             buy: 219
             sell: 55
           white_bed:
             material: WHITE_BED
-            name: '&fBett (Weiss)'
+            name: '&fBett (Weiß)'
             buy: 126
             sell: 32
           white_carpet:
             material: WHITE_CARPET
-            name: '&fTeppich (Weiss)'
+            name: '&fTeppich (Weiß)'
             buy: 24
             sell: 6
           magenta_banner:
@@ -2927,17 +2934,17 @@ categories:
             sell: 6
           lime_banner:
             material: LIME_BANNER
-            name: '&fBanner (Hellgruen)'
+            name: '&fBanner (Hellgrün)'
             buy: 219
             sell: 55
           lime_bed:
             material: LIME_BED
-            name: '&fBett (Hellgruen)'
+            name: '&fBett (Hellgrün)'
             buy: 126
             sell: 32
           lime_carpet:
             material: LIME_CARPET
-            name: '&fTeppich (Hellgruen)'
+            name: '&fTeppich (Hellgrün)'
             buy: 24
             sell: 6
           light_blue_banner:
@@ -3017,17 +3024,17 @@ categories:
             sell: 6
           cyan_banner:
             material: CYAN_BANNER
-            name: '&fBanner (Tuerkis)'
+            name: '&fBanner (Türkis)'
             buy: 219
             sell: 55
           cyan_bed:
             material: CYAN_BED
-            name: '&fBett (Tuerkis)'
+            name: '&fBett (Türkis)'
             buy: 126
             sell: 32
           cyan_carpet:
             material: CYAN_CARPET
-            name: '&fTeppich (Tuerkis)'
+            name: '&fTeppich (Türkis)'
             buy: 24
             sell: 6
           birch_boat:
@@ -3157,7 +3164,7 @@ categories:
             sell: 4
           painting_item:
             material: PAINTING
-            name: '&fGemaelde'
+            name: '&fGemälde'
             buy: 60
             sell: 15
           loom:
@@ -3212,7 +3219,7 @@ categories:
             sell: 237
           armor_stand_item:
             material: ARMOR_STAND
-            name: '&fRuestungsstaender'
+            name: '&fRüstungsständer'
             buy: 44
             sell: 11
           trapped_chest:
@@ -3242,7 +3249,7 @@ categories:
             sell: 1400
           smoker:
             material: SMOKER
-            name: '&fRaeucherofen'
+            name: '&fRäucherofen'
             buy: 204
             sell: 51
           raw_iron:
@@ -3262,7 +3269,7 @@ categories:
             sell: 14
           bowl:
             material: BOWL
-            name: '&fSchuessel'
+            name: '&fSchüssel'
             buy: 5
             sell: 2
           composter:
@@ -3317,7 +3324,7 @@ categories:
             sell: 3200
           trial_key:
             material: TRIAL_KEY
-            name: '&fPruefungsschluessel'
+            name: '&fPrüfungsschlüssel'
             buy: 10000
             sell: 2500
           raw_gold:
@@ -3342,7 +3349,7 @@ categories:
             sell: 51
           stonecutter:
             material: STONECUTTER
-            name: '&fSteinsaege'
+            name: '&fSteinsäge'
             buy: 135
             sell: 34
           gold_nugget:
@@ -3382,7 +3389,7 @@ categories:
             sell: 7
           ominous_trial_key:
             material: OMINOUS_TRIAL_KEY
-            name: '&fUnheilvoller Pruefungsschluessel'
+            name: '&fUnheilvoller Prüfungsschlüssel'
             buy: 15000
             sell: 3750
           furnace_minecart:

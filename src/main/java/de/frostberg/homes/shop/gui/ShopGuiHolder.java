@@ -19,13 +19,17 @@ public class ShopGuiHolder implements InventoryHolder {
     private final String categoryId;
     private final String subCategoryId;
     private final int page;
+    private final int buyAmount;
+    private final int sellAmount;
     private Inventory inventory;
 
-    public ShopGuiHolder(Type type, String categoryId, String subCategoryId, int page) {
+    public ShopGuiHolder(Type type, String categoryId, String subCategoryId, int page, int buyAmount, int sellAmount) {
         this.type = type;
         this.categoryId = categoryId;
         this.subCategoryId = subCategoryId;
         this.page = page;
+        this.buyAmount = buyAmount;
+        this.sellAmount = sellAmount;
     }
 
     @Override
@@ -51,5 +55,13 @@ public class ShopGuiHolder implements InventoryHolder {
 
     public int getPage() {
         return page;
+    }
+
+    public int getBuyAmount() {
+        return buyAmount;
+    }
+
+    public int getSellAmount() {
+        return sellAmount;
     }
 }
