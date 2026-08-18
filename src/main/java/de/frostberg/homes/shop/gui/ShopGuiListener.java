@@ -41,6 +41,10 @@ public class ShopGuiListener implements Listener {
     private static final int PREV_PAGE_SLOT = 46;
     private static final int NEXT_PAGE_SLOT = 52;
 
+    // Feste, "verteilte" Slot-Positionen fuers Hauptmenue (nicht eine durchgehende Reihe,
+    // sondern mit Luecken ueber mehrere Reihen verteilt, wie im Vorbild-Shop) - fuer bis zu 9 Kategorien
+    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 27, 29, 31, 33};
+
     private static final int DETAIL_ITEM_SLOT = 22;
     private static final int[] SELL_SLOTS = {21, 20, 19}; // -1, -32, -64 (von innen nach aussen)
     private static final int[] SELL_AMOUNTS = {1, 32, 64};
@@ -65,8 +69,7 @@ public class ShopGuiListener implements Listener {
         fillBorder(inventory);
 
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
-        int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
-        for (int i = 0; i < categories.size() && i < slots.length; i++) {
+        for (int i = 0; i < categories.size() && i < MAIN_MENU_SLOTS.length; i++) {
             ShopCategory category = categories.get(i);
             List<String> lore = new ArrayList<>();
             for (ShopSubCategory sub : category.getSubCategories()) {
@@ -74,7 +77,7 @@ public class ShopGuiListener implements Listener {
             }
             lore.add("");
             lore.add(MessageUtil.get(plugin.getMessages(), "shop-gui-main-hint"));
-            inventory.setItem(slots[i], simpleItem(category.getIcon(), MessageUtil.color("&l") + category.getDisplayName(), lore));
+            inventory.setItem(MAIN_MENU_SLOTS[i], simpleItem(category.getIcon(), MessageUtil.color("&l") + category.getDisplayName(), lore));
         }
 
         player.openInventory(inventory);
@@ -311,9 +314,8 @@ public class ShopGuiListener implements Listener {
 
     private void handleMainClick(Player player, int slot) {
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
-        int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
-        for (int i = 0; i < categories.size() && i < slots.length; i++) {
-            if (slots[i] == slot) {
+        for (int i = 0; i < categories.size() && i < MAIN_MENU_SLOTS.length; i++) {
+            if (MAIN_MENU_SLOTS[i] == slot) {
                 openCategory(player, categories.get(i));
                 return;
             }

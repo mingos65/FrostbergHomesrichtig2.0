@@ -72,4 +72,16 @@ public final class CurrencyBridge {
             return -1;
         }
     }
+
+    /** Liest den aktuellen Gold-Kontostand direkt ueber die Vault Economy-API. Gibt -1 zurueck, wenn Vault fehlt. */
+    public static double readGoldBalance(Player player) {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+            return -1;
+        }
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return -1;
+        }
+        return rsp.getProvider().getBalance(player);
+    }
 }

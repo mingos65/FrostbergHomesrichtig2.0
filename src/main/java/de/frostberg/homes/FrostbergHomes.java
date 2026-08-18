@@ -38,6 +38,7 @@ import de.frostberg.homes.staff.commands.VanishCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
+import de.frostberg.homes.util.CurrencyPlaceholderExpansion;
 import de.frostberg.homes.util.QuestPlaceholderExpansion;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -91,6 +92,7 @@ public class FrostbergHomes extends JavaPlugin {
             new ClanPlaceholderExpansion(this).register();
             new QuestPlaceholderExpansion(this).register();
             new ChatColorPlaceholderExpansion(this).register();
+            new CurrencyPlaceholderExpansion(this).register();
         }
 
         getLogger().info("FrostbergHomes wurde aktiviert.");
