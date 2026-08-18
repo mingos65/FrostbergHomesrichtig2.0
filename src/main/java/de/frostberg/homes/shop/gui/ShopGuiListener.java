@@ -319,10 +319,19 @@ public class ShopGuiListener implements Listener {
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
         for (int i = 0; i < categories.size() && i < MAIN_MENU_SLOTS.length; i++) {
             if (MAIN_MENU_SLOTS[i] == slot) {
-                openCategory(player, categories.get(i));
+                ShopCategory category = categories.get(i);
+                plugin.getLogger().info("[Shop-Debug] Hauptmenue-Klick auf Slot " + slot
+                        + " -> Kategorie '" + category.getId() + "' (" + category.getSubCategories().size() + " Unterkategorie(n))");
+                try {
+                    openCategory(player, category);
+                } catch (Exception ex) {
+                    plugin.getLogger().severe("[Shop-Debug] Fehler beim Oeffnen der Kategorie '" + category.getId() + "':");
+                    ex.printStackTrace();
+                }
                 return;
             }
         }
+        plugin.getLogger().info("[Shop-Debug] Hauptmenue-Klick auf Slot " + slot + " -> keine Kategorie auf diesem Slot registriert.");
     }
 
     /** Hat eine Kategorie nur eine Unterkategorie (z.B. Ruestung, Essen), waere die Uebersicht mit nur einem Icon ein sinnloser Extra-Klick - dann direkt zur Item-Liste. */
