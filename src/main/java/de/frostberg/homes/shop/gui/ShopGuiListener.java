@@ -43,9 +43,10 @@ public class ShopGuiListener implements Listener {
 
     // Feste, "verteilte" Slot-Positionen fuers Hauptmenue (nicht eine durchgehende Reihe,
     // sondern mit Luecken ueber mehrere Reihen verteilt, wie im Vorbild-Shop) - fuer bis zu 9
-    // Kategorien. Bewusst NIE Spalte 0 oder 8 (das ist die Rand-Spalte, die fillBorder() mit
-    // Glas fuellt - ein Icon dort wuerde den Rahmen an der Stelle sichtbar aufbrechen).
-    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 28, 30, 32, 34};
+    // Kategorien. Redstone (Index 5) liegt bewusst auf Slot 40 (eine Reihe unter Deko/Banner,
+    // Spalte 4) statt auf Spalte 0 - dort lag es auf der Rand-Spalte und brach den Glas-Rahmen
+    // sichtbar auf. Alle anderen Kategorien bleiben auf ihren urspruenglichen Slots.
+    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 40, 29, 31, 33};
 
     private static final int DETAIL_ITEM_SLOT = 22;
     private static final int[] SELL_SLOTS = {21, 20, 19}; // -1, -32, -64 (von innen nach aussen)
