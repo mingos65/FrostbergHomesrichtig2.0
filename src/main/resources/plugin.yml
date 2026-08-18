@@ -139,6 +139,11 @@ commands:
     usage: /v
     permission: frostberg.vanish
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  shop:
+    description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
+    usage: /shop [reload]
+    permission: shop.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -365,4 +370,18 @@ permissions:
     default: op
   frostberg.vanish:
     description: Erlaubt /vanish bzw. /v sowie das Sehen anderer vanishter Spieler
+    default: op
+
+  shop.*:
+    description: Gibt Zugriff auf alle Shop-Funktionen inkl. Reload
+    default: false
+    children:
+      shop.use: true
+      shop.admin: true
+
+  shop.use:
+    description: Erlaubt /shop und das Kaufen/Verkaufen im Shop-GUI
+    default: true
+  shop.admin:
+    description: Erlaubt /shop reload
     default: op

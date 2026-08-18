@@ -28,6 +28,17 @@ public final class CurrencyBridge {
         return true;
     }
 
+    public static boolean takeTokens(Player player, long amount) {
+        if (amount <= 0) {
+            return true;
+        }
+        if (Bukkit.getPluginManager().getPlugin("PlayerPoints") == null) {
+            return false;
+        }
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tokens take " + player.getName() + " " + amount);
+        return true;
+    }
+
     public static boolean giveGold(Player player, double amount) {
         if (amount <= 0) {
             return true;

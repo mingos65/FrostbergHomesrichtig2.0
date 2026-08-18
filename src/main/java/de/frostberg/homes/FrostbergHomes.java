@@ -28,6 +28,9 @@ import de.frostberg.homes.quest.commands.QuestCommand;
 import de.frostberg.homes.quest.gui.QuestGuiListener;
 import de.frostberg.homes.quest.listener.QuestProgressListener;
 import de.frostberg.homes.quest.manager.QuestManager;
+import de.frostberg.homes.shop.commands.ShopCommand;
+import de.frostberg.homes.shop.gui.ShopGuiListener;
+import de.frostberg.homes.shop.manager.ShopManager;
 import de.frostberg.homes.staff.VanishListener;
 import de.frostberg.homes.staff.VanishManager;
 import de.frostberg.homes.staff.commands.GameModeCommand;
@@ -56,6 +59,8 @@ public class FrostbergHomes extends JavaPlugin {
     private QuestGuiListener questGuiListener;
     private ChatColorManager chatColorManager;
     private VanishManager vanishManager;
+    private ShopManager shopManager;
+    private ShopGuiListener shopGuiListener;
     private FileConfiguration messages;
 
     @Override
@@ -76,6 +81,8 @@ public class FrostbergHomes extends JavaPlugin {
         this.questManager = new QuestManager(this);
         this.chatColorManager = new ChatColorManager(this);
         this.vanishManager = new VanishManager(this);
+        this.shopGuiListener = new ShopGuiListener(this);
+        this.shopManager = new ShopManager(this);
 
         registerCommands();
         registerListeners();
@@ -200,6 +207,10 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("vanish").setExecutor(vanishCommand);
         getCommand("v").setExecutor(vanishCommand);
 
+        ShopCommand shopCommand = new ShopCommand(this);
+        getCommand("shop").setExecutor(shopCommand);
+        getCommand("shop").setTabCompleter(shopCommand);
+
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen
         getServer().getPluginManager().registerEvents(homeCommand, this);
@@ -226,6 +237,7 @@ public class FrostbergHomes extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
+        getServer().getPluginManager().registerEvents(shopGuiListener, this);
     }
 
     /**
@@ -288,5 +300,13 @@ public class FrostbergHomes extends JavaPlugin {
 
     public VanishManager getVanishManager() {
         return vanishManager;
+    }
+
+    public ShopManager getShopManager() {
+        return shopManager;
+    }
+
+    public ShopGuiListener getShopGuiListener() {
+        return shopGuiListener;
     }
 }

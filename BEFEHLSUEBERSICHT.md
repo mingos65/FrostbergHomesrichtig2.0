@@ -1,12 +1,11 @@
 # FrostbergHomes – Komplette Befehlsübersicht
 
-Stand: 2026-08-17. Alle Befehle aus dem eigenen Plugin FrostbergHomes (Home-,
-Teleport-, Quest-, Clan-System), plus ein kurzer Überblick über die
-wichtigsten Befehle anderer, bereits installierter Plugins.
+Stand: 18.08.2026. Alle Befehle aus dem eigenen Plugin FrostbergHomes (Home-,
+Teleport-, Quest-, Clan-, Chat-/Staff-, Shop-System), plus ein Überblick über
+die wichtigsten Befehle aller anderen bereits installierten Plugins.
 
 **Spalten:** *Permission* zeigt die Bukkit-Permission und ihren Standardwert.
-*Neu?* zeigt, ob der Befehl in diesem großen Update (Home-GUI + Clan-System,
-16.08.2026) neu dazugekommen ist oder schon vorher existierte.
+*Neu?* zeigt, ob der Befehl neu dazugekommen ist oder schon vorher existierte.
 
 ---
 
@@ -14,27 +13,25 @@ wichtigsten Befehle anderer, bereits installierter Plugins.
 
 | Befehl | Beschreibung | Permission | Neu? |
 |---|---|---|---|
-| `/home` | Öffnet das Home-GUI (Truhen-Fenster, 2 Seiten à 14 Betten) | `homes.use` (Standard: an) | **Verhalten neu** – vorher direkter Teleport zu Home 1 |
+| `/home` | Öffnet das Home-GUI (Truhen-Fenster, 2 Seiten à 14 Betten = 28 Homes) | `homes.use` (Standard: an) | Bestehend |
 | `/home <nr>` | Teleportiert direkt zu Home Nummer `<nr>` (Warmup, Cooldown, sicherer Teleport) | `homes.use` (Standard: an) | Bestehend |
-| `/homes` | Öffnet dasselbe Home-GUI wie `/home` | `homes.list` (Standard: an) | **Verhalten neu** – vorher Chat-Liste statt GUI |
-| `/homes reload` | Lädt `config.yml` **und** `messages.yml` neu | `homes.reload` (Standard: op) | Bestehend (lädt jetzt auch messages.yml) |
+| `/homes` | Öffnet dasselbe Home-GUI wie `/home` | `homes.list` (Standard: an) | Bestehend |
+| `/homes reload` | Lädt `config.yml` **und** `messages.yml` neu | `homes.reload` (Standard: op) | Bestehend |
 | `/set home [nr]` | Setzt Home `<nr>` (Standard 1) an deiner Position | `homes.set` (Standard: an) | Bestehend |
 | `/delete home [nr]` | Löscht Home `<nr>` | `homes.delete` (Standard: an) | Bestehend |
-| `/sethome <name>` | Setzt ein Home im nächsten freien Slot mit eigenem Namen | `homes.set` (Standard: an) | **Neu** |
-| `/delhome <name>` | Löscht das Home mit diesem Namen | `homes.delete` (Standard: an) | **Neu** |
+| `/sethome <name>` | Setzt ein Home im nächsten freien Slot mit eigenem Namen | `homes.set` (Standard: an) | Bestehend |
+| `/delhome <name>` | Löscht das Home mit diesem Namen | `homes.delete` (Standard: an) | Bestehend |
 
 **Im Home-GUI:** Linksklick auf ein grünes (gesetztes) Home teleportiert
 direkt. Rechtsklick öffnet ein Menü mit Teleportieren / Koordinaten im Chat
 anzeigen / Umbenennen (Amboss) / Löschen (mit Ja-Nein-Bestätigung). Blaue
-Betten sind freie Slots, graue sind durch das Rang-Limit gesperrt.
-Home-Limit pro Rang über `homes.limit.1` bis `homes.limit.28` (erweitert von
-vorher 10 auf 28, für die 2 GUI-Seiten) sowie `homes.limit.unlimited`.
+Betten sind freie Slots, graue sind durch das Rang-Limit gesperrt (mit
+farbigem Sperrhinweis). Home-Limit pro Rang über `homes.limit.1` bis
+`homes.limit.28` sowie `homes.limit.unlimited`.
 
 ---
 
 ## 2) Teleport-Befehle (TPA & Spawn)
-
-Alle Befehle in diesem Abschnitt sind **komplett neu**.
 
 | Befehl | Beschreibung | Permission |
 |---|---|---|
@@ -57,13 +54,12 @@ TPA-Anfragen laufen nach 60 Sekunden automatisch ab. Nach Annahme läuft ein
 
 ## 3) Clan-Befehle
 
-Alle Befehle in diesem Abschnitt sind **komplett neu**. Rollen
-(Leader/Clan-Mod/Member) sind reine Clan-Daten, keine LuckPerms-Ränge – wer
-was darf, steht in der letzten Spalte.
+Rollen (Leader/Clan-Mod/Member) sind reine Clan-Daten, keine LuckPerms-Ränge –
+wer was darf, steht in der letzten Spalte.
 
 | Befehl | Beschreibung | Permission | Wer im Clan |
 |---|---|---|---|
-| `/clan create <name> [tag]` | Gründet einen neuen Clan, du wirst Leader | `clan.use` (Standard: an) | – (noch in keinem Clan) |
+| `/clan create <name> <tag>` | Gründet einen neuen Clan, du wirst Leader. Tag ist **Pflicht** (2-4 Zeichen), Name 2-15 Zeichen | `clan.use` (Standard: an) | – (noch in keinem Clan) |
 | `/clan delete` / `/clan disband` | Löst deinen Clan auf (Ja-Nein-Bestätigung) | `clan.use` | Leader (oder `clan.admin`) |
 | `/clan invite <spieler>` | Lädt einen Spieler ein (klickbare Annehmen/Ablehnen-Nachricht) | `clan.use` | Leader / Clan-Mod |
 | `/clan accept` | Nimmt die offene Einladung an | `clan.use` | – |
@@ -81,20 +77,20 @@ was darf, steht in der letzten Spalte.
 | `/clan bank` | Zeigt den Kontostand der Clan-Kasse (Tokens + Gold) | `clan.use` | Alle |
 | `/clan bank deposit <tokens\|gold> <betrag>` | Zahlt eigenes Guthaben in die Clan-Kasse ein | `clan.use` | Alle |
 | `/clan bank withdraw <tokens\|gold> <betrag>` | Hebt aus der Clan-Kasse ab | `clan.use` | Leader / Clan-Mod |
+| `/clan color` | Öffnet den Farben-Shop für den Clan-Tag (Kauf mit Gold, inkl. Hex-/Verlauf-Farben in höheren Preisstufen) | `clan.use` | Leader / Clan-Mod |
 
 Clan-Tag erscheint automatisch in Tabliste, Scoreboard-Sidebar ("Kein Clan"
-wenn keiner vorhanden) und lässt sich auch in den Chat einbinden – läuft über
-die eigene PlaceholderAPI-Erweiterung (`%frostbergclans_name%`,
-`%frostbergclans_tagdisplay%` u.a.), Details siehe README im Repository.
+wenn keiner vorhanden) und im Chat vor dem Rang-Präfix – läuft über die
+eigene PlaceholderAPI-Erweiterung (`%frostbergclans_name%`,
+`%frostbergclans_tagdisplay%` u.a.).
 
 ---
 
 ## 4) Quest-Befehle
 
-Daily-/Weekly-/Monthly-Quest-System, alle Befehle in diesem Abschnitt sind
-**komplett neu**. Alle Spieler bekommen pro Periode dieselben, zufällig aus
-dem Pool gewählten Quests (nicht individuell zufällig). Fortschritt zählt
-nur in der Farmwelt.
+Daily-/Weekly-/Monthly-Quest-System. Alle Spieler bekommen pro Periode
+dieselben, zufällig aus dem Pool gewählten Quests (nicht individuell
+zufällig). Fortschritt zählt nur in der Farmwelt.
 
 | Befehl | Beschreibung | Permission |
 |---|---|---|
@@ -108,31 +104,55 @@ nur in der Farmwelt.
 Reset-Zeitpunkte: Täglich (1 von 10 möglichen Quests) jeden Tag 00:00,
 Wöchentlich (3 von 13) jeden Montag 00:00, Monatlich (5 von 13) am 1. jedes
 Monats 00:00. War der Server zum Reset-Zeitpunkt offline, wird der Reset
-beim nächsten Start automatisch nachgeholt und der Fortschritt der
-abgelaufenen Periode zurückgesetzt.
+beim nächsten Start automatisch nachgeholt.
 
 **Belohnung:** Jede Quest gibt immer Tokens, gestaffelt nach den 1-5
 Schwierigkeits-Sternen (Täglich 550-1.600, Wöchentlich 1.600-4.600,
 Monatlich 4.800-13.600). Ab 3 Sternen gibt es zusätzlich etwas Gold obendrauf
 (1 Gold = 1.000 Tokens). Belohnungen müssen manuell im GUI abgeholt werden.
+Kategorie-Bonus (nur Wöchentlich/Monatlich) und automatischer Daily-Streak-
+Bonus kommen zusätzlich dazu.
 
-**Kategorie-Bonus:** eigenes Item im Kategorie-GUI (grauer Farbstoff =
-noch nicht abholbereit, grüner Farbstoff = abholbereit), muss ebenfalls
-manuell abgeholt werden. **Nur bei Wöchentlich und Monatlich** - bei
-Täglich gibt es keinen (nur 1 Quest pro Tag, wäre redundant).
+---
 
-Ein Rang-Multiplikator (`quest.multiplier.vip`/`.premium`) und ein
-automatischer Streak-Bonus für aufeinanderfolgende Daily-Tage kommen
-zusätzlich dazu. Nur Spieler mit `quest.admin` sehen im Haupt-GUI zusätzlich
-eine Vorschau auf die schon vorgemerkte, aber noch nicht aktive nächste
-Periode.
-
-## 5) Wirtschaft (Pay-Brücke, Tokens, Gold)
+## 5) Chat- & Staff-Befehle
 
 | Befehl | Beschreibung | Permission | Neu? |
 |---|---|---|---|
-| `/pay tokens <spieler> <anzahl>` | Sendet Tokens (reicht 1:1 an PlayerPoints weiter) | `frostberg.pay.tokens` (Standard: an) | Bestehend |
-| `/pay gold <spieler> <betrag>` | Sendet Gold (direkt über Vault-Economy-API) | `frostberg.pay.tokens` (Standard: an) | Bestehend |
+| `/chatcolor <farbe\|hex\|gradient\|bold\|reset>` | Eigene Chat-Farbe einstellen (16 deutsche Farbnamen, Standard). Hex/Verlauf brauchen `frostbergchat.color.rgb`, Fett `frostbergchat.color.bold` | `frostbergchat.color.use` (Standard: an) | Neu |
+| `/gm <0\|1\|2\|3>` | Schneller eigener Gamemode-Wechsel (Survival/Creative/Adventure/Spectator) | `frostberg.gamemode` (Standard: op) | Neu |
+| `/vanish`, `/v` | Schaltet eigene Unsichtbarkeit für normale Spieler um | `frostberg.vanish` (Standard: op) | Neu |
+
+Spieler mit der Permission `frostbergchat.teamline` bekommen automatisch vor
+jeder ihrer Chat-Nachrichten eine optische Leerzeile für alle sichtbar
+(kein eigener Befehl, reine Permission-Freischaltung).
+
+---
+
+## 6) Shop-Befehle
+
+Eigenes Shop-System (Ersatz für EconomyShopGUI), läuft komplett auf Deutsch
+und ausschließlich mit Tokens.
+
+| Befehl | Beschreibung | Permission | Neu? |
+|---|---|---|---|
+| `/shop` | Öffnet das Shop-Hauptmenü (Kategorien: Kampf, Bauen, Dekoration, Farming, Magie, Mobs, Sonstiges) | `shop.use` (Standard: an) | Neu |
+| `/shop reload` | Lädt `shop-items.yml` neu (Preisänderungen ohne Serverneustart) | `shop.admin` (Standard: op) | Neu |
+
+**Im Shop-GUI:** Kategorie anklicken öffnet direkt die Item-Liste, oben Tabs
+für Unterkategorien (z.B. Rüstung/Werkzeuge/Waffen/Redstone bei Kampf) –
+kein zusätzlicher Klick nötig. Linksklick = 1 kaufen, Shift+Links = 64
+kaufen, Rechtsklick = 1 verkaufen, Shift+Rechts = 64 verkaufen (jeweils nur
+so viel wie tatsächlich im Inventar vorhanden ist).
+
+---
+
+## 7) Wirtschaft (Pay-Brücke, Tokens, Gold)
+
+| Befehl | Beschreibung | Permission |
+|---|---|---|
+| `/pay tokens <spieler> <anzahl>` | Sendet Tokens (reicht 1:1 an PlayerPoints weiter) | `frostberg.pay.tokens` (Standard: an) |
+| `/pay gold <spieler> <betrag>` | Sendet Gold (direkt über Vault-Economy-API) | `frostberg.pay.tokens` (Standard: an) |
 
 **Tokens (PlayerPoints, fremdes Plugin):** `/tokens`, `/tokens pay`,
 `/tokens lead`, `/tokens look`, `/tokens give|take|set` (Admin) usw.
@@ -142,12 +162,11 @@ Periode.
 
 ---
 
-## 6) Allgemeine / bereits vorhandene Befehle (andere Plugins)
+## 8) Allgemeine / bereits vorhandene Befehle (andere Plugins)
 
 Diese Befehle stammen **nicht** aus FrostbergHomes, sondern aus den anderen
 auf dem Server installierten Plugins. Kurzübersicht, keine vollständige
-Referenz (eine ausführlichere Liste inkl. WorldEdit/PlotSquared/Multiverse
-im Detail hast du bereits als separate Datei von mir bekommen):
+Referenz.
 
 | Plugin | Wichtigste Befehle | Wofür |
 |---|---|---|
@@ -157,7 +176,7 @@ im Detail hast du bereits als separate Datei von mir bekommen):
 | **FastAsyncWorldEdit** | `//wand`, `//set`, `//copy`/`//paste`, `/brush ...` | Bauen (Builder+) |
 | **TAB** | `/tab reload` (Admin) | Tabliste/Scoreboard, läuft sonst automatisch |
 | **PlaceholderAPI** | `/papi list`, `/papi parse` (Admin) | Platzhalter-Verwaltung |
-| **EconomyShopGUI** | `/shop`, `/sellall` | Item-Shop (Preise noch nicht eingerichtet) |
+| **EconomyShopGUI** | `/shop`, `/sellall` | Wird schrittweise durch den eigenen Shop (Abschnitt 6) ersetzt |
 
 ---
 
@@ -165,8 +184,10 @@ im Detail hast du bereits als separate Datei von mir bekommen):
 
 - **Grün/"kann jeder Spieler"**: Homes verwalten, TPA senden/annehmen,
   `/spawn`/`/farmwelt`, Clan gründen/beitreten/chatten/Base nutzen/einzahlen,
-  `/quest` nutzen und Belohnungen abholen
+  `/quest` nutzen und Belohnungen abholen, `/chatcolor` (Standardfarben),
+  `/shop` nutzen
 - **Braucht Clan-Rolle Leader/Mod**: Clan löschen, einladen, kicken,
-  befördern, umbenennen, Base setzen, aus der Kasse abheben
+  befördern, umbenennen, Base setzen, aus der Kasse abheben, Farbe kaufen
 - **Braucht Admin/OP-Permission**: `/tp`/`/tphere`, `/setspawn`/`/setfarmwelt`,
-  `/homes reload`, `/quest reload`/`reset`/`info`/`broadcast`
+  `/homes reload`, `/quest reload`/`reset`/`info`/`broadcast`, `/gm`,
+  `/vanish`/`/v`, `/shop reload`
