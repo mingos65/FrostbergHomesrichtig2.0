@@ -438,6 +438,7 @@ public class ShopGuiListener implements Listener {
                     .replace("%price%", String.valueOf(item.getBuyPrice() * amount)));
             case NOT_BUYABLE -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "shop-not-buyable"));
             case NOT_ENOUGH_TOKENS -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "shop-not-enough-tokens"));
+            case NOT_ENOUGH_SPACE -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "shop-not-enough-space"));
             case PLAYERPOINTS_MISSING -> player.sendMessage(MessageUtil.get(plugin.getMessages(), "shop-playerpoints-missing"));
             default -> {
             }

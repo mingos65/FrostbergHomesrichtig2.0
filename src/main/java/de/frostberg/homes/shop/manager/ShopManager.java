@@ -34,6 +34,7 @@ public class ShopManager {
         NOT_SELLABLE,
         NOT_ENOUGH_TOKENS,
         NOT_ENOUGH_ITEMS,
+        NOT_ENOUGH_SPACE,
         PLAYERPOINTS_MISSING
     }
 
@@ -138,6 +139,9 @@ public class ShopManager {
         if (!item.isBuyable()) {
             return TransactionResult.NOT_BUYABLE;
         }
+        if (!hasInventorySpace(player, item.getMaterial(), amount)) {
+            return TransactionResult.NOT_ENOUGH_SPACE;
+        }
         long totalPrice = item.getBuyPrice() * amount;
         long balance = CurrencyBridge.readTokenBalance(player);
         if (balance < 0) {
@@ -151,6 +155,29 @@ public class ShopManager {
         }
         player.getInventory().addItem(buildPurchasedStack(item, amount));
         return TransactionResult.SUCCESS;
+    }
+
+    /**
+     * Prueft, ob "amount" Stueck von "material" komplett im Spielerinventar
+     * Platz finden wuerden (leere Slots + Platz in bereits vorhandenen,
+     * nicht vollen Stacks desselben Materials) - simuliert dieselbe Logik,
+     * die Inventory#addItem spaeter tatsaechlich anwendet, damit vorher
+     * geprueft werden kann, ohne schon Tokens abzuziehen.
+     */
+    private boolean hasInventorySpace(Player player, Material material, int amount) {
+        int maxStackSize = material.getMaxStackSize();
+        int remaining = amount;
+        for (org.bukkit.inventory.ItemStack stack : player.getInventory().getStorageContents()) {
+            if (remaining <= 0) {
+                return true;
+            }
+            if (stack == null || stack.getType() == Material.AIR) {
+                remaining -= maxStackSize;
+            } else if (stack.getType() == material && stack.getAmount() < maxStackSize) {
+                remaining -= (maxStackSize - stack.getAmount());
+            }
+        }
+        return remaining <= 0;
     }
 
     /**
