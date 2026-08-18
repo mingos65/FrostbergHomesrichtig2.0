@@ -669,86 +669,6 @@ categories:
             name: '&fWachsender Amethyst'
             buy: -1
             sell: 500
-          coal_ore:
-            material: COAL_ORE
-            name: '&fKohleerz'
-            buy: 54
-            sell: -1
-          deepslate_coal_ore:
-            material: DEEPSLATE_COAL_ORE
-            name: '&fTiefenschiefer-Kohleerz'
-            buy: 54
-            sell: -1
-          iron_ore:
-            material: IRON_ORE
-            name: '&fEisenerz'
-            buy: 90
-            sell: -1
-          deepslate_iron_ore:
-            material: DEEPSLATE_IRON_ORE
-            name: '&fTiefenschiefer-Eisenerz'
-            buy: 90
-            sell: -1
-          copper_ore:
-            material: COPPER_ORE
-            name: '&fKupfererz'
-            buy: 51
-            sell: -1
-          deepslate_copper_ore:
-            material: DEEPSLATE_COPPER_ORE
-            name: '&fTiefenschiefer-Kupfererz'
-            buy: 51
-            sell: -1
-          gold_ore:
-            material: GOLD_ORE
-            name: '&fGolderz'
-            buy: 126
-            sell: -1
-          deepslate_gold_ore:
-            material: DEEPSLATE_GOLD_ORE
-            name: '&fTiefenschiefer-Golderz'
-            buy: 126
-            sell: -1
-          redstone_ore:
-            material: REDSTONE_ORE
-            name: '&fRedstone-Erz'
-            buy: 15
-            sell: -1
-          deepslate_redstone_ore:
-            material: DEEPSLATE_REDSTONE_ORE
-            name: '&fTiefenschiefer-Redstone-Erz'
-            buy: 15
-            sell: -1
-          lapis_ore:
-            material: LAPIS_ORE
-            name: '&fLapislazulierz'
-            buy: 30
-            sell: -1
-          deepslate_lapis_ore:
-            material: DEEPSLATE_LAPIS_ORE
-            name: '&fTiefenschiefer-Lapislazulierz'
-            buy: 30
-            sell: -1
-          diamond_ore:
-            material: DIAMOND_ORE
-            name: '&fDiamanterz'
-            buy: 1140
-            sell: -1
-          deepslate_diamond_ore:
-            material: DEEPSLATE_DIAMOND_ORE
-            name: '&fTiefenschiefer-Diamanterz'
-            buy: 1140
-            sell: -1
-          emerald_ore:
-            material: EMERALD_ORE
-            name: '&fSmaragderz'
-            buy: 900
-            sell: -1
-          deepslate_emerald_ore:
-            material: DEEPSLATE_EMERALD_ORE
-            name: '&fTiefenschiefer-Smaragderz'
-            buy: 900
-            sell: -1
       nether:
         display-name: '&4&lNether'
         icon: NETHERRACK
@@ -1791,6 +1711,186 @@ categories:
             name: '&fKomparator'
             buy: 510
             sell: 128
+  erze:
+    display-name: '&b&lErze'
+    icon: DIAMOND_ORE
+    border: GRAY_STAINED_GLASS_PANE
+    sub-categories:
+      erze:
+        display-name: '&b&lErze'
+        icon: DIAMOND_ORE
+        columns: 9
+        items:
+          coal_ore:
+            material: COAL_ORE
+            name: '&fKohleerz'
+            buy: 54
+            sell: -1
+          deepslate_coal_ore:
+            material: DEEPSLATE_COAL_ORE
+            name: '&fTiefenschiefer-Kohleerz'
+            buy: 54
+            sell: -1
+          iron_ore:
+            material: IRON_ORE
+            name: '&fEisenerz'
+            buy: 90
+            sell: -1
+          deepslate_iron_ore:
+            material: DEEPSLATE_IRON_ORE
+            name: '&fTiefenschiefer-Eisenerz'
+            buy: 90
+            sell: -1
+          copper_ore:
+            material: COPPER_ORE
+            name: '&fKupfererz'
+            buy: 51
+            sell: -1
+          deepslate_copper_ore:
+            material: DEEPSLATE_COPPER_ORE
+            name: '&fTiefenschiefer-Kupfererz'
+            buy: 51
+            sell: -1
+          gold_ore:
+            material: GOLD_ORE
+            name: '&fGolderz'
+            buy: 126
+            sell: -1
+          deepslate_gold_ore:
+            material: DEEPSLATE_GOLD_ORE
+            name: '&fTiefenschiefer-Golderz'
+            buy: 126
+            sell: -1
+          redstone_ore:
+            material: REDSTONE_ORE
+            name: '&fRedstone-Erz'
+            buy: 15
+            sell: -1
+          deepslate_redstone_ore:
+            material: DEEPSLATE_REDSTONE_ORE
+            name: '&fTiefenschiefer-Redstone-Erz'
+            buy: 15
+            sell: -1
+          lapis_ore:
+            material: LAPIS_ORE
+            name: '&fLapislazulierz'
+            buy: 30
+            sell: -1
+          deepslate_lapis_ore:
+            material: DEEPSLATE_LAPIS_ORE
+            name: '&fTiefenschiefer-Lapislazulierz'
+            buy: 30
+            sell: -1
+          diamond_ore:
+            material: DIAMOND_ORE
+            name: '&fDiamanterz'
+            buy: 1140
+            sell: -1
+          deepslate_diamond_ore:
+            material: DEEPSLATE_DIAMOND_ORE
+            name: '&fTiefenschiefer-Diamanterz'
+            buy: 1140
+            sell: -1
+          emerald_ore:
+            material: EMERALD_ORE
+            name: '&fSmaragderz'
+            buy: 900
+            sell: -1
+          deepslate_emerald_ore:
+            material: DEEPSLATE_EMERALD_ORE
+            name: '&fTiefenschiefer-Smaragderz'
+            buy: 900
+            sell: -1
+          raw_iron:
+            material: RAW_IRON
+            name: '&fRohes Eisen'
+            buy: 90
+            sell: 30
+          raw_iron_block:
+            material: RAW_IRON_BLOCK
+            name: '&fBlock aus rohem Eisen'
+            buy: 810
+            sell: 203
+          raw_gold:
+            material: RAW_GOLD
+            name: '&fRohes Gold'
+            buy: 126
+            sell: 42
+          raw_gold_block:
+            material: RAW_GOLD_BLOCK
+            name: '&fBlock aus rohem Gold'
+            buy: 1134
+            sell: 284
+          raw_copper:
+            material: RAW_COPPER
+            name: '&fRohkupfer'
+            buy: 51
+            sell: 17
+          raw_copper_block:
+            material: RAW_COPPER_BLOCK
+            name: '&fRohkupferblock'
+            buy: 459
+            sell: 115
+          iron_ingot:
+            material: IRON_INGOT
+            name: '&fEisenbarren'
+            buy: 90
+            sell: 30
+          gold_ingot:
+            material: GOLD_INGOT
+            name: '&fGoldbarren'
+            buy: 126
+            sell: 42
+          copper_ingot:
+            material: COPPER_INGOT
+            name: '&fKupferbarren'
+            buy: 51
+            sell: 17
+          netherite_ingot:
+            material: NETHERITE_INGOT
+            name: '&fNetheritbarren'
+            buy: 38904
+            sell: 9726
+          netherite_scrap:
+            material: NETHERITE_SCRAP
+            name: '&fNetheritschrott'
+            buy: 9600
+            sell: 3200
+          coal:
+            material: COAL
+            name: '&fKohle'
+            buy: 54
+            sell: 18
+          charcoal:
+            material: CHARCOAL
+            name: '&fHolzkohle'
+            buy: 21
+            sell: 6
+          diamond:
+            material: DIAMOND
+            name: '&fDiamant'
+            buy: 1140
+            sell: 380
+          emerald:
+            material: EMERALD
+            name: '&fSmaragd'
+            buy: 900
+            sell: 300
+          lapis_lazuli:
+            material: LAPIS_LAZULI
+            name: '&fLapislazuli'
+            buy: 30
+            sell: 10
+          amethyst_shard:
+            material: AMETHYST_SHARD
+            name: '&fAmethystscherbe'
+            buy: 75
+            sell: 19
+          quartz:
+            material: QUARTZ
+            name: '&fNetherquarz'
+            buy: 60
+            sell: 15
   farming:
     display-name: '&a&lFarming'
     icon: WHEAT
@@ -3308,11 +3408,6 @@ categories:
             name: '&fTotem der Unsterblichkeit'
             buy: 12000
             sell: 3000
-          netherite_scrap:
-            material: NETHERITE_SCRAP
-            name: '&fNetheritschrott'
-            buy: 9600
-            sell: 3200
           dragon_head:
             material: DRAGON_HEAD
             name: '&fDrachenkopf'
@@ -3875,11 +3970,6 @@ categories:
             name: '&fStock'
             buy: 3
             sell: 1
-          raw_gold_block:
-            material: RAW_GOLD_BLOCK
-            name: '&fBlock aus rohem Gold'
-            buy: 1134
-            sell: 284
           shulker_box:
             material: SHULKER_BOX
             name: '&fShulker-Kiste'
@@ -3895,11 +3985,6 @@ categories:
             name: '&fWassereimer'
             buy: 270
             sell: 68
-          raw_copper_block:
-            material: RAW_COPPER_BLOCK
-            name: '&fRohkupferblock'
-            buy: 459
-            sell: 115
           pufferfish_bucket:
             material: PUFFERFISH_BUCKET
             name: '&fKugelfischeimer'
@@ -3914,11 +3999,6 @@ categories:
             material: PAPER
             name: '&fPapier'
             buy: 24
-            sell: 6
-          charcoal:
-            material: CHARCOAL
-            name: '&fHolzkohle'
-            buy: 21
             sell: 6
           fishing_rod:
             material: FISHING_ROD
@@ -3950,11 +4030,6 @@ categories:
             name: '&fFass'
             buy: 42
             sell: 11
-          raw_iron_block:
-            material: RAW_IRON_BLOCK
-            name: '&fBlock aus rohem Eisen'
-            buy: 810
-            sell: 203
           milk_bucket_item:
             material: MILK_BUCKET
             name: '&fMilcheimer'
@@ -3985,11 +4060,6 @@ categories:
             name: '&fKompass'
             buy: 390
             sell: 98
-          raw_iron:
-            material: RAW_IRON
-            name: '&fRohes Eisen'
-            buy: 90
-            sell: 30
           book:
             material: BOOK
             name: '&fBuch'
@@ -4020,16 +4090,6 @@ categories:
             name: '&fPrüfungsschlüssel'
             buy: 10000
             sell: 2500
-          raw_gold:
-            material: RAW_GOLD
-            name: '&fRohes Gold'
-            buy: 126
-            sell: 42
-          raw_copper:
-            material: RAW_COPPER
-            name: '&fRohkupfer'
-            buy: 51
-            sell: 17
           firework_rocket:
             material: FIREWORK_ROCKET
             name: '&fFeuerwerksrakete'

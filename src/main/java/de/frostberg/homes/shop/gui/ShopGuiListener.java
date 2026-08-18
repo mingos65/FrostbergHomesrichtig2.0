@@ -42,11 +42,13 @@ public class ShopGuiListener implements Listener {
     private static final int NEXT_PAGE_SLOT = 52;
 
     // Feste, "verteilte" Slot-Positionen fuers Hauptmenue (nicht eine durchgehende Reihe,
-    // sondern mit Luecken ueber mehrere Reihen verteilt, wie im Vorbild-Shop) - fuer bis zu 9
-    // Kategorien. Redstone (Index 5) liegt bewusst auf Slot 40 (eine Reihe unter Deko/Banner,
-    // Spalte 4) statt auf Spalte 0 - dort lag es auf der Rand-Spalte und brach den Glas-Rahmen
-    // sichtbar auf. Alle anderen Kategorien bleiben auf ihren urspruenglichen Slots.
-    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 40, 29, 31, 33};
+    // sondern mit Luecken ueber mehrere Reihen verteilt, wie im Vorbild-Shop). Reihenfolge
+    // entspricht der Kategorie-Reihenfolge in shop-items.yml: Bloecke, Werkzeuge, Waffen,
+    // Ruestung, Essen, Redstone, Erze, Farming, Deko, Sonstiges. Redstone (Index 5) und Erze
+    // (Index 6) liegen bewusst eine Reihe unter dem Deko-Banner, symmetrisch links/rechts mit
+    // einer Luecke in der Mitte (Slot 40 bleibt frei) - und nicht auf Spalte 0/8 (Rand-Spalte,
+    // die fillBorder() mit Glas fuellt).
+    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 42, 38, 29, 31, 33};
 
     private static final int DETAIL_ITEM_SLOT = 22;
     private static final int[] SELL_SLOTS = {21, 20, 19}; // -1, -32, -64 (von innen nach aussen)
