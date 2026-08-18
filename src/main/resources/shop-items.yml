@@ -930,184 +930,183 @@ categories:
             name: '&fGlas'
             buy: 12
             sell: 3
-          glass_pane:
-            material: GLASS_PANE
-            name: '&fGlasscheibe'
-            buy: 5
-            sell: 2
           tinted_glass:
             material: TINTED_GLASS
             name: '&fGetöntes Glas'
             buy: 18
             sell: 5
-          brown_stained_glass:
-            material: BROWN_STAINED_GLASS
-            name: '&fGlas (Braun)'
-            buy: 16
-            sell: 4
-          brown_stained_glass_pane:
-            material: BROWN_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Braun)'
-            buy: 6
-            sell: 2
-          purple_stained_glass:
-            material: PURPLE_STAINED_GLASS
-            name: '&fGlas (Lila)'
-            buy: 16
-            sell: 4
-          purple_stained_glass_pane:
-            material: PURPLE_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Lila)'
-            buy: 6
-            sell: 2
-          blue_stained_glass:
-            material: BLUE_STAINED_GLASS
-            name: '&fGlas (Blau)'
-            buy: 16
-            sell: 4
-          blue_stained_glass_pane:
-            material: BLUE_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Blau)'
-            buy: 6
-            sell: 2
-          black_stained_glass:
-            material: BLACK_STAINED_GLASS
-            name: '&fGlas (Schwarz)'
-            buy: 16
-            sell: 4
-          black_stained_glass_pane:
-            material: BLACK_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Schwarz)'
-            buy: 6
-            sell: 2
-          red_stained_glass:
-            material: RED_STAINED_GLASS
-            name: '&fGlas (Rot)'
-            buy: 16
-            sell: 4
-          red_stained_glass_pane:
-            material: RED_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Rot)'
-            buy: 6
-            sell: 2
-          orange_stained_glass:
-            material: ORANGE_STAINED_GLASS
-            name: '&fGlas (Orange)'
-            buy: 16
-            sell: 4
-          orange_stained_glass_pane:
-            material: ORANGE_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Orange)'
-            buy: 6
-            sell: 2
-          green_stained_glass:
-            material: GREEN_STAINED_GLASS
-            name: '&fGlas (Grün)'
-            buy: 16
-            sell: 4
-          green_stained_glass_pane:
-            material: GREEN_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Grün)'
-            buy: 6
-            sell: 2
           white_stained_glass:
             material: WHITE_STAINED_GLASS
             name: '&fGlas (Weiß)'
             buy: 16
             sell: 4
-          white_stained_glass_pane:
-            material: WHITE_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Weiß)'
-            buy: 6
-            sell: 2
+          orange_stained_glass:
+            material: ORANGE_STAINED_GLASS
+            name: '&fGlas (Orange)'
+            buy: 16
+            sell: 4
           magenta_stained_glass:
             material: MAGENTA_STAINED_GLASS
             name: '&fGlas (Magenta)'
             buy: 16
             sell: 4
-          magenta_stained_glass_pane:
-            material: MAGENTA_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Magenta)'
-            buy: 6
-            sell: 2
-          lime_stained_glass:
-            material: LIME_STAINED_GLASS
-            name: '&fGlas (Hellgrün)'
-            buy: 16
-            sell: 4
-          lime_stained_glass_pane:
-            material: LIME_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Hellgrün)'
-            buy: 6
-            sell: 2
           light_blue_stained_glass:
             material: LIGHT_BLUE_STAINED_GLASS
             name: '&fGlas (Hellblau)'
             buy: 16
             sell: 4
-          light_blue_stained_glass_pane:
-            material: LIGHT_BLUE_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Hellblau)'
-            buy: 6
-            sell: 2
-          gray_stained_glass:
-            material: GRAY_STAINED_GLASS
-            name: '&fGlas (Grau)'
-            buy: 16
-            sell: 4
-          gray_stained_glass_pane:
-            material: GRAY_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Grau)'
-            buy: 6
-            sell: 2
-          pink_stained_glass:
-            material: PINK_STAINED_GLASS
-            name: '&fGlas (Rosa)'
-            buy: 16
-            sell: 4
-          pink_stained_glass_pane:
-            material: PINK_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Rosa)'
-            buy: 6
-            sell: 2
-          light_gray_stained_glass:
-            material: LIGHT_GRAY_STAINED_GLASS
-            name: '&fGlas (Hellgrau)'
-            buy: 16
-            sell: 4
-          light_gray_stained_glass_pane:
-            material: LIGHT_GRAY_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Hellgrau)'
-            buy: 6
-            sell: 2
           yellow_stained_glass:
             material: YELLOW_STAINED_GLASS
             name: '&fGlas (Gelb)'
             buy: 16
             sell: 4
-          yellow_stained_glass_pane:
-            material: YELLOW_STAINED_GLASS_PANE
-            name: '&fGlasscheibe (Gelb)'
-            buy: 6
-            sell: 2
+          lime_stained_glass:
+            material: LIME_STAINED_GLASS
+            name: '&fGlas (Hellgrün)'
+            buy: 16
+            sell: 4
+          pink_stained_glass:
+            material: PINK_STAINED_GLASS
+            name: '&fGlas (Rosa)'
+            buy: 16
+            sell: 4
+          gray_stained_glass:
+            material: GRAY_STAINED_GLASS
+            name: '&fGlas (Grau)'
+            buy: 16
+            sell: 4
+          light_gray_stained_glass:
+            material: LIGHT_GRAY_STAINED_GLASS
+            name: '&fGlas (Hellgrau)'
+            buy: 16
+            sell: 4
           cyan_stained_glass:
             material: CYAN_STAINED_GLASS
             name: '&fGlas (Türkis)'
             buy: 16
             sell: 4
+          purple_stained_glass:
+            material: PURPLE_STAINED_GLASS
+            name: '&fGlas (Lila)'
+            buy: 16
+            sell: 4
+          blue_stained_glass:
+            material: BLUE_STAINED_GLASS
+            name: '&fGlas (Blau)'
+            buy: 16
+            sell: 4
+          brown_stained_glass:
+            material: BROWN_STAINED_GLASS
+            name: '&fGlas (Braun)'
+            buy: 16
+            sell: 4
+          green_stained_glass:
+            material: GREEN_STAINED_GLASS
+            name: '&fGlas (Grün)'
+            buy: 16
+            sell: 4
+          red_stained_glass:
+            material: RED_STAINED_GLASS
+            name: '&fGlas (Rot)'
+            buy: 16
+            sell: 4
+          black_stained_glass:
+            material: BLACK_STAINED_GLASS
+            name: '&fGlas (Schwarz)'
+            buy: 16
+            sell: 4
+          glass_pane:
+            material: GLASS_PANE
+            name: '&fGlasscheibe'
+            buy: 5
+            sell: 2
+          white_stained_glass_pane:
+            material: WHITE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Weiß)'
+            buy: 6
+            sell: 2
+          orange_stained_glass_pane:
+            material: ORANGE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Orange)'
+            buy: 6
+            sell: 2
+          magenta_stained_glass_pane:
+            material: MAGENTA_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Magenta)'
+            buy: 6
+            sell: 2
+          light_blue_stained_glass_pane:
+            material: LIGHT_BLUE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellblau)'
+            buy: 6
+            sell: 2
+          yellow_stained_glass_pane:
+            material: YELLOW_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Gelb)'
+            buy: 6
+            sell: 2
+          lime_stained_glass_pane:
+            material: LIME_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellgrün)'
+            buy: 6
+            sell: 2
+          pink_stained_glass_pane:
+            material: PINK_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Rosa)'
+            buy: 6
+            sell: 2
+          gray_stained_glass_pane:
+            material: GRAY_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Grau)'
+            buy: 6
+            sell: 2
+          light_gray_stained_glass_pane:
+            material: LIGHT_GRAY_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellgrau)'
+            buy: 6
+            sell: 2
           cyan_stained_glass_pane:
             material: CYAN_STAINED_GLASS_PANE
             name: '&fGlasscheibe (Türkis)'
             buy: 6
             sell: 2
-
+          purple_stained_glass_pane:
+            material: PURPLE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Lila)'
+            buy: 6
+            sell: 2
+          blue_stained_glass_pane:
+            material: BLUE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Blau)'
+            buy: 6
+            sell: 2
+          brown_stained_glass_pane:
+            material: BROWN_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Braun)'
+            buy: 6
+            sell: 2
+          green_stained_glass_pane:
+            material: GREEN_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Grün)'
+            buy: 6
+            sell: 2
+          red_stained_glass_pane:
+            material: RED_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Rot)'
+            buy: 6
+            sell: 2
+          black_stained_glass_pane:
+            material: BLACK_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Schwarz)'
+            buy: 6
+            sell: 2
   tools:
     display-name: '&e&lWerkzeuge'
     icon: IRON_PICKAXE
     border: YELLOW_STAINED_GLASS_PANE
     sub-categories:
-      pickaxes:
-        display-name: '&e&lSpitzhacken'
+      tools:
+        display-name: '&e&lWerkzeuge'
         icon: IRON_PICKAXE
         columns: 6
         items:
@@ -1141,11 +1140,6 @@ categories:
             name: '&fNetherit Spitzhacke'
             buy: 116718
             sell: 29180
-      axes:
-        display-name: '&e&lÄxte'
-        icon: IRON_AXE
-        columns: 6
-        items:
           wood_axe:
             material: WOODEN_AXE
             name: '&fHolz Axt'
@@ -1176,11 +1170,6 @@ categories:
             name: '&fNetherit Axt'
             buy: 116718
             sell: 29180
-      shovels:
-        display-name: '&e&lSchaufeln'
-        icon: IRON_SHOVEL
-        columns: 6
-        items:
           wood_shovel:
             material: WOODEN_SHOVEL
             name: '&fHolz Schaufel'
@@ -1211,11 +1200,6 @@ categories:
             name: '&fNetherit Schaufel'
             buy: 38910
             sell: 9728
-      hoes:
-        display-name: '&e&lHacken'
-        icon: IRON_HOE
-        columns: 6
-        items:
           wood_hoe:
             material: WOODEN_HOE
             name: '&fHolz Hacke'
@@ -1251,10 +1235,10 @@ categories:
     icon: DIAMOND_SWORD
     border: RED_STAINED_GLASS_PANE
     sub-categories:
-      swords:
-        display-name: '&c&lSchwerter'
+      weapons:
+        display-name: '&c&lWaffen'
         icon: DIAMOND_SWORD
-        columns: 6
+        columns: 9
         items:
           wood_sword:
             material: WOODEN_SWORD
@@ -1286,11 +1270,6 @@ categories:
             name: '&fNetherit Schwert'
             buy: 77811
             sell: 19453
-      ranged:
-        display-name: '&c&lBögen & Armbrüste'
-        icon: BOW
-        columns: 9
-        items:
           bow:
             material: BOW
             name: '&fBogen'
@@ -1311,11 +1290,6 @@ categories:
             name: '&fLeuchtpfeil'
             buy: 434
             sell: 109
-      other:
-        display-name: '&c&lSonstige Waffen'
-        icon: TRIDENT
-        columns: 9
-        items:
           trident:
             material: TRIDENT
             name: '&bSpeer'
@@ -1512,6 +1486,11 @@ categories:
             name: '&fSattel'
             buy: 250
             sell: 63
+          elytra:
+            material: ELYTRA
+            name: '&fElytren'
+            buy: 45600
+            sell: 11400
 
   food:
     display-name: '&6&lEssen'
@@ -1964,289 +1943,84 @@ categories:
         icon: WHITE_WOOL
         columns: 9
         items:
-          brown_wool:
-            material: BROWN_WOOL
-            name: '&fWolle (Braun)'
+          white_wool:
+            material: WHITE_WOOL
+            name: '&fWolle (Weiß)'
             buy: 36
             sell: 9
-          brown_terracotta:
-            material: BROWN_TERRACOTTA
-            name: '&fTerrakotta (Braun)'
-            buy: 28
-            sell: 7
-          brown_concrete:
-            material: BROWN_CONCRETE
-            name: '&fBeton (Braun)'
-            buy: 16
-            sell: 4
-          brown_carpet:
-            material: BROWN_CARPET
-            name: '&fTeppich (Braun)'
-            buy: 24
-            sell: 6
-          brown_dye:
-            material: BROWN_DYE
-            name: '&fFarbstoff (Braun)'
-            buy: 30
-            sell: 8
-          brown_banner:
-            material: BROWN_BANNER
-            name: '&fBanner (Braun)'
-            buy: 219
-            sell: 55
-          brown_bed:
-            material: BROWN_BED
-            name: '&fBett (Braun)'
-            buy: 126
-            sell: 32
-          brown_candle:
-            material: BROWN_CANDLE
-            name: '&fKerze (Braun)'
-            buy: 18
-            sell: 5
-          purple_wool:
-            material: PURPLE_WOOL
-            name: '&fWolle (Lila)'
-            buy: 36
-            sell: 9
-          purple_terracotta:
-            material: PURPLE_TERRACOTTA
-            name: '&fTerrakotta (Lila)'
-            buy: 28
-            sell: 7
-          purple_concrete:
-            material: PURPLE_CONCRETE
-            name: '&fBeton (Lila)'
-            buy: 16
-            sell: 4
-          purple_carpet:
-            material: PURPLE_CARPET
-            name: '&fTeppich (Lila)'
-            buy: 24
-            sell: 6
-          purple_dye:
-            material: PURPLE_DYE
-            name: '&fFarbstoff (Lila)'
-            buy: 30
-            sell: 8
-          purple_banner:
-            material: PURPLE_BANNER
-            name: '&fBanner (Lila)'
-            buy: 219
-            sell: 55
-          purple_bed:
-            material: PURPLE_BED
-            name: '&fBett (Lila)'
-            buy: 126
-            sell: 32
-          purple_candle:
-            material: PURPLE_CANDLE
-            name: '&fKerze (Lila)'
-            buy: 18
-            sell: 5
-          blue_wool:
-            material: BLUE_WOOL
-            name: '&fWolle (Blau)'
-            buy: 36
-            sell: 9
-          blue_terracotta:
-            material: BLUE_TERRACOTTA
-            name: '&fTerrakotta (Blau)'
-            buy: 28
-            sell: 7
-          blue_concrete:
-            material: BLUE_CONCRETE
-            name: '&fBeton (Blau)'
-            buy: 16
-            sell: 4
-          blue_carpet:
-            material: BLUE_CARPET
-            name: '&fTeppich (Blau)'
-            buy: 24
-            sell: 6
-          blue_dye:
-            material: BLUE_DYE
-            name: '&fFarbstoff (Blau)'
-            buy: 30
-            sell: 8
-          blue_banner:
-            material: BLUE_BANNER
-            name: '&fBanner (Blau)'
-            buy: 219
-            sell: 55
-          blue_bed:
-            material: BLUE_BED
-            name: '&fBett (Blau)'
-            buy: 126
-            sell: 32
-          blue_candle:
-            material: BLUE_CANDLE
-            name: '&fKerze (Blau)'
-            buy: 18
-            sell: 5
-          black_wool:
-            material: BLACK_WOOL
-            name: '&fWolle (Schwarz)'
-            buy: 36
-            sell: 9
-          black_terracotta:
-            material: BLACK_TERRACOTTA
-            name: '&fTerrakotta (Schwarz)'
-            buy: 28
-            sell: 7
-          black_concrete:
-            material: BLACK_CONCRETE
-            name: '&fBeton (Schwarz)'
-            buy: 16
-            sell: 4
-          black_carpet:
-            material: BLACK_CARPET
-            name: '&fTeppich (Schwarz)'
-            buy: 24
-            sell: 6
-          black_dye:
-            material: BLACK_DYE
-            name: '&fFarbstoff (Schwarz)'
-            buy: 30
-            sell: 8
-          black_banner:
-            material: BLACK_BANNER
-            name: '&fBanner (Schwarz)'
-            buy: 219
-            sell: 55
-          black_bed:
-            material: BLACK_BED
-            name: '&fBett (Schwarz)'
-            buy: 126
-            sell: 32
-          black_candle:
-            material: BLACK_CANDLE
-            name: '&fKerze (Schwarz)'
-            buy: 18
-            sell: 5
-          red_wool:
-            material: RED_WOOL
-            name: '&fWolle (Rot)'
-            buy: 36
-            sell: 9
-          red_terracotta:
-            material: RED_TERRACOTTA
-            name: '&fTerrakotta (Rot)'
-            buy: 28
-            sell: 7
-          red_concrete:
-            material: RED_CONCRETE
-            name: '&fBeton (Rot)'
-            buy: 16
-            sell: 4
-          red_carpet:
-            material: RED_CARPET
-            name: '&fTeppich (Rot)'
-            buy: 24
-            sell: 6
-          red_dye:
-            material: RED_DYE
-            name: '&fFarbstoff (Rot)'
-            buy: 30
-            sell: 8
-          red_banner:
-            material: RED_BANNER
-            name: '&fBanner (Rot)'
-            buy: 219
-            sell: 55
-          red_bed:
-            material: RED_BED
-            name: '&fBett (Rot)'
-            buy: 126
-            sell: 32
-          red_candle:
-            material: RED_CANDLE
-            name: '&fKerze (Rot)'
-            buy: 18
-            sell: 5
           orange_wool:
             material: ORANGE_WOOL
             name: '&fWolle (Orange)'
             buy: 36
             sell: 9
-          orange_terracotta:
-            material: ORANGE_TERRACOTTA
-            name: '&fTerrakotta (Orange)'
-            buy: 28
-            sell: 7
-          orange_concrete:
-            material: ORANGE_CONCRETE
-            name: '&fBeton (Orange)'
-            buy: 16
-            sell: 4
-          orange_carpet:
-            material: ORANGE_CARPET
-            name: '&fTeppich (Orange)'
-            buy: 24
-            sell: 6
-          orange_dye:
-            material: ORANGE_DYE
-            name: '&fFarbstoff (Orange)'
-            buy: 30
-            sell: 8
-          orange_banner:
-            material: ORANGE_BANNER
-            name: '&fBanner (Orange)'
-            buy: 219
-            sell: 55
-          orange_bed:
-            material: ORANGE_BED
-            name: '&fBett (Orange)'
-            buy: 126
-            sell: 32
-          orange_candle:
-            material: ORANGE_CANDLE
-            name: '&fKerze (Orange)'
-            buy: 18
-            sell: 5
+          magenta_wool:
+            material: MAGENTA_WOOL
+            name: '&fWolle (Magenta)'
+            buy: 36
+            sell: 9
+          light_blue_wool:
+            material: LIGHT_BLUE_WOOL
+            name: '&fWolle (Hellblau)'
+            buy: 36
+            sell: 9
+          yellow_wool:
+            material: YELLOW_WOOL
+            name: '&fWolle (Gelb)'
+            buy: 36
+            sell: 9
+          lime_wool:
+            material: LIME_WOOL
+            name: '&fWolle (Hellgrün)'
+            buy: 36
+            sell: 9
+          pink_wool:
+            material: PINK_WOOL
+            name: '&fWolle (Rosa)'
+            buy: 36
+            sell: 9
+          gray_wool:
+            material: GRAY_WOOL
+            name: '&fWolle (Grau)'
+            buy: 36
+            sell: 9
+          light_gray_wool:
+            material: LIGHT_GRAY_WOOL
+            name: '&fWolle (Hellgrau)'
+            buy: 36
+            sell: 9
+          cyan_wool:
+            material: CYAN_WOOL
+            name: '&fWolle (Türkis)'
+            buy: 36
+            sell: 9
+          purple_wool:
+            material: PURPLE_WOOL
+            name: '&fWolle (Lila)'
+            buy: 36
+            sell: 9
+          blue_wool:
+            material: BLUE_WOOL
+            name: '&fWolle (Blau)'
+            buy: 36
+            sell: 9
+          brown_wool:
+            material: BROWN_WOOL
+            name: '&fWolle (Braun)'
+            buy: 36
+            sell: 9
           green_wool:
             material: GREEN_WOOL
             name: '&fWolle (Grün)'
             buy: 36
             sell: 9
-          green_terracotta:
-            material: GREEN_TERRACOTTA
-            name: '&fTerrakotta (Grün)'
-            buy: 28
-            sell: 7
-          green_concrete:
-            material: GREEN_CONCRETE
-            name: '&fBeton (Grün)'
-            buy: 16
-            sell: 4
-          green_carpet:
-            material: GREEN_CARPET
-            name: '&fTeppich (Grün)'
-            buy: 24
-            sell: 6
-          green_dye:
-            material: GREEN_DYE
-            name: '&fFarbstoff (Grün)'
-            buy: 30
-            sell: 8
-          green_banner:
-            material: GREEN_BANNER
-            name: '&fBanner (Grün)'
-            buy: 219
-            sell: 55
-          green_bed:
-            material: GREEN_BED
-            name: '&fBett (Grün)'
-            buy: 126
-            sell: 32
-          green_candle:
-            material: GREEN_CANDLE
-            name: '&fKerze (Grün)'
-            buy: 18
-            sell: 5
-          white_wool:
-            material: WHITE_WOOL
-            name: '&fWolle (Weiß)'
+          red_wool:
+            material: RED_WOOL
+            name: '&fWolle (Rot)'
+            buy: 36
+            sell: 9
+          black_wool:
+            material: BLACK_WOOL
+            name: '&fWolle (Schwarz)'
             buy: 36
             sell: 9
           white_terracotta:
@@ -2254,9 +2028,159 @@ categories:
             name: '&fTerrakotta (Weiß)'
             buy: 28
             sell: 7
+          orange_terracotta:
+            material: ORANGE_TERRACOTTA
+            name: '&fTerrakotta (Orange)'
+            buy: 28
+            sell: 7
+          magenta_terracotta:
+            material: MAGENTA_TERRACOTTA
+            name: '&fTerrakotta (Magenta)'
+            buy: 28
+            sell: 7
+          light_blue_terracotta:
+            material: LIGHT_BLUE_TERRACOTTA
+            name: '&fTerrakotta (Hellblau)'
+            buy: 28
+            sell: 7
+          yellow_terracotta:
+            material: YELLOW_TERRACOTTA
+            name: '&fTerrakotta (Gelb)'
+            buy: 28
+            sell: 7
+          lime_terracotta:
+            material: LIME_TERRACOTTA
+            name: '&fTerrakotta (Hellgrün)'
+            buy: 28
+            sell: 7
+          pink_terracotta:
+            material: PINK_TERRACOTTA
+            name: '&fTerrakotta (Rosa)'
+            buy: 28
+            sell: 7
+          gray_terracotta:
+            material: GRAY_TERRACOTTA
+            name: '&fTerrakotta (Grau)'
+            buy: 28
+            sell: 7
+          light_gray_terracotta:
+            material: LIGHT_GRAY_TERRACOTTA
+            name: '&fTerrakotta (Hellgrau)'
+            buy: 28
+            sell: 7
+          cyan_terracotta:
+            material: CYAN_TERRACOTTA
+            name: '&fTerrakotta (Türkis)'
+            buy: 28
+            sell: 7
+          purple_terracotta:
+            material: PURPLE_TERRACOTTA
+            name: '&fTerrakotta (Lila)'
+            buy: 28
+            sell: 7
+          blue_terracotta:
+            material: BLUE_TERRACOTTA
+            name: '&fTerrakotta (Blau)'
+            buy: 28
+            sell: 7
+          brown_terracotta:
+            material: BROWN_TERRACOTTA
+            name: '&fTerrakotta (Braun)'
+            buy: 28
+            sell: 7
+          green_terracotta:
+            material: GREEN_TERRACOTTA
+            name: '&fTerrakotta (Grün)'
+            buy: 28
+            sell: 7
+          red_terracotta:
+            material: RED_TERRACOTTA
+            name: '&fTerrakotta (Rot)'
+            buy: 28
+            sell: 7
+          black_terracotta:
+            material: BLACK_TERRACOTTA
+            name: '&fTerrakotta (Schwarz)'
+            buy: 28
+            sell: 7
           white_concrete:
             material: WHITE_CONCRETE
             name: '&fBeton (Weiß)'
+            buy: 16
+            sell: 4
+          orange_concrete:
+            material: ORANGE_CONCRETE
+            name: '&fBeton (Orange)'
+            buy: 16
+            sell: 4
+          magenta_concrete:
+            material: MAGENTA_CONCRETE
+            name: '&fBeton (Magenta)'
+            buy: 16
+            sell: 4
+          light_blue_concrete:
+            material: LIGHT_BLUE_CONCRETE
+            name: '&fBeton (Hellblau)'
+            buy: 16
+            sell: 4
+          yellow_concrete:
+            material: YELLOW_CONCRETE
+            name: '&fBeton (Gelb)'
+            buy: 16
+            sell: 4
+          lime_concrete:
+            material: LIME_CONCRETE
+            name: '&fBeton (Hellgrün)'
+            buy: 16
+            sell: 4
+          pink_concrete:
+            material: PINK_CONCRETE
+            name: '&fBeton (Rosa)'
+            buy: 16
+            sell: 4
+          gray_concrete:
+            material: GRAY_CONCRETE
+            name: '&fBeton (Grau)'
+            buy: 16
+            sell: 4
+          light_gray_concrete:
+            material: LIGHT_GRAY_CONCRETE
+            name: '&fBeton (Hellgrau)'
+            buy: 16
+            sell: 4
+          cyan_concrete:
+            material: CYAN_CONCRETE
+            name: '&fBeton (Türkis)'
+            buy: 16
+            sell: 4
+          purple_concrete:
+            material: PURPLE_CONCRETE
+            name: '&fBeton (Lila)'
+            buy: 16
+            sell: 4
+          blue_concrete:
+            material: BLUE_CONCRETE
+            name: '&fBeton (Blau)'
+            buy: 16
+            sell: 4
+          brown_concrete:
+            material: BROWN_CONCRETE
+            name: '&fBeton (Braun)'
+            buy: 16
+            sell: 4
+          green_concrete:
+            material: GREEN_CONCRETE
+            name: '&fBeton (Grün)'
+            buy: 16
+            sell: 4
+          red_concrete:
+            material: RED_CONCRETE
+            name: '&fBeton (Rot)'
+            buy: 16
+            sell: 4
+          black_concrete:
+            material: BLACK_CONCRETE
+            name: '&fBeton (Schwarz)'
             buy: 16
             sell: 4
           white_carpet:
@@ -2264,9 +2188,159 @@ categories:
             name: '&fTeppich (Weiß)'
             buy: 24
             sell: 6
+          orange_carpet:
+            material: ORANGE_CARPET
+            name: '&fTeppich (Orange)'
+            buy: 24
+            sell: 6
+          magenta_carpet:
+            material: MAGENTA_CARPET
+            name: '&fTeppich (Magenta)'
+            buy: 24
+            sell: 6
+          light_blue_carpet:
+            material: LIGHT_BLUE_CARPET
+            name: '&fTeppich (Hellblau)'
+            buy: 24
+            sell: 6
+          yellow_carpet:
+            material: YELLOW_CARPET
+            name: '&fTeppich (Gelb)'
+            buy: 24
+            sell: 6
+          lime_carpet:
+            material: LIME_CARPET
+            name: '&fTeppich (Hellgrün)'
+            buy: 24
+            sell: 6
+          pink_carpet:
+            material: PINK_CARPET
+            name: '&fTeppich (Rosa)'
+            buy: 24
+            sell: 6
+          gray_carpet:
+            material: GRAY_CARPET
+            name: '&fTeppich (Grau)'
+            buy: 24
+            sell: 6
+          light_gray_carpet:
+            material: LIGHT_GRAY_CARPET
+            name: '&fTeppich (Hellgrau)'
+            buy: 24
+            sell: 6
+          cyan_carpet:
+            material: CYAN_CARPET
+            name: '&fTeppich (Türkis)'
+            buy: 24
+            sell: 6
+          purple_carpet:
+            material: PURPLE_CARPET
+            name: '&fTeppich (Lila)'
+            buy: 24
+            sell: 6
+          blue_carpet:
+            material: BLUE_CARPET
+            name: '&fTeppich (Blau)'
+            buy: 24
+            sell: 6
+          brown_carpet:
+            material: BROWN_CARPET
+            name: '&fTeppich (Braun)'
+            buy: 24
+            sell: 6
+          green_carpet:
+            material: GREEN_CARPET
+            name: '&fTeppich (Grün)'
+            buy: 24
+            sell: 6
+          red_carpet:
+            material: RED_CARPET
+            name: '&fTeppich (Rot)'
+            buy: 24
+            sell: 6
+          black_carpet:
+            material: BLACK_CARPET
+            name: '&fTeppich (Schwarz)'
+            buy: 24
+            sell: 6
           white_dye:
             material: WHITE_DYE
             name: '&fFarbstoff (Weiß)'
+            buy: 30
+            sell: 8
+          orange_dye:
+            material: ORANGE_DYE
+            name: '&fFarbstoff (Orange)'
+            buy: 30
+            sell: 8
+          magenta_dye:
+            material: MAGENTA_DYE
+            name: '&fFarbstoff (Magenta)'
+            buy: 30
+            sell: 8
+          light_blue_dye:
+            material: LIGHT_BLUE_DYE
+            name: '&fFarbstoff (Hellblau)'
+            buy: 30
+            sell: 8
+          yellow_dye:
+            material: YELLOW_DYE
+            name: '&fFarbstoff (Gelb)'
+            buy: 30
+            sell: 8
+          lime_dye:
+            material: LIME_DYE
+            name: '&fFarbstoff (Hellgrün)'
+            buy: 30
+            sell: 8
+          pink_dye:
+            material: PINK_DYE
+            name: '&fFarbstoff (Rosa)'
+            buy: 30
+            sell: 8
+          gray_dye:
+            material: GRAY_DYE
+            name: '&fFarbstoff (Grau)'
+            buy: 30
+            sell: 8
+          light_gray_dye:
+            material: LIGHT_GRAY_DYE
+            name: '&fFarbstoff (Hellgrau)'
+            buy: 30
+            sell: 8
+          cyan_dye:
+            material: CYAN_DYE
+            name: '&fFarbstoff (Türkis)'
+            buy: 30
+            sell: 8
+          purple_dye:
+            material: PURPLE_DYE
+            name: '&fFarbstoff (Lila)'
+            buy: 30
+            sell: 8
+          blue_dye:
+            material: BLUE_DYE
+            name: '&fFarbstoff (Blau)'
+            buy: 30
+            sell: 8
+          brown_dye:
+            material: BROWN_DYE
+            name: '&fFarbstoff (Braun)'
+            buy: 30
+            sell: 8
+          green_dye:
+            material: GREEN_DYE
+            name: '&fFarbstoff (Grün)'
+            buy: 30
+            sell: 8
+          red_dye:
+            material: RED_DYE
+            name: '&fFarbstoff (Rot)'
+            buy: 30
+            sell: 8
+          black_dye:
+            material: BLACK_DYE
+            name: '&fFarbstoff (Schwarz)'
             buy: 30
             sell: 8
           white_banner:
@@ -2274,9 +2348,159 @@ categories:
             name: '&fBanner (Weiß)'
             buy: 219
             sell: 55
+          orange_banner:
+            material: ORANGE_BANNER
+            name: '&fBanner (Orange)'
+            buy: 219
+            sell: 55
+          magenta_banner:
+            material: MAGENTA_BANNER
+            name: '&fBanner (Magenta)'
+            buy: 219
+            sell: 55
+          light_blue_banner:
+            material: LIGHT_BLUE_BANNER
+            name: '&fBanner (Hellblau)'
+            buy: 219
+            sell: 55
+          yellow_banner:
+            material: YELLOW_BANNER
+            name: '&fBanner (Gelb)'
+            buy: 219
+            sell: 55
+          lime_banner:
+            material: LIME_BANNER
+            name: '&fBanner (Hellgrün)'
+            buy: 219
+            sell: 55
+          pink_banner:
+            material: PINK_BANNER
+            name: '&fBanner (Rosa)'
+            buy: 219
+            sell: 55
+          gray_banner:
+            material: GRAY_BANNER
+            name: '&fBanner (Grau)'
+            buy: 219
+            sell: 55
+          light_gray_banner:
+            material: LIGHT_GRAY_BANNER
+            name: '&fBanner (Hellgrau)'
+            buy: 219
+            sell: 55
+          cyan_banner:
+            material: CYAN_BANNER
+            name: '&fBanner (Türkis)'
+            buy: 219
+            sell: 55
+          purple_banner:
+            material: PURPLE_BANNER
+            name: '&fBanner (Lila)'
+            buy: 219
+            sell: 55
+          blue_banner:
+            material: BLUE_BANNER
+            name: '&fBanner (Blau)'
+            buy: 219
+            sell: 55
+          brown_banner:
+            material: BROWN_BANNER
+            name: '&fBanner (Braun)'
+            buy: 219
+            sell: 55
+          green_banner:
+            material: GREEN_BANNER
+            name: '&fBanner (Grün)'
+            buy: 219
+            sell: 55
+          red_banner:
+            material: RED_BANNER
+            name: '&fBanner (Rot)'
+            buy: 219
+            sell: 55
+          black_banner:
+            material: BLACK_BANNER
+            name: '&fBanner (Schwarz)'
+            buy: 219
+            sell: 55
           white_bed:
             material: WHITE_BED
             name: '&fBett (Weiß)'
+            buy: 126
+            sell: 32
+          orange_bed:
+            material: ORANGE_BED
+            name: '&fBett (Orange)'
+            buy: 126
+            sell: 32
+          magenta_bed:
+            material: MAGENTA_BED
+            name: '&fBett (Magenta)'
+            buy: 126
+            sell: 32
+          light_blue_bed:
+            material: LIGHT_BLUE_BED
+            name: '&fBett (Hellblau)'
+            buy: 126
+            sell: 32
+          yellow_bed:
+            material: YELLOW_BED
+            name: '&fBett (Gelb)'
+            buy: 126
+            sell: 32
+          lime_bed:
+            material: LIME_BED
+            name: '&fBett (Hellgrün)'
+            buy: 126
+            sell: 32
+          pink_bed:
+            material: PINK_BED
+            name: '&fBett (Rosa)'
+            buy: 126
+            sell: 32
+          gray_bed:
+            material: GRAY_BED
+            name: '&fBett (Grau)'
+            buy: 126
+            sell: 32
+          light_gray_bed:
+            material: LIGHT_GRAY_BED
+            name: '&fBett (Hellgrau)'
+            buy: 126
+            sell: 32
+          cyan_bed:
+            material: CYAN_BED
+            name: '&fBett (Türkis)'
+            buy: 126
+            sell: 32
+          purple_bed:
+            material: PURPLE_BED
+            name: '&fBett (Lila)'
+            buy: 126
+            sell: 32
+          blue_bed:
+            material: BLUE_BED
+            name: '&fBett (Blau)'
+            buy: 126
+            sell: 32
+          brown_bed:
+            material: BROWN_BED
+            name: '&fBett (Braun)'
+            buy: 126
+            sell: 32
+          green_bed:
+            material: GREEN_BED
+            name: '&fBett (Grün)'
+            buy: 126
+            sell: 32
+          red_bed:
+            material: RED_BED
+            name: '&fBett (Rot)'
+            buy: 126
+            sell: 32
+          black_bed:
+            material: BLACK_BED
+            name: '&fBett (Schwarz)'
             buy: 126
             sell: 32
           white_candle:
@@ -2284,324 +2508,79 @@ categories:
             name: '&fKerze (Weiß)'
             buy: 18
             sell: 5
-          magenta_wool:
-            material: MAGENTA_WOOL
-            name: '&fWolle (Magenta)'
-            buy: 36
-            sell: 9
-          magenta_terracotta:
-            material: MAGENTA_TERRACOTTA
-            name: '&fTerrakotta (Magenta)'
-            buy: 28
-            sell: 7
-          magenta_concrete:
-            material: MAGENTA_CONCRETE
-            name: '&fBeton (Magenta)'
-            buy: 16
-            sell: 4
-          magenta_carpet:
-            material: MAGENTA_CARPET
-            name: '&fTeppich (Magenta)'
-            buy: 24
-            sell: 6
-          magenta_dye:
-            material: MAGENTA_DYE
-            name: '&fFarbstoff (Magenta)'
-            buy: 30
-            sell: 8
-          magenta_banner:
-            material: MAGENTA_BANNER
-            name: '&fBanner (Magenta)'
-            buy: 219
-            sell: 55
-          magenta_bed:
-            material: MAGENTA_BED
-            name: '&fBett (Magenta)'
-            buy: 126
-            sell: 32
+          orange_candle:
+            material: ORANGE_CANDLE
+            name: '&fKerze (Orange)'
+            buy: 18
+            sell: 5
           magenta_candle:
             material: MAGENTA_CANDLE
             name: '&fKerze (Magenta)'
             buy: 18
             sell: 5
-          lime_wool:
-            material: LIME_WOOL
-            name: '&fWolle (Hellgrün)'
-            buy: 36
-            sell: 9
-          lime_terracotta:
-            material: LIME_TERRACOTTA
-            name: '&fTerrakotta (Hellgrün)'
-            buy: 28
-            sell: 7
-          lime_concrete:
-            material: LIME_CONCRETE
-            name: '&fBeton (Hellgrün)'
-            buy: 16
-            sell: 4
-          lime_carpet:
-            material: LIME_CARPET
-            name: '&fTeppich (Hellgrün)'
-            buy: 24
-            sell: 6
-          lime_dye:
-            material: LIME_DYE
-            name: '&fFarbstoff (Hellgrün)'
-            buy: 30
-            sell: 8
-          lime_banner:
-            material: LIME_BANNER
-            name: '&fBanner (Hellgrün)'
-            buy: 219
-            sell: 55
-          lime_bed:
-            material: LIME_BED
-            name: '&fBett (Hellgrün)'
-            buy: 126
-            sell: 32
-          lime_candle:
-            material: LIME_CANDLE
-            name: '&fKerze (Hellgrün)'
-            buy: 18
-            sell: 5
-          light_blue_wool:
-            material: LIGHT_BLUE_WOOL
-            name: '&fWolle (Hellblau)'
-            buy: 36
-            sell: 9
-          light_blue_terracotta:
-            material: LIGHT_BLUE_TERRACOTTA
-            name: '&fTerrakotta (Hellblau)'
-            buy: 28
-            sell: 7
-          light_blue_concrete:
-            material: LIGHT_BLUE_CONCRETE
-            name: '&fBeton (Hellblau)'
-            buy: 16
-            sell: 4
-          light_blue_carpet:
-            material: LIGHT_BLUE_CARPET
-            name: '&fTeppich (Hellblau)'
-            buy: 24
-            sell: 6
-          light_blue_dye:
-            material: LIGHT_BLUE_DYE
-            name: '&fFarbstoff (Hellblau)'
-            buy: 30
-            sell: 8
-          light_blue_banner:
-            material: LIGHT_BLUE_BANNER
-            name: '&fBanner (Hellblau)'
-            buy: 219
-            sell: 55
-          light_blue_bed:
-            material: LIGHT_BLUE_BED
-            name: '&fBett (Hellblau)'
-            buy: 126
-            sell: 32
           light_blue_candle:
             material: LIGHT_BLUE_CANDLE
             name: '&fKerze (Hellblau)'
             buy: 18
             sell: 5
-          gray_wool:
-            material: GRAY_WOOL
-            name: '&fWolle (Grau)'
-            buy: 36
-            sell: 9
-          gray_terracotta:
-            material: GRAY_TERRACOTTA
-            name: '&fTerrakotta (Grau)'
-            buy: 28
-            sell: 7
-          gray_concrete:
-            material: GRAY_CONCRETE
-            name: '&fBeton (Grau)'
-            buy: 16
-            sell: 4
-          gray_carpet:
-            material: GRAY_CARPET
-            name: '&fTeppich (Grau)'
-            buy: 24
-            sell: 6
-          gray_dye:
-            material: GRAY_DYE
-            name: '&fFarbstoff (Grau)'
-            buy: 30
-            sell: 8
-          gray_banner:
-            material: GRAY_BANNER
-            name: '&fBanner (Grau)'
-            buy: 219
-            sell: 55
-          gray_bed:
-            material: GRAY_BED
-            name: '&fBett (Grau)'
-            buy: 126
-            sell: 32
-          gray_candle:
-            material: GRAY_CANDLE
-            name: '&fKerze (Grau)'
-            buy: 18
-            sell: 5
-          pink_wool:
-            material: PINK_WOOL
-            name: '&fWolle (Rosa)'
-            buy: 36
-            sell: 9
-          pink_terracotta:
-            material: PINK_TERRACOTTA
-            name: '&fTerrakotta (Rosa)'
-            buy: 28
-            sell: 7
-          pink_concrete:
-            material: PINK_CONCRETE
-            name: '&fBeton (Rosa)'
-            buy: 16
-            sell: 4
-          pink_carpet:
-            material: PINK_CARPET
-            name: '&fTeppich (Rosa)'
-            buy: 24
-            sell: 6
-          pink_dye:
-            material: PINK_DYE
-            name: '&fFarbstoff (Rosa)'
-            buy: 30
-            sell: 8
-          pink_banner:
-            material: PINK_BANNER
-            name: '&fBanner (Rosa)'
-            buy: 219
-            sell: 55
-          pink_bed:
-            material: PINK_BED
-            name: '&fBett (Rosa)'
-            buy: 126
-            sell: 32
-          pink_candle:
-            material: PINK_CANDLE
-            name: '&fKerze (Rosa)'
-            buy: 18
-            sell: 5
-          light_gray_wool:
-            material: LIGHT_GRAY_WOOL
-            name: '&fWolle (Hellgrau)'
-            buy: 36
-            sell: 9
-          light_gray_terracotta:
-            material: LIGHT_GRAY_TERRACOTTA
-            name: '&fTerrakotta (Hellgrau)'
-            buy: 28
-            sell: 7
-          light_gray_concrete:
-            material: LIGHT_GRAY_CONCRETE
-            name: '&fBeton (Hellgrau)'
-            buy: 16
-            sell: 4
-          light_gray_carpet:
-            material: LIGHT_GRAY_CARPET
-            name: '&fTeppich (Hellgrau)'
-            buy: 24
-            sell: 6
-          light_gray_dye:
-            material: LIGHT_GRAY_DYE
-            name: '&fFarbstoff (Hellgrau)'
-            buy: 30
-            sell: 8
-          light_gray_banner:
-            material: LIGHT_GRAY_BANNER
-            name: '&fBanner (Hellgrau)'
-            buy: 219
-            sell: 55
-          light_gray_bed:
-            material: LIGHT_GRAY_BED
-            name: '&fBett (Hellgrau)'
-            buy: 126
-            sell: 32
-          light_gray_candle:
-            material: LIGHT_GRAY_CANDLE
-            name: '&fKerze (Hellgrau)'
-            buy: 18
-            sell: 5
-          yellow_wool:
-            material: YELLOW_WOOL
-            name: '&fWolle (Gelb)'
-            buy: 36
-            sell: 9
-          yellow_terracotta:
-            material: YELLOW_TERRACOTTA
-            name: '&fTerrakotta (Gelb)'
-            buy: 28
-            sell: 7
-          yellow_concrete:
-            material: YELLOW_CONCRETE
-            name: '&fBeton (Gelb)'
-            buy: 16
-            sell: 4
-          yellow_carpet:
-            material: YELLOW_CARPET
-            name: '&fTeppich (Gelb)'
-            buy: 24
-            sell: 6
-          yellow_dye:
-            material: YELLOW_DYE
-            name: '&fFarbstoff (Gelb)'
-            buy: 30
-            sell: 8
-          yellow_banner:
-            material: YELLOW_BANNER
-            name: '&fBanner (Gelb)'
-            buy: 219
-            sell: 55
-          yellow_bed:
-            material: YELLOW_BED
-            name: '&fBett (Gelb)'
-            buy: 126
-            sell: 32
           yellow_candle:
             material: YELLOW_CANDLE
             name: '&fKerze (Gelb)'
             buy: 18
             sell: 5
-          cyan_wool:
-            material: CYAN_WOOL
-            name: '&fWolle (Türkis)'
-            buy: 36
-            sell: 9
-          cyan_terracotta:
-            material: CYAN_TERRACOTTA
-            name: '&fTerrakotta (Türkis)'
-            buy: 28
-            sell: 7
-          cyan_concrete:
-            material: CYAN_CONCRETE
-            name: '&fBeton (Türkis)'
-            buy: 16
-            sell: 4
-          cyan_carpet:
-            material: CYAN_CARPET
-            name: '&fTeppich (Türkis)'
-            buy: 24
-            sell: 6
-          cyan_dye:
-            material: CYAN_DYE
-            name: '&fFarbstoff (Türkis)'
-            buy: 30
-            sell: 8
-          cyan_banner:
-            material: CYAN_BANNER
-            name: '&fBanner (Türkis)'
-            buy: 219
-            sell: 55
-          cyan_bed:
-            material: CYAN_BED
-            name: '&fBett (Türkis)'
-            buy: 126
-            sell: 32
+          lime_candle:
+            material: LIME_CANDLE
+            name: '&fKerze (Hellgrün)'
+            buy: 18
+            sell: 5
+          pink_candle:
+            material: PINK_CANDLE
+            name: '&fKerze (Rosa)'
+            buy: 18
+            sell: 5
+          gray_candle:
+            material: GRAY_CANDLE
+            name: '&fKerze (Grau)'
+            buy: 18
+            sell: 5
+          light_gray_candle:
+            material: LIGHT_GRAY_CANDLE
+            name: '&fKerze (Hellgrau)'
+            buy: 18
+            sell: 5
           cyan_candle:
             material: CYAN_CANDLE
             name: '&fKerze (Türkis)'
+            buy: 18
+            sell: 5
+          purple_candle:
+            material: PURPLE_CANDLE
+            name: '&fKerze (Lila)'
+            buy: 18
+            sell: 5
+          blue_candle:
+            material: BLUE_CANDLE
+            name: '&fKerze (Blau)'
+            buy: 18
+            sell: 5
+          brown_candle:
+            material: BROWN_CANDLE
+            name: '&fKerze (Braun)'
+            buy: 18
+            sell: 5
+          green_candle:
+            material: GREEN_CANDLE
+            name: '&fKerze (Grün)'
+            buy: 18
+            sell: 5
+          red_candle:
+            material: RED_CANDLE
+            name: '&fKerze (Rot)'
+            buy: 18
+            sell: 5
+          black_candle:
+            material: BLACK_CANDLE
+            name: '&fKerze (Schwarz)'
             buy: 18
             sell: 5
       dekoration:
@@ -3927,11 +3906,6 @@ categories:
             name: '&fKugelfischeimer'
             buy: 330
             sell: 83
-          elytra:
-            material: ELYTRA
-            name: '&fElytren'
-            buy: 45600
-            sell: 11400
           powder_snow_bucket:
             material: POWDER_SNOW_BUCKET
             name: '&fPulverschnee-Eimer'

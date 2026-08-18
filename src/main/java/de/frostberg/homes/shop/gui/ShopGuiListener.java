@@ -62,7 +62,7 @@ public class ShopGuiListener implements Listener {
         Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-main-title"))));
         holder.setInventory(inventory);
 
-        fillBorder(inventory, Material.GRAY_STAINED_GLASS_PANE);
+        fillBorder(inventory);
 
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
         int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
@@ -97,7 +97,7 @@ public class ShopGuiListener implements Listener {
         Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
         holder.setInventory(inventory);
 
-        fillBorder(inventory, category.getBorderMaterial());
+        fillBorder(inventory);
         addNavBar(inventory, true, false, 0, 0);
 
         List<ShopSubCategory> subCategories = category.getSubCategories();
@@ -145,7 +145,7 @@ public class ShopGuiListener implements Listener {
         Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
         holder.setInventory(inventory);
 
-        fillBorder(inventory, category.getBorderMaterial());
+        fillBorder(inventory);
         addNavBar(inventory, true, totalPages > 1, clampedPage, totalPages);
 
         int leftPad = (9 - columns) / 2;
@@ -180,7 +180,7 @@ public class ShopGuiListener implements Listener {
         Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
         holder.setInventory(inventory);
 
-        fillBorder(inventory, category.getBorderMaterial());
+        fillBorder(inventory);
         addNavBar(inventory, true, false, 0, 0);
 
         inventory.setItem(DETAIL_ITEM_SLOT, buildDetailItemStack(player, item));
@@ -254,11 +254,22 @@ public class ShopGuiListener implements Listener {
         return "&8«——— " + rawTitle + "&8 ———»";
     }
 
-    /** Fuellt jeden noch leeren Slot mit einer zur Kategorie passenden Glasscheibe (Rahmen-Look). */
-    private void fillBorder(Inventory inventory, Material borderMaterial) {
-        ItemStack filler = simpleItem(borderMaterial, " ", null);
-        for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, filler.clone());
+    /**
+     * Fuellt nur den AEUSSEREN Rand (oberste/unterste Reihe, linke/rechte
+     * Spalte) mit schlichten grauen Glasscheiben - bewusst nicht die ganze
+     * Flaeche, damit es nicht "vollgemuellt" wirkt. Der Innenbereich bleibt
+     * leer (normale Inventar-Optik), bis Items ihn befuellen.
+     */
+    private void fillBorder(Inventory inventory) {
+        ItemStack filler = simpleItem(Material.GRAY_STAINED_GLASS_PANE, " ", null);
+        int size = inventory.getSize();
+        int rows = size / 9;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (row == 0 || row == rows - 1 || col == 0 || col == 8) {
+                    inventory.setItem(row * 9 + col, filler.clone());
+                }
+            }
         }
     }
 
@@ -298,9 +309,18 @@ public class ShopGuiListener implements Listener {
         int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
         for (int i = 0; i < categories.size() && i < slots.length; i++) {
             if (slots[i] == slot) {
-                openCategoryHub(player, categories.get(i).getId());
+                openCategory(player, categories.get(i));
                 return;
             }
+        }
+    }
+
+    /** Hat eine Kategorie nur eine Unterkategorie (z.B. Ruestung, Essen), waere die Uebersicht mit nur einem Icon ein sinnloser Extra-Klick - dann direkt zur Item-Liste. */
+    private void openCategory(Player player, ShopCategory category) {
+        if (category.getSubCategories().size() == 1) {
+            openItemList(player, category.getId(), category.getSubCategories().get(0).getId(), 0);
+        } else {
+            openCategoryHub(player, category.getId());
         }
     }
 
@@ -326,16 +346,22 @@ public class ShopGuiListener implements Listener {
     }
 
     private void handleListClick(Player player, ShopGuiHolder holder, int slot) {
-        if (slot == BACK_SLOT) {
-            openCategoryHub(player, holder.getCategoryId());
-            return;
-        }
         Optional<ShopCategory> categoryOpt = findCategory(holder.getCategoryId());
         if (categoryOpt.isEmpty()) {
             openMain(player);
             return;
         }
         ShopCategory category = categoryOpt.get();
+
+        if (slot == BACK_SLOT) {
+            // Wurde die Uebersicht beim Reingehen uebersprungen (nur 1 Unterkategorie), auch beim Zurueckgehen ueberspringen
+            if (category.getSubCategories().size() == 1) {
+                openMain(player);
+            } else {
+                openCategoryHub(player, category.getId());
+            }
+            return;
+        }
         Optional<ShopSubCategory> subOpt = findSubCategory(category, holder.getSubCategoryId());
         if (subOpt.isEmpty()) {
             openCategoryHub(player, category.getId());
