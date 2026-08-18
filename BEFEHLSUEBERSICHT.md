@@ -139,11 +139,14 @@ und ausschließlich mit Tokens.
 | `/shop` | Öffnet das Shop-Hauptmenü (Kategorien: Kampf, Bauen, Dekoration, Farming, Magie, Mobs, Sonstiges) | `shop.use` (Standard: an) | Neu |
 | `/shop reload` | Lädt `shop-items.yml` neu (Preisänderungen ohne Serverneustart) | `shop.admin` (Standard: op) | Neu |
 
-**Im Shop-GUI:** Kategorie anklicken öffnet direkt die Item-Liste, oben Tabs
-für Unterkategorien (z.B. Rüstung/Werkzeuge/Waffen/Redstone bei Kampf) –
-kein zusätzlicher Klick nötig. Linksklick = 1 kaufen, Shift+Links = 64
-kaufen, Rechtsklick = 1 verkaufen, Shift+Rechts = 64 verkaufen (jeweils nur
-so viel wie tatsächlich im Inventar vorhanden ist).
+**Im Shop-GUI (4 Ebenen):** Hauptmenü (9 Kategorien: Blöcke, Werkzeuge,
+Waffen, Rüstung, Essen, Redstone, Farming, Deko, Sonstiges) → Kategorie-
+Übersicht mit Icons der Unterkategorien (z.B. bei Blöcke: Holz/Stein/Erde &
+Natur/Nether/End/Glas) → Item-Liste → Kauf-/Verkauf-Fenster für das
+angeklickte Item (Item mittig, rechts grüne Scheiben +1/+32/+64 zum Kaufen,
+links rote Scheiben -1/-32/-64 zum Verkaufen, inkl. aktuellem Guthaben in
+der Beschreibung). Unten auf jeder Ebene an derselben Stelle: Zurück und
+Hauptmenü. Jedes Item gibt es nur in genau einer Kategorie.
 
 ---
 

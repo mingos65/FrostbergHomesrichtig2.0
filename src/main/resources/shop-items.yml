@@ -4,466 +4,15 @@
 #  Aenderungen mit /shop reload uebernehmen.
 # =====================================================
 categories:
-  combat:
-    display-name: '&c&lKampf'
-    icon: DIAMOND_SWORD
-    border: RED_STAINED_GLASS_PANE
-    sub-categories:
-      armor:
-        display-name: '&b&lRüstung'
-        icon: IRON_CHESTPLATE
-        items:
-          leather_helmet:
-            material: LEATHER_HELMET
-            name: '&fLeder Helm'
-            buy: 180
-            sell: 45
-          leather_chestplate:
-            material: LEATHER_CHESTPLATE
-            name: '&fLeder Brustplatte'
-            buy: 288
-            sell: 72
-          leather_leggings:
-            material: LEATHER_LEGGINGS
-            name: '&fLeder Hose'
-            buy: 252
-            sell: 63
-          leather_boots:
-            material: LEATHER_BOOTS
-            name: '&fLeder Stiefel'
-            buy: 144
-            sell: 36
-          chainmail_helmet:
-            material: CHAINMAIL_HELMET
-            name: '&fKette Helm'
-            buy: 1350
-            sell: 338
-          chainmail_chestplate:
-            material: CHAINMAIL_CHESTPLATE
-            name: '&fKette Brustplatte'
-            buy: 2160
-            sell: 540
-          chainmail_leggings:
-            material: CHAINMAIL_LEGGINGS
-            name: '&fKette Hose'
-            buy: 1890
-            sell: 473
-          chainmail_boots:
-            material: CHAINMAIL_BOOTS
-            name: '&fKette Stiefel'
-            buy: 1080
-            sell: 270
-          copper_helmet:
-            material: COPPER_HELMET
-            name: '&fKupfer Helm'
-            buy: 255
-            sell: 64
-          copper_chestplate:
-            material: COPPER_CHESTPLATE
-            name: '&fKupfer Brustplatte'
-            buy: 408
-            sell: 102
-          copper_leggings:
-            material: COPPER_LEGGINGS
-            name: '&fKupfer Hose'
-            buy: 357
-            sell: 90
-          copper_boots:
-            material: COPPER_BOOTS
-            name: '&fKupfer Stiefel'
-            buy: 204
-            sell: 51
-          iron_helmet:
-            material: IRON_HELMET
-            name: '&fEisen Helm'
-            buy: 450
-            sell: 113
-          iron_chestplate:
-            material: IRON_CHESTPLATE
-            name: '&fEisen Brustplatte'
-            buy: 720
-            sell: 180
-          iron_leggings:
-            material: IRON_LEGGINGS
-            name: '&fEisen Hose'
-            buy: 630
-            sell: 158
-          iron_boots:
-            material: IRON_BOOTS
-            name: '&fEisen Stiefel'
-            buy: 360
-            sell: 90
-          gold_helmet:
-            material: GOLDEN_HELMET
-            name: '&fGold Helm'
-            buy: 630
-            sell: 158
-          gold_chestplate:
-            material: GOLDEN_CHESTPLATE
-            name: '&fGold Brustplatte'
-            buy: 1008
-            sell: 252
-          gold_leggings:
-            material: GOLDEN_LEGGINGS
-            name: '&fGold Hose'
-            buy: 882
-            sell: 221
-          gold_boots:
-            material: GOLDEN_BOOTS
-            name: '&fGold Stiefel'
-            buy: 504
-            sell: 126
-          diamond_helmet:
-            material: DIAMOND_HELMET
-            name: '&fDiamant Helm'
-            buy: 5700
-            sell: 1425
-          diamond_chestplate:
-            material: DIAMOND_CHESTPLATE
-            name: '&fDiamant Brustplatte'
-            buy: 9120
-            sell: 2280
-          diamond_leggings:
-            material: DIAMOND_LEGGINGS
-            name: '&fDiamant Hose'
-            buy: 7980
-            sell: 1995
-          diamond_boots:
-            material: DIAMOND_BOOTS
-            name: '&fDiamant Stiefel'
-            buy: 4560
-            sell: 1140
-          netherite_helmet:
-            material: NETHERITE_HELMET
-            name: '&fNetherit Helm'
-            buy: 194520
-            sell: 48630
-          netherite_chestplate:
-            material: NETHERITE_CHESTPLATE
-            name: '&fNetherit Brustplatte'
-            buy: 311232
-            sell: 77808
-          netherite_leggings:
-            material: NETHERITE_LEGGINGS
-            name: '&fNetherit Hose'
-            buy: 272328
-            sell: 68082
-          netherite_boots:
-            material: NETHERITE_BOOTS
-            name: '&fNetherit Stiefel'
-            buy: 155616
-            sell: 38904
-          netherite_upgrade_smithing_template:
-            material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
-            name: '&5Netherit-Umrüstungsvorlage'
-            buy: 1931
-            sell: 483
-          horse_armor_iron:
-            material: IRON_HORSE_ARMOR
-            name: '&fEiserne Pferderüstung'
-            buy: 900
-            sell: 225
-          horse_armor_gold:
-            material: GOLDEN_HORSE_ARMOR
-            name: '&6Goldene Pferderüstung'
-            buy: 1260
-            sell: 315
-          horse_armor_diamond:
-            material: DIAMOND_HORSE_ARMOR
-            name: '&bDiamant-Pferderüstung'
-            buy: 11400
-            sell: 2850
-          shield:
-            material: SHIELD
-            name: '&fSchild'
-            buy: 126
-            sell: 32
-      tools:
-        display-name: '&7&lWerkzeuge'
-        icon: IRON_PICKAXE
-        items:
-          wood_pickaxe:
-            material: WOODEN_PICKAXE
-            name: '&fHolz Spitzhacke'
-            buy: 18
-            sell: 5
-          wood_axe:
-            material: WOODEN_AXE
-            name: '&fHolz Axt'
-            buy: 18
-            sell: 5
-          wood_shovel:
-            material: WOODEN_SHOVEL
-            name: '&fHolz Schaufel'
-            buy: 6
-            sell: 2
-          wood_hoe:
-            material: WOODEN_HOE
-            name: '&fHolz Hacke'
-            buy: 12
-            sell: 3
-          stone_pickaxe:
-            material: STONE_PICKAXE
-            name: '&fStein Spitzhacke'
-            buy: 45
-            sell: 12
-          stone_axe:
-            material: STONE_AXE
-            name: '&fStein Axt'
-            buy: 45
-            sell: 12
-          stone_shovel:
-            material: STONE_SHOVEL
-            name: '&fStein Schaufel'
-            buy: 15
-            sell: 4
-          stone_hoe:
-            material: STONE_HOE
-            name: '&fStein Hacke'
-            buy: 30
-            sell: 8
-          iron_pickaxe:
-            material: IRON_PICKAXE
-            name: '&fEisen Spitzhacke'
-            buy: 270
-            sell: 68
-          iron_axe:
-            material: IRON_AXE
-            name: '&fEisen Axt'
-            buy: 270
-            sell: 68
-          iron_shovel:
-            material: IRON_SHOVEL
-            name: '&fEisen Schaufel'
-            buy: 90
-            sell: 23
-          iron_hoe:
-            material: IRON_HOE
-            name: '&fEisen Hacke'
-            buy: 180
-            sell: 45
-          gold_pickaxe:
-            material: GOLDEN_PICKAXE
-            name: '&fGold Spitzhacke'
-            buy: 378
-            sell: 95
-          gold_axe:
-            material: GOLDEN_AXE
-            name: '&fGold Axt'
-            buy: 378
-            sell: 95
-          gold_shovel:
-            material: GOLDEN_SHOVEL
-            name: '&fGold Schaufel'
-            buy: 126
-            sell: 32
-          gold_hoe:
-            material: GOLDEN_HOE
-            name: '&fGold Hacke'
-            buy: 252
-            sell: 63
-          diamond_pickaxe:
-            material: DIAMOND_PICKAXE
-            name: '&fDiamant Spitzhacke'
-            buy: 3420
-            sell: 855
-          diamond_axe:
-            material: DIAMOND_AXE
-            name: '&fDiamant Axt'
-            buy: 3420
-            sell: 855
-          diamond_shovel:
-            material: DIAMOND_SHOVEL
-            name: '&fDiamant Schaufel'
-            buy: 1140
-            sell: 285
-          diamond_hoe:
-            material: DIAMOND_HOE
-            name: '&fDiamant Hacke'
-            buy: 2280
-            sell: 570
-          netherite_pickaxe:
-            material: NETHERITE_PICKAXE
-            name: '&fNetherit Spitzhacke'
-            buy: 116712
-            sell: 29178
-          netherite_axe:
-            material: NETHERITE_AXE
-            name: '&fNetherit Axt'
-            buy: 116712
-            sell: 29178
-          netherite_shovel:
-            material: NETHERITE_SHOVEL
-            name: '&fNetherit Schaufel'
-            buy: 38904
-            sell: 9726
-          netherite_hoe:
-            material: NETHERITE_HOE
-            name: '&fNetherit Hacke'
-            buy: 77808
-            sell: 19452
-      weapons:
-        display-name: '&c&lWaffen'
-        icon: IRON_SWORD
-        items:
-          wood_sword:
-            material: WOODEN_SWORD
-            name: '&fHolz Schwert'
-            buy: 12
-            sell: 3
-          stone_sword:
-            material: STONE_SWORD
-            name: '&fStein Schwert'
-            buy: 30
-            sell: 8
-          iron_sword:
-            material: IRON_SWORD
-            name: '&fEisen Schwert'
-            buy: 180
-            sell: 45
-          gold_sword:
-            material: GOLDEN_SWORD
-            name: '&fGold Schwert'
-            buy: 252
-            sell: 63
-          diamond_sword:
-            material: DIAMOND_SWORD
-            name: '&fDiamant Schwert'
-            buy: 2280
-            sell: 570
-          netherite_sword:
-            material: NETHERITE_SWORD
-            name: '&fNetherit Schwert'
-            buy: 77808
-            sell: 19452
-          bow:
-            material: BOW
-            name: '&fBogen'
-            buy: 207
-            sell: 52
-          crossbow:
-            material: CROSSBOW
-            name: '&fArmbrust'
-            buy: 281
-            sell: 71
-          arrow:
-            material: ARROW
-            name: '&fPfeil'
-            buy: 14
-            sell: 4
-          spectral_arrow:
-            material: SPECTRAL_ARROW
-            name: '&fLeuchtpfeil'
-            buy: 434
-            sell: 109
-          trident:
-            material: TRIDENT
-            name: '&bDreizack'
-            buy: 3000
-            sell: 750
-          mace:
-            material: MACE
-            name: '&5Streitkolben'
-            buy: 12000
-            sell: 3000
-      redstone:
-        display-name: '&4&lRedstone'
-        icon: REDSTONE
-        items:
-          dispenser:
-            material: DISPENSER
-            name: '&fWerfer'
-            buy: 195
-            sell: 49
-          hopper:
-            material: HOPPER
-            name: '&fTrichter'
-            buy: 498
-            sell: 125
-          lever:
-            material: LEVER
-            name: '&fHebel'
-            buy: 9
-            sell: 3
-          target:
-            material: TARGET
-            name: '&fZielblock'
-            buy: 1212
-            sell: 303
-          dropper:
-            material: DROPPER
-            name: '&fSpender'
-            buy: 135
-            sell: 34
-          note_block:
-            material: NOTE_BLOCK
-            name: '&fNotenblock'
-            buy: 180
-            sell: 45
-          repeater:
-            material: REPEATER
-            name: '&fRepeater'
-            buy: 90
-            sell: 23
-          observer:
-            material: OBSERVER
-            name: '&fBeobachter'
-            buy: 414
-            sell: 104
-          daylight_detector:
-            material: DAYLIGHT_DETECTOR
-            name: '&fTageslichtsensor'
-            buy: 225
-            sell: 57
-          comparator:
-            material: COMPARATOR
-            name: '&fKomparator'
-            buy: 510
-            sell: 128
-          sticky_piston:
-            material: STICKY_PISTON
-            name: '&fKlebriger Kolben'
-            buy: 345
-            sell: 87
-          tnt:
-            material: TNT
-            name: '&fTNT'
-            buy: 348
-            sell: 87
-          redstone_block:
-            material: REDSTONE_BLOCK
-            name: '&fRedstone-Block'
-            buy: 459
-            sell: 115
-          piston:
-            material: PISTON
-            name: '&fKolben'
-            buy: 285
-            sell: 72
-          redstone_lamp:
-            material: REDSTONE_LAMP
-            name: '&fRedstone-Lampe'
-            buy: 948
-            sell: 237
-          tripwire_hook:
-            material: TRIPWIRE_HOOK
-            name: '&fStolperdraht-Haken'
-            buy: 99
-            sell: 25
-          redstone_torch:
-            material: REDSTONE_TORCH
-            name: '&fRedstone-Fackel'
-            buy: 30
-            sell: 8
-
-  building:
-    display-name: '&6&lBauen'
+  blocks:
+    display-name: '&2&lBlöcke'
     icon: GRASS_BLOCK
-    border: ORANGE_STAINED_GLASS_PANE
+    border: LIME_STAINED_GLASS_PANE
     sub-categories:
       wood:
-        display-name: '&8&lHolzblöcke'
+        display-name: '&6&lHolz'
         icon: OAK_LOG
+        columns: 9
         items:
           birch_planks:
             material: BIRCH_PLANKS
@@ -796,92 +345,93 @@ categories:
             buy: 24
             sell: 6
       stone:
-        display-name: '&7&lSteinblöcke'
+        display-name: '&7&lStein'
         icon: STONE_BRICKS
+        columns: 9
         items:
-          tuff_bricks:
-            material: TUFF_BRICKS
-            name: '&fTuffziegel'
-            buy: 15
-            sell: 4
-          purpur_block:
-            material: PURPUR_BLOCK
-            name: '&fPurpurblock'
-            buy: 75
-            sell: 19
-          mossy_stone_bricks:
-            material: MOSSY_STONE_BRICKS
-            name: '&fBemooste Steinziegel'
-            buy: 40
-            sell: 10
-          polished_tuff:
-            material: POLISHED_TUFF
-            name: '&fPolierter Tuffstein'
-            buy: 15
-            sell: 4
-          granite:
-            material: GRANITE
-            name: '&fGranit'
-            buy: 15
-            sell: 4
-          bricks:
-            material: BRICKS
-            name: '&fZiegelsteine'
-            buy: 24
-            sell: 6
-          stone_bricks:
-            material: STONE_BRICKS
-            name: '&fSteinziegel'
-            buy: 32
-            sell: 8
-          prismarine:
-            material: PRISMARINE
-            name: '&fPrismarin'
-            buy: 300
-            sell: 75
-          polished_deepslate:
-            material: POLISHED_DEEPSLATE
-            name: '&fPolierter Tiefenschiefer'
-            buy: 18
-            sell: 5
-          red_nether_bricks:
-            material: RED_NETHER_BRICKS
-            name: '&fRote Netherziegel'
-            buy: 90
-            sell: 23
-          cobbled_deepslate:
-            material: COBBLED_DEEPSLATE
-            name: '&fBruch-Tiefenschiefer'
-            buy: 18
-            sell: 5
-          stone:
-            material: STONE
-            name: '&fStein'
-            buy: 15
-            sell: 4
           andesite:
             material: ANDESITE
             name: '&fAndesit'
             buy: 15
             sell: 4
-          tuff:
-            material: TUFF
-            name: '&fTuffstein'
+          brick_wall:
+            material: BRICK_WALL
+            name: '&fZiegelmauer'
+            buy: 24
+            sell: 6
+          gilded_blackstone:
+            material: GILDED_BLACKSTONE
+            name: '&fVergoldeter Schwarzstein'
+            buy: 76
+            sell: 19
+          granite_wall:
+            material: GRANITE_WALL
+            name: '&fGranitmauer'
             buy: 15
             sell: 4
-          blackstone:
-            material: BLACKSTONE
-            name: '&fSchwarzstein'
+          mossy_cobblestone:
+            material: MOSSY_COBBLESTONE
+            name: '&fBemooster Bruchstein'
+            buy: 23
+            sell: 6
+          cobbled_deepslate:
+            material: COBBLED_DEEPSLATE
+            name: '&fBruch-Tiefenschiefer'
+            buy: 18
+            sell: 5
+          polished_tuff:
+            material: POLISHED_TUFF
+            name: '&fPolierter Tuffstein'
+            buy: 15
+            sell: 4
+          stone_brick_wall:
+            material: STONE_BRICK_WALL
+            name: '&fSteinziegelmauer'
+            buy: 32
+            sell: 8
+          mossy_stone_bricks:
+            material: MOSSY_STONE_BRICKS
+            name: '&fBemooste Steinziegel'
+            buy: 40
+            sell: 10
+          polished_blackstone_bricks:
+            material: POLISHED_BLACKSTONE_BRICKS
+            name: '&fPolierte Schwarzstein-Ziegel'
             buy: 20
+            sell: 5
+          deepslate_bricks:
+            material: DEEPSLATE_BRICKS
+            name: '&fTiefenschieferziegel'
+            buy: 18
             sell: 5
           polished_blackstone:
             material: POLISHED_BLACKSTONE
             name: '&fPolierter Schwarzstein'
             buy: 20
             sell: 5
-          cobblestone:
-            material: COBBLESTONE
-            name: '&fBruchstein'
+          diorite_wall:
+            material: DIORITE_WALL
+            name: '&fDioritmauer'
+            buy: 15
+            sell: 4
+          deepslate_brick_wall:
+            material: DEEPSLATE_BRICK_WALL
+            name: '&fTiefenschieferziegelmauer'
+            buy: 18
+            sell: 5
+          blackstone_wall:
+            material: BLACKSTONE_WALL
+            name: '&fSchwarzsteinmauer'
+            buy: 20
+            sell: 5
+          polished_andesite:
+            material: POLISHED_ANDESITE
+            name: '&fPolierter Andesit'
+            buy: 15
+            sell: 4
+          cobblestone_wall:
+            material: COBBLESTONE_WALL
+            name: '&fBruchsteinmauer'
             buy: 15
             sell: 4
           diorite:
@@ -889,144 +439,1531 @@ categories:
             name: '&fDiorit'
             buy: 15
             sell: 4
-          nether_bricks:
-            material: NETHER_BRICKS
-            name: '&fNetherziegel'
-            buy: 27
-            sell: 7
-          deepslate_bricks:
-            material: DEEPSLATE_BRICKS
-            name: '&fTiefenschieferziegel'
-            buy: 18
-            sell: 5
-          end_stone:
-            material: END_STONE
-            name: '&fEndstein'
-            buy: 40
-            sell: 10
-          end_stone_bricks:
-            material: END_STONE_BRICKS
-            name: '&fEndsteinziegel'
-            buy: 40
-            sell: 10
           deepslate:
             material: DEEPSLATE
             name: '&fTiefenschiefer'
             buy: 18
             sell: 5
-          mossy_cobblestone:
-            material: MOSSY_COBBLESTONE
-            name: '&fBemooster Bruchstein'
-            buy: 23
-            sell: 6
-      natural:
-        display-name: '&2&lNaturblöcke'
-        icon: DIRT
-        items:
-          clay:
-            material: CLAY
-            name: '&fLehm'
+          polished_granite:
+            material: POLISHED_GRANITE
+            name: '&fPolierter Granit'
+            buy: 15
+            sell: 4
+          andesite_wall:
+            material: ANDESITE_WALL
+            name: '&fAndesitmauer'
+            buy: 15
+            sell: 4
+          polished_blackstone_wall:
+            material: POLISHED_BLACKSTONE_WALL
+            name: '&fPolierte Schwarzsteinmauer'
+            buy: 20
+            sell: 5
+          tuff_bricks:
+            material: TUFF_BRICKS
+            name: '&fTuffziegel'
+            buy: 15
+            sell: 4
+          tuff:
+            material: TUFF
+            name: '&fTuffstein'
+            buy: 15
+            sell: 4
+          deepslate_tiles:
+            material: DEEPSLATE_TILES
+            name: '&fTiefenschieferfliesen'
+            buy: 18
+            sell: 5
+          tuff_wall:
+            material: TUFF_WALL
+            name: '&fTuffsteinmauer'
+            buy: 15
+            sell: 4
+          granite:
+            material: GRANITE
+            name: '&fGranit'
+            buy: 15
+            sell: 4
+          stone_bricks:
+            material: STONE_BRICKS
+            name: '&fSteinziegel'
+            buy: 32
+            sell: 8
+          cobbled_deepslate_wall:
+            material: COBBLED_DEEPSLATE_WALL
+            name: '&fBruch-Tiefenschiefermauer'
+            buy: 18
+            sell: 5
+          chiseled_tuff:
+            material: CHISELED_TUFF
+            name: '&fGemeißelter Tuffstein'
+            buy: 15
+            sell: 4
+          mud_bricks:
+            material: MUD_BRICKS
+            name: '&fLehmziegel'
             buy: 24
             sell: 6
-          packed_ice:
-            material: PACKED_ICE
-            name: '&fPackeis'
-            buy: 144
-            sell: 36
-          sand:
-            material: SAND
-            name: '&fSand'
+          mud_brick_wall:
+            material: MUD_BRICK_WALL
+            name: '&fLehmziegelmauer'
+            buy: 24
+            sell: 6
+          blackstone:
+            material: BLACKSTONE
+            name: '&fSchwarzstein'
+            buy: 20
+            sell: 5
+          bricks:
+            material: BRICKS
+            name: '&fZiegelsteine'
+            buy: 24
+            sell: 6
+          cobblestone:
+            material: COBBLESTONE
+            name: '&fBruchstein'
+            buy: 15
+            sell: 4
+          polished_diorite:
+            material: POLISHED_DIORITE
+            name: '&fPolierter Diorit'
+            buy: 15
+            sell: 4
+          stone:
+            material: STONE
+            name: '&fStein'
+            buy: 15
+            sell: 4
+          chiseled_deepslate:
+            material: CHISELED_DEEPSLATE
+            name: '&fGemeißelter Tiefenschiefer'
+            buy: 18
+            sell: 5
+          polished_deepslate:
+            material: POLISHED_DEEPSLATE
+            name: '&fPolierter Tiefenschiefer'
+            buy: 18
+            sell: 5
+
+      nature:
+        display-name: '&a&lErde & Natur'
+        icon: DIRT
+        columns: 9
+        items:
+          deepslate_gold_ore:
+            material: DEEPSLATE_GOLD_ORE
+            name: '&fTiefenschiefer-Golderz'
+            buy: 126
+            sell: -1
+          mycelium:
+            material: MYCELIUM
+            name: '&fMyzel'
             buy: 12
             sell: 4
-          red_sand:
-            material: RED_SAND
-            name: '&fRoter Sand'
+          dirt:
+            material: DIRT
+            name: '&fErde'
             buy: 12
             sell: 4
+          copper_ore:
+            material: COPPER_ORE
+            name: '&fKupfererz'
+            buy: 51
+            sell: -1
           moss_block:
             material: MOSS_BLOCK
             name: '&fMoosblock'
             buy: 60
             sell: 15
+          crying_obsidian:
+            material: CRYING_OBSIDIAN
+            name: '&fWeinender Obsidian'
+            buy: 240
+            sell: 60
+          emerald_ore:
+            material: EMERALD_ORE
+            name: '&fSmaragderz'
+            buy: 900
+            sell: -1
+          redstone_ore:
+            material: REDSTONE_ORE
+            name: '&fRedstone-Erz'
+            buy: 15
+            sell: -1
           mud:
             material: MUD
             name: '&fSchlamm'
             buy: 12
+            sell: 4
+          deepslate_iron_ore:
+            material: DEEPSLATE_IRON_ORE
+            name: '&fTiefenschiefer-Eisenerz'
+            buy: 90
+            sell: -1
+          iron_ore:
+            material: IRON_ORE
+            name: '&fEisenerz'
+            buy: 90
+            sell: -1
+          deepslate_emerald_ore:
+            material: DEEPSLATE_EMERALD_ORE
+            name: '&fTiefenschiefer-Smaragderz'
+            buy: 900
+            sell: -1
+          sponge:
+            material: SPONGE
+            name: '&fSchwamm'
+            buy: 900
+            sell: 300
+          diamond_ore:
+            material: DIAMOND_ORE
+            name: '&fDiamanterz'
+            buy: 1140
+            sell: -1
+          deepslate_redstone_ore:
+            material: DEEPSLATE_REDSTONE_ORE
+            name: '&fTiefenschiefer-Redstone-Erz'
+            buy: 15
+            sell: -1
+          sand:
+            material: SAND
+            name: '&fSand'
+            buy: 12
+            sell: 4
+          deepslate_copper_ore:
+            material: DEEPSLATE_COPPER_ORE
+            name: '&fTiefenschiefer-Kupfererz'
+            buy: 51
+            sell: -1
+          deepslate_coal_ore:
+            material: DEEPSLATE_COAL_ORE
+            name: '&fTiefenschiefer-Kohleerz'
+            buy: 54
+            sell: -1
+          dripstone_block:
+            material: DRIPSTONE_BLOCK
+            name: '&fTropfsteinblock'
+            buy: 15
+            sell: 4
+          podzol:
+            material: PODZOL
+            name: '&fPodsol'
+            buy: 12
+            sell: 4
+          packed_mud:
+            material: PACKED_MUD
+            name: '&fVerdichteter Schlamm'
+            buy: 24
+            sell: 6
+          blue_ice:
+            material: BLUE_ICE
+            name: '&fBlaues Eis'
+            buy: 432
+            sell: 108
+          coarse_dirt:
+            material: COARSE_DIRT
+            name: '&fGrobe Erde'
+            buy: 12
+            sell: 4
+          wet_sponge:
+            material: WET_SPONGE
+            name: '&fNasser Schwamm'
+            buy: 900
+            sell: 300
+          deepslate_diamond_ore:
+            material: DEEPSLATE_DIAMOND_ORE
+            name: '&fTiefenschiefer-Diamanterz'
+            buy: 1140
+            sell: -1
+          obsidian:
+            material: OBSIDIAN
+            name: '&fObsidian'
+            buy: 180
+            sell: 60
+          clay:
+            material: CLAY
+            name: '&fLehm'
+            buy: 24
+            sell: 6
+          snow_block:
+            material: SNOW_BLOCK
+            name: '&fSchneeblock'
+            buy: 12
+            sell: 4
+          budding_amethyst:
+            material: BUDDING_AMETHYST
+            name: '&fWachsender Amethyst'
+            buy: -1
+            sell: 500
+          lapis_ore:
+            material: LAPIS_ORE
+            name: '&fLapislazulierz'
+            buy: 30
+            sell: -1
+          packed_ice:
+            material: PACKED_ICE
+            name: '&fPackeis'
+            buy: 144
+            sell: 36
+          calcite:
+            material: CALCITE
+            name: '&fKalzit'
+            buy: 15
             sell: 4
           grass_block:
             material: GRASS_BLOCK
             name: '&fGrasblock'
             buy: 12
             sell: 4
-          sea_lantern:
-            material: SEA_LANTERN
-            name: '&fSeelaterne'
-            buy: 405
-            sell: 102
-          dirt:
-            material: DIRT
-            name: '&fErde'
-            buy: 12
-            sell: 4
-          obsidian:
-            material: OBSIDIAN
-            name: '&fObsidian'
-            buy: 180
-            sell: 60
-          blue_ice:
-            material: BLUE_ICE
-            name: '&fBlaues Eis'
-            buy: 432
-            sell: 108
-          ice:
-            material: ICE
-            name: '&fEis'
-            buy: 36
-            sell: 9
-          glowstone:
-            material: GLOWSTONE
-            name: '&fLeuchtstein'
-            buy: 420
-            sell: 105
-          sponge:
-            material: SPONGE
-            name: '&fSchwamm'
-            buy: 900
-            sell: 300
           gravel:
             material: GRAVEL
             name: '&fKies'
             buy: 12
             sell: 4
-          snow_block:
-            material: SNOW_BLOCK
-            name: '&fSchneeblock'
+          coal_ore:
+            material: COAL_ORE
+            name: '&fKohleerz'
+            buy: 54
+            sell: -1
+          red_sand:
+            material: RED_SAND
+            name: '&fRoter Sand'
             buy: 12
             sell: 4
-      decorative_blocks:
-        display-name: '&b&lDeko-Blöcke'
+          deepslate_lapis_ore:
+            material: DEEPSLATE_LAPIS_ORE
+            name: '&fTiefenschiefer-Lapislazulierz'
+            buy: 30
+            sell: -1
+          gold_ore:
+            material: GOLD_ORE
+            name: '&fGolderz'
+            buy: 126
+            sell: -1
+          amethyst_block:
+            material: AMETHYST_BLOCK
+            name: '&fAmethystblock'
+            buy: 300
+            sell: 75
+          ice:
+            material: ICE
+            name: '&fEis'
+            buy: 36
+            sell: 9
+      nether:
+        display-name: '&4&lNether'
+        icon: NETHERRACK
+        columns: 9
+        items:
+          nether_bricks:
+            material: NETHER_BRICKS
+            name: '&fNetherziegel'
+            buy: 27
+            sell: 7
+          nether_brick_wall:
+            material: NETHER_BRICK_WALL
+            name: '&fNetherziegelmauer'
+            buy: 27
+            sell: 7
+          glowstone:
+            material: GLOWSTONE
+            name: '&fLeuchtstein'
+            buy: 420
+            sell: 105
+          shroomlight:
+            material: SHROOMLIGHT
+            name: '&fLeuchtpilz'
+            buy: 120
+            sell: 30
+          ancient_debris:
+            material: ANCIENT_DEBRIS
+            name: '&fAntiker Schutt'
+            buy: 9600
+            sell: 3200
+          nether_brick_fence:
+            material: NETHER_BRICK_FENCE
+            name: '&fNetherziegel-Zaun'
+            buy: 38
+            sell: 10
+          nether_wart_block:
+            material: NETHER_WART_BLOCK
+            name: '&fNetherwarzenblock'
+            buy: 540
+            sell: 135
+          red_nether_brick_wall:
+            material: RED_NETHER_BRICK_WALL
+            name: '&fRote Netherziegelmauer'
+            buy: 90
+            sell: 23
+          warped_wart_block:
+            material: WARPED_WART_BLOCK
+            name: '&fVerzerrter Warzenblock'
+            buy: 540
+            sell: 135
+          crimson_nylium:
+            material: CRIMSON_NYLIUM
+            name: '&fKarmesinmyzel'
+            buy: 30
+            sell: 8
+          warped_nylium:
+            material: WARPED_NYLIUM
+            name: '&fVerzerrtes Myzel'
+            buy: 30
+            sell: 8
+          polished_basalt:
+            material: POLISHED_BASALT
+            name: '&fPolierter Basalt'
+            buy: 30
+            sell: 8
+          magma_block:
+            material: MAGMA_BLOCK
+            name: '&fMagmablock'
+            buy: 240
+            sell: 60
+          smooth_basalt:
+            material: SMOOTH_BASALT
+            name: '&fGlatter Basalt'
+            buy: 30
+            sell: 8
+          red_nether_bricks:
+            material: RED_NETHER_BRICKS
+            name: '&fRote Netherziegel'
+            buy: 90
+            sell: 23
+          soul_soil:
+            material: SOUL_SOIL
+            name: '&fSeelenerde'
+            buy: 24
+            sell: 6
+          basalt:
+            material: BASALT
+            name: '&fBasalt'
+            buy: 30
+            sell: 8
+          netherrack:
+            material: NETHERRACK
+            name: '&fNetherrack'
+            buy: 9
+            sell: 3
+          soul_sand:
+            material: SOUL_SAND
+            name: '&fSeelensand'
+            buy: 24
+            sell: 6
+          nether_gold_ore:
+            material: NETHER_GOLD_ORE
+            name: '&fNethergolderz'
+            buy: 30
+            sell: -1
+          blackstone_nether:
+            material: BLACKSTONE
+            name: '&fSchwarzstein'
+            buy: 20
+            sell: 5
+      end:
+        display-name: '&5&lEnd'
+        icon: END_STONE
+        columns: 9
+        items:
+          chorus_flower:
+            material: CHORUS_FLOWER
+            name: '&fChorus-Blüte'
+            buy: 75
+            sell: 25
+          end_stone_bricks:
+            material: END_STONE_BRICKS
+            name: '&fEndsteinziegel'
+            buy: 40
+            sell: 10
+          chorus_plant:
+            material: CHORUS_PLANT
+            name: '&fChorus-Pflanze'
+            buy: 75
+            sell: 25
+          purpur_block:
+            material: PURPUR_BLOCK
+            name: '&fPurpurblock'
+            buy: 75
+            sell: 19
+          end_rod:
+            material: END_ROD
+            name: '&fEnd-Stab'
+            buy: 105
+            sell: 27
+          purpur_stairs:
+            material: PURPUR_STAIRS
+            name: '&fPurpurtreppe'
+            buy: 113
+            sell: 29
+          purpur_pillar:
+            material: PURPUR_PILLAR
+            name: '&fPurpursäule'
+            buy: 75
+            sell: 19
+          purpur_slab:
+            material: PURPUR_SLAB
+            name: '&fPurpurstufe'
+            buy: 38
+            sell: 10
+          end_stone:
+            material: END_STONE
+            name: '&fEndstein'
+            buy: 40
+            sell: 10
+          end_stone_brick_wall:
+            material: END_STONE_BRICK_WALL
+            name: '&fEndsteinziegelmauer'
+            buy: 40
+            sell: 10
+          popped_chorus_fruit:
+            material: POPPED_CHORUS_FRUIT
+            name: '&fGeknallte Chorusfrucht'
+            buy: 75
+            sell: 19
+      glass:
+        display-name: '&b&lGlas'
         icon: GLASS
+        columns: 9
         items:
           glass:
             material: GLASS
             name: '&fGlas'
             buy: 12
             sell: 3
-          bookshelf:
-            material: BOOKSHELF
-            name: '&6Bücherregal'
+          glass_pane:
+            material: GLASS_PANE
+            name: '&fGlasscheibe'
+            buy: 5
+            sell: 2
+          tinted_glass:
+            material: TINTED_GLASS
+            name: '&fGetöntes Glas'
+            buy: 18
+            sell: 5
+          brown_stained_glass:
+            material: BROWN_STAINED_GLASS
+            name: '&fGlas (Braun)'
+            buy: 16
+            sell: 4
+          brown_stained_glass_pane:
+            material: BROWN_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Braun)'
+            buy: 6
+            sell: 2
+          purple_stained_glass:
+            material: PURPLE_STAINED_GLASS
+            name: '&fGlas (Lila)'
+            buy: 16
+            sell: 4
+          purple_stained_glass_pane:
+            material: PURPLE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Lila)'
+            buy: 6
+            sell: 2
+          blue_stained_glass:
+            material: BLUE_STAINED_GLASS
+            name: '&fGlas (Blau)'
+            buy: 16
+            sell: 4
+          blue_stained_glass_pane:
+            material: BLUE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Blau)'
+            buy: 6
+            sell: 2
+          black_stained_glass:
+            material: BLACK_STAINED_GLASS
+            name: '&fGlas (Schwarz)'
+            buy: 16
+            sell: 4
+          black_stained_glass_pane:
+            material: BLACK_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Schwarz)'
+            buy: 6
+            sell: 2
+          red_stained_glass:
+            material: RED_STAINED_GLASS
+            name: '&fGlas (Rot)'
+            buy: 16
+            sell: 4
+          red_stained_glass_pane:
+            material: RED_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Rot)'
+            buy: 6
+            sell: 2
+          orange_stained_glass:
+            material: ORANGE_STAINED_GLASS
+            name: '&fGlas (Orange)'
+            buy: 16
+            sell: 4
+          orange_stained_glass_pane:
+            material: ORANGE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Orange)'
+            buy: 6
+            sell: 2
+          green_stained_glass:
+            material: GREEN_STAINED_GLASS
+            name: '&fGlas (Grün)'
+            buy: 16
+            sell: 4
+          green_stained_glass_pane:
+            material: GREEN_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Grün)'
+            buy: 6
+            sell: 2
+          white_stained_glass:
+            material: WHITE_STAINED_GLASS
+            name: '&fGlas (Weiß)'
+            buy: 16
+            sell: 4
+          white_stained_glass_pane:
+            material: WHITE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Weiß)'
+            buy: 6
+            sell: 2
+          magenta_stained_glass:
+            material: MAGENTA_STAINED_GLASS
+            name: '&fGlas (Magenta)'
+            buy: 16
+            sell: 4
+          magenta_stained_glass_pane:
+            material: MAGENTA_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Magenta)'
+            buy: 6
+            sell: 2
+          lime_stained_glass:
+            material: LIME_STAINED_GLASS
+            name: '&fGlas (Hellgrün)'
+            buy: 16
+            sell: 4
+          lime_stained_glass_pane:
+            material: LIME_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellgrün)'
+            buy: 6
+            sell: 2
+          light_blue_stained_glass:
+            material: LIGHT_BLUE_STAINED_GLASS
+            name: '&fGlas (Hellblau)'
+            buy: 16
+            sell: 4
+          light_blue_stained_glass_pane:
+            material: LIGHT_BLUE_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellblau)'
+            buy: 6
+            sell: 2
+          gray_stained_glass:
+            material: GRAY_STAINED_GLASS
+            name: '&fGlas (Grau)'
+            buy: 16
+            sell: 4
+          gray_stained_glass_pane:
+            material: GRAY_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Grau)'
+            buy: 6
+            sell: 2
+          pink_stained_glass:
+            material: PINK_STAINED_GLASS
+            name: '&fGlas (Rosa)'
+            buy: 16
+            sell: 4
+          pink_stained_glass_pane:
+            material: PINK_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Rosa)'
+            buy: 6
+            sell: 2
+          light_gray_stained_glass:
+            material: LIGHT_GRAY_STAINED_GLASS
+            name: '&fGlas (Hellgrau)'
+            buy: 16
+            sell: 4
+          light_gray_stained_glass_pane:
+            material: LIGHT_GRAY_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Hellgrau)'
+            buy: 6
+            sell: 2
+          yellow_stained_glass:
+            material: YELLOW_STAINED_GLASS
+            name: '&fGlas (Gelb)'
+            buy: 16
+            sell: 4
+          yellow_stained_glass_pane:
+            material: YELLOW_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Gelb)'
+            buy: 6
+            sell: 2
+          cyan_stained_glass:
+            material: CYAN_STAINED_GLASS
+            name: '&fGlas (Türkis)'
+            buy: 16
+            sell: 4
+          cyan_stained_glass_pane:
+            material: CYAN_STAINED_GLASS_PANE
+            name: '&fGlasscheibe (Türkis)'
+            buy: 6
+            sell: 2
+
+  tools:
+    display-name: '&e&lWerkzeuge'
+    icon: IRON_PICKAXE
+    border: YELLOW_STAINED_GLASS_PANE
+    sub-categories:
+      pickaxes:
+        display-name: '&e&lSpitzhacken'
+        icon: IRON_PICKAXE
+        columns: 6
+        items:
+          wood_pickaxe:
+            material: WOODEN_PICKAXE
+            name: '&fHolz Spitzhacke'
+            buy: 24
+            sell: 6
+          stone_pickaxe:
+            material: STONE_PICKAXE
+            name: '&fStein Spitzhacke'
+            buy: 51
+            sell: 13
+          iron_pickaxe:
+            material: IRON_PICKAXE
+            name: '&fEisen Spitzhacke'
+            buy: 276
+            sell: 69
+          gold_pickaxe:
+            material: GOLDEN_PICKAXE
+            name: '&fGold Spitzhacke'
+            buy: 384
+            sell: 96
+          diamond_pickaxe:
+            material: DIAMOND_PICKAXE
+            name: '&fDiamant Spitzhacke'
+            buy: 3426
+            sell: 857
+          netherite_pickaxe:
+            material: NETHERITE_PICKAXE
+            name: '&fNetherit Spitzhacke'
+            buy: 116718
+            sell: 29180
+      axes:
+        display-name: '&e&lÄxte'
+        icon: IRON_AXE
+        columns: 6
+        items:
+          wood_axe:
+            material: WOODEN_AXE
+            name: '&fHolz Axt'
+            buy: 24
+            sell: 6
+          stone_axe:
+            material: STONE_AXE
+            name: '&fStein Axt'
+            buy: 51
+            sell: 13
+          iron_axe:
+            material: IRON_AXE
+            name: '&fEisen Axt'
+            buy: 276
+            sell: 69
+          gold_axe:
+            material: GOLDEN_AXE
+            name: '&fGold Axt'
+            buy: 384
+            sell: 96
+          diamond_axe:
+            material: DIAMOND_AXE
+            name: '&fDiamant Axt'
+            buy: 3426
+            sell: 857
+          netherite_axe:
+            material: NETHERITE_AXE
+            name: '&fNetherit Axt'
+            buy: 116718
+            sell: 29180
+      shovels:
+        display-name: '&e&lSchaufeln'
+        icon: IRON_SHOVEL
+        columns: 6
+        items:
+          wood_shovel:
+            material: WOODEN_SHOVEL
+            name: '&fHolz Schaufel'
+            buy: 12
+            sell: 3
+          stone_shovel:
+            material: STONE_SHOVEL
+            name: '&fStein Schaufel'
+            buy: 21
+            sell: 6
+          iron_shovel:
+            material: IRON_SHOVEL
+            name: '&fEisen Schaufel'
+            buy: 96
+            sell: 24
+          gold_shovel:
+            material: GOLDEN_SHOVEL
+            name: '&fGold Schaufel'
+            buy: 132
+            sell: 33
+          diamond_shovel:
+            material: DIAMOND_SHOVEL
+            name: '&fDiamant Schaufel'
+            buy: 1146
+            sell: 287
+          netherite_shovel:
+            material: NETHERITE_SHOVEL
+            name: '&fNetherit Schaufel'
+            buy: 38910
+            sell: 9728
+      hoes:
+        display-name: '&e&lHacken'
+        icon: IRON_HOE
+        columns: 6
+        items:
+          wood_hoe:
+            material: WOODEN_HOE
+            name: '&fHolz Hacke'
+            buy: 18
+            sell: 5
+          stone_hoe:
+            material: STONE_HOE
+            name: '&fStein Hacke'
+            buy: 36
+            sell: 9
+          iron_hoe:
+            material: IRON_HOE
+            name: '&fEisen Hacke'
+            buy: 186
+            sell: 47
+          gold_hoe:
+            material: GOLDEN_HOE
+            name: '&fGold Hacke'
+            buy: 258
+            sell: 65
+          diamond_hoe:
+            material: DIAMOND_HOE
+            name: '&fDiamant Hacke'
+            buy: 2286
+            sell: 572
+          netherite_hoe:
+            material: NETHERITE_HOE
+            name: '&fNetherit Hacke'
+            buy: 77814
+            sell: 19454
+  weapons:
+    display-name: '&c&lWaffen'
+    icon: DIAMOND_SWORD
+    border: RED_STAINED_GLASS_PANE
+    sub-categories:
+      swords:
+        display-name: '&c&lSchwerter'
+        icon: DIAMOND_SWORD
+        columns: 6
+        items:
+          wood_sword:
+            material: WOODEN_SWORD
+            name: '&fHolz Schwert'
+            buy: 15
+            sell: 4
+          stone_sword:
+            material: STONE_SWORD
+            name: '&fStein Schwert'
+            buy: 33
+            sell: 9
+          iron_sword:
+            material: IRON_SWORD
+            name: '&fEisen Schwert'
+            buy: 183
+            sell: 46
+          gold_sword:
+            material: GOLDEN_SWORD
+            name: '&fGold Schwert'
+            buy: 255
+            sell: 64
+          diamond_sword:
+            material: DIAMOND_SWORD
+            name: '&fDiamant Schwert'
+            buy: 2283
+            sell: 571
+          netherite_sword:
+            material: NETHERITE_SWORD
+            name: '&fNetherit Schwert'
+            buy: 77811
+            sell: 19453
+      ranged:
+        display-name: '&c&lBögen & Armbrüste'
+        icon: BOW
+        columns: 9
+        items:
+          bow:
+            material: BOW
+            name: '&fBogen'
+            buy: 207
+            sell: 52
+          crossbow:
+            material: CROSSBOW
+            name: '&fArmbrust'
+            buy: 281
+            sell: 71
+          arrow:
+            material: ARROW
+            name: '&fPfeil'
+            buy: 14
+            sell: 4
+          spectral_arrow:
+            material: SPECTRAL_ARROW
+            name: '&fLeuchtpfeil'
+            buy: 434
+            sell: 109
+      other:
+        display-name: '&c&lSonstige Waffen'
+        icon: TRIDENT
+        columns: 9
+        items:
+          trident:
+            material: TRIDENT
+            name: '&bSpeer'
+            buy: 3000
+            sell: 750
+          mace:
+            material: MACE
+            name: '&5Streitkolben'
+            buy: 12000
+            sell: 3000
+          shield:
+            material: SHIELD
+            name: '&fSchild'
+            buy: 126
+            sell: 32
+
+  armor:
+    display-name: '&b&lRüstung'
+    icon: DIAMOND_CHESTPLATE
+    border: LIGHT_BLUE_STAINED_GLASS_PANE
+    sub-categories:
+      full:
+        display-name: '&b&lRüstung'
+        icon: DIAMOND_CHESTPLATE
+        columns: 7
+        items:
+          leather_helmet:
+            material: LEATHER_HELMET
+            name: '&fLeder Helm'
+            buy: 180
+            sell: 45
+          chainmail_helmet:
+            material: CHAINMAIL_HELMET
+            name: '&fKette Helm'
+            buy: 1350
+            sell: 338
+          copper_helmet:
+            material: COPPER_HELMET
+            name: '&fKupfer Helm'
+            buy: 255
+            sell: 64
+          iron_helmet:
+            material: IRON_HELMET
+            name: '&fEisen Helm'
+            buy: 450
+            sell: 113
+          gold_helmet:
+            material: GOLDEN_HELMET
+            name: '&fGold Helm'
+            buy: 630
+            sell: 158
+          diamond_helmet:
+            material: DIAMOND_HELMET
+            name: '&fDiamant Helm'
+            buy: 5700
+            sell: 1425
+          netherite_helmet:
+            material: NETHERITE_HELMET
+            name: '&fNetherit Helm'
+            buy: 194520
+            sell: 48630
+          leather_chestplate:
+            material: LEATHER_CHESTPLATE
+            name: '&fLeder Brustplatte'
+            buy: 288
+            sell: 72
+          chainmail_chestplate:
+            material: CHAINMAIL_CHESTPLATE
+            name: '&fKette Brustplatte'
+            buy: 2160
+            sell: 540
+          copper_chestplate:
+            material: COPPER_CHESTPLATE
+            name: '&fKupfer Brustplatte'
+            buy: 408
+            sell: 102
+          iron_chestplate:
+            material: IRON_CHESTPLATE
+            name: '&fEisen Brustplatte'
+            buy: 720
+            sell: 180
+          gold_chestplate:
+            material: GOLDEN_CHESTPLATE
+            name: '&fGold Brustplatte'
+            buy: 1008
+            sell: 252
+          diamond_chestplate:
+            material: DIAMOND_CHESTPLATE
+            name: '&fDiamant Brustplatte'
+            buy: 9120
+            sell: 2280
+          netherite_chestplate:
+            material: NETHERITE_CHESTPLATE
+            name: '&fNetherit Brustplatte'
+            buy: 311232
+            sell: 77808
+          leather_leggings:
+            material: LEATHER_LEGGINGS
+            name: '&fLeder Hose'
+            buy: 252
+            sell: 63
+          chainmail_leggings:
+            material: CHAINMAIL_LEGGINGS
+            name: '&fKette Hose'
+            buy: 1890
+            sell: 473
+          copper_leggings:
+            material: COPPER_LEGGINGS
+            name: '&fKupfer Hose'
+            buy: 357
+            sell: 90
+          iron_leggings:
+            material: IRON_LEGGINGS
+            name: '&fEisen Hose'
+            buy: 630
+            sell: 158
+          gold_leggings:
+            material: GOLDEN_LEGGINGS
+            name: '&fGold Hose'
+            buy: 882
+            sell: 221
+          diamond_leggings:
+            material: DIAMOND_LEGGINGS
+            name: '&fDiamant Hose'
+            buy: 7980
+            sell: 1995
+          netherite_leggings:
+            material: NETHERITE_LEGGINGS
+            name: '&fNetherit Hose'
+            buy: 272328
+            sell: 68082
+          leather_boots:
+            material: LEATHER_BOOTS
+            name: '&fLeder Stiefel'
+            buy: 144
+            sell: 36
+          chainmail_boots:
+            material: CHAINMAIL_BOOTS
+            name: '&fKette Stiefel'
+            buy: 1080
+            sell: 270
+          copper_boots:
+            material: COPPER_BOOTS
+            name: '&fKupfer Stiefel'
+            buy: 204
+            sell: 51
+          iron_boots:
+            material: IRON_BOOTS
+            name: '&fEisen Stiefel'
             buy: 360
             sell: 90
-          quartz_block:
-            material: QUARTZ_BLOCK
-            name: '&fQuarzblock'
-            buy: 240
-            sell: 60
-          copper_block:
-            material: COPPER_BLOCK
-            name: '&6Kupferblock'
+          gold_boots:
+            material: GOLDEN_BOOTS
+            name: '&fGold Stiefel'
+            buy: 504
+            sell: 126
+          diamond_boots:
+            material: DIAMOND_BOOTS
+            name: '&fDiamant Stiefel'
+            buy: 4560
+            sell: 1140
+          netherite_boots:
+            material: NETHERITE_BOOTS
+            name: '&fNetherit Stiefel'
+            buy: 155616
+            sell: 38904
+          netherite_upgrade_smithing_template:
+            material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
+            name: '&5Netherit-Umrüstungsvorlage'
+            buy: 1931
+            sell: 483
+          horse_armor_iron:
+            material: IRON_HORSE_ARMOR
+            name: '&fEiserne Pferderüstung'
+            buy: 900
+            sell: 225
+          horse_armor_gold:
+            material: GOLDEN_HORSE_ARMOR
+            name: '&6Goldene Pferderüstung'
+            buy: 1260
+            sell: 315
+          horse_armor_diamond:
+            material: DIAMOND_HORSE_ARMOR
+            name: '&bDiamant-Pferderüstung'
+            buy: 11400
+            sell: 2850
+          wolf_armor:
+            material: WOLF_ARMOR
+            name: '&fWolfsrüstung'
+            buy: 900
+            sell: 225
+          saddle:
+            material: SADDLE
+            name: '&fSattel'
+            buy: 250
+            sell: 63
+
+  food:
+    display-name: '&6&lEssen'
+    icon: COOKED_BEEF
+    border: ORANGE_STAINED_GLASS_PANE
+    sub-categories:
+      food:
+        display-name: '&6&lEssen'
+        icon: COOKED_BEEF
+        columns: 9
+        items:
+          dried_kelp:
+            material: DRIED_KELP
+            name: '&fGetrockneter Seetang'
+            buy: 9
+            sell: 3
+          rabbit:
+            material: RABBIT
+            name: '&fRohes Kaninchen'
+            buy: 45
+            sell: 12
+          cake:
+            material: CAKE
+            name: '&fKuchen'
+            buy: 978
+            sell: 245
+          cookie:
+            material: COOKIE
+            name: '&fKeks'
+            buy: 30
+            sell: 8
+          mutton:
+            material: MUTTON
+            name: '&fRohes Hammelfleisch'
+            buy: 45
+            sell: 12
+          milk_bucket:
+            material: MILK_BUCKET
+            name: '&fMilcheimer'
+            buy: 270
+            sell: 68
+          enchanted_golden_apple:
+            material: ENCHANTED_GOLDEN_APPLE
+            name: '&fVerzauberter goldener Apfel'
+            buy: -1
+            sell: 6000
+          beef:
+            material: BEEF
+            name: '&fRohes Rindfleisch'
+            buy: 45
+            sell: 12
+          bread:
+            material: BREAD
+            name: '&fBrot'
+            buy: 90
+            sell: 23
+          cooked_rabbit:
+            material: COOKED_RABBIT
+            name: '&fGebratenes Kaninchen'
+            buy: 45
+            sell: 12
+          beetroot_soup:
+            material: BEETROOT_SOUP
+            name: '&fRote-Bete-Suppe'
+            buy: 45
+            sell: 12
+          chicken:
+            material: CHICKEN
+            name: '&fRohes Hühnchen'
+            buy: 45
+            sell: 12
+          porkchop:
+            material: PORKCHOP
+            name: '&fRohes Schweinefleisch'
+            buy: 45
+            sell: 12
+          rabbit_stew:
+            material: RABBIT_STEW
+            name: '&fKanincheneintopf'
+            buy: 90
+            sell: 23
+          cooked_porkchop:
+            material: COOKED_PORKCHOP
+            name: '&fGebratenes Schweinefleisch'
+            buy: 45
+            sell: 12
+          cooked_cod:
+            material: COOKED_COD
+            name: '&fGebratener Kabeljau'
+            buy: 45
+            sell: 12
+          apple:
+            material: APPLE
+            name: '&fApfel'
+            buy: 18
+            sell: 5
+          suspicious_stew:
+            material: SUSPICIOUS_STEW
+            name: '&fVerdächtiger Eintopf'
+            buy: 60
+            sell: 15
+          cooked_mutton:
+            material: COOKED_MUTTON
+            name: '&fGebratenes Hammelfleisch'
+            buy: 45
+            sell: 12
+          cod:
+            material: COD
+            name: '&fRoher Kabeljau'
+            buy: 45
+            sell: 12
+          cooked_beef:
+            material: COOKED_BEEF
+            name: '&fSteak'
+            buy: 45
+            sell: 12
+          melon_slice:
+            material: MELON_SLICE
+            name: '&fMelonenscheibe'
+            buy: 9
+            sell: 3
+          cooked_salmon:
+            material: COOKED_SALMON
+            name: '&fGebratener Lachs'
+            buy: 45
+            sell: 12
+          honey_bottle:
+            material: HONEY_BOTTLE
+            name: '&fHonigflasche'
+            buy: 90
+            sell: 23
+          pumpkin_pie:
+            material: PUMPKIN_PIE
+            name: '&fKürbiskuchen'
+            buy: 60
+            sell: 15
+          salmon:
+            material: SALMON
+            name: '&fRoher Lachs'
+            buy: 45
+            sell: 12
+          mushroom_stew:
+            material: MUSHROOM_STEW
+            name: '&fPilzsuppe'
+            buy: 45
+            sell: 12
+          golden_apple:
+            material: GOLDEN_APPLE
+            name: '&fGoldener Apfel'
+            buy: 1053
+            sell: 264
+          poisonous_potato:
+            material: POISONOUS_POTATO
+            name: '&fGiftige Kartoffel'
+            buy: -1
+            sell: 15
+          cooked_chicken:
+            material: COOKED_CHICKEN
+            name: '&fGebratenes Hühnchen'
+            buy: 45
+            sell: 12
+  redstone:
+    display-name: '&4&lRedstone'
+    icon: REDSTONE
+    border: RED_STAINED_GLASS_PANE
+    sub-categories:
+      redstone:
+        display-name: '&4&lRedstone'
+        icon: REDSTONE
+        columns: 9
+        items:
+          lever:
+            material: LEVER
+            name: '&fHebel'
+            buy: 9
+            sell: 3
+          daylight_detector:
+            material: DAYLIGHT_DETECTOR
+            name: '&fTageslichtsensor'
+            buy: 225
+            sell: 57
+          polished_blackstone_pressure_plate:
+            material: POLISHED_BLACKSTONE_PRESSURE_PLATE
+            name: '&fSchwarzsteindruckplatte'
+            buy: 40
+            sell: 10
+          target:
+            material: TARGET
+            name: '&fZielblock'
+            buy: 1212
+            sell: 303
+          light_weighted_pressure_plate:
+            material: LIGHT_WEIGHTED_PRESSURE_PLATE
+            name: '&fGolddruckplatte'
+            buy: 252
+            sell: 63
+          lightning_rod:
+            material: LIGHTNING_ROD
+            name: '&fBlitzableiter'
+            buy: 153
+            sell: 39
+          sticky_piston:
+            material: STICKY_PISTON
+            name: '&fKlebriger Kolben'
+            buy: 345
+            sell: 87
+          heavy_weighted_pressure_plate:
+            material: HEAVY_WEIGHTED_PRESSURE_PLATE
+            name: '&fEisendruckplatte'
+            buy: 180
+            sell: 45
+          repeater:
+            material: REPEATER
+            name: '&fRepeater'
+            buy: 90
+            sell: 23
+          stone_pressure_plate:
+            material: STONE_PRESSURE_PLATE
+            name: '&fSteindruckplatte'
+            buy: 30
+            sell: 8
+          tripwire_hook:
+            material: TRIPWIRE_HOOK
+            name: '&fStolperdraht-Haken'
+            buy: 99
+            sell: 25
+          polished_blackstone_button:
+            material: POLISHED_BLACKSTONE_BUTTON
+            name: '&fSchwarzsteinknopf'
+            buy: 20
+            sell: 5
+          tnt:
+            material: TNT
+            name: '&fTNT'
+            buy: 348
+            sell: 87
+          redstone_torch:
+            material: REDSTONE_TORCH
+            name: '&fRedstone-Fackel'
+            buy: 30
+            sell: 8
+          stone_button:
+            material: STONE_BUTTON
+            name: '&fSteinknopf'
+            buy: 15
+            sell: 4
+          redstone_block:
+            material: REDSTONE_BLOCK
+            name: '&fRedstone-Block'
             buy: 459
             sell: 115
+          redstone:
+            material: REDSTONE
+            name: '&fRedstone-Staub'
+            buy: 15
+            sell: 5
+          note_block:
+            material: NOTE_BLOCK
+            name: '&fNotenblock'
+            buy: 180
+            sell: 45
+          observer:
+            material: OBSERVER
+            name: '&fBeobachter'
+            buy: 414
+            sell: 104
+          hopper:
+            material: HOPPER
+            name: '&fTrichter'
+            buy: 498
+            sell: 125
+          dispenser:
+            material: DISPENSER
+            name: '&fWerfer'
+            buy: 195
+            sell: 49
+          piston:
+            material: PISTON
+            name: '&fKolben'
+            buy: 285
+            sell: 72
+          redstone_lamp:
+            material: REDSTONE_LAMP
+            name: '&fRedstone-Lampe'
+            buy: 948
+            sell: 237
+          dropper:
+            material: DROPPER
+            name: '&fSpender'
+            buy: 135
+            sell: 34
+          tripwire:
+            material: TRIPWIRE
+            name: '&fStolperdraht'
+            buy: 9
+            sell: 3
+          comparator:
+            material: COMPARATOR
+            name: '&fKomparator'
+            buy: 510
+            sell: 128
+  farming:
+    display-name: '&a&lFarming'
+    icon: WHEAT
+    border: GREEN_STAINED_GLASS_PANE
+    sub-categories:
+      farming:
+        display-name: '&a&lFarming'
+        icon: WHEAT
+        columns: 9
+        items:
+          birch_sapling:
+            material: BIRCH_SAPLING
+            name: '&fSetzling (Birke)'
+            buy: 9
+            sell: 3
+          dark_oak_sapling:
+            material: DARK_OAK_SAPLING
+            name: '&fSetzling (Schwarzeiche)'
+            buy: 9
+            sell: 3
+          nether_wart:
+            material: NETHER_WART
+            name: '&fNetherwarze'
+            buy: 60
+            sell: 20
+          beetroot:
+            material: BEETROOT
+            name: '&fRote Bete'
+            buy: 30
+            sell: 10
+          bamboo:
+            material: BAMBOO
+            name: '&fBambus'
+            buy: 18
+            sell: 5
+          jungle_sapling:
+            material: JUNGLE_SAPLING
+            name: '&fSetzling (Dschungel)'
+            buy: 9
+            sell: 3
+          carrot:
+            material: CARROT
+            name: '&fKarotte'
+            buy: 30
+            sell: 10
+          melon:
+            material: MELON
+            name: '&fMelone'
+            buy: 30
+            sell: 8
+          cactus:
+            material: CACTUS
+            name: '&fKaktus'
+            buy: 18
+            sell: 5
+          hay_block:
+            material: HAY_BLOCK
+            name: '&fHeuballen'
+            buy: 270
+            sell: 68
+          pumpkin:
+            material: PUMPKIN
+            name: '&fKürbis'
+            buy: 30
+            sell: 8
+          sugar_cane:
+            material: SUGAR_CANE
+            name: '&fZuckerrohr'
+            buy: 24
+            sell: 6
+          carrot_on_a_stick:
+            material: CARROT_ON_A_STICK
+            name: '&fKarotte am Stab'
+            buy: 405
+            sell: 102
+          beetroot_seeds:
+            material: BEETROOT_SEEDS
+            name: '&fRote-Bete-Samen'
+            buy: 9
+            sell: 3
+          wheat:
+            material: WHEAT
+            name: '&fWeizen'
+            buy: 30
+            sell: 10
+          pumpkin_seeds:
+            material: PUMPKIN_SEEDS
+            name: '&fKürbissamen'
+            buy: 9
+            sell: 3
+          oak_sapling:
+            material: OAK_SAPLING
+            name: '&fSetzling (Eiche)'
+            buy: 9
+            sell: 3
+          potato:
+            material: POTATO
+            name: '&fKartoffel'
+            buy: 30
+            sell: 10
+          spruce_sapling:
+            material: SPRUCE_SAPLING
+            name: '&fSetzling (Fichte)'
+            buy: 9
+            sell: 3
+          cocoa_beans:
+            material: COCOA_BEANS
+            name: '&fKakaobohnen'
+            buy: 45
+            sell: 12
+          wheat_seeds:
+            material: WHEAT_SEEDS
+            name: '&fWeizensamen'
+            buy: 9
+            sell: 3
+          bone_meal:
+            material: BONE_MEAL
+            name: '&fKnochenmehl'
+            buy: 15
+            sell: 4
+          sweet_berries:
+            material: SWEET_BERRIES
+            name: '&fSüße Beeren'
+            buy: 27
+            sell: 7
+          melon_seeds:
+            material: MELON_SEEDS
+            name: '&fMelonensamen'
+            buy: 9
+            sell: 3
+          acacia_sapling:
+            material: ACACIA_SAPLING
+            name: '&fSetzling (Akazie)'
+            buy: 9
+            sell: 3
+          sugar:
+            material: SUGAR
+            name: '&fZucker'
+            buy: 30
+            sell: 8
+
+  decoration:
+    display-name: '&d&lDeko'
+    icon: PINK_BANNER
+    border: MAGENTA_STAINED_GLASS_PANE
+    sub-categories:
+      faerbbar:
+        display-name: '&d&lFärbbare Blöcke'
+        icon: WHITE_WOOL
+        columns: 9
+        items:
           brown_wool:
             material: BROWN_WOOL
             name: '&fWolle (Braun)'
@@ -1042,6 +1979,31 @@ categories:
             name: '&fBeton (Braun)'
             buy: 16
             sell: 4
+          brown_carpet:
+            material: BROWN_CARPET
+            name: '&fTeppich (Braun)'
+            buy: 24
+            sell: 6
+          brown_dye:
+            material: BROWN_DYE
+            name: '&fFarbstoff (Braun)'
+            buy: 30
+            sell: 8
+          brown_banner:
+            material: BROWN_BANNER
+            name: '&fBanner (Braun)'
+            buy: 219
+            sell: 55
+          brown_bed:
+            material: BROWN_BED
+            name: '&fBett (Braun)'
+            buy: 126
+            sell: 32
+          brown_candle:
+            material: BROWN_CANDLE
+            name: '&fKerze (Braun)'
+            buy: 18
+            sell: 5
           purple_wool:
             material: PURPLE_WOOL
             name: '&fWolle (Lila)'
@@ -1057,6 +2019,31 @@ categories:
             name: '&fBeton (Lila)'
             buy: 16
             sell: 4
+          purple_carpet:
+            material: PURPLE_CARPET
+            name: '&fTeppich (Lila)'
+            buy: 24
+            sell: 6
+          purple_dye:
+            material: PURPLE_DYE
+            name: '&fFarbstoff (Lila)'
+            buy: 30
+            sell: 8
+          purple_banner:
+            material: PURPLE_BANNER
+            name: '&fBanner (Lila)'
+            buy: 219
+            sell: 55
+          purple_bed:
+            material: PURPLE_BED
+            name: '&fBett (Lila)'
+            buy: 126
+            sell: 32
+          purple_candle:
+            material: PURPLE_CANDLE
+            name: '&fKerze (Lila)'
+            buy: 18
+            sell: 5
           blue_wool:
             material: BLUE_WOOL
             name: '&fWolle (Blau)'
@@ -1072,6 +2059,31 @@ categories:
             name: '&fBeton (Blau)'
             buy: 16
             sell: 4
+          blue_carpet:
+            material: BLUE_CARPET
+            name: '&fTeppich (Blau)'
+            buy: 24
+            sell: 6
+          blue_dye:
+            material: BLUE_DYE
+            name: '&fFarbstoff (Blau)'
+            buy: 30
+            sell: 8
+          blue_banner:
+            material: BLUE_BANNER
+            name: '&fBanner (Blau)'
+            buy: 219
+            sell: 55
+          blue_bed:
+            material: BLUE_BED
+            name: '&fBett (Blau)'
+            buy: 126
+            sell: 32
+          blue_candle:
+            material: BLUE_CANDLE
+            name: '&fKerze (Blau)'
+            buy: 18
+            sell: 5
           black_wool:
             material: BLACK_WOOL
             name: '&fWolle (Schwarz)'
@@ -1087,6 +2099,31 @@ categories:
             name: '&fBeton (Schwarz)'
             buy: 16
             sell: 4
+          black_carpet:
+            material: BLACK_CARPET
+            name: '&fTeppich (Schwarz)'
+            buy: 24
+            sell: 6
+          black_dye:
+            material: BLACK_DYE
+            name: '&fFarbstoff (Schwarz)'
+            buy: 30
+            sell: 8
+          black_banner:
+            material: BLACK_BANNER
+            name: '&fBanner (Schwarz)'
+            buy: 219
+            sell: 55
+          black_bed:
+            material: BLACK_BED
+            name: '&fBett (Schwarz)'
+            buy: 126
+            sell: 32
+          black_candle:
+            material: BLACK_CANDLE
+            name: '&fKerze (Schwarz)'
+            buy: 18
+            sell: 5
           red_wool:
             material: RED_WOOL
             name: '&fWolle (Rot)'
@@ -1102,6 +2139,31 @@ categories:
             name: '&fBeton (Rot)'
             buy: 16
             sell: 4
+          red_carpet:
+            material: RED_CARPET
+            name: '&fTeppich (Rot)'
+            buy: 24
+            sell: 6
+          red_dye:
+            material: RED_DYE
+            name: '&fFarbstoff (Rot)'
+            buy: 30
+            sell: 8
+          red_banner:
+            material: RED_BANNER
+            name: '&fBanner (Rot)'
+            buy: 219
+            sell: 55
+          red_bed:
+            material: RED_BED
+            name: '&fBett (Rot)'
+            buy: 126
+            sell: 32
+          red_candle:
+            material: RED_CANDLE
+            name: '&fKerze (Rot)'
+            buy: 18
+            sell: 5
           orange_wool:
             material: ORANGE_WOOL
             name: '&fWolle (Orange)'
@@ -1117,6 +2179,31 @@ categories:
             name: '&fBeton (Orange)'
             buy: 16
             sell: 4
+          orange_carpet:
+            material: ORANGE_CARPET
+            name: '&fTeppich (Orange)'
+            buy: 24
+            sell: 6
+          orange_dye:
+            material: ORANGE_DYE
+            name: '&fFarbstoff (Orange)'
+            buy: 30
+            sell: 8
+          orange_banner:
+            material: ORANGE_BANNER
+            name: '&fBanner (Orange)'
+            buy: 219
+            sell: 55
+          orange_bed:
+            material: ORANGE_BED
+            name: '&fBett (Orange)'
+            buy: 126
+            sell: 32
+          orange_candle:
+            material: ORANGE_CANDLE
+            name: '&fKerze (Orange)'
+            buy: 18
+            sell: 5
           green_wool:
             material: GREEN_WOOL
             name: '&fWolle (Grün)'
@@ -1132,6 +2219,31 @@ categories:
             name: '&fBeton (Grün)'
             buy: 16
             sell: 4
+          green_carpet:
+            material: GREEN_CARPET
+            name: '&fTeppich (Grün)'
+            buy: 24
+            sell: 6
+          green_dye:
+            material: GREEN_DYE
+            name: '&fFarbstoff (Grün)'
+            buy: 30
+            sell: 8
+          green_banner:
+            material: GREEN_BANNER
+            name: '&fBanner (Grün)'
+            buy: 219
+            sell: 55
+          green_bed:
+            material: GREEN_BED
+            name: '&fBett (Grün)'
+            buy: 126
+            sell: 32
+          green_candle:
+            material: GREEN_CANDLE
+            name: '&fKerze (Grün)'
+            buy: 18
+            sell: 5
           white_wool:
             material: WHITE_WOOL
             name: '&fWolle (Weiß)'
@@ -1147,6 +2259,31 @@ categories:
             name: '&fBeton (Weiß)'
             buy: 16
             sell: 4
+          white_carpet:
+            material: WHITE_CARPET
+            name: '&fTeppich (Weiß)'
+            buy: 24
+            sell: 6
+          white_dye:
+            material: WHITE_DYE
+            name: '&fFarbstoff (Weiß)'
+            buy: 30
+            sell: 8
+          white_banner:
+            material: WHITE_BANNER
+            name: '&fBanner (Weiß)'
+            buy: 219
+            sell: 55
+          white_bed:
+            material: WHITE_BED
+            name: '&fBett (Weiß)'
+            buy: 126
+            sell: 32
+          white_candle:
+            material: WHITE_CANDLE
+            name: '&fKerze (Weiß)'
+            buy: 18
+            sell: 5
           magenta_wool:
             material: MAGENTA_WOOL
             name: '&fWolle (Magenta)'
@@ -1162,6 +2299,31 @@ categories:
             name: '&fBeton (Magenta)'
             buy: 16
             sell: 4
+          magenta_carpet:
+            material: MAGENTA_CARPET
+            name: '&fTeppich (Magenta)'
+            buy: 24
+            sell: 6
+          magenta_dye:
+            material: MAGENTA_DYE
+            name: '&fFarbstoff (Magenta)'
+            buy: 30
+            sell: 8
+          magenta_banner:
+            material: MAGENTA_BANNER
+            name: '&fBanner (Magenta)'
+            buy: 219
+            sell: 55
+          magenta_bed:
+            material: MAGENTA_BED
+            name: '&fBett (Magenta)'
+            buy: 126
+            sell: 32
+          magenta_candle:
+            material: MAGENTA_CANDLE
+            name: '&fKerze (Magenta)'
+            buy: 18
+            sell: 5
           lime_wool:
             material: LIME_WOOL
             name: '&fWolle (Hellgrün)'
@@ -1177,6 +2339,31 @@ categories:
             name: '&fBeton (Hellgrün)'
             buy: 16
             sell: 4
+          lime_carpet:
+            material: LIME_CARPET
+            name: '&fTeppich (Hellgrün)'
+            buy: 24
+            sell: 6
+          lime_dye:
+            material: LIME_DYE
+            name: '&fFarbstoff (Hellgrün)'
+            buy: 30
+            sell: 8
+          lime_banner:
+            material: LIME_BANNER
+            name: '&fBanner (Hellgrün)'
+            buy: 219
+            sell: 55
+          lime_bed:
+            material: LIME_BED
+            name: '&fBett (Hellgrün)'
+            buy: 126
+            sell: 32
+          lime_candle:
+            material: LIME_CANDLE
+            name: '&fKerze (Hellgrün)'
+            buy: 18
+            sell: 5
           light_blue_wool:
             material: LIGHT_BLUE_WOOL
             name: '&fWolle (Hellblau)'
@@ -1192,6 +2379,31 @@ categories:
             name: '&fBeton (Hellblau)'
             buy: 16
             sell: 4
+          light_blue_carpet:
+            material: LIGHT_BLUE_CARPET
+            name: '&fTeppich (Hellblau)'
+            buy: 24
+            sell: 6
+          light_blue_dye:
+            material: LIGHT_BLUE_DYE
+            name: '&fFarbstoff (Hellblau)'
+            buy: 30
+            sell: 8
+          light_blue_banner:
+            material: LIGHT_BLUE_BANNER
+            name: '&fBanner (Hellblau)'
+            buy: 219
+            sell: 55
+          light_blue_bed:
+            material: LIGHT_BLUE_BED
+            name: '&fBett (Hellblau)'
+            buy: 126
+            sell: 32
+          light_blue_candle:
+            material: LIGHT_BLUE_CANDLE
+            name: '&fKerze (Hellblau)'
+            buy: 18
+            sell: 5
           gray_wool:
             material: GRAY_WOOL
             name: '&fWolle (Grau)'
@@ -1207,6 +2419,31 @@ categories:
             name: '&fBeton (Grau)'
             buy: 16
             sell: 4
+          gray_carpet:
+            material: GRAY_CARPET
+            name: '&fTeppich (Grau)'
+            buy: 24
+            sell: 6
+          gray_dye:
+            material: GRAY_DYE
+            name: '&fFarbstoff (Grau)'
+            buy: 30
+            sell: 8
+          gray_banner:
+            material: GRAY_BANNER
+            name: '&fBanner (Grau)'
+            buy: 219
+            sell: 55
+          gray_bed:
+            material: GRAY_BED
+            name: '&fBett (Grau)'
+            buy: 126
+            sell: 32
+          gray_candle:
+            material: GRAY_CANDLE
+            name: '&fKerze (Grau)'
+            buy: 18
+            sell: 5
           pink_wool:
             material: PINK_WOOL
             name: '&fWolle (Rosa)'
@@ -1222,6 +2459,31 @@ categories:
             name: '&fBeton (Rosa)'
             buy: 16
             sell: 4
+          pink_carpet:
+            material: PINK_CARPET
+            name: '&fTeppich (Rosa)'
+            buy: 24
+            sell: 6
+          pink_dye:
+            material: PINK_DYE
+            name: '&fFarbstoff (Rosa)'
+            buy: 30
+            sell: 8
+          pink_banner:
+            material: PINK_BANNER
+            name: '&fBanner (Rosa)'
+            buy: 219
+            sell: 55
+          pink_bed:
+            material: PINK_BED
+            name: '&fBett (Rosa)'
+            buy: 126
+            sell: 32
+          pink_candle:
+            material: PINK_CANDLE
+            name: '&fKerze (Rosa)'
+            buy: 18
+            sell: 5
           light_gray_wool:
             material: LIGHT_GRAY_WOOL
             name: '&fWolle (Hellgrau)'
@@ -1237,6 +2499,31 @@ categories:
             name: '&fBeton (Hellgrau)'
             buy: 16
             sell: 4
+          light_gray_carpet:
+            material: LIGHT_GRAY_CARPET
+            name: '&fTeppich (Hellgrau)'
+            buy: 24
+            sell: 6
+          light_gray_dye:
+            material: LIGHT_GRAY_DYE
+            name: '&fFarbstoff (Hellgrau)'
+            buy: 30
+            sell: 8
+          light_gray_banner:
+            material: LIGHT_GRAY_BANNER
+            name: '&fBanner (Hellgrau)'
+            buy: 219
+            sell: 55
+          light_gray_bed:
+            material: LIGHT_GRAY_BED
+            name: '&fBett (Hellgrau)'
+            buy: 126
+            sell: 32
+          light_gray_candle:
+            material: LIGHT_GRAY_CANDLE
+            name: '&fKerze (Hellgrau)'
+            buy: 18
+            sell: 5
           yellow_wool:
             material: YELLOW_WOOL
             name: '&fWolle (Gelb)'
@@ -1252,6 +2539,31 @@ categories:
             name: '&fBeton (Gelb)'
             buy: 16
             sell: 4
+          yellow_carpet:
+            material: YELLOW_CARPET
+            name: '&fTeppich (Gelb)'
+            buy: 24
+            sell: 6
+          yellow_dye:
+            material: YELLOW_DYE
+            name: '&fFarbstoff (Gelb)'
+            buy: 30
+            sell: 8
+          yellow_banner:
+            material: YELLOW_BANNER
+            name: '&fBanner (Gelb)'
+            buy: 219
+            sell: 55
+          yellow_bed:
+            material: YELLOW_BED
+            name: '&fBett (Gelb)'
+            buy: 126
+            sell: 32
+          yellow_candle:
+            material: YELLOW_CANDLE
+            name: '&fKerze (Gelb)'
+            buy: 18
+            sell: 5
           cyan_wool:
             material: CYAN_WOOL
             name: '&fWolle (Türkis)'
@@ -1267,208 +2579,144 @@ categories:
             name: '&fBeton (Türkis)'
             buy: 16
             sell: 4
-
-  decoration:
-    display-name: '&d&lDekoration'
-    icon: BLUE_CANDLE
-    border: MAGENTA_STAINED_GLASS_PANE
-    sub-categories:
-      decorative:
-        display-name: '&9&lDekoration'
-        icon: FLOWER_POT
-        items:
-          end_rod:
-            material: END_ROD
-            name: '&fEnd-Stab'
-            buy: 105
-            sell: 27
-          lightning_rod:
-            material: LIGHTNING_ROD
-            name: '&fBlitzableiter'
-            buy: 153
-            sell: 39
-          beacon:
-            material: BEACON
-            name: '&fLeuchtfeuer'
-            buy: 16620
-            sell: 4155
-          lantern:
-            material: LANTERN
-            name: '&fLaterne'
-            buy: 102
-            sell: 26
-          skull_banner_pattern:
-            material: SKULL_BANNER_PATTERN
-            name: '&fBannermuster (Schädel)'
-            buy: 4000
-            sell: 1000
-          conduit:
-            material: CONDUIT
-            name: '&fAquisator'
-            buy: 5600
-            sell: 1400
-          item_frame:
-            material: ITEM_FRAME
-            name: '&fRahmen'
-            buy: 60
-            sell: 15
-          glow_item_frame:
-            material: GLOW_ITEM_FRAME
-            name: '&fLeucht-Rahmen'
-            buy: 135
-            sell: 34
-          chain:
-            material: CHAIN
-            name: '&fKette'
-            buy: 110
-            sell: 28
-          flower_pot:
-            material: FLOWER_POT
-            name: '&fBlumentopf'
-            buy: 18
-            sell: 5
-          sea_lantern:
-            material: SEA_LANTERN
-            name: '&fSeelaterne'
-            buy: 405
-            sell: 102
-          painting:
-            material: PAINTING
-            name: '&fGemälde'
-            buy: 60
-            sell: 15
-          armor_stand:
-            material: ARMOR_STAND
-            name: '&fRüstungsständer'
-            buy: 44
-            sell: 11
-          cauldron:
-            material: CAULDRON
-            name: '&fKessel'
-            buy: 90
-            sell: 23
-          brewing_stand:
-            material: BREWING_STAND
-            name: '&fBraustand'
-            buy: 90
-            sell: 23
-          flower_banner_pattern:
-            material: FLOWER_BANNER_PATTERN
-            name: '&fBannermuster (Blume)'
-            buy: 2000
-            sell: 500
-          soul_lantern:
-            material: SOUL_LANTERN
-            name: '&fSeelenlaterne'
-            buy: 138
-            sell: 35
-      dyes:
-        display-name: '&e&lFarbstoffe'
-        icon: ROSE_BUSH
-        items:
-          brown_dye:
-            material: BROWN_DYE
-            name: '&fFarbstoff (Braun)'
-            buy: 30
-            sell: 8
-          purple_dye:
-            material: PURPLE_DYE
-            name: '&fFarbstoff (Lila)'
-            buy: 30
-            sell: 8
-          blue_dye:
-            material: BLUE_DYE
-            name: '&fFarbstoff (Blau)'
-            buy: 30
-            sell: 8
-          black_dye:
-            material: BLACK_DYE
-            name: '&fFarbstoff (Schwarz)'
-            buy: 30
-            sell: 8
-          red_dye:
-            material: RED_DYE
-            name: '&fFarbstoff (Rot)'
-            buy: 30
-            sell: 8
-          orange_dye:
-            material: ORANGE_DYE
-            name: '&fFarbstoff (Orange)'
-            buy: 30
-            sell: 8
-          green_dye:
-            material: GREEN_DYE
-            name: '&fFarbstoff (Grün)'
-            buy: 30
-            sell: 8
-          white_dye:
-            material: WHITE_DYE
-            name: '&fFarbstoff (Weiß)'
-            buy: 30
-            sell: 8
-          magenta_dye:
-            material: MAGENTA_DYE
-            name: '&fFarbstoff (Magenta)'
-            buy: 30
-            sell: 8
-          lime_dye:
-            material: LIME_DYE
-            name: '&fFarbstoff (Hellgrün)'
-            buy: 30
-            sell: 8
-          light_blue_dye:
-            material: LIGHT_BLUE_DYE
-            name: '&fFarbstoff (Hellblau)'
-            buy: 30
-            sell: 8
-          gray_dye:
-            material: GRAY_DYE
-            name: '&fFarbstoff (Grau)'
-            buy: 30
-            sell: 8
-          pink_dye:
-            material: PINK_DYE
-            name: '&fFarbstoff (Rosa)'
-            buy: 30
-            sell: 8
-          light_gray_dye:
-            material: LIGHT_GRAY_DYE
-            name: '&fFarbstoff (Hellgrau)'
-            buy: 30
-            sell: 8
-          yellow_dye:
-            material: YELLOW_DYE
-            name: '&fFarbstoff (Gelb)'
-            buy: 30
-            sell: 8
+          cyan_carpet:
+            material: CYAN_CARPET
+            name: '&fTeppich (Türkis)'
+            buy: 24
+            sell: 6
           cyan_dye:
             material: CYAN_DYE
             name: '&fFarbstoff (Türkis)'
             buy: 30
             sell: 8
-          oxeye_daisy:
-            material: OXEYE_DAISY
-            name: '&fWucherblume'
+          cyan_banner:
+            material: CYAN_BANNER
+            name: '&fBanner (Türkis)'
+            buy: 219
+            sell: 55
+          cyan_bed:
+            material: CYAN_BED
+            name: '&fBett (Türkis)'
+            buy: 126
+            sell: 32
+          cyan_candle:
+            material: CYAN_CANDLE
+            name: '&fKerze (Türkis)'
             buy: 18
             sell: 5
+      dekoration:
+        display-name: '&d&lDekoration'
+        icon: FLOWER_POT
+        columns: 9
+        items:
+          allium:
+            material: ALLIUM
+            name: '&fLauch'
+            buy: 18
+            sell: 5
+          quartz_stairs:
+            material: QUARTZ_STAIRS
+            name: '&fQuarztreppe'
+            buy: 360
+            sell: 90
+          fire_coral_block:
+            material: FIRE_CORAL_BLOCK
+            name: '&fFeuerkoralle'
+            buy: 105
+            sell: 27
+          chiseled_bookshelf:
+            material: CHISELED_BOOKSHELF
+            name: '&fGemeißeltes Bücherregal'
+            buy: 450
+            sell: 113
+          large_fern:
+            material: LARGE_FERN
+            name: '&fGroßer Farn'
+            buy: 15
+            sell: 5
+          peony:
+            material: PEONY
+            name: '&fPfingstrose'
+            buy: 30
+            sell: 8
+          item_frame:
+            material: ITEM_FRAME
+            name: '&fRahmen'
+            buy: 60
+            sell: 15
+          cauldron:
+            material: CAULDRON
+            name: '&fKessel'
+            buy: 90
+            sell: 23
+          cornflower:
+            material: CORNFLOWER
+            name: '&fKornblume'
+            buy: 18
+            sell: 5
+          bookshelf:
+            material: BOOKSHELF
+            name: '&fBücherregal'
+            buy: 360
+            sell: 90
+          brewing_stand:
+            material: BREWING_STAND
+            name: '&fBraustand'
+            buy: 90
+            sell: 23
+          sea_lantern:
+            material: SEA_LANTERN
+            name: '&fSeelaterne'
+            buy: 405
+            sell: 102
           blue_orchid:
             material: BLUE_ORCHID
             name: '&fBlaue Orchidee'
             buy: 18
             sell: 5
-          lily_of_the_valley:
-            material: LILY_OF_THE_VALLEY
-            name: '&fMaiglöckchen'
-            buy: 18
+          end_rod_deco:
+            material: END_ROD
+            name: '&fEnd-Stab'
+            buy: 105
+            sell: 27
+          lantern:
+            material: LANTERN
+            name: '&fLaterne'
+            buy: 102
+            sell: 26
+          tall_grass:
+            material: TALL_GRASS
+            name: '&fHohes Gras'
+            buy: 15
             sell: 5
-          azure_bluet:
-            material: AZURE_BLUET
-            name: '&fSternhyazinthe'
-            buy: 18
+          quartz_slab:
+            material: QUARTZ_SLAB
+            name: '&fQuarzstufe'
+            buy: 120
+            sell: 30
+          rose_bush:
+            material: ROSE_BUSH
+            name: '&fRosenbusch'
+            buy: 30
+            sell: 8
+          chiseled_quartz_block:
+            material: CHISELED_QUARTZ_BLOCK
+            name: '&fGemeißelter Quarzblock'
+            buy: 240
+            sell: 60
+          dead_bush:
+            material: DEAD_BUSH
+            name: '&fToter Busch'
+            buy: 15
             sell: 5
-          allium:
-            material: ALLIUM
-            name: '&fLauch'
+          jukebox:
+            material: JUKEBOX
+            name: '&fPlattenspieler'
+            buy: 1188
+            sell: 297
+          candle:
+            material: CANDLE
+            name: '&fKerze'
             buy: 18
             sell: 5
           poppy:
@@ -1476,14 +2724,99 @@ categories:
             name: '&fKlatschmohn'
             buy: 18
             sell: 5
+          brain_coral_block:
+            material: BRAIN_CORAL_BLOCK
+            name: '&fHirnkoralle'
+            buy: 105
+            sell: 27
+          lily_pad:
+            material: LILY_PAD
+            name: '&fSeerosenblatt'
+            buy: 15
+            sell: 5
+          vine:
+            material: VINE
+            name: '&fRanke'
+            buy: 9
+            sell: 3
+          sunflower:
+            material: SUNFLOWER
+            name: '&fSonnenblume'
+            buy: 30
+            sell: 8
+          painting:
+            material: PAINTING
+            name: '&fGemälde'
+            buy: 60
+            sell: 15
+          azure_bluet:
+            material: AZURE_BLUET
+            name: '&fSternhyazinthe'
+            buy: 18
+            sell: 5
+          fern:
+            material: FERN
+            name: '&fFarn'
+            buy: 15
+            sell: 5
+          moss_carpet:
+            material: MOSS_CARPET
+            name: '&fMoosteppich'
+            buy: 15
+            sell: 5
           wither_rose:
             material: WITHER_ROSE
             name: '&fWitherrose'
             buy: 450
             sell: 113
-          cornflower:
-            material: CORNFLOWER
-            name: '&fKornblume'
+          armor_stand:
+            material: ARMOR_STAND
+            name: '&fRüstungsständer'
+            buy: 44
+            sell: 11
+          quartz_pillar:
+            material: QUARTZ_PILLAR
+            name: '&fQuarzsäule'
+            buy: 240
+            sell: 60
+          lilac:
+            material: LILAC
+            name: '&fFlieder'
+            buy: 30
+            sell: 8
+          quartz_block:
+            material: QUARTZ_BLOCK
+            name: '&fQuarzblock'
+            buy: 240
+            sell: 60
+          smooth_quartz:
+            material: SMOOTH_QUARTZ
+            name: '&fGlatter Quarz'
+            buy: 240
+            sell: 60
+          conduit:
+            material: CONDUIT
+            name: '&fAquisator'
+            buy: 5600
+            sell: 1400
+          glow_item_frame:
+            material: GLOW_ITEM_FRAME
+            name: '&fLeucht-Rahmen'
+            buy: 135
+            sell: 34
+          soul_lantern:
+            material: SOUL_LANTERN
+            name: '&fSeelenlaterne'
+            buy: 138
+            sell: 35
+          tube_coral_block:
+            material: TUBE_CORAL_BLOCK
+            name: '&fRöhrenkoralle'
+            buy: 105
+            sell: 27
+          lily_of_the_valley:
+            material: LILY_OF_THE_VALLEY
+            name: '&fMaiglöckchen'
             buy: 18
             sell: 5
           dandelion:
@@ -1491,228 +2824,36 @@ categories:
             name: '&fLöwenzahn'
             buy: 18
             sell: 5
-  farming:
-    display-name: '&a&lFarming'
-    icon: WHEAT
-    border: LIME_STAINED_GLASS_PANE
-    sub-categories:
-      crops:
-        display-name: '&a&lErnte'
-        icon: WHEAT
-        items:
-          sugar_cane:
-            material: SUGAR_CANE
-            name: '&fZuckerrohr'
-            buy: 24
-            sell: 6
-          potato:
-            material: POTATO
-            name: '&fKartoffel'
-            buy: 30
-            sell: 10
-          beetroot:
-            material: BEETROOT
-            name: '&fRote Bete'
-            buy: 30
-            sell: 10
-          carrot:
-            material: CARROT
-            name: '&fKarotte'
-            buy: 30
-            sell: 10
-          wheat_seeds:
-            material: WHEAT_SEEDS
-            name: '&fWeizensamen'
-            buy: 9
-            sell: 3
-          cocoa_beans:
-            material: COCOA_BEANS
-            name: '&fKakaobohnen'
-            buy: 45
-            sell: 12
-          melon_seeds:
-            material: MELON_SEEDS
-            name: '&fMelonensamen'
-            buy: 9
-            sell: 3
-          nether_wart:
-            material: NETHER_WART
-            name: '&fNetherwarze'
-            buy: 60
-            sell: 20
-          pumpkin:
-            material: PUMPKIN
-            name: '&fKürbis'
-            buy: 30
-            sell: 8
-          bamboo:
-            material: BAMBOO
-            name: '&fBambus'
+          horn_coral_block:
+            material: HORN_CORAL_BLOCK
+            name: '&fHornkoralle'
+            buy: 105
+            sell: 27
+          flower_pot:
+            material: FLOWER_POT
+            name: '&fBlumentopf'
             buy: 18
             sell: 5
-          beetroot_seeds:
-            material: BEETROOT_SEEDS
-            name: '&fRote-Bete-Samen'
-            buy: 9
-            sell: 3
-          cactus:
-            material: CACTUS
-            name: '&fKaktus'
+          bubble_coral_block:
+            material: BUBBLE_CORAL_BLOCK
+            name: '&fBlasenkoralle'
+            buy: 105
+            sell: 27
+          oxeye_daisy:
+            material: OXEYE_DAISY
+            name: '&fWucherblume'
             buy: 18
             sell: 5
-          wheat:
-            material: WHEAT
-            name: '&fWeizen'
-            buy: 30
-            sell: 10
-          melon:
-            material: MELON
-            name: '&fMelone'
-            buy: 30
-            sell: 8
-          hay_block:
-            material: HAY_BLOCK
-            name: '&fHeuballen'
-            buy: 270
-            sell: 68
-          pumpkin_seeds:
-            material: PUMPKIN_SEEDS
-            name: '&fKürbissamen'
-            buy: 9
-            sell: 3
-          sweet_berries:
-            material: SWEET_BERRIES
-            name: '&fSüße Beeren'
-            buy: 27
-            sell: 7
-      food:
-        display-name: '&6&lEssen'
-        icon: COOKED_BEEF
-        items:
-          bread:
-            material: BREAD
-            name: '&fBrot'
-            buy: 90
-            sell: 23
-          cooked_rabbit:
-            material: COOKED_RABBIT
-            name: '&fGebratenes Kaninchen'
-            buy: 45
-            sell: 12
-          chicken:
-            material: CHICKEN
-            name: '&fRohes Hühnchen'
-            buy: 45
-            sell: 12
-          cooked_porkchop:
-            material: COOKED_PORKCHOP
-            name: '&fGebratenes Schweinefleisch'
-            buy: 45
-            sell: 12
-          rabbit:
-            material: RABBIT
-            name: '&fRohes Kaninchen'
-            buy: 45
-            sell: 12
-          porkchop:
-            material: PORKCHOP
-            name: '&fRohes Schweinefleisch'
-            buy: 45
-            sell: 12
-          golden_apple:
-            material: GOLDEN_APPLE
-            name: '&fGoldener Apfel'
-            buy: 1053
-            sell: 264
-          cooked_cod:
-            material: COOKED_COD
-            name: '&fGebratener Kabeljau'
-            buy: 45
-            sell: 12
-          cookie:
-            material: COOKIE
-            name: '&fKeks'
-            buy: 30
-            sell: 8
-          mutton:
-            material: MUTTON
-            name: '&fRohes Hammelfleisch'
-            buy: 45
-            sell: 12
-          cooked_beef:
-            material: COOKED_BEEF
-            name: '&fSteak'
-            buy: 45
-            sell: 12
-          cooked_salmon:
-            material: COOKED_SALMON
-            name: '&fGebratener Lachs'
-            buy: 45
-            sell: 12
-          carrot_on_a_stick:
-            material: CARROT_ON_A_STICK
-            name: '&fKarotte am Stab'
-            buy: 405
-            sell: 102
-          cooked_mutton:
-            material: COOKED_MUTTON
-            name: '&fGebratenes Hammelfleisch'
-            buy: 45
-            sell: 12
-          apple:
-            material: APPLE
-            name: '&fApfel'
-            buy: 18
-            sell: 5
-          beef:
-            material: BEEF
-            name: '&fRohes Rindfleisch'
-            buy: 45
-            sell: 12
-          cake:
-            material: CAKE
-            name: '&fKuchen'
-            buy: 978
-            sell: 245
-          milk_bucket:
-            material: MILK_BUCKET
-            name: '&fMilcheimer'
-            buy: 270
-            sell: 68
-          cooked_chicken:
-            material: COOKED_CHICKEN
-            name: '&fGebratenes Hühnchen'
-            buy: 45
-            sell: 12
-          honey_bottle:
-            material: HONEY_BOTTLE
-            name: '&fHonigflasche'
-            buy: 90
-            sell: 23
-          salmon:
-            material: SALMON
-            name: '&fRoher Lachs'
-            buy: 45
-            sell: 12
-          cod:
-            material: COD
-            name: '&fRoher Kabeljau'
-            buy: 45
-            sell: 12
-          pumpkin_pie:
-            material: PUMPKIN_PIE
-            name: '&fKürbiskuchen'
-            buy: 60
-            sell: 15
 
-  magic:
-    display-name: '&5&lMagie'
-    icon: ENCHANTED_BOOK
-    border: PURPLE_STAINED_GLASS_PANE
+  misc:
+    display-name: '&f&lSonstiges'
+    icon: CHEST
+    border: LIGHT_GRAY_STAINED_GLASS_PANE
     sub-categories:
-      enchanting:
+      verzauberungen:
         display-name: '&d&lVerzauberungen'
         icon: ENCHANTED_BOOK
+        columns: 9
         items:
           respiration3:
             material: ENCHANTED_BOOK
@@ -1854,20 +2995,16 @@ categories:
             name: '&dUnendlichkeit'
             buy: 1200
             sell: 300
-      potions:
+      traenke:
         display-name: '&d&lTränke'
         icon: POTION
+        columns: 9
         items:
           glass_bottle:
             material: GLASS_BOTTLE
             name: '&fGlasflasche'
             buy: 12
             sell: 3
-          nether_wart_item:
-            material: NETHER_WART
-            name: '&fNetherwarze'
-            buy: 60
-            sell: 20
           brewing_stand_item:
             material: BREWING_STAND
             name: '&fBraustand'
@@ -2053,159 +3190,261 @@ categories:
             name: '&dSchwebefall'
             buy: 747
             sell: 187
-  mobs:
-    display-name: '&2&lMobs'
-    icon: ZOMBIE_HEAD
-    border: GREEN_STAINED_GLASS_PANE
-    sub-categories:
-      mob_drops:
+      mob_beute:
         display-name: '&2&lMob-Beute'
-        icon: ROTTEN_FLESH
+        icon: BONE
+        columns: 9
         items:
-          bone:
-            material: BONE
-            name: '&fKnochen'
-            buy: 45
-            sell: 12
-          pufferfish:
-            material: PUFFERFISH
-            name: '&fKugelfisch'
-            buy: 60
-            sell: 20
-          tropical_fish:
-            material: TROPICAL_FISH
-            name: '&fTropenfisch'
-            buy: 45
-            sell: 15
-          totem_of_undying:
-            material: TOTEM_OF_UNDYING
-            name: '&fTotem der Unsterblichkeit'
-            buy: 12000
-            sell: 3000
-          rabbit_foot:
-            material: RABBIT_FOOT
-            name: '&fHasenpfote'
-            buy: 300
-            sell: 75
-          ancient_debris:
-            material: ANCIENT_DEBRIS
-            name: '&fAntiker Schutt'
-            buy: 9600
-            sell: 3200
-          magma_cream:
-            material: MAGMA_CREAM
-            name: '&fMagmacreme'
-            buy: 270
-            sell: 68
-          blaze_rod:
-            material: BLAZE_ROD
-            name: '&fLohenstab'
-            buy: 900
-            sell: 300
-          phantom_membrane:
-            material: PHANTOM_MEMBRANE
-            name: '&fPhantommembran'
-            buy: 675
-            sell: 169
-          netherite_scrap:
-            material: NETHERITE_SCRAP
-            name: '&fNetheritschrott'
-            buy: 9600
-            sell: 3200
-          string:
-            material: STRING
-            name: '&fFaden'
-            buy: 66
-            sell: 17
-          gunpowder:
-            material: GUNPOWDER
-            name: '&fSchießpulver'
-            buy: 60
-            sell: 20
-          blaze_powder:
-            material: BLAZE_POWDER
-            name: '&fLohenstaub'
-            buy: 450
-            sell: 113
-          rotten_flesh:
-            material: ROTTEN_FLESH
-            name: '&fVerrottetes Fleisch'
-            buy: 24
-            sell: 6
-          spider_eye:
-            material: SPIDER_EYE
-            name: '&fSpinnenauge'
-            buy: 90
-            sell: 23
-          prismarine_shard:
-            material: PRISMARINE_SHARD
-            name: '&fPrismarinsplitter'
-            buy: 75
-            sell: 25
-          prismarine_crystals:
-            material: PRISMARINE_CRYSTALS
-            name: '&fPrismarinkristalle'
-            buy: 90
-            sell: 30
-          leather:
-            material: LEATHER
-            name: '&fLeder'
-            buy: 36
-            sell: 9
-          bone_meal:
-            material: BONE_MEAL
-            name: '&fKnochenmehl'
-            buy: 15
-            sell: 4
-          nether_star:
-            material: NETHER_STAR
-            name: '&fNetherstern'
-            buy: 45600
-            sell: 11400
-          egg:
-            material: EGG
-            name: '&fEi'
-            buy: 15
-            sell: 4
-          ghast_tear:
-            material: GHAST_TEAR
-            name: '&fGhast-Träne'
-            buy: 900
-            sell: 225
-          feather:
-            material: FEATHER
-            name: '&fFeder'
-            buy: 36
-            sell: 9
-          ender_pearl:
-            material: ENDER_PEARL
-            name: '&fEnderperle'
-            buy: 750
-            sell: 250
-          rabbit_hide:
-            material: RABBIT_HIDE
-            name: '&fHasenfell'
-            buy: 45
-            sell: 12
-          slime_ball:
-            material: SLIME_BALL
-            name: '&fSchleimball'
-            buy: 240
-            sell: 60
+          piglin_head:
+            material: PIGLIN_HEAD
+            name: '&fPiglinkopf'
+            buy: -1
+            sell: 1800
           shulker_shell:
             material: SHULKER_SHELL
             name: '&fShulker-Panzer'
             buy: 900
             sell: 300
+          zombie_head:
+            material: ZOMBIE_HEAD
+            name: '&fZombiekopf'
+            buy: -1
+            sell: 1200
+          blaze_powder:
+            material: BLAZE_POWDER
+            name: '&fLohenstaub'
+            buy: 450
+            sell: 113
+          bone:
+            material: BONE
+            name: '&fKnochen'
+            buy: 45
+            sell: 12
+          egg:
+            material: EGG
+            name: '&fEi'
+            buy: 15
+            sell: 4
+          magma_cream:
+            material: MAGMA_CREAM
+            name: '&fMagmacreme'
+            buy: 270
+            sell: 68
+          gunpowder:
+            material: GUNPOWDER
+            name: '&fSchießpulver'
+            buy: 60
+            sell: 20
+          glow_ink_sac:
+            material: GLOW_INK_SAC
+            name: '&fLeucht-Tintenbeutel'
+            buy: 75
+            sell: 19
+          rabbit_hide:
+            material: RABBIT_HIDE
+            name: '&fHasenfell'
+            buy: 45
+            sell: 12
+          rotten_flesh:
+            material: ROTTEN_FLESH
+            name: '&fVerrottetes Fleisch'
+            buy: 24
+            sell: 6
+          leather:
+            material: LEATHER
+            name: '&fLeder'
+            buy: 36
+            sell: 9
+          ink_sac:
+            material: INK_SAC
+            name: '&fTintenbeutel'
+            buy: 30
+            sell: 8
+          ender_eye:
+            material: ENDER_EYE
+            name: '&fEnderauge'
+            buy: 900
+            sell: 225
+          wither_skeleton_skull:
+            material: WITHER_SKELETON_SKULL
+            name: '&fWither-Skelett-Schädel'
+            buy: -1
+            sell: 1800
+          slime_ball:
+            material: SLIME_BALL
+            name: '&fSchleimball'
+            buy: 240
+            sell: 60
+          prismarine_crystals:
+            material: PRISMARINE_CRYSTALS
+            name: '&fPrismarinkristalle'
+            buy: 90
+            sell: 30
+          ender_pearl:
+            material: ENDER_PEARL
+            name: '&fEnderperle'
+            buy: 750
+            sell: 250
+          nether_star:
+            material: NETHER_STAR
+            name: '&fNetherstern'
+            buy: 45600
+            sell: 11400
+          tropical_fish:
+            material: TROPICAL_FISH
+            name: '&fTropenfisch'
+            buy: 45
+            sell: 15
+          rabbit_foot:
+            material: RABBIT_FOOT
+            name: '&fHasenpfote'
+            buy: 300
+            sell: 75
+          spider_eye:
+            material: SPIDER_EYE
+            name: '&fSpinnenauge'
+            buy: 90
+            sell: 23
+          creeper_head:
+            material: CREEPER_HEAD
+            name: '&fCreeper-Kopf'
+            buy: -1
+            sell: 1200
+          ghast_tear:
+            material: GHAST_TEAR
+            name: '&fGhast-Träne'
+            buy: 900
+            sell: 225
+          skeleton_skull:
+            material: SKELETON_SKULL
+            name: '&fSkelettschädel'
+            buy: -1
+            sell: 1200
+          feather:
+            material: FEATHER
+            name: '&fFeder'
+            buy: 36
+            sell: 9
+          totem_of_undying:
+            material: TOTEM_OF_UNDYING
+            name: '&fTotem der Unsterblichkeit'
+            buy: 12000
+            sell: 3000
+          netherite_scrap:
+            material: NETHERITE_SCRAP
+            name: '&fNetheritschrott'
+            buy: 9600
+            sell: 3200
+          dragon_head:
+            material: DRAGON_HEAD
+            name: '&fDrachenkopf'
+            buy: -1
+            sell: 2500
+          pufferfish:
+            material: PUFFERFISH
+            name: '&fKugelfisch'
+            buy: 60
+            sell: 20
+          blaze_rod:
+            material: BLAZE_ROD
+            name: '&fLohenstab'
+            buy: 900
+            sell: 300
+          string:
+            material: STRING
+            name: '&fFaden'
+            buy: 66
+            sell: 17
+          prismarine_shard:
+            material: PRISMARINE_SHARD
+            name: '&fPrismarinsplitter'
+            buy: 75
+            sell: 25
+          phantom_membrane:
+            material: PHANTOM_MEMBRANE
+            name: '&fPhantommembran'
+            buy: 675
+            sell: 169
 
-  sonstiges:
-    display-name: '&f&lSonstiges'
-    icon: CHEST
-    border: LIGHT_GRAY_STAINED_GLASS_PANE
-    sub-categories:
+      werkstationen:
+        display-name: '&6&lWerkstationen'
+        icon: CRAFTING_TABLE
+        columns: 9
+        items:
+          grindstone:
+            material: GRINDSTONE
+            name: '&fSchleifstein'
+            buy: 26
+            sell: 7
+          smithing_table:
+            material: SMITHING_TABLE
+            name: '&fSchmiedetisch'
+            buy: 204
+            sell: 51
+          blast_furnace:
+            material: BLAST_FURNACE
+            name: '&fSchmelzofen'
+            buy: 615
+            sell: 154
+          composter:
+            material: COMPOSTER
+            name: '&fKomposter'
+            buy: 21
+            sell: 6
+          anvil:
+            material: ANVIL
+            name: '&fAmboss'
+            buy: 450
+            sell: 113
+          stonecutter:
+            material: STONECUTTER
+            name: '&fSteinsäge'
+            buy: 135
+            sell: 34
+          enchanting_table:
+            material: ENCHANTING_TABLE
+            name: '&fZaubertisch'
+            buy: 3108
+            sell: 777
+          cartography_table:
+            material: CARTOGRAPHY_TABLE
+            name: '&fKartentisch'
+            buy: 72
+            sell: 18
+          fletching_table:
+            material: FLETCHING_TABLE
+            name: '&fPfeilmachertisch'
+            buy: 54
+            sell: 14
+          loom:
+            material: LOOM
+            name: '&fWebstuhl'
+            buy: 144
+            sell: 36
+          furnace:
+            material: FURNACE
+            name: '&fOfen'
+            buy: 120
+            sell: 30
+          lectern:
+            material: LECTERN
+            name: '&fLesepult'
+            buy: 372
+            sell: 93
+          crafting_table:
+            material: CRAFTING_TABLE
+            name: '&fWerkbank'
+            buy: 24
+            sell: 6
+          smoker:
+            material: SMOKER
+            name: '&fRäucherofen'
+            buy: 204
+            sell: 51
       bauteile:
         display-name: '&7&lBauteile'
         icon: OAK_DOOR
+        columns: 9
         items:
           birch_door:
             material: BIRCH_DOOR
@@ -2537,16 +3776,6 @@ categories:
             name: '&fHängeschild (Eiche)'
             buy: 26
             sell: 7
-          stone_button:
-            material: STONE_BUTTON
-            name: '&fKnopf (Stein)'
-            buy: 15
-            sell: 4
-          stone_pressure_plate:
-            material: STONE_PRESSURE_PLATE
-            name: '&fDruckplatte (Stein)'
-            buy: 30
-            sell: 8
           iron_door:
             material: IRON_DOOR
             name: '&fEisentür'
@@ -2557,16 +3786,11 @@ categories:
             name: '&fEisenfalltür'
             buy: 360
             sell: 90
-          light_weighted_pressure_plate:
-            material: LIGHT_WEIGHTED_PRESSURE_PLATE
-            name: '&fDruckplatte (Gold)'
-            buy: 252
-            sell: 63
-          heavy_weighted_pressure_plate:
-            material: HEAVY_WEIGHTED_PRESSURE_PLATE
-            name: '&fDruckplatte (Eisen)'
-            buy: 180
-            sell: 45
+          exposed_copper_block:
+            material: EXPOSED_COPPER_BLOCK
+            name: '&fKupferblock (Verwittertes Kupfer)'
+            buy: 459
+            sell: 115
           exposed_copper_door:
             material: EXPOSED_COPPER_DOOR
             name: '&fTür (Verwittertes Kupfer)'
@@ -2587,9 +3811,9 @@ categories:
             name: '&fLampe (Verwittertes Kupfer)'
             buy: 450
             sell: 113
-          cut_exposed_copper:
-            material: EXPOSED_CUT_COPPER
-            name: '&fGeschnittenes Kupfer (Verwittertes Kupfer)'
+          weathered_copper_block:
+            material: WEATHERED_COPPER_BLOCK
+            name: '&fKupferblock (Angelaufenes Kupfer)'
             buy: 459
             sell: 115
           weathered_copper_door:
@@ -2612,9 +3836,9 @@ categories:
             name: '&fLampe (Angelaufenes Kupfer)'
             buy: 450
             sell: 113
-          cut_weathered_copper:
-            material: WEATHERED_CUT_COPPER
-            name: '&fGeschnittenes Kupfer (Angelaufenes Kupfer)'
+          oxidized_copper_block:
+            material: OXIDIZED_COPPER_BLOCK
+            name: '&fKupferblock (Oxidiertes Kupfer)'
             buy: 459
             sell: 115
           oxidized_copper_door:
@@ -2637,9 +3861,9 @@ categories:
             name: '&fLampe (Oxidiertes Kupfer)'
             buy: 450
             sell: 113
-          cut_oxidized_copper:
-            material: OXIDIZED_CUT_COPPER
-            name: '&fGeschnittenes Kupfer (Oxidiertes Kupfer)'
+          copper_block:
+            material: COPPER_BLOCK
+            name: '&fKupferblock (Kupfer)'
             buy: 459
             sell: 115
           copper_door:
@@ -2662,379 +3886,270 @@ categories:
             name: '&fLampe (Kupfer)'
             buy: 450
             sell: 113
-          cut_copper:
-            material: CUT_COPPER
-            name: '&fGeschnittenes Kupfer (Kupfer)'
-            buy: 459
-            sell: 115
-          tuff_wall:
-            material: TUFF_WALL
-            name: '&fTuffsteinmauer'
-            buy: 15
-            sell: 4
-          end_stone_brick_wall:
-            material: END_STONE_BRICK_WALL
-            name: '&fEndsteinziegelmauer'
-            buy: 40
-            sell: 10
-          cobbled_deepslate_wall:
-            material: COBBLED_DEEPSLATE_WALL
-            name: '&fBruch-Tiefenschiefermauer'
-            buy: 18
-            sell: 5
-          tuff_brick_wall:
-            material: TUFF_BRICK_WALL
-            name: '&fTuffziegelmauer'
-            buy: 15
-            sell: 4
-          deepslate_tile_wall:
-            material: DEEPSLATE_TILE_WALL
-            name: '&fTiefenschieferfliesenmauer'
-            buy: 18
-            sell: 5
-          blackstone_wall:
-            material: BLACKSTONE_WALL
-            name: '&fSchwarzsteinmauer'
-            buy: 20
-            sell: 5
-          mossy_cobblestone_wall:
-            material: MOSSY_COBBLESTONE_WALL
-            name: '&fBemooste Bruchsteinmauer'
-            buy: 23
-            sell: 6
-          stone_brick_wall:
-            material: STONE_BRICK_WALL
-            name: '&fSteinziegelmauer'
-            buy: 32
-            sell: 8
-          polished_blackstone_brick_wall:
-            material: POLISHED_BLACKSTONE_BRICK_WALL
-            name: '&fPolierte Schwarzstein-Ziegelmauer'
-            buy: 20
-            sell: 5
-          sandstone_wall:
-            material: SANDSTONE_WALL
-            name: '&fSandsteinmauer'
-            buy: 48
-            sell: 12
-          mud_brick_wall:
-            material: MUD_BRICK_WALL
-            name: '&fLehmziegelmauer'
-            buy: 24
-            sell: 6
-          prismarine_wall:
-            material: PRISMARINE_WALL
-            name: '&fPrismarinmauer'
-            buy: 300
-            sell: 75
-          red_sandstone_wall:
-            material: RED_SANDSTONE_WALL
-            name: '&fRoter-Sandstein-Mauer'
-            buy: 48
-            sell: 12
-          andesite_wall:
-            material: ANDESITE_WALL
-            name: '&fAndesitmauer'
-            buy: 15
-            sell: 4
-          brick_wall:
-            material: BRICK_WALL
-            name: '&fZiegelmauer'
-            buy: 24
-            sell: 6
-          granite_wall:
-            material: GRANITE_WALL
-            name: '&fGranitmauer'
-            buy: 15
-            sell: 4
-          diorite_wall:
-            material: DIORITE_WALL
-            name: '&fDioritmauer'
-            buy: 15
-            sell: 4
-          red_nether_brick_wall:
-            material: RED_NETHER_BRICK_WALL
-            name: '&fRote Netherziegelmauer'
-            buy: 90
-            sell: 23
-          nether_brick_wall:
-            material: NETHER_BRICK_WALL
-            name: '&fNetherziegelmauer'
-            buy: 27
-            sell: 7
-          polished_blackstone_wall:
-            material: POLISHED_BLACKSTONE_WALL
-            name: '&fPolierte Schwarzsteinmauer'
-            buy: 20
-            sell: 5
-          polished_deepslate_wall:
-            material: POLISHED_DEEPSLATE_WALL
-            name: '&fPolierte Tiefenschiefermauer'
-            buy: 18
-            sell: 5
-          mossy_stone_brick_wall:
-            material: MOSSY_STONE_BRICK_WALL
-            name: '&fBemooste Steinziegelmauer'
-            buy: 40
-            sell: 10
-          polished_tuff_wall:
-            material: POLISHED_TUFF_WALL
-            name: '&fPolierte Tuffsteinmauer'
-            buy: 15
-            sell: 4
-          cobblestone_wall:
-            material: COBBLESTONE_WALL
-            name: '&fBruchsteinmauer'
-            buy: 15
-            sell: 4
-          deepslate_brick_wall:
-            material: DEEPSLATE_BRICK_WALL
-            name: '&fTiefenschieferziegelmauer'
-            buy: 18
-            sell: 5
 
       diverses:
         display-name: '&f&lDiverses'
         icon: CHEST
+        columns: 9
         items:
-          brown_banner:
-            material: BROWN_BANNER
-            name: '&fBanner (Braun)'
-            buy: 219
-            sell: 55
-          brown_bed:
-            material: BROWN_BED
-            name: '&fBett (Braun)'
-            buy: 126
-            sell: 32
-          brown_carpet:
-            material: BROWN_CARPET
-            name: '&fTeppich (Braun)'
+          stick:
+            material: STICK
+            name: '&fStock'
+            buy: 3
+            sell: 1
+          raw_gold_block:
+            material: RAW_GOLD_BLOCK
+            name: '&fBlock aus rohem Gold'
+            buy: 1134
+            sell: 284
+          shulker_box:
+            material: SHULKER_BOX
+            name: '&fShulker-Kiste'
+            buy: 948
+            sell: 237
+          brick:
+            material: BRICK
+            name: '&fZiegel'
+            buy: 6
+            sell: 2
+          water_bucket:
+            material: WATER_BUCKET
+            name: '&fWassereimer'
+            buy: 270
+            sell: 68
+          raw_copper_block:
+            material: RAW_COPPER_BLOCK
+            name: '&fRohkupferblock'
+            buy: 459
+            sell: 115
+          pufferfish_bucket:
+            material: PUFFERFISH_BUCKET
+            name: '&fKugelfischeimer'
+            buy: 330
+            sell: 83
+          elytra:
+            material: ELYTRA
+            name: '&fElytren'
+            buy: 45600
+            sell: 11400
+          powder_snow_bucket:
+            material: POWDER_SNOW_BUCKET
+            name: '&fPulverschnee-Eimer'
+            buy: 270
+            sell: 68
+          paper:
+            material: PAPER
+            name: '&fPapier'
             buy: 24
             sell: 6
-          purple_banner:
-            material: PURPLE_BANNER
-            name: '&fBanner (Lila)'
-            buy: 219
-            sell: 55
-          purple_bed:
-            material: PURPLE_BED
-            name: '&fBett (Lila)'
-            buy: 126
-            sell: 32
-          purple_carpet:
-            material: PURPLE_CARPET
-            name: '&fTeppich (Lila)'
-            buy: 24
+          charcoal:
+            material: CHARCOAL
+            name: '&fHolzkohle'
+            buy: 21
             sell: 6
-          blue_banner:
-            material: BLUE_BANNER
-            name: '&fBanner (Blau)'
-            buy: 219
-            sell: 55
-          blue_bed:
-            material: BLUE_BED
-            name: '&fBett (Blau)'
+          fishing_rod:
+            material: FISHING_ROD
+            name: '&fAngel'
+            buy: 201
+            sell: 51
+          trapped_chest:
+            material: TRAPPED_CHEST
+            name: '&fFallentruhe'
+            buy: 147
+            sell: 37
+          flint:
+            material: FLINT
+            name: '&fFeuerstein'
+            buy: 15
+            sell: 4
+          shears:
+            material: SHEARS
+            name: '&fSchere'
+            buy: 102
+            sell: 26
+          clay_ball:
+            material: CLAY_BALL
+            name: '&fLehmkugel'
+            buy: 6
+            sell: 2
+          barrel:
+            material: BARREL
+            name: '&fFass'
+            buy: 42
+            sell: 11
+          raw_iron_block:
+            material: RAW_IRON_BLOCK
+            name: '&fBlock aus rohem Eisen'
+            buy: 810
+            sell: 203
+          milk_bucket_item:
+            material: MILK_BUCKET
+            name: '&fMilcheimer'
+            buy: 270
+            sell: 68
+          hopper_minecart:
+            material: HOPPER_MINECART
+            name: '&fTrichterlore'
+            buy: 948
+            sell: 237
+          flint_and_steel:
+            material: FLINT_AND_STEEL
+            name: '&fFeuerzeug'
+            buy: 75
+            sell: 19
+          bowl:
+            material: BOWL
+            name: '&fSchüssel'
+            buy: 5
+            sell: 2
+          ominous_trial_key:
+            material: OMINOUS_TRIAL_KEY
+            name: '&fUnheilvoller Prüfungsschlüssel'
+            buy: 15000
+            sell: 3750
+          compass:
+            material: COMPASS
+            name: '&fKompass'
+            buy: 390
+            sell: 98
+          raw_iron:
+            material: RAW_IRON
+            name: '&fRohes Eisen'
+            buy: 90
+            sell: 30
+          book:
+            material: BOOK
+            name: '&fBuch'
+            buy: 108
+            sell: 27
+          spyglass:
+            material: SPYGLASS
+            name: '&fFernrohr'
+            buy: 309
+            sell: 78
+          tnt_minecart:
+            material: TNT_MINECART
+            name: '&fTNT-Lore'
+            buy: 798
+            sell: 200
+          lead:
+            material: LEAD
+            name: '&fLeine'
+            buy: 30
+            sell: 8
+          ender_chest:
+            material: ENDER_CHEST
+            name: '&fEndertruhe'
+            buy: 2280
+            sell: 570
+          trial_key:
+            material: TRIAL_KEY
+            name: '&fPrüfungsschlüssel'
+            buy: 10000
+            sell: 2500
+          raw_gold:
+            material: RAW_GOLD
+            name: '&fRohes Gold'
             buy: 126
-            sell: 32
-          blue_carpet:
-            material: BLUE_CARPET
-            name: '&fTeppich (Blau)'
-            buy: 24
+            sell: 42
+          raw_copper:
+            material: RAW_COPPER
+            name: '&fRohkupfer'
+            buy: 51
+            sell: 17
+          firework_rocket:
+            material: FIREWORK_ROCKET
+            name: '&fFeuerwerksrakete'
+            buy: 84
+            sell: 21
+          bucket:
+            material: BUCKET
+            name: '&fEimer'
+            buy: 270
+            sell: 68
+          lava_bucket:
+            material: LAVA_BUCKET
+            name: '&fLava-Eimer'
+            buy: 270
+            sell: 68
+          sculk_vein:
+            material: SCULK_VEIN
+            name: '&fSculk-Ader'
+            buy: 45
+            sell: 15
+          minecart:
+            material: MINECART
+            name: '&fLore'
+            buy: 450
+            sell: 113
+          snowball:
+            material: SNOWBALL
+            name: '&fSchneeball'
+            buy: 9
+            sell: 3
+          chest_minecart:
+            material: CHEST_MINECART
+            name: '&fTruhenlore'
+            buy: 498
+            sell: 125
+          gold_nugget:
+            material: GOLD_NUGGET
+            name: '&fGoldnugget'
+            buy: 14
+            sell: 4
+          ladder:
+            material: LADDER
+            name: '&fLeiter'
+            buy: 21
             sell: 6
-          black_banner:
-            material: BLACK_BANNER
-            name: '&fBanner (Schwarz)'
-            buy: 219
-            sell: 55
-          black_bed:
-            material: BLACK_BED
-            name: '&fBett (Schwarz)'
-            buy: 126
-            sell: 32
-          black_carpet:
-            material: BLACK_CARPET
-            name: '&fTeppich (Schwarz)'
-            buy: 24
-            sell: 6
-          red_banner:
-            material: RED_BANNER
-            name: '&fBanner (Rot)'
-            buy: 219
-            sell: 55
-          red_bed:
-            material: RED_BED
-            name: '&fBett (Rot)'
-            buy: 126
-            sell: 32
-          red_carpet:
-            material: RED_CARPET
-            name: '&fTeppich (Rot)'
-            buy: 24
-            sell: 6
-          orange_banner:
-            material: ORANGE_BANNER
-            name: '&fBanner (Orange)'
-            buy: 219
-            sell: 55
-          orange_bed:
-            material: ORANGE_BED
-            name: '&fBett (Orange)'
-            buy: 126
-            sell: 32
-          orange_carpet:
-            material: ORANGE_CARPET
-            name: '&fTeppich (Orange)'
-            buy: 24
-            sell: 6
-          green_banner:
-            material: GREEN_BANNER
-            name: '&fBanner (Grün)'
-            buy: 219
-            sell: 55
-          green_bed:
-            material: GREEN_BED
-            name: '&fBett (Grün)'
-            buy: 126
-            sell: 32
-          green_carpet:
-            material: GREEN_CARPET
-            name: '&fTeppich (Grün)'
-            buy: 24
-            sell: 6
-          white_banner:
-            material: WHITE_BANNER
-            name: '&fBanner (Weiß)'
-            buy: 219
-            sell: 55
-          white_bed:
-            material: WHITE_BED
-            name: '&fBett (Weiß)'
-            buy: 126
-            sell: 32
-          white_carpet:
-            material: WHITE_CARPET
-            name: '&fTeppich (Weiß)'
-            buy: 24
-            sell: 6
-          magenta_banner:
-            material: MAGENTA_BANNER
-            name: '&fBanner (Magenta)'
-            buy: 219
-            sell: 55
-          magenta_bed:
-            material: MAGENTA_BED
-            name: '&fBett (Magenta)'
-            buy: 126
-            sell: 32
-          magenta_carpet:
-            material: MAGENTA_CARPET
-            name: '&fTeppich (Magenta)'
-            buy: 24
-            sell: 6
-          lime_banner:
-            material: LIME_BANNER
-            name: '&fBanner (Hellgrün)'
-            buy: 219
-            sell: 55
-          lime_bed:
-            material: LIME_BED
-            name: '&fBett (Hellgrün)'
-            buy: 126
-            sell: 32
-          lime_carpet:
-            material: LIME_CARPET
-            name: '&fTeppich (Hellgrün)'
-            buy: 24
-            sell: 6
-          light_blue_banner:
-            material: LIGHT_BLUE_BANNER
-            name: '&fBanner (Hellblau)'
-            buy: 219
-            sell: 55
-          light_blue_bed:
-            material: LIGHT_BLUE_BED
-            name: '&fBett (Hellblau)'
-            buy: 126
-            sell: 32
-          light_blue_carpet:
-            material: LIGHT_BLUE_CARPET
-            name: '&fTeppich (Hellblau)'
-            buy: 24
-            sell: 6
-          gray_banner:
-            material: GRAY_BANNER
-            name: '&fBanner (Grau)'
-            buy: 219
-            sell: 55
-          gray_bed:
-            material: GRAY_BED
-            name: '&fBett (Grau)'
-            buy: 126
-            sell: 32
-          gray_carpet:
-            material: GRAY_CARPET
-            name: '&fTeppich (Grau)'
-            buy: 24
-            sell: 6
-          pink_banner:
-            material: PINK_BANNER
-            name: '&fBanner (Rosa)'
-            buy: 219
-            sell: 55
-          pink_bed:
-            material: PINK_BED
-            name: '&fBett (Rosa)'
-            buy: 126
-            sell: 32
-          pink_carpet:
-            material: PINK_CARPET
-            name: '&fTeppich (Rosa)'
-            buy: 24
-            sell: 6
-          light_gray_banner:
-            material: LIGHT_GRAY_BANNER
-            name: '&fBanner (Hellgrau)'
-            buy: 219
-            sell: 55
-          light_gray_bed:
-            material: LIGHT_GRAY_BED
-            name: '&fBett (Hellgrau)'
-            buy: 126
-            sell: 32
-          light_gray_carpet:
-            material: LIGHT_GRAY_CARPET
-            name: '&fTeppich (Hellgrau)'
-            buy: 24
-            sell: 6
-          yellow_banner:
-            material: YELLOW_BANNER
-            name: '&fBanner (Gelb)'
-            buy: 219
-            sell: 55
-          yellow_bed:
-            material: YELLOW_BED
-            name: '&fBett (Gelb)'
-            buy: 126
-            sell: 32
-          yellow_carpet:
-            material: YELLOW_CARPET
-            name: '&fTeppich (Gelb)'
-            buy: 24
-            sell: 6
-          cyan_banner:
-            material: CYAN_BANNER
-            name: '&fBanner (Türkis)'
-            buy: 219
-            sell: 55
-          cyan_bed:
-            material: CYAN_BED
-            name: '&fBett (Türkis)'
-            buy: 126
-            sell: 32
-          cyan_carpet:
-            material: CYAN_CARPET
-            name: '&fTeppich (Türkis)'
+          vault:
+            material: VAULT
+            name: '&fTresor'
+            buy: 120000
+            sell: 30000
+          firework_star:
+            material: FIREWORK_STAR
+            name: '&fFeuerwerksstern'
+            buy: 90
+            sell: 23
+          writable_book:
+            material: WRITABLE_BOOK
+            name: '&fBuch und Feder'
+            buy: 120
+            sell: 30
+          bone_block:
+            material: BONE_BLOCK
+            name: '&fKnochenblock'
+            buy: 135
+            sell: 34
+          clock:
+            material: CLOCK
+            name: '&fUhr'
+            buy: 378
+            sell: 95
+          iron_nugget:
+            material: IRON_NUGGET
+            name: '&fEisennugget'
+            buy: 10
+            sell: 3
+          name_tag:
+            material: NAME_TAG
+            name: '&fNamensschild'
+            buy: 200
+            sell: 50
+          furnace_minecart:
+            material: FURNACE_MINECART
+            name: '&fOfenlore'
+            buy: 570
+            sell: 143
+          chest:
+            material: CHEST
+            name: '&fTruhe'
+            buy: 48
+            sell: 12
+          map:
+            material: MAP
+            name: '&fKarte'
             buy: 24
             sell: 6
           birch_boat:
@@ -3127,344 +4242,4 @@ categories:
             name: '&fTruhenboot (Eiche)'
             buy: 78
             sell: 20
-          lightning_rod_item:
-            material: LIGHTNING_ROD
-            name: '&fBlitzableiter'
-            buy: 153
-            sell: 39
-          stick:
-            material: STICK
-            name: '&fStock'
-            buy: 3
-            sell: 1
-          furnace:
-            material: FURNACE
-            name: '&fOfen'
-            buy: 120
-            sell: 30
-          crafting_table:
-            material: CRAFTING_TABLE
-            name: '&fWerkbank'
-            buy: 24
-            sell: 6
-          raw_gold_block:
-            material: RAW_GOLD_BLOCK
-            name: '&fBlock aus rohem Gold'
-            buy: 1134
-            sell: 284
-          sculk_vein:
-            material: SCULK_VEIN
-            name: '&fSculk-Ader'
-            buy: 45
-            sell: 15
-          flint:
-            material: FLINT
-            name: '&fFeuerstein'
-            buy: 15
-            sell: 4
-          painting_item:
-            material: PAINTING
-            name: '&fGemälde'
-            buy: 60
-            sell: 15
-          loom:
-            material: LOOM
-            name: '&fWebstuhl'
-            buy: 144
-            sell: 36
-          raw_copper_block:
-            material: RAW_COPPER_BLOCK
-            name: '&fRohkupferblock'
-            buy: 459
-            sell: 115
-          hopper_minecart:
-            material: HOPPER_MINECART
-            name: '&fTrichterlore'
-            buy: 948
-            sell: 237
-          raw_iron_block:
-            material: RAW_IRON_BLOCK
-            name: '&fBlock aus rohem Eisen'
-            buy: 810
-            sell: 203
-          paper:
-            material: PAPER
-            name: '&fPapier'
-            buy: 24
-            sell: 6
-          prismarine_shard_item:
-            material: PRISMARINE_SHARD
-            name: '&fPrismarinsplitter'
-            buy: 75
-            sell: 25
-          charcoal:
-            material: CHARCOAL
-            name: '&fHolzkohle'
-            buy: 21
-            sell: 6
-          item_frame_item:
-            material: ITEM_FRAME
-            name: '&fRahmen'
-            buy: 60
-            sell: 15
-          lectern:
-            material: LECTERN
-            name: '&fLesepult'
-            buy: 372
-            sell: 93
-          shulker_box:
-            material: SHULKER_BOX
-            name: '&fShulker-Kiste'
-            buy: 948
-            sell: 237
-          armor_stand_item:
-            material: ARMOR_STAND
-            name: '&fRüstungsständer'
-            buy: 44
-            sell: 11
-          trapped_chest:
-            material: TRAPPED_CHEST
-            name: '&fFallentruhe'
-            buy: 147
-            sell: 37
-          chest_minecart:
-            material: CHEST_MINECART
-            name: '&fTruhenlore'
-            buy: 498
-            sell: 125
-          clay_ball:
-            material: CLAY_BALL
-            name: '&fLehmkugel'
-            buy: 6
-            sell: 2
-          iron_nugget:
-            material: IRON_NUGGET
-            name: '&fEisennugget'
-            buy: 10
-            sell: 3
-          conduit_item:
-            material: CONDUIT
-            name: '&fAquisator'
-            buy: 5600
-            sell: 1400
-          smoker:
-            material: SMOKER
-            name: '&fRäucherofen'
-            buy: 204
-            sell: 51
-          raw_iron:
-            material: RAW_IRON
-            name: '&fRohes Eisen'
-            buy: 90
-            sell: 30
-          pufferfish_bucket:
-            material: PUFFERFISH_BUCKET
-            name: '&fKugelfischeimer'
-            buy: 330
-            sell: 83
-          fletching_table:
-            material: FLETCHING_TABLE
-            name: '&fPfeilmachertisch'
-            buy: 54
-            sell: 14
-          bowl:
-            material: BOWL
-            name: '&fSchüssel'
-            buy: 5
-            sell: 2
-          composter:
-            material: COMPOSTER
-            name: '&fKomposter'
-            buy: 21
-            sell: 6
-          snowball:
-            material: SNOWBALL
-            name: '&fSchneeball'
-            buy: 9
-            sell: 3
-          enchanting_table:
-            material: ENCHANTING_TABLE
-            name: '&fZaubertisch'
-            buy: 3108
-            sell: 777
-          vault:
-            material: VAULT
-            name: '&fTresor'
-            buy: 120000
-            sell: 30000
-          brick_item:
-            material: BRICK
-            name: '&fZiegel'
-            buy: 6
-            sell: 2
-          fire_charge:
-            material: FIRE_CHARGE
-            name: '&fFeuerkugel'
-            buy: 188
-            sell: 47
-          raw_copper:
-            material: RAW_COPPER
-            name: '&fRohkupfer'
-            buy: 51
-            sell: 17
-          tnt_minecart:
-            material: TNT_MINECART
-            name: '&fTNT-Lore'
-            buy: 798
-            sell: 200
-          blast_furnace:
-            material: BLAST_FURNACE
-            name: '&fSchmelzofen'
-            buy: 615
-            sell: 154
-          netherite_scrap_item:
-            material: NETHERITE_SCRAP
-            name: '&fNetheritschrott'
-            buy: 9600
-            sell: 3200
-          trial_key:
-            material: TRIAL_KEY
-            name: '&fPrüfungsschlüssel'
-            buy: 10000
-            sell: 2500
-          raw_gold:
-            material: RAW_GOLD
-            name: '&fRohes Gold'
-            buy: 126
-            sell: 42
-          firework_rocket:
-            material: FIREWORK_ROCKET
-            name: '&fFeuerwerksrakete'
-            buy: 84
-            sell: 21
-          cartography_table:
-            material: CARTOGRAPHY_TABLE
-            name: '&fKartentisch'
-            buy: 72
-            sell: 18
-          smithing_table:
-            material: SMITHING_TABLE
-            name: '&fSchmiedetisch'
-            buy: 204
-            sell: 51
-          stonecutter:
-            material: STONECUTTER
-            name: '&fSteinsäge'
-            buy: 135
-            sell: 34
-          gold_nugget:
-            material: GOLD_NUGGET
-            name: '&fGoldnugget'
-            buy: 14
-            sell: 4
-          ladder:
-            material: LADDER
-            name: '&fLeiter'
-            buy: 21
-            sell: 6
-          firework_star:
-            material: FIREWORK_STAR
-            name: '&fFeuerwerksstern'
-            buy: 90
-            sell: 23
-          popped_chorus_fruit:
-            material: POPPED_CHORUS_FRUIT
-            name: '&fGeknallte Chorusfrucht'
-            buy: 75
-            sell: 19
-          bone_block:
-            material: BONE_BLOCK
-            name: '&fKnochenblock'
-            buy: 135
-            sell: 34
-          book:
-            material: BOOK
-            name: '&fBuch'
-            buy: 108
-            sell: 27
-          grindstone:
-            material: GRINDSTONE
-            name: '&fSchleifstein'
-            buy: 26
-            sell: 7
-          ominous_trial_key:
-            material: OMINOUS_TRIAL_KEY
-            name: '&fUnheilvoller Prüfungsschlüssel'
-            buy: 15000
-            sell: 3750
-          furnace_minecart:
-            material: FURNACE_MINECART
-            name: '&fOfenlore'
-            buy: 570
-            sell: 143
-          prismarine_crystals_item:
-            material: PRISMARINE_CRYSTALS
-            name: '&fPrismarinkristalle'
-            buy: 90
-            sell: 30
-          poisonous_potato:
-            material: POISONOUS_POTATO
-            name: '&fGiftige Kartoffel'
-            buy: -1
-            sell: 15
-          wet_sponge:
-            material: WET_SPONGE
-            name: '&fNasser Schwamm'
-            buy: -1
-            sell: 125
-          piglin_head:
-            material: PIGLIN_HEAD
-            name: '&fPiglinkopf'
-            buy: -1
-            sell: 1800
-          dragon_head:
-            material: DRAGON_HEAD
-            name: '&fDrachenkopf'
-            buy: -1
-            sell: 2500
-          enchanted_golden_apple:
-            material: ENCHANTED_GOLDEN_APPLE
-            name: '&fVerzauberter goldener Apfel'
-            buy: -1
-            sell: 6000
-          coal_ore:
-            material: COAL_ORE
-            name: '&fKohleerz'
-            buy: 54
-            sell: -1
-          redstone_ore:
-            material: REDSTONE_ORE
-            name: '&fRedstone-Erz'
-            buy: 15
-            sell: -1
-          copper_ore:
-            material: COPPER_ORE
-            name: '&fKupfererz'
-            buy: 51
-            sell: -1
-          lapis_ore:
-            material: LAPIS_ORE
-            name: '&fLapislazulierz'
-            buy: 30
-            sell: -1
-          diamond_ore:
-            material: DIAMOND_ORE
-            name: '&fDiamanterz'
-            buy: 1140
-            sell: -1
-          emerald_ore:
-            material: EMERALD_ORE
-            name: '&fSmaragderz'
-            buy: 900
-            sell: -1
-          gold_ore:
-            material: GOLD_ORE
-            name: '&fGolderz'
-            buy: 126
-            sell: -1
-          iron_ore:
-            material: IRON_ORE
-            name: '&fEisenerz'
-            buy: 90
-            sell: -1
 

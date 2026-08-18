@@ -7,29 +7,34 @@ import org.bukkit.inventory.InventoryHolder;
  * Markiert alle Shop-Inventare, damit ShopGuiListener sie im
  * InventoryClickEvent zuverlaessig ueber getHolder() erkennt statt sich auf
  * den Fenstertitel zu verlassen (gleiches Muster wie HomeGuiHolder).
+ *
+ * Vier Ebenen: MAIN (Hauptmenue) -> CATEGORY_HUB (Icons der
+ * Unterkategorien) -> ITEM_LIST (die eigentlichen Items einer
+ * Unterkategorie) -> ITEM_DETAIL (Kauf/Verkauf-Fenster fuer ein einzelnes
+ * Item).
  */
 public class ShopGuiHolder implements InventoryHolder {
 
     public enum Type {
         MAIN,
-        CATEGORY
+        CATEGORY_HUB,
+        ITEM_LIST,
+        ITEM_DETAIL
     }
 
     private final Type type;
     private final String categoryId;
     private final String subCategoryId;
     private final int page;
-    private final int buyAmount;
-    private final int sellAmount;
+    private final String itemId;
     private Inventory inventory;
 
-    public ShopGuiHolder(Type type, String categoryId, String subCategoryId, int page, int buyAmount, int sellAmount) {
+    public ShopGuiHolder(Type type, String categoryId, String subCategoryId, int page, String itemId) {
         this.type = type;
         this.categoryId = categoryId;
         this.subCategoryId = subCategoryId;
         this.page = page;
-        this.buyAmount = buyAmount;
-        this.sellAmount = sellAmount;
+        this.itemId = itemId;
     }
 
     @Override
@@ -57,11 +62,7 @@ public class ShopGuiHolder implements InventoryHolder {
         return page;
     }
 
-    public int getBuyAmount() {
-        return buyAmount;
-    }
-
-    public int getSellAmount() {
-        return sellAmount;
+    public String getItemId() {
+        return itemId;
     }
 }

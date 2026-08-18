@@ -88,6 +88,7 @@ public class ShopManager {
     private ShopSubCategory loadSubCategory(String subId, ConfigurationSection sub) {
         String subDisplayName = MessageUtil.color(sub.getString("display-name", subId));
         Material subIcon = parseMaterial(sub.getString("icon"), Material.CHEST);
+        int columns = sub.getInt("columns", 9);
 
         List<ShopItem> items = new ArrayList<>();
         ConfigurationSection itemsSection = sub.getConfigurationSection("items");
@@ -113,7 +114,7 @@ public class ShopManager {
             }
         }
 
-        return new ShopSubCategory(subId, subDisplayName, subIcon, items);
+        return new ShopSubCategory(subId, subDisplayName, subIcon, columns, items);
     }
 
     private Material parseMaterial(String raw, Material fallback) {

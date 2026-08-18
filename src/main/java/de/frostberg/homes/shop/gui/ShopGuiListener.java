@@ -5,13 +5,13 @@ import de.frostberg.homes.shop.manager.ShopManager;
 import de.frostberg.homes.shop.model.ShopCategory;
 import de.frostberg.homes.shop.model.ShopItem;
 import de.frostberg.homes.shop.model.ShopSubCategory;
+import de.frostberg.homes.util.CurrencyBridge;
 import de.frostberg.homes.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,31 +22,30 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Eigenes Shop-GUI, Ersatz fuer EconomyShopGUI. Anders als dort fuehrt ein
- * Klick auf einen Unterkategorie-Tab NICHT in ein neues Fenster, sondern
- * schaltet nur die Item-Liste auf derselben Seite um - so bleibt alles in
- * maximal 2 Klicks erreichbar (Hauptmenue -> Kategorie -> Item).
+ * Eigenes Shop-GUI, Ersatz fuer EconomyShopGUI. Vier Ebenen (wie beim
+ * Vorbild-Shop): Hauptmenue -> Kategorie-Uebersicht (Icons der
+ * Unterkategorien) -> Item-Liste -> Kauf/Verkauf-Detailfenster fuer ein
+ * einzelnes Item. Auf jeder Ebene unten immer an derselben Stelle
+ * "Zurueck" (Slot 45) und "Hauptmenue" (Slot 49).
  *
- * Slot-Layout der Kategorie-Ansicht (54 Slots):
- *  Reihe 0 (0-8):     Zurueck-Button (Slot 0), Tab-Buttons fuer Unterkategorien
- *  Reihen 1-4 (9-44): Item-Raster, 9 Items pro Reihe = 36 pro Seite
- *  Reihe 5 (45-53):   Vorherige-Seite (45), Kaufmenge 1/16/32/64 (46-49),
- *                      Verkaufmenge 1/32/64 (50-52), Naechste-Seite (53)
- * Alle nicht belegten Slots werden mit Glas-Scheiben gefuellt (Rahmen-Look,
- * gleiches Prinzip wie bei EconomyShopGUI), statt leer/schwarz zu bleiben.
+ * Alle Inventare sind 54 Slots (6 Reihen) gross, fuer ein einheitliches
+ * Erscheinungsbild. Nicht belegte Slots werden mit Glas-Scheiben gefuellt.
  */
 public class ShopGuiListener implements Listener {
 
-    private static final int ITEMS_PER_PAGE = 36;
-    private static final int ITEM_GRID_START = 9;
-    private static final int PREV_PAGE_SLOT = 45;
-    private static final int NEXT_PAGE_SLOT = 53;
-    private static final int BACK_SLOT = 0;
+    private static final int CENTER_ROW_START = 18; // Reihe 3 (0-indexiert Reihe 2)
+    private static final int ITEM_GRID_START = 9; // Reihe 2
+    private static final int ITEM_GRID_ROWS = 4;
+    private static final int BACK_SLOT = 45;
+    private static final int MAIN_MENU_SLOT = 49;
+    private static final int PREV_PAGE_SLOT = 46;
+    private static final int NEXT_PAGE_SLOT = 52;
 
-    private static final int[] BUY_AMOUNT_SLOTS = {46, 47, 48, 49};
-    private static final int[] BUY_AMOUNTS = {1, 16, 32, 64};
-    private static final int[] SELL_AMOUNT_SLOTS = {50, 51, 52};
+    private static final int DETAIL_ITEM_SLOT = 22;
+    private static final int[] SELL_SLOTS = {21, 20, 19}; // -1, -32, -64 (von innen nach aussen)
     private static final int[] SELL_AMOUNTS = {1, 32, 64};
+    private static final int[] BUY_SLOTS = {23, 24, 25}; // +1, +32, +64
+    private static final int[] BUY_AMOUNTS = {1, 32, 64};
 
     private final FrostbergHomes plugin;
 
@@ -55,31 +54,199 @@ public class ShopGuiListener implements Listener {
     }
 
     // ---------------------------------------------------------------
-    // Oeffnen
+    // Ebene 1: Hauptmenue
     // ---------------------------------------------------------------
 
     public void openMain(Player player) {
-        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.MAIN, null, null, 0, 1, 1);
-        String title = bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-main-title"));
-        Inventory inventory = Bukkit.createInventory(holder, 27, MessageUtil.color(title));
+        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.MAIN, null, null, 0, null);
+        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-main-title"))));
         holder.setInventory(inventory);
 
-        fillBorder(inventory, Material.BLACK_STAINED_GLASS_PANE);
+        fillBorder(inventory, Material.GRAY_STAINED_GLASS_PANE);
 
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
-        int[] slots = centeredSlots(categories.size(), 9, 27);
-        for (int i = 0; i < categories.size(); i++) {
+        int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
+        for (int i = 0; i < categories.size() && i < slots.length; i++) {
             ShopCategory category = categories.get(i);
             List<String> lore = new ArrayList<>();
             for (ShopSubCategory sub : category.getSubCategories()) {
-                lore.add(MessageUtil.color("&7» " + sub.getDisplayName()));
+                lore.add(MessageUtil.color("&7▸ " + sub.getDisplayName()));
             }
             lore.add("");
             lore.add(MessageUtil.get(plugin.getMessages(), "shop-gui-main-hint"));
-            inventory.setItem(slots[i], simpleItem(category.getIcon(), category.getDisplayName(), lore));
+            inventory.setItem(slots[i], simpleItem(category.getIcon(), MessageUtil.color("&l") + category.getDisplayName(), lore));
         }
 
         player.openInventory(inventory);
+    }
+
+    // ---------------------------------------------------------------
+    // Ebene 2: Kategorie-Uebersicht (Unterkategorie-Icons)
+    // ---------------------------------------------------------------
+
+    public void openCategoryHub(Player player, String categoryId) {
+        Optional<ShopCategory> categoryOpt = findCategory(categoryId);
+        if (categoryOpt.isEmpty()) {
+            openMain(player);
+            return;
+        }
+        ShopCategory category = categoryOpt.get();
+
+        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.CATEGORY_HUB, category.getId(), null, 0, null);
+        String title = bracketTitle(category.getDisplayName());
+        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        fillBorder(inventory, category.getBorderMaterial());
+        addNavBar(inventory, true, false, 0, 0);
+
+        List<ShopSubCategory> subCategories = category.getSubCategories();
+        int[] slots = centeredSlots(subCategories.size(), CENTER_ROW_START);
+        for (int i = 0; i < subCategories.size() && i < slots.length; i++) {
+            ShopSubCategory sub = subCategories.get(i);
+            List<String> lore = List.of(
+                    MessageUtil.get(plugin.getMessages(), "shop-gui-hub-hint").replace("%count%", String.valueOf(sub.getItems().size()))
+            );
+            inventory.setItem(slots[i], simpleItem(sub.getIcon(), MessageUtil.color("&l") + sub.getDisplayName(), lore));
+        }
+
+        player.openInventory(inventory);
+    }
+
+    // ---------------------------------------------------------------
+    // Ebene 3: Item-Liste
+    // ---------------------------------------------------------------
+
+    public void openItemList(Player player, String categoryId, String subCategoryId, int page) {
+        Optional<ShopCategory> categoryOpt = findCategory(categoryId);
+        if (categoryOpt.isEmpty()) {
+            openMain(player);
+            return;
+        }
+        ShopCategory category = categoryOpt.get();
+        Optional<ShopSubCategory> subOpt = findSubCategory(category, subCategoryId);
+        if (subOpt.isEmpty()) {
+            openCategoryHub(player, categoryId);
+            return;
+        }
+        ShopSubCategory subCategory = subOpt.get();
+
+        int columns = Math.max(1, Math.min(9, subCategory.getColumns()));
+        int itemsPerPage = columns * ITEM_GRID_ROWS;
+        List<ShopItem> items = subCategory.getItems();
+        int totalPages = Math.max(1, (int) Math.ceil(items.size() / (double) itemsPerPage));
+        int clampedPage = Math.max(0, Math.min(page, totalPages - 1));
+        int offset = clampedPage * itemsPerPage;
+
+        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.ITEM_LIST, category.getId(), subCategory.getId(), clampedPage, null);
+        String title = bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-list-title")
+                .replace("%category%", category.getDisplayName())
+                .replace("%sub%", subCategory.getDisplayName()));
+        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        fillBorder(inventory, category.getBorderMaterial());
+        addNavBar(inventory, true, totalPages > 1, clampedPage, totalPages);
+
+        int leftPad = (9 - columns) / 2;
+        for (int i = 0; i < itemsPerPage && offset + i < items.size(); i++) {
+            int row = i / columns;
+            int col = i % columns;
+            if (row >= ITEM_GRID_ROWS) {
+                break;
+            }
+            int slot = ITEM_GRID_START + row * 9 + leftPad + col;
+            inventory.setItem(slot, buildListItemStack(items.get(offset + i)));
+        }
+
+        player.openInventory(inventory);
+    }
+
+    // ---------------------------------------------------------------
+    // Ebene 4: Kauf/Verkauf-Detail
+    // ---------------------------------------------------------------
+
+    public void openItemDetail(Player player, String categoryId, String subCategoryId, int page, String itemId) {
+        ShopItem item = plugin.getShopManager().getItem(itemId);
+        Optional<ShopCategory> categoryOpt = findCategory(categoryId);
+        if (item == null || categoryOpt.isEmpty()) {
+            openMain(player);
+            return;
+        }
+        ShopCategory category = categoryOpt.get();
+
+        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.ITEM_DETAIL, categoryId, subCategoryId, page, itemId);
+        String title = bracketTitle(item.getDisplayName());
+        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
+        holder.setInventory(inventory);
+
+        fillBorder(inventory, category.getBorderMaterial());
+        addNavBar(inventory, true, false, 0, 0);
+
+        inventory.setItem(DETAIL_ITEM_SLOT, buildDetailItemStack(player, item));
+
+        for (int i = 0; i < SELL_SLOTS.length; i++) {
+            if (!item.isSellable()) {
+                continue;
+            }
+            int amount = SELL_AMOUNTS[i];
+            String name = MessageUtil.get(plugin.getMessages(), "shop-detail-sell-button").replace("%amount%", String.valueOf(amount));
+            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "shop-detail-sell-lore")
+                    .replace("%total%", String.valueOf(item.getSellPrice() * amount)));
+            inventory.setItem(SELL_SLOTS[i], simpleItem(Material.RED_STAINED_GLASS_PANE, MessageUtil.color("&c&l") + name, lore));
+        }
+        for (int i = 0; i < BUY_SLOTS.length; i++) {
+            if (!item.isBuyable()) {
+                continue;
+            }
+            int amount = BUY_AMOUNTS[i];
+            String name = MessageUtil.get(plugin.getMessages(), "shop-detail-buy-button").replace("%amount%", String.valueOf(amount));
+            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "shop-detail-buy-lore")
+                    .replace("%total%", String.valueOf(item.getBuyPrice() * amount)));
+            inventory.setItem(BUY_SLOTS[i], simpleItem(Material.LIME_STAINED_GLASS_PANE, MessageUtil.color("&a&l") + name, lore));
+        }
+
+        player.openInventory(inventory);
+    }
+
+    private ItemStack buildDetailItemStack(Player player, ShopItem item) {
+        List<String> lore = new ArrayList<>();
+        if (item.isBuyable()) {
+            lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-buy").replace("%price%", String.valueOf(item.getBuyPrice())));
+        }
+        if (item.isSellable()) {
+            lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-sell").replace("%price%", String.valueOf(item.getSellPrice())));
+        }
+        lore.add("");
+        long balance = CurrencyBridge.readTokenBalance(player);
+        if (balance >= 0) {
+            lore.add(MessageUtil.get(plugin.getMessages(), "shop-detail-balance").replace("%balance%", String.valueOf(balance)));
+        }
+        return simpleItem(item.getMaterial(), MessageUtil.color("&l") + item.getDisplayName(), lore);
+    }
+
+    // ---------------------------------------------------------------
+    // Hilfsaufbau: Navigationsleiste unten, Titel-Klammern, Rahmen
+    // ---------------------------------------------------------------
+
+    private void addNavBar(Inventory inventory, boolean showBack, boolean showPages, int page, int totalPages) {
+        List<String> backLore = List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-back-lore"));
+        inventory.setItem(BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-back"), backLore));
+
+        List<String> mainLore = List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-mainmenu-lore"));
+        inventory.setItem(MAIN_MENU_SLOT, simpleItem(Material.COMPASS, MessageUtil.get(plugin.getMessages(), "shop-gui-mainmenu"), mainLore));
+
+        if (showPages) {
+            List<String> pageLore = List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-page-indicator")
+                    .replace("%page%", String.valueOf(page + 1))
+                    .replace("%pages%", String.valueOf(totalPages)));
+            if (page > 0) {
+                inventory.setItem(PREV_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-prev-page"), pageLore));
+            }
+            if (page < totalPages - 1) {
+                inventory.setItem(NEXT_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-next-page"), pageLore));
+            }
+        }
     }
 
     /** Umrahmt einen Titel im Stil "&8«——— Titel ———»", wie im Vorbild-Shop. */
@@ -87,119 +254,12 @@ public class ShopGuiListener implements Listener {
         return "&8«——— " + rawTitle + "&8 ———»";
     }
 
-    public void openCategory(Player player, String categoryId, String subCategoryId, int page) {
-        openCategory(player, categoryId, subCategoryId, page, 1, 1);
-    }
-
-    public void openCategory(Player player, String categoryId, String subCategoryId, int page, int buyAmount, int sellAmount) {
-        Optional<ShopCategory> categoryOpt = findCategory(categoryId);
-        if (categoryOpt.isEmpty()) {
-            openMain(player);
-            return;
-        }
-        ShopCategory category = categoryOpt.get();
-        if (category.getSubCategories().isEmpty()) {
-            openMain(player);
-            return;
-        }
-
-        ShopSubCategory subCategory = findSubCategory(category, subCategoryId)
-                .orElse(category.getSubCategories().get(0));
-
-        ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.CATEGORY, category.getId(), subCategory.getId(), page, buyAmount, sellAmount);
-        String title = bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-category-title")
-                .replace("%category%", category.getDisplayName())
-                .replace("%sub%", subCategory.getDisplayName()));
-        Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
-        holder.setInventory(inventory);
-
-        fillBorder(inventory, category.getBorderMaterial());
-
-        List<String> backLore = List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-back-lore"));
-        inventory.setItem(BACK_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-back"), backLore));
-
-        List<ShopSubCategory> subCategories = category.getSubCategories();
-        for (int i = 0; i < subCategories.size() && i < 7; i++) {
-            ShopSubCategory tab = subCategories.get(i);
-            boolean active = tab.getId().equals(subCategory.getId());
-            String name = (active ? "&n&l" : "&l") + tab.getDisplayName();
-            List<String> tabLore = active
-                    ? List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-tab-active"))
-                    : List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-tab-hint"));
-            inventory.setItem(1 + i, simpleItem(tab.getIcon(), MessageUtil.color(name), tabLore));
-        }
-
-        List<ShopItem> items = subCategory.getItems();
-        int totalPages = Math.max(1, (int) Math.ceil(items.size() / (double) ITEMS_PER_PAGE));
-        int clampedPage = Math.max(0, Math.min(page, totalPages - 1));
-        int offset = clampedPage * ITEMS_PER_PAGE;
-
-        for (int i = 0; i < ITEMS_PER_PAGE && offset + i < items.size(); i++) {
-            inventory.setItem(ITEM_GRID_START + i, buildItemStack(items.get(offset + i), buyAmount, sellAmount));
-        }
-
-        buildAmountSelector(inventory, buyAmount, sellAmount);
-
-        if (totalPages > 1) {
-            List<String> pageLore = List.of(MessageUtil.get(plugin.getMessages(), "shop-gui-page-indicator")
-                    .replace("%page%", String.valueOf(clampedPage + 1))
-                    .replace("%pages%", String.valueOf(totalPages)));
-            if (clampedPage > 0) {
-                inventory.setItem(PREV_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-prev-page"), pageLore));
-            }
-            if (clampedPage < totalPages - 1) {
-                inventory.setItem(NEXT_PAGE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "shop-gui-next-page"), pageLore));
-            }
-        }
-
-        player.openInventory(inventory);
-    }
-
-    /** Baut die 4 Kauf- und 3 Verkaufmengen-Knoepfe, die aktuell ausgewaehlte Menge ist unterstrichen+fett markiert und leuchtet. */
-    private void buildAmountSelector(Inventory inventory, int buyAmount, int sellAmount) {
-        for (int i = 0; i < BUY_AMOUNT_SLOTS.length; i++) {
-            int amount = BUY_AMOUNTS[i];
-            boolean active = amount == buyAmount;
-            String name = (active ? "&n&l" : "&l") + MessageUtil.get(plugin.getMessages(), "shop-amount-buy").replace("%amount%", String.valueOf(amount));
-            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), active ? "shop-amount-active" : "shop-amount-hint"));
-            Material mat = active ? Material.LIME_DYE : Material.GREEN_DYE;
-            ItemStack stack = simpleItem(mat, MessageUtil.color(name), lore);
-            if (active) {
-                glow(stack);
-            }
-            inventory.setItem(BUY_AMOUNT_SLOTS[i], stack);
-        }
-        for (int i = 0; i < SELL_AMOUNT_SLOTS.length; i++) {
-            int amount = SELL_AMOUNTS[i];
-            boolean active = amount == sellAmount;
-            String name = (active ? "&n&l" : "&l") + MessageUtil.get(plugin.getMessages(), "shop-amount-sell").replace("%amount%", String.valueOf(amount));
-            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), active ? "shop-amount-active" : "shop-amount-hint"));
-            Material mat = active ? Material.RED_DYE : Material.ORANGE_DYE;
-            ItemStack stack = simpleItem(mat, MessageUtil.color(name), lore);
-            if (active) {
-                glow(stack);
-            }
-            inventory.setItem(SELL_AMOUNT_SLOTS[i], stack);
-        }
-    }
-
-    /** Fuellt jeden noch leeren Slot mit einer zur Kategorie passenden Glasscheibe, damit das Fenster wie bei EconomyShopGUI einen Rahmen statt leerer Flaechen hat. */
+    /** Fuellt jeden noch leeren Slot mit einer zur Kategorie passenden Glasscheibe (Rahmen-Look). */
     private void fillBorder(Inventory inventory, Material borderMaterial) {
         ItemStack filler = simpleItem(borderMaterial, " ", null);
         for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, filler.clone());
         }
-    }
-
-    /** Laesst ein Item leicht leuchten (Verzauberungs-Glanz ohne sichtbare Verzauberung in der Lore), fuer die aktive Mengen-Auswahl. */
-    private void glow(ItemStack stack) {
-        ItemMeta meta = stack.getItemMeta();
-        if (meta == null) {
-            return;
-        }
-        meta.addEnchant(org.bukkit.enchantments.Enchantment.UNBREAKING, 1, true);
-        meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS);
-        stack.setItemMeta(meta);
     }
 
     // ---------------------------------------------------------------
@@ -220,91 +280,120 @@ public class ShopGuiListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         int slot = event.getSlot();
 
-        if (holder.getType() == ShopGuiHolder.Type.MAIN) {
-            handleMainClick(player, slot);
+        if (slot == MAIN_MENU_SLOT && holder.getType() != ShopGuiHolder.Type.MAIN) {
+            openMain(player);
             return;
         }
 
-        handleCategoryClick(player, holder, slot, event.getClick());
+        switch (holder.getType()) {
+            case MAIN -> handleMainClick(player, slot);
+            case CATEGORY_HUB -> handleHubClick(player, holder, slot);
+            case ITEM_LIST -> handleListClick(player, holder, slot);
+            case ITEM_DETAIL -> handleDetailClick(player, holder, slot);
+        }
     }
 
     private void handleMainClick(Player player, int slot) {
         List<ShopCategory> categories = plugin.getShopManager().getCategories();
-        int[] slots = centeredSlots(categories.size(), 9, 27);
-        for (int i = 0; i < categories.size(); i++) {
+        int[] slots = centeredSlots(categories.size(), CENTER_ROW_START);
+        for (int i = 0; i < categories.size() && i < slots.length; i++) {
             if (slots[i] == slot) {
-                ShopCategory category = categories.get(i);
-                if (!category.getSubCategories().isEmpty()) {
-                    openCategory(player, category.getId(), category.getSubCategories().get(0).getId(), 0);
-                }
+                openCategoryHub(player, categories.get(i).getId());
                 return;
             }
         }
     }
 
-    private void handleCategoryClick(Player player, ShopGuiHolder holder, int slot, ClickType click) {
+    private void handleHubClick(Player player, ShopGuiHolder holder, int slot) {
+        if (slot == BACK_SLOT) {
+            openMain(player);
+            return;
+        }
         Optional<ShopCategory> categoryOpt = findCategory(holder.getCategoryId());
         if (categoryOpt.isEmpty()) {
             openMain(player);
             return;
         }
         ShopCategory category = categoryOpt.get();
-        int buyAmount = holder.getBuyAmount();
-        int sellAmount = holder.getSellAmount();
+        List<ShopSubCategory> subCategories = category.getSubCategories();
+        int[] slots = centeredSlots(subCategories.size(), CENTER_ROW_START);
+        for (int i = 0; i < subCategories.size() && i < slots.length; i++) {
+            if (slots[i] == slot) {
+                openItemList(player, category.getId(), subCategories.get(i).getId(), 0);
+                return;
+            }
+        }
+    }
 
+    private void handleListClick(Player player, ShopGuiHolder holder, int slot) {
         if (slot == BACK_SLOT) {
+            openCategoryHub(player, holder.getCategoryId());
+            return;
+        }
+        Optional<ShopCategory> categoryOpt = findCategory(holder.getCategoryId());
+        if (categoryOpt.isEmpty()) {
             openMain(player);
             return;
         }
+        ShopCategory category = categoryOpt.get();
+        Optional<ShopSubCategory> subOpt = findSubCategory(category, holder.getSubCategoryId());
+        if (subOpt.isEmpty()) {
+            openCategoryHub(player, category.getId());
+            return;
+        }
+        ShopSubCategory subCategory = subOpt.get();
+
         if (slot == PREV_PAGE_SLOT) {
-            openCategory(player, category.getId(), holder.getSubCategoryId(), holder.getPage() - 1, buyAmount, sellAmount);
+            openItemList(player, category.getId(), subCategory.getId(), holder.getPage() - 1);
             return;
         }
         if (slot == NEXT_PAGE_SLOT) {
-            openCategory(player, category.getId(), holder.getSubCategoryId(), holder.getPage() + 1, buyAmount, sellAmount);
+            openItemList(player, category.getId(), subCategory.getId(), holder.getPage() + 1);
             return;
         }
 
-        for (int i = 0; i < BUY_AMOUNT_SLOTS.length; i++) {
-            if (BUY_AMOUNT_SLOTS[i] == slot) {
-                openCategory(player, category.getId(), holder.getSubCategoryId(), holder.getPage(), BUY_AMOUNTS[i], sellAmount);
-                return;
-            }
-        }
-        for (int i = 0; i < SELL_AMOUNT_SLOTS.length; i++) {
-            if (SELL_AMOUNT_SLOTS[i] == slot) {
-                openCategory(player, category.getId(), holder.getSubCategoryId(), holder.getPage(), buyAmount, SELL_AMOUNTS[i]);
-                return;
-            }
-        }
+        int columns = Math.max(1, Math.min(9, subCategory.getColumns()));
+        int itemsPerPage = columns * ITEM_GRID_ROWS;
+        int leftPad = (9 - columns) / 2;
 
-        List<ShopSubCategory> subCategories = category.getSubCategories();
-        if (slot >= 1 && slot <= 7 && slot - 1 < subCategories.size()) {
-            openCategory(player, category.getId(), subCategories.get(slot - 1).getId(), 0, buyAmount, sellAmount);
+        int rowIndex = (slot - ITEM_GRID_START) / 9;
+        int colInRow = (slot - ITEM_GRID_START) % 9;
+        if (slot < ITEM_GRID_START || rowIndex >= ITEM_GRID_ROWS || colInRow < leftPad || colInRow >= leftPad + columns) {
             return;
         }
-
-        if (slot < ITEM_GRID_START || slot >= ITEM_GRID_START + ITEMS_PER_PAGE) {
-            return;
-        }
-
-        ShopSubCategory subCategory = findSubCategory(category, holder.getSubCategoryId())
-                .orElse(subCategories.get(0));
-        int index = holder.getPage() * ITEMS_PER_PAGE + (slot - ITEM_GRID_START);
+        int index = holder.getPage() * itemsPerPage + rowIndex * columns + (colInRow - leftPad);
         if (index < 0 || index >= subCategory.getItems().size()) {
             return;
         }
         ShopItem item = subCategory.getItems().get(index);
+        openItemDetail(player, category.getId(), subCategory.getId(), holder.getPage(), item.getId());
+    }
 
-        boolean sellClick = click == ClickType.RIGHT || click == ClickType.SHIFT_RIGHT;
-        if (sellClick) {
-            handleSell(player, item, sellAmount);
-        } else {
-            handleBuy(player, item, buyAmount);
+    private void handleDetailClick(Player player, ShopGuiHolder holder, int slot) {
+        if (slot == BACK_SLOT) {
+            openItemList(player, holder.getCategoryId(), holder.getSubCategoryId(), holder.getPage());
+            return;
+        }
+        ShopItem item = plugin.getShopManager().getItem(holder.getItemId());
+        if (item == null) {
+            openMain(player);
+            return;
         }
 
-        // Ansicht neu aufbauen, damit ein evtl. veraendertes Inventar (Verkauf) sich nicht mit dem GUI ueberschneidet
-        openCategory(player, category.getId(), subCategory.getId(), holder.getPage(), buyAmount, sellAmount);
+        for (int i = 0; i < BUY_SLOTS.length; i++) {
+            if (BUY_SLOTS[i] == slot) {
+                handleBuy(player, item, BUY_AMOUNTS[i]);
+                openItemDetail(player, holder.getCategoryId(), holder.getSubCategoryId(), holder.getPage(), holder.getItemId());
+                return;
+            }
+        }
+        for (int i = 0; i < SELL_SLOTS.length; i++) {
+            if (SELL_SLOTS[i] == slot) {
+                handleSell(player, item, SELL_AMOUNTS[i]);
+                openItemDetail(player, holder.getCategoryId(), holder.getSubCategoryId(), holder.getPage(), holder.getItemId());
+                return;
+            }
+        }
     }
 
     private void handleBuy(Player player, ShopItem item, int amount) {
@@ -357,7 +446,7 @@ public class ShopGuiListener implements Listener {
                 .findFirst();
     }
 
-    private ItemStack buildItemStack(ShopItem item, int buyAmount, int sellAmount) {
+    private ItemStack buildListItemStack(ShopItem item) {
         List<String> lore = new ArrayList<>();
         if (item.isBuyable()) {
             lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-buy").replace("%price%", String.valueOf(item.getBuyPrice())));
@@ -366,16 +455,7 @@ public class ShopGuiListener implements Listener {
             lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-sell").replace("%price%", String.valueOf(item.getSellPrice())));
         }
         lore.add("");
-        if (item.isBuyable()) {
-            lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-hint-buy")
-                    .replace("%amount%", String.valueOf(buyAmount))
-                    .replace("%total%", String.valueOf(item.getBuyPrice() * buyAmount)));
-        }
-        if (item.isSellable()) {
-            lore.add(MessageUtil.get(plugin.getMessages(), "shop-item-lore-hint-sell")
-                    .replace("%amount%", String.valueOf(sellAmount))
-                    .replace("%total%", String.valueOf(item.getSellPrice() * sellAmount)));
-        }
+        lore.add(MessageUtil.get(plugin.getMessages(), "shop-gui-list-item-hint"));
         return simpleItem(item.getMaterial(), MessageUtil.color("&l") + item.getDisplayName(), lore);
     }
 
@@ -392,12 +472,12 @@ public class ShopGuiListener implements Listener {
         return item;
     }
 
-    /** Berechnet zentrierte Slot-Positionen fuer "count" Icons in der mittleren Reihe eines "size"-grossen Inventars. */
-    private int[] centeredSlots(int count, int rowWidth, int size) {
-        int middleRowStart = (size / rowWidth / 2) * rowWidth;
-        int start = middleRowStart + Math.max(0, (rowWidth - count) / 2);
-        int[] slots = new int[count];
-        for (int i = 0; i < count; i++) {
+    /** Berechnet zentrierte Slot-Positionen fuer bis zu 9 Icons in einer Reihe, beginnend bei rowStart. */
+    private int[] centeredSlots(int count, int rowStart) {
+        int clamped = Math.min(count, 9);
+        int start = rowStart + Math.max(0, (9 - clamped) / 2);
+        int[] slots = new int[clamped];
+        for (int i = 0; i < clamped; i++) {
             slots[i] = start + i;
         }
         return slots;
