@@ -14,94 +14,34 @@ categories:
         icon: OAK_LOG
         columns: 9
         items:
-          birch_planks:
-            material: BIRCH_PLANKS
-            name: '&fBretter (Birke)'
+          oak_planks:
+            material: OAK_PLANKS
+            name: '&fBretter (Eiche)'
             buy: 6
             sell: 2
-          birch_log:
-            material: BIRCH_LOG
-            name: '&fStamm (Birke)'
+          oak_log:
+            material: OAK_LOG
+            name: '&fStamm (Eiche)'
             buy: 21
             sell: 7
-          birch_stairs:
-            material: BIRCH_STAIRS
-            name: '&fTreppe (Birke)'
+          oak_stairs:
+            material: OAK_STAIRS
+            name: '&fTreppe (Eiche)'
             buy: 9
             sell: 3
-          birch_slab:
-            material: BIRCH_SLAB
-            name: '&fStufe (Birke)'
+          oak_slab:
+            material: OAK_SLAB
+            name: '&fStufe (Eiche)'
             buy: 3
             sell: 1
-          birch_fence:
-            material: BIRCH_FENCE
-            name: '&fZaun (Birke)'
+          oak_fence:
+            material: OAK_FENCE
+            name: '&fZaun (Eiche)'
             buy: 8
             sell: 2
-          birch_fence_gate:
-            material: BIRCH_FENCE_GATE
-            name: '&fZauntor (Birke)'
-            buy: 24
-            sell: 6
-          bamboo_planks:
-            material: BAMBOO_PLANKS
-            name: '&fBretter (Bambus)'
-            buy: 6
-            sell: 2
-          bamboo_log:
-            material: BAMBOO_BLOCK
-            name: '&fStamm (Bambus)'
-            buy: 21
-            sell: 7
-          bamboo_stairs:
-            material: BAMBOO_STAIRS
-            name: '&fTreppe (Bambus)'
-            buy: 9
-            sell: 3
-          bamboo_slab:
-            material: BAMBOO_SLAB
-            name: '&fStufe (Bambus)'
-            buy: 3
-            sell: 1
-          bamboo_fence:
-            material: BAMBOO_FENCE
-            name: '&fZaun (Bambus)'
-            buy: 8
-            sell: 2
-          bamboo_fence_gate:
-            material: BAMBOO_FENCE_GATE
-            name: '&fZauntor (Bambus)'
-            buy: 24
-            sell: 6
-          cherry_planks:
-            material: CHERRY_PLANKS
-            name: '&fBretter (Kirsche)'
-            buy: 6
-            sell: 2
-          cherry_log:
-            material: CHERRY_LOG
-            name: '&fStamm (Kirsche)'
-            buy: 21
-            sell: 7
-          cherry_stairs:
-            material: CHERRY_STAIRS
-            name: '&fTreppe (Kirsche)'
-            buy: 9
-            sell: 3
-          cherry_slab:
-            material: CHERRY_SLAB
-            name: '&fStufe (Kirsche)'
-            buy: 3
-            sell: 1
-          cherry_fence:
-            material: CHERRY_FENCE
-            name: '&fZaun (Kirsche)'
-            buy: 8
-            sell: 2
-          cherry_fence_gate:
-            material: CHERRY_FENCE_GATE
-            name: '&fZauntor (Kirsche)'
+          oak_fence_gate:
+            material: OAK_FENCE_GATE
+            name: '&fZauntor (Eiche)'
             buy: 24
             sell: 6
           spruce_planks:
@@ -134,34 +74,64 @@ categories:
             name: '&fZauntor (Fichte)'
             buy: 24
             sell: 6
-          mangrove_planks:
-            material: MANGROVE_PLANKS
-            name: '&fBretter (Mangrove)'
+          birch_planks:
+            material: BIRCH_PLANKS
+            name: '&fBretter (Birke)'
             buy: 6
             sell: 2
-          mangrove_log:
-            material: MANGROVE_LOG
-            name: '&fStamm (Mangrove)'
+          birch_log:
+            material: BIRCH_LOG
+            name: '&fStamm (Birke)'
             buy: 21
             sell: 7
-          mangrove_stairs:
-            material: MANGROVE_STAIRS
-            name: '&fTreppe (Mangrove)'
+          birch_stairs:
+            material: BIRCH_STAIRS
+            name: '&fTreppe (Birke)'
             buy: 9
             sell: 3
-          mangrove_slab:
-            material: MANGROVE_SLAB
-            name: '&fStufe (Mangrove)'
+          birch_slab:
+            material: BIRCH_SLAB
+            name: '&fStufe (Birke)'
             buy: 3
             sell: 1
-          mangrove_fence:
-            material: MANGROVE_FENCE
-            name: '&fZaun (Mangrove)'
+          birch_fence:
+            material: BIRCH_FENCE
+            name: '&fZaun (Birke)'
             buy: 8
             sell: 2
-          mangrove_fence_gate:
-            material: MANGROVE_FENCE_GATE
-            name: '&fZauntor (Mangrove)'
+          birch_fence_gate:
+            material: BIRCH_FENCE_GATE
+            name: '&fZauntor (Birke)'
+            buy: 24
+            sell: 6
+          jungle_planks:
+            material: JUNGLE_PLANKS
+            name: '&fBretter (Dschungel)'
+            buy: 6
+            sell: 2
+          jungle_log:
+            material: JUNGLE_LOG
+            name: '&fStamm (Dschungel)'
+            buy: 21
+            sell: 7
+          jungle_stairs:
+            material: JUNGLE_STAIRS
+            name: '&fTreppe (Dschungel)'
+            buy: 9
+            sell: 3
+          jungle_slab:
+            material: JUNGLE_SLAB
+            name: '&fStufe (Dschungel)'
+            buy: 3
+            sell: 1
+          jungle_fence:
+            material: JUNGLE_FENCE
+            name: '&fZaun (Dschungel)'
+            buy: 8
+            sell: 2
+          jungle_fence_gate:
+            material: JUNGLE_FENCE_GATE
+            name: '&fZauntor (Dschungel)'
             buy: 24
             sell: 6
           acacia_planks:
@@ -194,34 +164,124 @@ categories:
             name: '&fZauntor (Akazie)'
             buy: 24
             sell: 6
-          jungle_planks:
-            material: JUNGLE_PLANKS
-            name: '&fBretter (Dschungel)'
+          dark_oak_planks:
+            material: DARK_OAK_PLANKS
+            name: '&fBretter (Schwarzeiche)'
             buy: 6
             sell: 2
-          jungle_log:
-            material: JUNGLE_LOG
-            name: '&fStamm (Dschungel)'
+          dark_oak_log:
+            material: DARK_OAK_LOG
+            name: '&fStamm (Schwarzeiche)'
             buy: 21
             sell: 7
-          jungle_stairs:
-            material: JUNGLE_STAIRS
-            name: '&fTreppe (Dschungel)'
+          dark_oak_stairs:
+            material: DARK_OAK_STAIRS
+            name: '&fTreppe (Schwarzeiche)'
             buy: 9
             sell: 3
-          jungle_slab:
-            material: JUNGLE_SLAB
-            name: '&fStufe (Dschungel)'
+          dark_oak_slab:
+            material: DARK_OAK_SLAB
+            name: '&fStufe (Schwarzeiche)'
             buy: 3
             sell: 1
-          jungle_fence:
-            material: JUNGLE_FENCE
-            name: '&fZaun (Dschungel)'
+          dark_oak_fence:
+            material: DARK_OAK_FENCE
+            name: '&fZaun (Schwarzeiche)'
             buy: 8
             sell: 2
-          jungle_fence_gate:
-            material: JUNGLE_FENCE_GATE
-            name: '&fZauntor (Dschungel)'
+          dark_oak_fence_gate:
+            material: DARK_OAK_FENCE_GATE
+            name: '&fZauntor (Schwarzeiche)'
+            buy: 24
+            sell: 6
+          mangrove_planks:
+            material: MANGROVE_PLANKS
+            name: '&fBretter (Mangrove)'
+            buy: 6
+            sell: 2
+          mangrove_log:
+            material: MANGROVE_LOG
+            name: '&fStamm (Mangrove)'
+            buy: 21
+            sell: 7
+          mangrove_stairs:
+            material: MANGROVE_STAIRS
+            name: '&fTreppe (Mangrove)'
+            buy: 9
+            sell: 3
+          mangrove_slab:
+            material: MANGROVE_SLAB
+            name: '&fStufe (Mangrove)'
+            buy: 3
+            sell: 1
+          mangrove_fence:
+            material: MANGROVE_FENCE
+            name: '&fZaun (Mangrove)'
+            buy: 8
+            sell: 2
+          mangrove_fence_gate:
+            material: MANGROVE_FENCE_GATE
+            name: '&fZauntor (Mangrove)'
+            buy: 24
+            sell: 6
+          cherry_planks:
+            material: CHERRY_PLANKS
+            name: '&fBretter (Kirsche)'
+            buy: 6
+            sell: 2
+          cherry_log:
+            material: CHERRY_LOG
+            name: '&fStamm (Kirsche)'
+            buy: 21
+            sell: 7
+          cherry_stairs:
+            material: CHERRY_STAIRS
+            name: '&fTreppe (Kirsche)'
+            buy: 9
+            sell: 3
+          cherry_slab:
+            material: CHERRY_SLAB
+            name: '&fStufe (Kirsche)'
+            buy: 3
+            sell: 1
+          cherry_fence:
+            material: CHERRY_FENCE
+            name: '&fZaun (Kirsche)'
+            buy: 8
+            sell: 2
+          cherry_fence_gate:
+            material: CHERRY_FENCE_GATE
+            name: '&fZauntor (Kirsche)'
+            buy: 24
+            sell: 6
+          bamboo_planks:
+            material: BAMBOO_PLANKS
+            name: '&fBretter (Bambus)'
+            buy: 6
+            sell: 2
+          bamboo_log:
+            material: BAMBOO_BLOCK
+            name: '&fStamm (Bambus)'
+            buy: 21
+            sell: 7
+          bamboo_stairs:
+            material: BAMBOO_STAIRS
+            name: '&fTreppe (Bambus)'
+            buy: 9
+            sell: 3
+          bamboo_slab:
+            material: BAMBOO_SLAB
+            name: '&fStufe (Bambus)'
+            buy: 3
+            sell: 1
+          bamboo_fence:
+            material: BAMBOO_FENCE
+            name: '&fZaun (Bambus)'
+            buy: 8
+            sell: 2
+          bamboo_fence_gate:
+            material: BAMBOO_FENCE_GATE
+            name: '&fZauntor (Bambus)'
             buy: 24
             sell: 6
           crimson_planks:
@@ -284,136 +344,161 @@ categories:
             name: '&fZauntor (Verzerrt)'
             buy: 24
             sell: 6
-          dark_oak_planks:
-            material: DARK_OAK_PLANKS
-            name: '&fBretter (Schwarzeiche)'
-            buy: 6
-            sell: 2
-          dark_oak_log:
-            material: DARK_OAK_LOG
-            name: '&fStamm (Schwarzeiche)'
-            buy: 21
-            sell: 7
-          dark_oak_stairs:
-            material: DARK_OAK_STAIRS
-            name: '&fTreppe (Schwarzeiche)'
-            buy: 9
-            sell: 3
-          dark_oak_slab:
-            material: DARK_OAK_SLAB
-            name: '&fStufe (Schwarzeiche)'
-            buy: 3
-            sell: 1
-          dark_oak_fence:
-            material: DARK_OAK_FENCE
-            name: '&fZaun (Schwarzeiche)'
-            buy: 8
-            sell: 2
-          dark_oak_fence_gate:
-            material: DARK_OAK_FENCE_GATE
-            name: '&fZauntor (Schwarzeiche)'
-            buy: 24
-            sell: 6
-          oak_planks:
-            material: OAK_PLANKS
-            name: '&fBretter (Eiche)'
-            buy: 6
-            sell: 2
-          oak_log:
-            material: OAK_LOG
-            name: '&fStamm (Eiche)'
-            buy: 21
-            sell: 7
-          oak_stairs:
-            material: OAK_STAIRS
-            name: '&fTreppe (Eiche)'
-            buy: 9
-            sell: 3
-          oak_slab:
-            material: OAK_SLAB
-            name: '&fStufe (Eiche)'
-            buy: 3
-            sell: 1
-          oak_fence:
-            material: OAK_FENCE
-            name: '&fZaun (Eiche)'
-            buy: 8
-            sell: 2
-          oak_fence_gate:
-            material: OAK_FENCE_GATE
-            name: '&fZauntor (Eiche)'
-            buy: 24
-            sell: 6
       stone:
         display-name: '&7&lStein'
         icon: STONE_BRICKS
         columns: 9
         items:
-          andesite:
-            material: ANDESITE
-            name: '&fAndesit'
+          stone:
+            material: STONE
+            name: '&fStein'
             buy: 15
             sell: 4
-          brick_wall:
-            material: BRICK_WALL
-            name: '&fZiegelmauer'
-            buy: 24
-            sell: 6
-          gilded_blackstone:
-            material: GILDED_BLACKSTONE
-            name: '&fVergoldeter Schwarzstein'
-            buy: 76
-            sell: 19
-          granite_wall:
-            material: GRANITE_WALL
-            name: '&fGranitmauer'
+          cobblestone:
+            material: COBBLESTONE
+            name: '&fBruchstein'
             buy: 15
             sell: 4
+          stone_bricks:
+            material: STONE_BRICKS
+            name: '&fSteinziegel'
+            buy: 32
+            sell: 8
           mossy_cobblestone:
             material: MOSSY_COBBLESTONE
             name: '&fBemooster Bruchstein'
             buy: 23
             sell: 6
-          cobbled_deepslate:
-            material: COBBLED_DEEPSLATE
-            name: '&fBruch-Tiefenschiefer'
-            buy: 18
-            sell: 5
-          polished_tuff:
-            material: POLISHED_TUFF
-            name: '&fPolierter Tuffstein'
-            buy: 15
-            sell: 4
-          stone_brick_wall:
-            material: STONE_BRICK_WALL
-            name: '&fSteinziegelmauer'
-            buy: 32
-            sell: 8
           mossy_stone_bricks:
             material: MOSSY_STONE_BRICKS
             name: '&fBemooste Steinziegel'
             buy: 40
             sell: 10
-          polished_blackstone_bricks:
-            material: POLISHED_BLACKSTONE_BRICKS
-            name: '&fPolierte Schwarzstein-Ziegel'
-            buy: 20
+          andesite:
+            material: ANDESITE
+            name: '&fAndesit'
+            buy: 15
+            sell: 4
+          polished_andesite:
+            material: POLISHED_ANDESITE
+            name: '&fPolierter Andesit'
+            buy: 15
+            sell: 4
+          diorite:
+            material: DIORITE
+            name: '&fDiorit'
+            buy: 15
+            sell: 4
+          polished_diorite:
+            material: POLISHED_DIORITE
+            name: '&fPolierter Diorit'
+            buy: 15
+            sell: 4
+          granite:
+            material: GRANITE
+            name: '&fGranit'
+            buy: 15
+            sell: 4
+          polished_granite:
+            material: POLISHED_GRANITE
+            name: '&fPolierter Granit'
+            buy: 15
+            sell: 4
+          bricks:
+            material: BRICKS
+            name: '&fZiegelsteine'
+            buy: 24
+            sell: 6
+          mud_bricks:
+            material: MUD_BRICKS
+            name: '&fLehmziegel'
+            buy: 24
+            sell: 6
+          deepslate:
+            material: DEEPSLATE
+            name: '&fTiefenschiefer'
+            buy: 18
+            sell: 5
+          cobbled_deepslate:
+            material: COBBLED_DEEPSLATE
+            name: '&fBruch-Tiefenschiefer'
+            buy: 18
+            sell: 5
+          polished_deepslate:
+            material: POLISHED_DEEPSLATE
+            name: '&fPolierter Tiefenschiefer'
+            buy: 18
             sell: 5
           deepslate_bricks:
             material: DEEPSLATE_BRICKS
             name: '&fTiefenschieferziegel'
             buy: 18
             sell: 5
+          deepslate_tiles:
+            material: DEEPSLATE_TILES
+            name: '&fTiefenschieferfliesen'
+            buy: 18
+            sell: 5
+          chiseled_deepslate:
+            material: CHISELED_DEEPSLATE
+            name: '&fGemeißelter Tiefenschiefer'
+            buy: 18
+            sell: 5
+          blackstone:
+            material: BLACKSTONE
+            name: '&fSchwarzstein'
+            buy: 20
+            sell: 5
           polished_blackstone:
             material: POLISHED_BLACKSTONE
             name: '&fPolierter Schwarzstein'
             buy: 20
             sell: 5
-          diorite_wall:
-            material: DIORITE_WALL
-            name: '&fDioritmauer'
+          polished_blackstone_bricks:
+            material: POLISHED_BLACKSTONE_BRICKS
+            name: '&fPolierte Schwarzstein-Ziegel'
+            buy: 20
+            sell: 5
+          gilded_blackstone:
+            material: GILDED_BLACKSTONE
+            name: '&fVergoldeter Schwarzstein'
+            buy: 76
+            sell: 19
+          tuff:
+            material: TUFF
+            name: '&fTuffstein'
             buy: 15
             sell: 4
+          polished_tuff:
+            material: POLISHED_TUFF
+            name: '&fPolierter Tuffstein'
+            buy: 15
+            sell: 4
+          tuff_bricks:
+            material: TUFF_BRICKS
+            name: '&fTuffziegel'
+            buy: 15
+            sell: 4
+          chiseled_tuff:
+            material: CHISELED_TUFF
+            name: '&fGemeißelter Tuffstein'
+            buy: 15
+            sell: 4
+          cobblestone_wall:
+            material: COBBLESTONE_WALL
+            name: '&fBruchsteinmauer'
+            buy: 15
+            sell: 4
+          cobbled_deepslate_wall:
+            material: COBBLED_DEEPSLATE_WALL
+            name: '&fBruch-Tiefenschiefermauer'
+            buy: 18
+            sell: 5
+          stone_brick_wall:
+            material: STONE_BRICK_WALL
+            name: '&fSteinziegelmauer'
+            buy: 32
+            sell: 8
           deepslate_brick_wall:
             material: DEEPSLATE_BRICK_WALL
             name: '&fTiefenschieferziegelmauer'
@@ -424,84 +509,29 @@ categories:
             name: '&fSchwarzsteinmauer'
             buy: 20
             sell: 5
-          polished_andesite:
-            material: POLISHED_ANDESITE
-            name: '&fPolierter Andesit'
-            buy: 15
-            sell: 4
-          cobblestone_wall:
-            material: COBBLESTONE_WALL
-            name: '&fBruchsteinmauer'
-            buy: 15
-            sell: 4
-          diorite:
-            material: DIORITE
-            name: '&fDiorit'
-            buy: 15
-            sell: 4
-          deepslate:
-            material: DEEPSLATE
-            name: '&fTiefenschiefer'
-            buy: 18
-            sell: 5
-          polished_granite:
-            material: POLISHED_GRANITE
-            name: '&fPolierter Granit'
-            buy: 15
-            sell: 4
-          andesite_wall:
-            material: ANDESITE_WALL
-            name: '&fAndesitmauer'
-            buy: 15
-            sell: 4
           polished_blackstone_wall:
             material: POLISHED_BLACKSTONE_WALL
             name: '&fPolierte Schwarzsteinmauer'
             buy: 20
             sell: 5
-          tuff_bricks:
-            material: TUFF_BRICKS
-            name: '&fTuffziegel'
+          andesite_wall:
+            material: ANDESITE_WALL
+            name: '&fAndesitmauer'
             buy: 15
             sell: 4
-          tuff:
-            material: TUFF
-            name: '&fTuffstein'
+          diorite_wall:
+            material: DIORITE_WALL
+            name: '&fDioritmauer'
             buy: 15
             sell: 4
-          deepslate_tiles:
-            material: DEEPSLATE_TILES
-            name: '&fTiefenschieferfliesen'
-            buy: 18
-            sell: 5
-          tuff_wall:
-            material: TUFF_WALL
-            name: '&fTuffsteinmauer'
+          granite_wall:
+            material: GRANITE_WALL
+            name: '&fGranitmauer'
             buy: 15
             sell: 4
-          granite:
-            material: GRANITE
-            name: '&fGranit'
-            buy: 15
-            sell: 4
-          stone_bricks:
-            material: STONE_BRICKS
-            name: '&fSteinziegel'
-            buy: 32
-            sell: 8
-          cobbled_deepslate_wall:
-            material: COBBLED_DEEPSLATE_WALL
-            name: '&fBruch-Tiefenschiefermauer'
-            buy: 18
-            sell: 5
-          chiseled_tuff:
-            material: CHISELED_TUFF
-            name: '&fGemeißelter Tuffstein'
-            buy: 15
-            sell: 4
-          mud_bricks:
-            material: MUD_BRICKS
-            name: '&fLehmziegel'
+          brick_wall:
+            material: BRICK_WALL
+            name: '&fZiegelmauer'
             buy: 24
             sell: 6
           mud_brick_wall:
@@ -509,177 +539,56 @@ categories:
             name: '&fLehmziegelmauer'
             buy: 24
             sell: 6
-          blackstone:
-            material: BLACKSTONE
-            name: '&fSchwarzstein'
-            buy: 20
-            sell: 5
-          bricks:
-            material: BRICKS
-            name: '&fZiegelsteine'
-            buy: 24
-            sell: 6
-          cobblestone:
-            material: COBBLESTONE
-            name: '&fBruchstein'
+          tuff_wall:
+            material: TUFF_WALL
+            name: '&fTuffsteinmauer'
             buy: 15
             sell: 4
-          polished_diorite:
-            material: POLISHED_DIORITE
-            name: '&fPolierter Diorit'
-            buy: 15
-            sell: 4
-          stone:
-            material: STONE
-            name: '&fStein'
-            buy: 15
-            sell: 4
-          chiseled_deepslate:
-            material: CHISELED_DEEPSLATE
-            name: '&fGemeißelter Tiefenschiefer'
-            buy: 18
-            sell: 5
-          polished_deepslate:
-            material: POLISHED_DEEPSLATE
-            name: '&fPolierter Tiefenschiefer'
-            buy: 18
-            sell: 5
-
       nature:
         display-name: '&a&lErde & Natur'
         icon: DIRT
         columns: 9
         items:
-          deepslate_gold_ore:
-            material: DEEPSLATE_GOLD_ORE
-            name: '&fTiefenschiefer-Golderz'
-            buy: 126
-            sell: -1
-          mycelium:
-            material: MYCELIUM
-            name: '&fMyzel'
-            buy: 12
-            sell: 4
           dirt:
             material: DIRT
             name: '&fErde'
             buy: 12
             sell: 4
-          copper_ore:
-            material: COPPER_ORE
-            name: '&fKupfererz'
-            buy: 51
-            sell: -1
-          moss_block:
-            material: MOSS_BLOCK
-            name: '&fMoosblock'
-            buy: 60
-            sell: 15
-          crying_obsidian:
-            material: CRYING_OBSIDIAN
-            name: '&fWeinender Obsidian'
-            buy: 240
-            sell: 60
-          emerald_ore:
-            material: EMERALD_ORE
-            name: '&fSmaragderz'
-            buy: 900
-            sell: -1
-          redstone_ore:
-            material: REDSTONE_ORE
-            name: '&fRedstone-Erz'
-            buy: 15
-            sell: -1
-          mud:
-            material: MUD
-            name: '&fSchlamm'
+          grass_block:
+            material: GRASS_BLOCK
+            name: '&fGrasblock'
             buy: 12
             sell: 4
-          deepslate_iron_ore:
-            material: DEEPSLATE_IRON_ORE
-            name: '&fTiefenschiefer-Eisenerz'
-            buy: 90
-            sell: -1
-          iron_ore:
-            material: IRON_ORE
-            name: '&fEisenerz'
-            buy: 90
-            sell: -1
-          deepslate_emerald_ore:
-            material: DEEPSLATE_EMERALD_ORE
-            name: '&fTiefenschiefer-Smaragderz'
-            buy: 900
-            sell: -1
-          sponge:
-            material: SPONGE
-            name: '&fSchwamm'
-            buy: 900
-            sell: 300
-          diamond_ore:
-            material: DIAMOND_ORE
-            name: '&fDiamanterz'
-            buy: 1140
-            sell: -1
-          deepslate_redstone_ore:
-            material: DEEPSLATE_REDSTONE_ORE
-            name: '&fTiefenschiefer-Redstone-Erz'
-            buy: 15
-            sell: -1
-          sand:
-            material: SAND
-            name: '&fSand'
+          coarse_dirt:
+            material: COARSE_DIRT
+            name: '&fGrobe Erde'
             buy: 12
-            sell: 4
-          deepslate_copper_ore:
-            material: DEEPSLATE_COPPER_ORE
-            name: '&fTiefenschiefer-Kupfererz'
-            buy: 51
-            sell: -1
-          deepslate_coal_ore:
-            material: DEEPSLATE_COAL_ORE
-            name: '&fTiefenschiefer-Kohleerz'
-            buy: 54
-            sell: -1
-          dripstone_block:
-            material: DRIPSTONE_BLOCK
-            name: '&fTropfsteinblock'
-            buy: 15
             sell: 4
           podzol:
             material: PODZOL
             name: '&fPodsol'
             buy: 12
             sell: 4
-          packed_mud:
-            material: PACKED_MUD
-            name: '&fVerdichteter Schlamm'
-            buy: 24
-            sell: 6
-          blue_ice:
-            material: BLUE_ICE
-            name: '&fBlaues Eis'
-            buy: 432
-            sell: 108
-          coarse_dirt:
-            material: COARSE_DIRT
-            name: '&fGrobe Erde'
+          mycelium:
+            material: MYCELIUM
+            name: '&fMyzel'
             buy: 12
             sell: 4
-          wet_sponge:
-            material: WET_SPONGE
-            name: '&fNasser Schwamm'
-            buy: 900
-            sell: 300
-          deepslate_diamond_ore:
-            material: DEEPSLATE_DIAMOND_ORE
-            name: '&fTiefenschiefer-Diamanterz'
-            buy: 1140
-            sell: -1
-          obsidian:
-            material: OBSIDIAN
-            name: '&fObsidian'
-            buy: 180
-            sell: 60
+          sand:
+            material: SAND
+            name: '&fSand'
+            buy: 12
+            sell: 4
+          red_sand:
+            material: RED_SAND
+            name: '&fRoter Sand'
+            buy: 12
+            sell: 4
+          gravel:
+            material: GRAVEL
+            name: '&fKies'
+            buy: 12
+            sell: 4
           clay:
             material: CLAY
             name: '&fLehm'
@@ -690,66 +599,156 @@ categories:
             name: '&fSchneeblock'
             buy: 12
             sell: 4
-          budding_amethyst:
-            material: BUDDING_AMETHYST
-            name: '&fWachsender Amethyst'
-            buy: -1
-            sell: 500
-          lapis_ore:
-            material: LAPIS_ORE
-            name: '&fLapislazulierz'
-            buy: 30
-            sell: -1
+          ice:
+            material: ICE
+            name: '&fEis'
+            buy: 36
+            sell: 9
           packed_ice:
             material: PACKED_ICE
             name: '&fPackeis'
             buy: 144
             sell: 36
+          blue_ice:
+            material: BLUE_ICE
+            name: '&fBlaues Eis'
+            buy: 432
+            sell: 108
+          obsidian:
+            material: OBSIDIAN
+            name: '&fObsidian'
+            buy: 180
+            sell: 60
+          crying_obsidian:
+            material: CRYING_OBSIDIAN
+            name: '&fWeinender Obsidian'
+            buy: 240
+            sell: 60
+          sponge:
+            material: SPONGE
+            name: '&fSchwamm'
+            buy: 900
+            sell: 300
+          wet_sponge:
+            material: WET_SPONGE
+            name: '&fNasser Schwamm'
+            buy: 900
+            sell: 300
+          moss_block:
+            material: MOSS_BLOCK
+            name: '&fMoosblock'
+            buy: 60
+            sell: 15
+          mud:
+            material: MUD
+            name: '&fSchlamm'
+            buy: 12
+            sell: 4
+          packed_mud:
+            material: PACKED_MUD
+            name: '&fVerdichteter Schlamm'
+            buy: 24
+            sell: 6
           calcite:
             material: CALCITE
             name: '&fKalzit'
             buy: 15
             sell: 4
-          grass_block:
-            material: GRASS_BLOCK
-            name: '&fGrasblock'
-            buy: 12
+          dripstone_block:
+            material: DRIPSTONE_BLOCK
+            name: '&fTropfsteinblock'
+            buy: 15
             sell: 4
-          gravel:
-            material: GRAVEL
-            name: '&fKies'
-            buy: 12
-            sell: 4
+          amethyst_block:
+            material: AMETHYST_BLOCK
+            name: '&fAmethystblock'
+            buy: 300
+            sell: 75
+          budding_amethyst:
+            material: BUDDING_AMETHYST
+            name: '&fWachsender Amethyst'
+            buy: -1
+            sell: 500
           coal_ore:
             material: COAL_ORE
             name: '&fKohleerz'
             buy: 54
             sell: -1
-          red_sand:
-            material: RED_SAND
-            name: '&fRoter Sand'
-            buy: 12
-            sell: 4
-          deepslate_lapis_ore:
-            material: DEEPSLATE_LAPIS_ORE
-            name: '&fTiefenschiefer-Lapislazulierz'
-            buy: 30
+          deepslate_coal_ore:
+            material: DEEPSLATE_COAL_ORE
+            name: '&fTiefenschiefer-Kohleerz'
+            buy: 54
+            sell: -1
+          iron_ore:
+            material: IRON_ORE
+            name: '&fEisenerz'
+            buy: 90
+            sell: -1
+          deepslate_iron_ore:
+            material: DEEPSLATE_IRON_ORE
+            name: '&fTiefenschiefer-Eisenerz'
+            buy: 90
+            sell: -1
+          copper_ore:
+            material: COPPER_ORE
+            name: '&fKupfererz'
+            buy: 51
+            sell: -1
+          deepslate_copper_ore:
+            material: DEEPSLATE_COPPER_ORE
+            name: '&fTiefenschiefer-Kupfererz'
+            buy: 51
             sell: -1
           gold_ore:
             material: GOLD_ORE
             name: '&fGolderz'
             buy: 126
             sell: -1
-          amethyst_block:
-            material: AMETHYST_BLOCK
-            name: '&fAmethystblock'
-            buy: 300
-            sell: 75
-          ice:
-            material: ICE
-            name: '&fEis'
-            buy: 36
-            sell: 9
+          deepslate_gold_ore:
+            material: DEEPSLATE_GOLD_ORE
+            name: '&fTiefenschiefer-Golderz'
+            buy: 126
+            sell: -1
+          redstone_ore:
+            material: REDSTONE_ORE
+            name: '&fRedstone-Erz'
+            buy: 15
+            sell: -1
+          deepslate_redstone_ore:
+            material: DEEPSLATE_REDSTONE_ORE
+            name: '&fTiefenschiefer-Redstone-Erz'
+            buy: 15
+            sell: -1
+          lapis_ore:
+            material: LAPIS_ORE
+            name: '&fLapislazulierz'
+            buy: 30
+            sell: -1
+          deepslate_lapis_ore:
+            material: DEEPSLATE_LAPIS_ORE
+            name: '&fTiefenschiefer-Lapislazulierz'
+            buy: 30
+            sell: -1
+          diamond_ore:
+            material: DIAMOND_ORE
+            name: '&fDiamanterz'
+            buy: 1140
+            sell: -1
+          deepslate_diamond_ore:
+            material: DEEPSLATE_DIAMOND_ORE
+            name: '&fTiefenschiefer-Diamanterz'
+            buy: 1140
+            sell: -1
+          emerald_ore:
+            material: EMERALD_ORE
+            name: '&fSmaragderz'
+            buy: 900
+            sell: -1
+          deepslate_emerald_ore:
+            material: DEEPSLATE_EMERALD_ORE
+            name: '&fTiefenschiefer-Smaragderz'
+            buy: 900
+            sell: -1
       nether:
         display-name: '&4&lNether'
         icon: NETHERRACK

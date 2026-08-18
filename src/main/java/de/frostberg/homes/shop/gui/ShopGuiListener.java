@@ -139,9 +139,14 @@ public class ShopGuiListener implements Listener {
         int offset = clampedPage * itemsPerPage;
 
         ShopGuiHolder holder = new ShopGuiHolder(ShopGuiHolder.Type.ITEM_LIST, category.getId(), subCategory.getId(), clampedPage, null);
-        String title = bracketTitle(MessageUtil.get(plugin.getMessages(), "shop-gui-list-title")
-                .replace("%category%", category.getDisplayName())
-                .replace("%sub%", subCategory.getDisplayName()));
+        // Hat die Kategorie nur eine Unterkategorie, ist deren Name identisch zum Kategorienamen -
+        // dann nur einmal anzeigen statt "Werkzeuge » Werkzeuge"
+        String titleText = category.getSubCategories().size() == 1
+                ? category.getDisplayName()
+                : MessageUtil.get(plugin.getMessages(), "shop-gui-list-title")
+                        .replace("%category%", category.getDisplayName())
+                        .replace("%sub%", subCategory.getDisplayName());
+        String title = bracketTitle(titleText);
         Inventory inventory = Bukkit.createInventory(holder, 54, MessageUtil.color(title));
         holder.setInventory(inventory);
 
@@ -249,9 +254,9 @@ public class ShopGuiListener implements Listener {
         }
     }
 
-    /** Umrahmt einen Titel im Stil "&8«——— Titel ———»", wie im Vorbild-Shop. */
+    /** Umrahmt einen Titel im Stil "&8<---- Titel ---->", wie im Vorbild-Shop (einfache ASCII-Zeichen statt Unicode-Pfeile, damit nichts im Client-Font verrutscht). */
     private String bracketTitle(String rawTitle) {
-        return "&8«——— " + rawTitle + "&8 ———»";
+        return "&8<---- " + rawTitle + "&8 ---->";
     }
 
     /**
