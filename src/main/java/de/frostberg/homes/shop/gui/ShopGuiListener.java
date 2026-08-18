@@ -46,9 +46,9 @@ public class ShopGuiListener implements Listener {
     // entspricht der Kategorie-Reihenfolge in shop-items.yml: Bloecke, Werkzeuge, Waffen,
     // Ruestung, Essen, Redstone, Erze, Farming, Deko, Sonstiges. Redstone (Index 5) und Erze
     // (Index 6) liegen bewusst eine Reihe unter dem Deko-Banner, symmetrisch links/rechts mit
-    // einer Luecke in der Mitte (Slot 40 bleibt frei) - und nicht auf Spalte 0/8 (Rand-Spalte,
+    // genau einem freien Slot dazwischen (Slot 40) - und nicht auf Spalte 0/8 (Rand-Spalte,
     // die fillBorder() mit Glas fuellt).
-    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 42, 38, 29, 31, 33};
+    private static final int[] MAIN_MENU_SLOTS = {11, 15, 19, 22, 25, 41, 39, 29, 31, 33};
 
     private static final int DETAIL_ITEM_SLOT = 22;
     private static final int[] SELL_SLOTS = {21, 20, 19}; // -1, -32, -64 (von innen nach aussen)

@@ -1713,12 +1713,12 @@ categories:
             sell: 128
   erze:
     display-name: '&b&lErze'
-    icon: DIAMOND_ORE
+    icon: NETHERITE_INGOT
     border: GRAY_STAINED_GLASS_PANE
     sub-categories:
       erze:
         display-name: '&b&lErze'
-        icon: DIAMOND_ORE
+        icon: NETHERITE_INGOT
         columns: 9
         items:
           coal_ore:
