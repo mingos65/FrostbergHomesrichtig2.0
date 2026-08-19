@@ -21,14 +21,25 @@ settings:
   # Welt, zu der /spawn und /setspawn gehören (aktuell wird der Spawn in der
   # Plotwelt gebaut, nicht in der Hauptwelt "world")
   spawn-world: "plotwelt65"
-  # Welt, zu der /farmwelt und /setfarmwelt gehören
-  farm-world: "farm"
-  # Maximaler Radius in Blöcken um den mit /setfarmwelt gesetzten Mittelpunkt,
-  # innerhalb dessen /farmwelt eine zufällige, sichere Position auswählt
-  farm-teleport-radius: 4000
-  # Mindestabstand in Blöcken vom Mittelpunkt - verhindert, dass Spieler direkt
-  # neben dem Zentrum (und damit evtl. schon abgebauten Flächen) landen
-  farm-teleport-min-radius: 2000
+  # Die drei Farmwelten, waehlbar per /farmwelt-GUI (oder direkt per
+  # "/farmwelt overworld|nether|end"). Je Welt: "world" = Bukkit-Weltname
+  # (kann jede ueber Multiverse angelegte Welt sein), "radius" = maximaler
+  # Abstand in Bloecken vom mit "/setfarmwelt <typ>" gesetzten Mittelpunkt,
+  # "min-radius" = Mindestabstand davon (verhindert Landung direkt neben
+  # dem, evtl. schon abgebauten, Zentrum).
+  farm-worlds:
+    overworld:
+      world: "farm"
+      radius: 4000
+      min-radius: 2000
+    nether:
+      world: "farm_nether"
+      radius: 1000
+      min-radius: 200
+    end:
+      world: "farm_end"
+      radius: 2000
+      min-radius: 500
 effects:
   # Sound beim Start des Countdowns
   sound-on-warmup-start: true
@@ -88,8 +99,8 @@ clan:
       code: "gradient:FF4500:FFD700"
       price: 2000
 quest:
-  # Fortschritt zaehlt nur in der Welt aus settings.farm-world (siehe oben) -
-  # keine eigene Welt-Einstellung noetig, das ist bewusst dieselbe Welt.
+  # Fortschritt zaehlt nur in der Welt aus settings.farm-worlds.overworld.world
+  # (siehe oben) - keine eigene Welt-Einstellung noetig, das ist bewusst dieselbe Welt.
   progress-messages-enabled: true
   # Alle wie viele erledigte Einheiten eine Zwischen-Nachricht kommt (z.B.
   # alle 100 abgebaute Bloecke). 0 deaktiviert die Zwischen-Nachrichten komplett.

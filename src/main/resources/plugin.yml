@@ -85,8 +85,8 @@ commands:
     permission: spawn.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   farmwelt:
-    description: Teleportiert dich zur Farmwelt
-    usage: /farmwelt
+    description: 'Oeffnet die Farmwelt-Auswahl (Nutzung: /farmwelt [overworld|nether|end])'
+    usage: /farmwelt [overworld|nether|end]
     permission: spawn.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   setspawn:
@@ -95,8 +95,8 @@ commands:
     permission: spawn.admin
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   setfarmwelt:
-    description: Setzt den Spawnpunkt der Farmwelt auf deine Position
-    usage: /setfarmwelt
+    description: 'Setzt den Mittelpunkt einer Farmwelt auf deine Position (Nutzung: /setfarmwelt <overworld|nether|end>)'
+    usage: /setfarmwelt <overworld|nether|end>
     permission: spawn.admin
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   clan:

@@ -42,9 +42,10 @@ farbigem Sperrhinweis). Home-Limit pro Rang über `homes.limit.1` bis
 | `/tp <spieler>` | Sofortiger Teleport zum Spieler, ohne Anfrage/Countdown/Cooldown | `tpa.admin` (Standard: op) |
 | `/tphere <spieler>` | Holt einen Spieler sofort zu dir, ohne Anfrage | `tpa.admin` (Standard: op) |
 | `/spawn` | Teleportiert immer zum selben festen Punkt (in `plotwelt65`) | `spawn.use` (Standard: an) |
-| `/farmwelt` | Teleportiert zu einer zufälligen, sicheren Stelle (2.000–4.000 Blöcke vom Mittelpunkt) | `spawn.use` (Standard: an) |
+| `/farmwelt` | Öffnet ein Auswahl-GUI für 3 Farmwelten (Overworld/Nether/End), teleportiert zu einer zufälligen, sicheren Stelle im jeweils konfigurierten Radius | `spawn.use` (Standard: an) |
+| `/farmwelt <overworld\|nether\|end>` | Shortcut: teleportiert direkt in die angegebene Farmwelt, ohne das GUI zu öffnen | `spawn.use` (Standard: an) |
 | `/setspawn` | Setzt den `/spawn`-Punkt auf deine Position | `spawn.admin` (Standard: op) |
-| `/setfarmwelt` | Setzt den Mittelpunkt für die `/farmwelt`-Zufallsteleports | `spawn.admin` (Standard: op) |
+| `/setfarmwelt <overworld\|nether\|end>` | Setzt den Mittelpunkt für die Zufallsteleports der angegebenen Farmwelt (du musst dort stehen) | `spawn.admin` (Standard: op) |
 
 TPA-Anfragen laufen nach 60 Sekunden automatisch ab. Nach Annahme läuft ein
 3-Sekunden-Countdown (bricht bei Bewegung ab), danach ein eigener

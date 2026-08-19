@@ -65,6 +65,7 @@ public final class SafeTeleport {
 
     private static boolean isHarmful(Material material) {
         return material == Material.LAVA
+                || material == Material.WATER
                 || material == Material.FIRE
                 || material == Material.SOUL_FIRE
                 || material == Material.MAGMA_BLOCK

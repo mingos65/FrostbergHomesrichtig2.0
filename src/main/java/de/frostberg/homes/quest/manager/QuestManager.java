@@ -464,7 +464,7 @@ public class QuestManager implements Listener {
         if (player.hasPermission("quest.bypass.world")) {
             return true;
         }
-        String worldName = plugin.getConfig().getString("settings.farm-world", "farm");
+        String worldName = plugin.getConfig().getString("settings.farm-worlds.overworld.world", "farm");
         return player.getWorld().getName().equals(worldName);
     }
 

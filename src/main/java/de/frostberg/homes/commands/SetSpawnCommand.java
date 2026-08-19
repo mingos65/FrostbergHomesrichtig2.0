@@ -10,20 +10,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * /setspawn und /setfarmwelt - setzt den Spawnpunkt der Hauptwelt bzw. der
- * Farmwelt auf die aktuelle Position. Beide Befehle teilen sich diese Klasse
- * (per "farm"-Flag im Konstruktor), analog zu SpawnCommand. Verlangt, dass
- * der Admin tatsaechlich in der betroffenen Welt steht, da eine Spawn-Location
- * nur innerhalb ihrer eigenen Welt sinnvoll ist.
+ * /setspawn - setzt den Spawnpunkt der Hauptwelt auf die aktuelle Position.
+ * Verlangt, dass der Admin tatsaechlich in der Spawn-Welt steht.
+ *
+ * Das frueher hier per "farm"-Flag mitgefuehrte /setfarmwelt lebt jetzt im
+ * eigenstaendigen de.frostberg.homes.farmwelt-Package (SetFarmweltCommand,
+ * ein Mittelpunkt je Farmwelt statt nur einer).
  */
 public class SetSpawnCommand implements CommandExecutor {
 
     private final FrostbergHomes plugin;
-    private final boolean farm;
 
-    public SetSpawnCommand(FrostbergHomes plugin, boolean farm) {
+    public SetSpawnCommand(FrostbergHomes plugin) {
         this.plugin = plugin;
-        this.farm = farm;
     }
 
     @Override
@@ -33,21 +32,21 @@ public class SetSpawnCommand implements CommandExecutor {
             return true;
         }
 
-        String worldName = plugin.getConfig().getString(farm ? "settings.farm-world" : "settings.spawn-world");
+        String worldName = plugin.getConfig().getString("settings.spawn-world");
         World expectedWorld = worldName == null ? null : Bukkit.getWorld(worldName);
         if (expectedWorld == null) {
-            player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-not-loaded" : "spawn-world-not-loaded"));
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "spawn-world-not-loaded"));
             return true;
         }
 
         if (!player.getWorld().equals(expectedWorld)) {
-            player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-wrong-world" : "spawn-wrong-world")
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "spawn-wrong-world")
                     .replace("%world%", expectedWorld.getName()));
             return true;
         }
 
         expectedWorld.setSpawnLocation(player.getLocation());
-        player.sendMessage(MessageUtil.get(plugin.getMessages(), farm ? "farmwelt-set" : "spawn-set"));
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), "spawn-set"));
         return true;
     }
 }

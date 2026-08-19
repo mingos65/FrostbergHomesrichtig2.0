@@ -19,6 +19,9 @@ import de.frostberg.homes.commands.SpawnCommand;
 import de.frostberg.homes.commands.TpaAcceptCommand;
 import de.frostberg.homes.commands.TpaCommand;
 import de.frostberg.homes.commands.TpaDenyCommand;
+import de.frostberg.homes.farmwelt.commands.FarmweltCommand;
+import de.frostberg.homes.farmwelt.commands.SetFarmweltCommand;
+import de.frostberg.homes.farmwelt.gui.FarmweltGuiListener;
 import de.frostberg.homes.gui.HomesGuiListener;
 import de.frostberg.homes.listener.FarmDeathRespawnListener;
 import de.frostberg.homes.listener.PlayerDataListener;
@@ -62,6 +65,7 @@ public class FrostbergHomes extends JavaPlugin {
     private VanishManager vanishManager;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
+    private FarmweltGuiListener farmweltGuiListener;
     private FileConfiguration messages;
 
     @Override
@@ -84,6 +88,7 @@ public class FrostbergHomes extends JavaPlugin {
         this.vanishManager = new VanishManager(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
+        this.farmweltGuiListener = new FarmweltGuiListener(this);
 
         registerCommands();
         registerListeners();
@@ -181,10 +186,16 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("tphere").setExecutor(tpHereCommand);
         getCommand("tphere").setTabCompleter(tpHereCommand);
 
-        getCommand("spawn").setExecutor(new SpawnCommand(this, false));
-        getCommand("farmwelt").setExecutor(new SpawnCommand(this, true));
-        getCommand("setspawn").setExecutor(new SetSpawnCommand(this, false));
-        getCommand("setfarmwelt").setExecutor(new SetSpawnCommand(this, true));
+        getCommand("spawn").setExecutor(new SpawnCommand(this));
+        getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
+
+        FarmweltCommand farmweltCommand = new FarmweltCommand(this);
+        getCommand("farmwelt").setExecutor(farmweltCommand);
+        getCommand("farmwelt").setTabCompleter(farmweltCommand);
+
+        SetFarmweltCommand setFarmweltCommand = new SetFarmweltCommand(this);
+        getCommand("setfarmwelt").setExecutor(setFarmweltCommand);
+        getCommand("setfarmwelt").setTabCompleter(setFarmweltCommand);
 
         this.clanCommand = new ClanCommand(this);
         getCommand("clan").setExecutor(clanCommand);
@@ -240,6 +251,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
+        getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
 
     /**
@@ -310,5 +322,9 @@ public class FrostbergHomes extends JavaPlugin {
 
     public ShopGuiListener getShopGuiListener() {
         return shopGuiListener;
+    }
+
+    public FarmweltGuiListener getFarmweltGuiListener() {
+        return farmweltGuiListener;
     }
 }

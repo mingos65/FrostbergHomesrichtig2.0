@@ -64,9 +64,9 @@
 #   WALK_DISTANCE  - kein target noetig, amount = Bloecke in der Farmwelt
 #   EARN_TOKENS    - kein target noetig, amount = verdiente Tokens (egal woher)
 #
-# WICHTIG: Fortschritt zaehlt bei ALLEN Quest-Typen nur in der Farmwelt
-# (siehe settings.farm-world in config.yml). Das GUI (/quest) selbst kannst
-# du dagegen von ueberall aus oeffnen.
+# WICHTIG: Fortschritt zaehlt bei ALLEN Quest-Typen nur in der (Overworld-)
+# Farmwelt (siehe settings.farm-worlds.overworld.world in config.yml). Das
+# GUI (/quest) selbst kannst du dagegen von ueberall aus oeffnen.
 
 daily:
   quest-count: 1
