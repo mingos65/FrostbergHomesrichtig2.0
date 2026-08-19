@@ -55,17 +55,8 @@ public class FarmweltGuiListener implements Listener {
 
     private ItemStack buildTypeItem(FarmType type) {
         String key = type.getConfigKey();
-        String prefix = "settings.farm-worlds." + key + ".";
-        int min = plugin.getConfig().getInt(prefix + "min-radius", 0);
-        int max = plugin.getConfig().getInt(prefix + "radius", 0);
-
-        List<String> lore = new ArrayList<>();
-        for (String line : MessageUtil.get(plugin.getMessages(), "farmwelt-gui-" + key + "-lore").split("\\n")) {
-            lore.add(line.replace("%min%", String.valueOf(min)).replace("%max%", String.valueOf(max)));
-        }
-
         return simpleItem(type.getIcon(),
-                MessageUtil.get(plugin.getMessages(), "farmwelt-gui-" + key + "-name"), lore);
+                MessageUtil.get(plugin.getMessages(), "farmwelt-gui-" + key + "-name"), null);
     }
 
     @EventHandler

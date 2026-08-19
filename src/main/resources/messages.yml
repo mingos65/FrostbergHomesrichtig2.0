@@ -114,11 +114,8 @@ spawn-world-not-loaded: "%prefix%&cDie Spawn-Welt ist aktuell nicht geladen."
 # ---------- Farmwelt-GUI (/farmwelt ohne Argument) ----------
 farmwelt-gui-title: "&8<---- &b&lFarmwelt &8---->"
 farmwelt-gui-overworld-name: "&a&lNormale Farmwelt"
-farmwelt-gui-overworld-lore: "&7Radius: &f%min%&7-&f%max% &7Blöcke"
 farmwelt-gui-nether-name: "&c&lNether-Farmwelt"
-farmwelt-gui-nether-lore: "&7Radius: &f%min%&7-&f%max% &7Blöcke"
 farmwelt-gui-end-name: "&5&lEnd-Farmwelt"
-farmwelt-gui-end-lore: "&7Radius: &f%min%&7-&f%max% &7Blöcke"
 farmwelt-gui-close: "&f« Schließen"
 farmwelt-gui-close-lore: "&8Menü ohne Teleport schließen"
 # ---------- Clan: Platzhalter (TAB/Scoreboard/Chat, siehe ClanPlaceholderExpansion) ----------
