@@ -17,12 +17,23 @@ public final class SafeTeleport {
     private SafeTeleport() {
     }
 
+    /** Wie {@link #findSafeLocation(Location, int)}, ohne zusaetzliche Hoehenbegrenzung (nutzt die volle Welthoehe). */
+    public static Location findSafeLocation(Location location) {
+        return findSafeLocation(location, Integer.MAX_VALUE);
+    }
+
     /**
      * Sucht zuerst ab der Hoehe von {@code location} nach oben, dann nach
      * unten, nach der naechsten sicheren Position auf derselben X/Z-Spalte.
      * Gibt null zurueck, wenn in der ganzen Spalte keine gefunden wurde.
+     *
+     * {@code maxSearchY} begrenzt die Aufwaerts-Suche zusaetzlich zur
+     * natuerlichen Welthoehe - wichtig im Nether, wo die Aufwaerts-Suche
+     * sonst haeufig zuerst die duenne Luft-Tasche direkt unter der
+     * Bedrock-Decke findet (der Untergrund ist dort meist durchgehend
+     * massiv), statt einer sinnvollen Position naeher am Nether-Boden.
      */
-    public static Location findSafeLocation(Location location) {
+    public static Location findSafeLocation(Location location, int maxSearchY) {
         World world = location.getWorld();
         if (world == null) {
             return null;
@@ -32,7 +43,7 @@ public final class SafeTeleport {
         int z = location.getBlockZ();
 
         int minY = world.getMinHeight();
-        int maxY = world.getMaxHeight() - 2;
+        int maxY = Math.min(world.getMaxHeight() - 2, maxSearchY);
         int clampedStart = Math.max(minY, Math.min(location.getBlockY(), maxY));
 
         for (int y = clampedStart; y <= maxY; y++) {

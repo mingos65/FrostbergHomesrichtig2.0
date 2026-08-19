@@ -22,6 +22,12 @@ public final class FarmTeleportService {
 
     private static final int MAX_ATTEMPTS = 10;
 
+    // Verhindert, dass die Sicher-Positions-Suche im Nether bis zur duennen
+    // Luft-Tasche direkt unter der Bedrock-Decke hochscannt (siehe
+    // SafeTeleport#findSafeLocation) - 120 liegt sicher unter der ueblichen
+    // Nether-Decke bei Y=127.
+    private static final int NETHER_MAX_SEARCH_Y = 120;
+
     private FarmTeleportService() {
     }
 
@@ -66,8 +72,19 @@ public final class FarmTeleportService {
                         return;
                     }
 
-                    Location probe = new Location(world, x, center.getY(), z);
-                    Location safe = SafeTeleport.findSafeLocation(probe);
+                    // Der Mittelpunkt (world.getSpawnLocation()) liegt oft weit entfernt
+                    // von x/z und seine Hoehe sagt nichts ueber das Gelaende an der
+                    // gewuerfelten Position aus. Im Nether gibt es keine "hoechster
+                    // Block"-Abfrage, die funktioniert (die Bedrock-Decke waere der
+                    // hoechste Block) - dort wird stattdessen knapp unter der Decke
+                    // gestartet und nach unten gesucht. In Overworld/End liefert
+                    // getHighestBlockYAt() die tatsaechliche Gelaendeoberflaeche an
+                    // dieser Spalte, unabhaengig von Bergen/Taelern.
+                    int probeY = type == FarmType.NETHER ? NETHER_MAX_SEARCH_Y : world.getHighestBlockYAt(x, z);
+                    Location probe = new Location(world, x, probeY, z);
+                    Location safe = type == FarmType.NETHER
+                            ? SafeTeleport.findSafeLocation(probe, NETHER_MAX_SEARCH_Y)
+                            : SafeTeleport.findSafeLocation(probe);
 
                     if (safe != null) {
                         player.teleport(safe);

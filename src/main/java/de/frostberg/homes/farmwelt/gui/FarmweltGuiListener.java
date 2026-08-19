@@ -47,7 +47,7 @@ public class FarmweltGuiListener implements Listener {
         }
 
         List<String> closeLore = List.of(MessageUtil.get(plugin.getMessages(), "farmwelt-gui-close-lore"));
-        inventory.setItem(CLOSE_SLOT, simpleItem(Material.BARRIER,
+        inventory.setItem(CLOSE_SLOT, simpleItem(Material.ARROW,
                 MessageUtil.get(plugin.getMessages(), "farmwelt-gui-close"), closeLore));
 
         player.openInventory(inventory);
