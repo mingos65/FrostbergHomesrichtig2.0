@@ -36,6 +36,12 @@ import de.frostberg.homes.farmwelt.commands.FarmweltCommand;
 import de.frostberg.homes.farmwelt.commands.SetFarmweltCommand;
 import de.frostberg.homes.farmwelt.gui.FarmweltGuiListener;
 import de.frostberg.homes.gui.HomesGuiListener;
+import de.frostberg.homes.handel.HandelListener;
+import de.frostberg.homes.handel.TradeManager;
+import de.frostberg.homes.handel.commands.HandelAcceptCommand;
+import de.frostberg.homes.handel.commands.HandelCommand;
+import de.frostberg.homes.handel.commands.HandelDenyCommand;
+import de.frostberg.homes.handel.gui.HandelGuiListener;
 import de.frostberg.homes.lagclear.LagClearManager;
 import de.frostberg.homes.lagclear.commands.LagClearCommand;
 import de.frostberg.homes.listener.FarmDeathRespawnListener;
@@ -109,6 +115,8 @@ public class FrostbergHomes extends JavaPlugin {
     private EnderchestGuiListener enderchestGuiListener;
     private RucksackManager rucksackManager;
     private RucksackGuiListener rucksackGuiListener;
+    private TradeManager tradeManager;
+    private HandelGuiListener handelGuiListener;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -145,6 +153,8 @@ public class FrostbergHomes extends JavaPlugin {
         this.enderchestGuiListener = new EnderchestGuiListener(this);
         this.rucksackManager = new RucksackManager(this);
         this.rucksackGuiListener = new RucksackGuiListener(this);
+        this.tradeManager = new TradeManager();
+        this.handelGuiListener = new HandelGuiListener(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -320,6 +330,12 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("rs").setExecutor(rucksackCommand);
         getCommand("rucksack").setExecutor(rucksackCommand);
 
+        HandelCommand handelCommand = new HandelCommand(this);
+        getCommand("handel").setExecutor(handelCommand);
+        getCommand("handel").setTabCompleter(handelCommand);
+        getCommand("handelaccept").setExecutor(new HandelAcceptCommand(this));
+        getCommand("handeldeny").setExecutor(new HandelDenyCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -361,6 +377,8 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlaytimeListener(this), this);
         getServer().getPluginManager().registerEvents(enderchestGuiListener, this);
         getServer().getPluginManager().registerEvents(rucksackGuiListener, this);
+        getServer().getPluginManager().registerEvents(handelGuiListener, this);
+        getServer().getPluginManager().registerEvents(new HandelListener(this), this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -477,6 +495,14 @@ public class FrostbergHomes extends JavaPlugin {
 
     public RucksackGuiListener getRucksackGuiListener() {
         return rucksackGuiListener;
+    }
+
+    public TradeManager getTradeManager() {
+        return tradeManager;
+    }
+
+    public HandelGuiListener getHandelGuiListener() {
+        return handelGuiListener;
     }
 
     public ShopManager getShopManager() {

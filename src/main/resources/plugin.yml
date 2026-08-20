@@ -234,6 +234,21 @@ commands:
     usage: /rucksack
     permission: rucksack.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  handel:
+    description: 'Sicherer Spieler-Handel (Nutzung: /handel <spieler>)'
+    usage: /handel <spieler>
+    permission: handel.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  handelaccept:
+    description: Nimmt eine Handelsanfrage an
+    usage: /handelaccept
+    permission: handel.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  handeldeny:
+    description: Lehnt eine Handelsanfrage ab
+    usage: /handeldeny
+    permission: handel.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -513,6 +528,9 @@ permissions:
     default: true
   rucksack.use:
     description: Erlaubt /rs bzw. /rucksack
+    default: true
+  handel.use:
+    description: Erlaubt /handel, /handelaccept, /handeldeny
     default: true
 
   shop.*:
