@@ -34,6 +34,12 @@ public class ChatFormatListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent event) {
+        if (event.isCancelled()) {
+            // ChatModeListener (Team-/Adminchat) hat die Nachricht bereits
+            // umgeleitet - nicht zusaetzlich als "normale" Nachricht formatieren.
+            return;
+        }
+
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         ChatColorManager colorManager = plugin.getChatColorManager();

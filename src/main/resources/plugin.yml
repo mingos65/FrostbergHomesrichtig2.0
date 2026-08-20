@@ -149,6 +149,41 @@ commands:
     usage: /chatclear
     permission: chat.clear
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  teamchat:
+    description: Schaltet den Team-Chat-Modus um
+    usage: /teamchat
+    permission: chat.teamchat
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  tc:
+    description: 'Alias fuer /teamchat'
+    usage: /tc
+    permission: chat.teamchat
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  adminchat:
+    description: Schaltet den Admin-Chat-Modus um
+    usage: /adminchat
+    permission: chat.adminchat
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  ac:
+    description: 'Alias fuer /adminchat'
+    usage: /ac
+    permission: chat.adminchat
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  support:
+    description: 'Hilfe vom Team anfordern (Nutzung: /support <nachricht>)'
+    usage: /support <nachricht|close>
+    permission: support.request
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  report:
+    description: 'Meldet einen Spieler dem Team (Nutzung: /report <spieler> <grund>)'
+    usage: /report <spieler> <grund>
+    permission: report.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  reports:
+    description: 'Zeigt die Melde-Historie eines Spielers (Nutzung: /reports <spieler>)'
+    usage: /reports <spieler>
+    permission: report.view
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -385,7 +420,25 @@ permissions:
     description: Erlaubt /cw (Command-Watcher-Live-Feed)
     default: op
   chat.clear:
-    description: Erlaubt /cc (Chat fuer alle leeren)
+    description: Erlaubt /chatclear (Chat fuer alle leeren)
+    default: op
+  chat.teamchat:
+    description: Erlaubt /teamchat bzw. /tc
+    default: op
+  chat.adminchat:
+    description: Erlaubt /adminchat bzw. /ac
+    default: op
+  support.request:
+    description: Erlaubt /support (Hilfe anfordern)
+    default: true
+  support.accept:
+    description: Erlaubt /support accept (Anfragen annehmen)
+    default: op
+  report.use:
+    description: Erlaubt /report (Spieler melden)
+    default: true
+  report.view:
+    description: Erlaubt /reports sowie Report-Broadcasts zu sehen
     default: op
 
   shop.*:

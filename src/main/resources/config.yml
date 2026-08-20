@@ -129,3 +129,6 @@ quest:
     particle-complete: "HAPPY_VILLAGER"
     sound-on-claim: true
     sound-claim: "ENTITY_EXPERIENCE_ORB_PICKUP"
+report:
+  # Mindestabstand in Sekunden zwischen zwei /report-Meldungen desselben Spielers
+  cooldown-seconds: 60

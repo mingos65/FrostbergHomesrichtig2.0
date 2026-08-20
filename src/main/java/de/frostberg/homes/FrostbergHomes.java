@@ -2,8 +2,12 @@ package de.frostberg.homes;
 
 import de.frostberg.homes.chat.ChatColorManager;
 import de.frostberg.homes.chat.ChatFormatListener;
+import de.frostberg.homes.chat.ChatModeListener;
+import de.frostberg.homes.chat.ChatModeManager;
+import de.frostberg.homes.chat.commands.AdminChatCommand;
 import de.frostberg.homes.chat.commands.ChatClearCommand;
 import de.frostberg.homes.chat.commands.ChatColorCommand;
+import de.frostberg.homes.chat.commands.TeamChatCommand;
 import de.frostberg.homes.clan.commands.ClanChatCommand;
 import de.frostberg.homes.clan.commands.ClanCommand;
 import de.frostberg.homes.clan.gui.ClanGuiListener;
@@ -32,6 +36,9 @@ import de.frostberg.homes.quest.commands.QuestCommand;
 import de.frostberg.homes.quest.gui.QuestGuiListener;
 import de.frostberg.homes.quest.listener.QuestProgressListener;
 import de.frostberg.homes.quest.manager.QuestManager;
+import de.frostberg.homes.report.ReportManager;
+import de.frostberg.homes.report.commands.ReportCommand;
+import de.frostberg.homes.report.commands.ReportsCommand;
 import de.frostberg.homes.shop.commands.ShopCommand;
 import de.frostberg.homes.shop.gui.ShopGuiListener;
 import de.frostberg.homes.shop.manager.ShopManager;
@@ -42,6 +49,9 @@ import de.frostberg.homes.staff.VanishManager;
 import de.frostberg.homes.staff.commands.GameModeCommand;
 import de.frostberg.homes.staff.commands.CommandWatcherCommand;
 import de.frostberg.homes.staff.commands.VanishCommand;
+import de.frostberg.homes.support.SupportListener;
+import de.frostberg.homes.support.SupportManager;
+import de.frostberg.homes.support.commands.SupportCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
@@ -69,6 +79,9 @@ public class FrostbergHomes extends JavaPlugin {
     private ChatColorManager chatColorManager;
     private VanishManager vanishManager;
     private CommandWatcherManager commandWatcherManager;
+    private ChatModeManager chatModeManager;
+    private SupportManager supportManager;
+    private ReportManager reportManager;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -93,6 +106,9 @@ public class FrostbergHomes extends JavaPlugin {
         this.chatColorManager = new ChatColorManager(this);
         this.vanishManager = new VanishManager(this);
         this.commandWatcherManager = new CommandWatcherManager();
+        this.chatModeManager = new ChatModeManager();
+        this.supportManager = new SupportManager();
+        this.reportManager = new ReportManager(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -231,6 +247,21 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("cw").setExecutor(new CommandWatcherCommand(this));
         getCommand("chatclear").setExecutor(new ChatClearCommand(this));
 
+        TeamChatCommand teamChatCommand = new TeamChatCommand(this);
+        getCommand("teamchat").setExecutor(teamChatCommand);
+        getCommand("tc").setExecutor(teamChatCommand);
+
+        AdminChatCommand adminChatCommand = new AdminChatCommand(this);
+        getCommand("adminchat").setExecutor(adminChatCommand);
+        getCommand("ac").setExecutor(adminChatCommand);
+
+        getCommand("support").setExecutor(new SupportCommand(this));
+
+        ReportCommand reportCommand = new ReportCommand(this);
+        getCommand("report").setExecutor(reportCommand);
+        getCommand("report").setTabCompleter(reportCommand);
+        getCommand("reports").setExecutor(new ReportsCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -259,9 +290,14 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(questGuiListener, this);
         getServer().getPluginManager().registerEvents(new QuestProgressListener(this), this);
 
+        // ChatModeListener MUSS vor ChatFormatListener registriert werden (gleiche
+        // Prioritaet LOWEST, Bukkit fuehrt bei gleicher Prioritaet in Registrier-
+        // reihenfolge aus) - siehe Kommentar in ChatModeListener.
+        getServer().getPluginManager().registerEvents(new ChatModeListener(this), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
         getServer().getPluginManager().registerEvents(new CommandWatcherListener(this), this);
+        getServer().getPluginManager().registerEvents(new SupportListener(this), this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -330,6 +366,18 @@ public class FrostbergHomes extends JavaPlugin {
 
     public CommandWatcherManager getCommandWatcherManager() {
         return commandWatcherManager;
+    }
+
+    public ChatModeManager getChatModeManager() {
+        return chatModeManager;
+    }
+
+    public SupportManager getSupportManager() {
+        return supportManager;
+    }
+
+    public ReportManager getReportManager() {
+        return reportManager;
     }
 
     public ShopManager getShopManager() {
