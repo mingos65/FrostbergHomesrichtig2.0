@@ -214,6 +214,16 @@ commands:
     usage: /top
     permission: stats.top
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  ec:
+    description: 'Eigene Mehrseiten-Enderchest (Nutzung: /ec [name <seite> <name>])'
+    usage: /ec [name <seite> <name>]
+    permission: ec.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  enderchest:
+    description: 'Alias fuer /ec'
+    usage: /enderchest [name <seite> <name>]
+    permission: ec.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -487,6 +497,9 @@ permissions:
     default: true
   stats.top:
     description: Erlaubt /top
+    default: true
+  ec.use:
+    description: Erlaubt /ec bzw. /enderchest
     default: true
 
   shop.*:

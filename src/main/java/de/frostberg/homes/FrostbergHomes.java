@@ -29,6 +29,9 @@ import de.frostberg.homes.commands.SpawnCommand;
 import de.frostberg.homes.commands.TpaAcceptCommand;
 import de.frostberg.homes.commands.TpaCommand;
 import de.frostberg.homes.commands.TpaDenyCommand;
+import de.frostberg.homes.enderchest.EnderchestManager;
+import de.frostberg.homes.enderchest.commands.EnderchestCommand;
+import de.frostberg.homes.enderchest.gui.EnderchestGuiListener;
 import de.frostberg.homes.farmwelt.commands.FarmweltCommand;
 import de.frostberg.homes.farmwelt.commands.SetFarmweltCommand;
 import de.frostberg.homes.farmwelt.gui.FarmweltGuiListener;
@@ -99,6 +102,8 @@ public class FrostbergHomes extends JavaPlugin {
     private BankManager bankManager;
     private BankGuiListener bankGuiListener;
     private PlaytimeManager playtimeManager;
+    private EnderchestManager enderchestManager;
+    private EnderchestGuiListener enderchestGuiListener;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -131,6 +136,8 @@ public class FrostbergHomes extends JavaPlugin {
         this.bankManager = new BankManager(this);
         this.bankGuiListener = new BankGuiListener(this);
         this.playtimeManager = new PlaytimeManager(this);
+        this.enderchestManager = new EnderchestManager(this);
+        this.enderchestGuiListener = new EnderchestGuiListener(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -298,6 +305,10 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("spielzeit").setExecutor(new SpielzeitCommand(this));
         getCommand("top").setExecutor(new TopCommand(this));
 
+        EnderchestCommand enderchestCommand = new EnderchestCommand(this);
+        getCommand("ec").setExecutor(enderchestCommand);
+        getCommand("enderchest").setExecutor(enderchestCommand);
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -337,6 +348,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(armorStandGuiListener, this);
         getServer().getPluginManager().registerEvents(bankGuiListener, this);
         getServer().getPluginManager().registerEvents(new PlaytimeListener(this), this);
+        getServer().getPluginManager().registerEvents(enderchestGuiListener, this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -437,6 +449,14 @@ public class FrostbergHomes extends JavaPlugin {
 
     public PlaytimeManager getPlaytimeManager() {
         return playtimeManager;
+    }
+
+    public EnderchestManager getEnderchestManager() {
+        return enderchestManager;
+    }
+
+    public EnderchestGuiListener getEnderchestGuiListener() {
+        return enderchestGuiListener;
     }
 
     public ShopManager getShopManager() {

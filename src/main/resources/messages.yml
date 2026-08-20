@@ -309,6 +309,12 @@ spielzeit-line: "%prefix%&7Spielzeit von &e%player%&8: &f%time%"
 top-empty: "%prefix%&7Noch keine Spielzeit-Daten vorhanden."
 top-header: "&b&lTop-Spielzeit"
 top-entry: "&8#%rank% &e%player% &8» &f%time%"
+# ---------- Enderchest (/ec, /enderchest) ----------
+ec-selector-title: "&8<---- &5&lEnderchest &8---->"
+ec-selector-lore: "&7Klicken zum Öffnen"
+ec-name-usage: "%prefix%&cNutzung: &f/ec name <seite> <name>"
+ec-invalid-page: "%prefix%&cUngültige Seite. Du hast &e%limit% &cSeite(n)."
+ec-name-set: "%prefix%&aSeite &e%page% &aheißt jetzt &f%name%&a."
 
 # ---------- Admin ----------
 reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

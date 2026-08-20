@@ -18,6 +18,8 @@ settings:
   # Home-Limit, falls der Spieler keine homes.limit.<n> / homes.limit.unlimited
   # Permission von LuckPerms besitzt (Fallback)
   default-home-limit: 1
+  # Enderchest-Seiten-Limit, falls der Spieler keine ec.pages.<n>-Permission hat
+  default-ec-pages: 1
   # Welt, zu der /spawn und /setspawn gehören (aktuell wird der Spawn in der
   # Plotwelt gebaut, nicht in der Hauptwelt "world")
   spawn-world: "plotwelt65"
