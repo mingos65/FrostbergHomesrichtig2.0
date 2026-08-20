@@ -56,7 +56,7 @@ public class VanishPlaceholderExpansion extends PlaceholderExpansion implements 
         if (!plugin.getVanishManager().isVanished(target)) {
             return "";
         }
-        return MessageUtil.color(" &7(V)");
+        return MessageUtil.color(" &d(V)");
     }
 
     @Override
