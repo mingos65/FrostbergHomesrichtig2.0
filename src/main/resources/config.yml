@@ -20,8 +20,6 @@ settings:
   default-home-limit: 1
   # Enderchest-Seiten-Limit, falls der Spieler keine ec.pages.<n>-Permission hat
   default-ec-pages: 1
-  # Groesse des /rs-Rucksacks in Slots (Vielfaches von 9, 9-54)
-  rucksack-size: 54
   # Welt, zu der /spawn und /setspawn gehören (aktuell wird der Spawn in der
   # Plotwelt gebaut, nicht in der Hauptwelt "world")
   spawn-world: "plotwelt65"
