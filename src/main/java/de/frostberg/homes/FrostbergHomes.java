@@ -2,6 +2,7 @@ package de.frostberg.homes;
 
 import de.frostberg.homes.chat.ChatColorManager;
 import de.frostberg.homes.chat.ChatFormatListener;
+import de.frostberg.homes.chat.commands.ChatClearCommand;
 import de.frostberg.homes.chat.commands.ChatColorCommand;
 import de.frostberg.homes.clan.commands.ClanChatCommand;
 import de.frostberg.homes.clan.commands.ClanCommand;
@@ -34,15 +35,19 @@ import de.frostberg.homes.quest.manager.QuestManager;
 import de.frostberg.homes.shop.commands.ShopCommand;
 import de.frostberg.homes.shop.gui.ShopGuiListener;
 import de.frostberg.homes.shop.manager.ShopManager;
+import de.frostberg.homes.staff.CommandWatcherListener;
+import de.frostberg.homes.staff.CommandWatcherManager;
 import de.frostberg.homes.staff.VanishListener;
 import de.frostberg.homes.staff.VanishManager;
 import de.frostberg.homes.staff.commands.GameModeCommand;
+import de.frostberg.homes.staff.commands.CommandWatcherCommand;
 import de.frostberg.homes.staff.commands.VanishCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
 import de.frostberg.homes.util.CurrencyPlaceholderExpansion;
 import de.frostberg.homes.util.QuestPlaceholderExpansion;
+import de.frostberg.homes.util.VanishPlaceholderExpansion;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -63,6 +68,7 @@ public class FrostbergHomes extends JavaPlugin {
     private QuestGuiListener questGuiListener;
     private ChatColorManager chatColorManager;
     private VanishManager vanishManager;
+    private CommandWatcherManager commandWatcherManager;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -86,6 +92,7 @@ public class FrostbergHomes extends JavaPlugin {
         this.questManager = new QuestManager(this);
         this.chatColorManager = new ChatColorManager(this);
         this.vanishManager = new VanishManager(this);
+        this.commandWatcherManager = new CommandWatcherManager();
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -98,6 +105,7 @@ public class FrostbergHomes extends JavaPlugin {
             new QuestPlaceholderExpansion(this).register();
             new ChatColorPlaceholderExpansion(this).register();
             new CurrencyPlaceholderExpansion(this).register();
+            new VanishPlaceholderExpansion(this).register();
         }
 
         getLogger().info("FrostbergHomes wurde aktiviert.");
@@ -220,6 +228,9 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("vanish").setExecutor(vanishCommand);
         getCommand("v").setExecutor(vanishCommand);
 
+        getCommand("cw").setExecutor(new CommandWatcherCommand(this));
+        getCommand("chatclear").setExecutor(new ChatClearCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -250,6 +261,7 @@ public class FrostbergHomes extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
+        getServer().getPluginManager().registerEvents(new CommandWatcherListener(this), this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -314,6 +326,10 @@ public class FrostbergHomes extends JavaPlugin {
 
     public VanishManager getVanishManager() {
         return vanishManager;
+    }
+
+    public CommandWatcherManager getCommandWatcherManager() {
+        return commandWatcherManager;
     }
 
     public ShopManager getShopManager() {

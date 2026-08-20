@@ -222,6 +222,10 @@ gamemode-name-adventure: "Adventure"
 gamemode-name-spectator: "Spectator"
 vanish-on: "%prefix%&aDu bist jetzt &7unsichtbar&a."
 vanish-off: "%prefix%&aDu bist wieder &asichtbar&a."
+cw-enabled: "%prefix%&aCommand-Watcher &8» &aeingeschaltet."
+cw-disabled: "%prefix%&aCommand-Watcher &8» &7ausgeschaltet."
+cw-broadcast: "%prefix%&7[CW] &e%player% &7» &f/%command%"
+cc-cleared: "%prefix%&aDer Chat wurde von &e%staff% &ageleert."
 
 # ---------- Admin ----------
 reload-success: "%prefix%&aDie Konfiguration wurde neu geladen."

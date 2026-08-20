@@ -139,6 +139,16 @@ commands:
     usage: /v
     permission: frostberg.vanish
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  cw:
+    description: Schaltet den Command-Watcher-Live-Feed fuer dich um
+    usage: /cw
+    permission: cw.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  chatclear:
+    description: Leert den Chat fuer alle Spieler
+    usage: /chatclear
+    permission: chat.clear
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -370,6 +380,12 @@ permissions:
     default: op
   frostberg.vanish:
     description: Erlaubt /vanish bzw. /v sowie das Sehen anderer vanishter Spieler
+    default: op
+  cw.use:
+    description: Erlaubt /cw (Command-Watcher-Live-Feed)
+    default: op
+  chat.clear:
+    description: Erlaubt /cc (Chat fuer alle leeren)
     default: op
 
   shop.*:
