@@ -199,6 +199,21 @@ commands:
     usage: /bank [hide]
     permission: bank.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  stats:
+    description: 'Zeigt Statistiken an (Nutzung: /stats [spieler])'
+    usage: /stats [spieler]
+    permission: stats.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  spielzeit:
+    description: 'Zeigt die Spielzeit an (Nutzung: /spielzeit [spieler])'
+    usage: /spielzeit [spieler]
+    permission: stats.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  top:
+    description: Zeigt die Rangliste nach Spielzeit
+    usage: /top
+    permission: stats.top
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -463,6 +478,15 @@ permissions:
     default: op
   bank.use:
     description: Erlaubt /bank
+    default: true
+  bank.viewhidden:
+    description: Zeigt bei /stats auch das Bankguthaben von Spielern mit /bank hide
+    default: op
+  stats.use:
+    description: Erlaubt /stats und /spielzeit
+    default: true
+  stats.top:
+    description: Erlaubt /top
     default: true
 
   shop.*:
