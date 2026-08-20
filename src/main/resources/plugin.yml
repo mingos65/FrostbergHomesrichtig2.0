@@ -189,6 +189,11 @@ commands:
     usage: /laggclear
     permission: lagclear.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  ast:
+    description: Oeffnet das Bearbeitungsmenue fuer den angeschauten Armor Stand
+    usage: /ast
+    permission: ast.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -447,6 +452,9 @@ permissions:
     default: op
   lagclear.use:
     description: Erlaubt /laggclear (manuelle Bodenitem-Bereinigung)
+    default: op
+  ast.use:
+    description: Erlaubt /ast (Armor-Stand-Editor)
     default: op
 
   shop.*:

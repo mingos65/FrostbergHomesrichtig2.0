@@ -1,5 +1,7 @@
 package de.frostberg.homes;
 
+import de.frostberg.homes.armorstand.commands.ArmorStandCommand;
+import de.frostberg.homes.armorstand.gui.ArmorStandGuiListener;
 import de.frostberg.homes.chat.ChatColorManager;
 import de.frostberg.homes.chat.ChatFormatListener;
 import de.frostberg.homes.chat.ChatModeListener;
@@ -85,6 +87,7 @@ public class FrostbergHomes extends JavaPlugin {
     private SupportManager supportManager;
     private ReportManager reportManager;
     private LagClearManager lagClearManager;
+    private ArmorStandGuiListener armorStandGuiListener;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -113,6 +116,7 @@ public class FrostbergHomes extends JavaPlugin {
         this.supportManager = new SupportManager();
         this.reportManager = new ReportManager(this);
         this.lagClearManager = new LagClearManager(this);
+        this.armorStandGuiListener = new ArmorStandGuiListener(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -272,6 +276,8 @@ public class FrostbergHomes extends JavaPlugin {
 
         getCommand("laggclear").setExecutor(new LagClearCommand(this));
 
+        getCommand("ast").setExecutor(new ArmorStandCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -308,6 +314,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
         getServer().getPluginManager().registerEvents(new CommandWatcherListener(this), this);
         getServer().getPluginManager().registerEvents(new SupportListener(this), this);
+        getServer().getPluginManager().registerEvents(armorStandGuiListener, this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -392,6 +399,10 @@ public class FrostbergHomes extends JavaPlugin {
 
     public LagClearManager getLagClearManager() {
         return lagClearManager;
+    }
+
+    public ArmorStandGuiListener getArmorStandGuiListener() {
+        return armorStandGuiListener;
     }
 
     public ShopManager getShopManager() {
