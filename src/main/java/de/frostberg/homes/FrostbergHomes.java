@@ -28,6 +28,8 @@ import de.frostberg.homes.farmwelt.commands.FarmweltCommand;
 import de.frostberg.homes.farmwelt.commands.SetFarmweltCommand;
 import de.frostberg.homes.farmwelt.gui.FarmweltGuiListener;
 import de.frostberg.homes.gui.HomesGuiListener;
+import de.frostberg.homes.lagclear.LagClearManager;
+import de.frostberg.homes.lagclear.commands.LagClearCommand;
 import de.frostberg.homes.listener.FarmDeathRespawnListener;
 import de.frostberg.homes.listener.PlayerDataListener;
 import de.frostberg.homes.manager.HomeManager;
@@ -82,6 +84,7 @@ public class FrostbergHomes extends JavaPlugin {
     private ChatModeManager chatModeManager;
     private SupportManager supportManager;
     private ReportManager reportManager;
+    private LagClearManager lagClearManager;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -109,12 +112,14 @@ public class FrostbergHomes extends JavaPlugin {
         this.chatModeManager = new ChatModeManager();
         this.supportManager = new SupportManager();
         this.reportManager = new ReportManager(this);
+        this.lagClearManager = new LagClearManager(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
 
         registerCommands();
         registerListeners();
+        lagClearManager.start();
 
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new ClanPlaceholderExpansion(this).register();
@@ -130,6 +135,9 @@ public class FrostbergHomes extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (lagClearManager != null) {
+            lagClearManager.stop();
+        }
         if (homeManager != null) {
             homeManager.saveAll();
         }
@@ -262,6 +270,8 @@ public class FrostbergHomes extends JavaPlugin {
         getCommand("report").setTabCompleter(reportCommand);
         getCommand("reports").setExecutor(new ReportsCommand(this));
 
+        getCommand("laggclear").setExecutor(new LagClearCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -378,6 +388,10 @@ public class FrostbergHomes extends JavaPlugin {
 
     public ReportManager getReportManager() {
         return reportManager;
+    }
+
+    public LagClearManager getLagClearManager() {
+        return lagClearManager;
     }
 
     public ShopManager getShopManager() {

@@ -184,6 +184,11 @@ commands:
     usage: /reports <spieler>
     permission: report.view
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  laggclear:
+    description: Entfernt sofort alle Item-Entities, die auf dem Boden liegen
+    usage: /laggclear
+    permission: lagclear.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -439,6 +444,9 @@ permissions:
     default: true
   report.view:
     description: Erlaubt /reports sowie Report-Broadcasts zu sehen
+    default: op
+  lagclear.use:
+    description: Erlaubt /laggclear (manuelle Bodenitem-Bereinigung)
     default: op
 
   shop.*:
