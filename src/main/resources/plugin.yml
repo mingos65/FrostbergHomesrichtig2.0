@@ -194,6 +194,11 @@ commands:
     usage: /ast
     permission: ast.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  bank:
+    description: 'Eigene Bank fuer Tokens/Gold (Nutzung: /bank [hide])'
+    usage: /bank [hide]
+    permission: bank.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -456,6 +461,9 @@ permissions:
   ast.use:
     description: Erlaubt /ast (Armor-Stand-Editor)
     default: op
+  bank.use:
+    description: Erlaubt /bank
+    default: true
 
   shop.*:
     description: Gibt Zugriff auf alle Shop-Funktionen inkl. Reload

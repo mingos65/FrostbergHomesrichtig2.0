@@ -73,6 +73,25 @@ public final class CurrencyBridge {
         }
     }
 
+    /** Zieht Gold direkt ueber die Vault Economy-API ab. Prueft vorher, ob genug Guthaben da ist. */
+    public static boolean takeGold(Player player, double amount) {
+        if (amount <= 0) {
+            return true;
+        }
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        Economy economy = rsp.getProvider();
+        if (!economy.has(player, amount)) {
+            return false;
+        }
+        return economy.withdrawPlayer(player, amount).transactionSuccess();
+    }
+
     /** Liest den aktuellen Gold-Kontostand direkt ueber die Vault Economy-API. Gibt -1 zurueck, wenn Vault fehlt. */
     public static double readGoldBalance(Player player) {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {

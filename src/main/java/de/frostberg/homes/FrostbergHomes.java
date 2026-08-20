@@ -2,6 +2,9 @@ package de.frostberg.homes;
 
 import de.frostberg.homes.armorstand.commands.ArmorStandCommand;
 import de.frostberg.homes.armorstand.gui.ArmorStandGuiListener;
+import de.frostberg.homes.bank.BankManager;
+import de.frostberg.homes.bank.commands.BankCommand;
+import de.frostberg.homes.bank.gui.BankGuiListener;
 import de.frostberg.homes.chat.ChatColorManager;
 import de.frostberg.homes.chat.ChatFormatListener;
 import de.frostberg.homes.chat.ChatModeListener;
@@ -88,6 +91,8 @@ public class FrostbergHomes extends JavaPlugin {
     private ReportManager reportManager;
     private LagClearManager lagClearManager;
     private ArmorStandGuiListener armorStandGuiListener;
+    private BankManager bankManager;
+    private BankGuiListener bankGuiListener;
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
@@ -117,6 +122,8 @@ public class FrostbergHomes extends JavaPlugin {
         this.reportManager = new ReportManager(this);
         this.lagClearManager = new LagClearManager(this);
         this.armorStandGuiListener = new ArmorStandGuiListener(this);
+        this.bankManager = new BankManager(this);
+        this.bankGuiListener = new BankGuiListener(this);
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
@@ -278,6 +285,8 @@ public class FrostbergHomes extends JavaPlugin {
 
         getCommand("ast").setExecutor(new ArmorStandCommand(this));
 
+        getCommand("bank").setExecutor(new BankCommand(this));
+
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
@@ -315,6 +324,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CommandWatcherListener(this), this);
         getServer().getPluginManager().registerEvents(new SupportListener(this), this);
         getServer().getPluginManager().registerEvents(armorStandGuiListener, this);
+        getServer().getPluginManager().registerEvents(bankGuiListener, this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
     }
@@ -403,6 +413,14 @@ public class FrostbergHomes extends JavaPlugin {
 
     public ArmorStandGuiListener getArmorStandGuiListener() {
         return armorStandGuiListener;
+    }
+
+    public BankManager getBankManager() {
+        return bankManager;
+    }
+
+    public BankGuiListener getBankGuiListener() {
+        return bankGuiListener;
     }
 
     public ShopManager getShopManager() {
