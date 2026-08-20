@@ -54,54 +54,66 @@ public class BankManager {
         save();
     }
 
-    /** Zahlt "amount" Tokens vom Wallet auf die Bank ein. Gibt den tatsaechlich eingezahlten Betrag zurueck (0 = nichts zu tun/fehlgeschlagen). */
-    public long depositAllTokens(Player player) {
+    /** Zahlt genau "amount" Tokens vom Wallet auf die Bank ein. Liefert false bei ungueltigem Betrag/zu wenig Wallet-Guthaben. */
+    public boolean depositTokens(Player player, long amount) {
+        if (amount <= 0) {
+            return false;
+        }
         long balance = CurrencyBridge.readTokenBalance(player);
-        if (balance <= 0) {
-            return 0;
+        if (balance < amount) {
+            return false;
         }
-        if (!CurrencyBridge.takeTokens(player, balance)) {
-            return 0;
+        if (!CurrencyBridge.takeTokens(player, amount)) {
+            return false;
         }
-        setBankTokens(player.getUniqueId(), getBankTokens(player.getUniqueId()) + balance);
-        return balance;
+        setBankTokens(player.getUniqueId(), getBankTokens(player.getUniqueId()) + amount);
+        return true;
     }
 
-    /** Zahlt das komplette Bank-Tokens-Guthaben zurueck ins Wallet aus. */
-    public long withdrawAllTokens(Player player) {
+    /** Hebt genau "amount" Tokens von der Bank ab und zahlt sie ins Wallet aus. */
+    public boolean withdrawTokens(Player player, long amount) {
+        if (amount <= 0) {
+            return false;
+        }
         long stored = getBankTokens(player.getUniqueId());
-        if (stored <= 0) {
-            return 0;
+        if (stored < amount) {
+            return false;
         }
-        if (!CurrencyBridge.giveTokens(player, stored)) {
-            return 0;
+        if (!CurrencyBridge.giveTokens(player, amount)) {
+            return false;
         }
-        setBankTokens(player.getUniqueId(), 0);
-        return stored;
+        setBankTokens(player.getUniqueId(), stored - amount);
+        return true;
     }
 
-    public double depositAllGold(Player player) {
+    public boolean depositGold(Player player, double amount) {
+        if (amount <= 0) {
+            return false;
+        }
         double balance = CurrencyBridge.readGoldBalance(player);
-        if (balance <= 0) {
-            return 0;
+        if (balance < amount) {
+            return false;
         }
-        if (!CurrencyBridge.takeGold(player, balance)) {
-            return 0;
+        if (!CurrencyBridge.takeGold(player, amount)) {
+            return false;
         }
-        setBankGold(player.getUniqueId(), getBankGold(player.getUniqueId()) + balance);
-        return balance;
+        setBankGold(player.getUniqueId(), getBankGold(player.getUniqueId()) + amount);
+        return true;
     }
 
-    public double withdrawAllGold(Player player) {
+    public boolean withdrawGold(Player player, double amount) {
+        if (amount <= 0) {
+            return false;
+        }
         double stored = getBankGold(player.getUniqueId());
-        if (stored <= 0) {
-            return 0;
+        if (stored < amount) {
+            return false;
         }
-        if (!CurrencyBridge.giveGold(player, stored)) {
-            return 0;
+        if (!CurrencyBridge.giveGold(player, amount)) {
+            return false;
         }
-        setBankGold(player.getUniqueId(), 0);
-        return stored;
+        setBankGold(player.getUniqueId(), stored - amount);
+        return true;
     }
 
     private void setBankTokens(UUID uuid, long amount) {

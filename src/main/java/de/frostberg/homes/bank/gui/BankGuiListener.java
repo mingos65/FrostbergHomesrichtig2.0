@@ -18,19 +18,21 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * /bank-GUI: je eine Spalte fuer Tokens und Gold, Einzahlen (gruen)/Info
- * (Muenzen-Icon)/Abheben (rot) nebeneinander, mit Luecke dazwischen -
- * gleicher Rahmen-/Nav-Stil wie Shop-GUI. Ein-/Auszahlen bucht jeweils das
- * KOMPLETTE verfuegbare Guthaben (kein Text-Eingabe-Screen noetig).
+ * /bank-GUI: Tokens-Block oben, Gold-Block unten, durch eine Trennzeile
+ * getrennt. Einzahlen/Abheben oeffnet keine Klick-Buttons mehr fuer den
+ * kompletten Betrag, sondern fragt den gewuenschten Betrag per Chat ab
+ * (ueber ChatInputManager) und oeffnet das GUI danach wieder.
  */
 public class BankGuiListener implements Listener {
 
+    private static final int HEADER_SLOT = 4;
     private static final int TOKENS_DEPOSIT_SLOT = 19;
     private static final int TOKENS_INFO_SLOT = 20;
     private static final int TOKENS_WITHDRAW_SLOT = 21;
-    private static final int GOLD_DEPOSIT_SLOT = 23;
-    private static final int GOLD_INFO_SLOT = 24;
-    private static final int GOLD_WITHDRAW_SLOT = 25;
+    private static final int DIVIDER_ROW_START = 27;
+    private static final int GOLD_DEPOSIT_SLOT = 37;
+    private static final int GOLD_INFO_SLOT = 38;
+    private static final int GOLD_WITHDRAW_SLOT = 39;
     private static final int CLOSE_SLOT = 49;
 
     private final FrostbergHomes plugin;
@@ -47,6 +49,14 @@ public class BankGuiListener implements Listener {
         holder.setInventory(inventory);
 
         fillBorder(inventory);
+        for (int i = DIVIDER_ROW_START; i < DIVIDER_ROW_START + 9; i++) {
+            inventory.setItem(i, simpleItem(Material.YELLOW_STAINED_GLASS_PANE, " ", null));
+        }
+
+        inventory.setItem(HEADER_SLOT, simpleItem(Material.NAME_TAG,
+                MessageUtil.get(plugin.getMessages(), "bank-header"),
+                List.of(MessageUtil.get(plugin.getMessages(), "bank-header-lore"))));
+
         render(inventory, player);
 
         List<String> closeLore = List.of(MessageUtil.get(plugin.getMessages(), "bank-close-lore"));
@@ -62,31 +72,31 @@ public class BankGuiListener implements Listener {
         double walletGold = Math.max(0, CurrencyBridge.readGoldBalance(player));
         double bankGold = plugin.getBankManager().getBankGold(player.getUniqueId());
 
-        inventory.setItem(TOKENS_DEPOSIT_SLOT, simpleItem(Material.LIME_STAINED_GLASS_PANE,
+        inventory.setItem(TOKENS_DEPOSIT_SLOT, simpleItem(Material.EMERALD_BLOCK,
                 MessageUtil.get(plugin.getMessages(), "bank-deposit-button"),
-                List.of(MessageUtil.get(plugin.getMessages(), "bank-deposit-tokens-lore").replace("%amount%", format.tokens(walletTokens)))));
+                List.of(MessageUtil.get(plugin.getMessages(), "bank-deposit-tokens-lore"))));
         inventory.setItem(TOKENS_INFO_SLOT, simpleItem(Material.SUNFLOWER,
                 MessageUtil.get(plugin.getMessages(), "bank-tokens-name"),
                 List.of(
                         MessageUtil.get(plugin.getMessages(), "bank-wallet-line").replace("%amount%", format.tokens(walletTokens)),
                         MessageUtil.get(plugin.getMessages(), "bank-balance-line").replace("%amount%", format.tokens(bankTokens))
                 )));
-        inventory.setItem(TOKENS_WITHDRAW_SLOT, simpleItem(Material.RED_STAINED_GLASS_PANE,
+        inventory.setItem(TOKENS_WITHDRAW_SLOT, simpleItem(Material.REDSTONE_BLOCK,
                 MessageUtil.get(plugin.getMessages(), "bank-withdraw-button"),
-                List.of(MessageUtil.get(plugin.getMessages(), "bank-withdraw-tokens-lore").replace("%amount%", format.tokens(bankTokens)))));
+                List.of(MessageUtil.get(plugin.getMessages(), "bank-withdraw-tokens-lore"))));
 
-        inventory.setItem(GOLD_DEPOSIT_SLOT, simpleItem(Material.LIME_STAINED_GLASS_PANE,
+        inventory.setItem(GOLD_DEPOSIT_SLOT, simpleItem(Material.EMERALD_BLOCK,
                 MessageUtil.get(plugin.getMessages(), "bank-deposit-button"),
-                List.of(MessageUtil.get(plugin.getMessages(), "bank-deposit-gold-lore").replace("%amount%", format.gold(walletGold)))));
+                List.of(MessageUtil.get(plugin.getMessages(), "bank-deposit-gold-lore"))));
         inventory.setItem(GOLD_INFO_SLOT, simpleItem(Material.GOLD_INGOT,
                 MessageUtil.get(plugin.getMessages(), "bank-gold-name"),
                 List.of(
                         MessageUtil.get(plugin.getMessages(), "bank-wallet-line").replace("%amount%", format.gold(walletGold)),
                         MessageUtil.get(plugin.getMessages(), "bank-balance-line").replace("%amount%", format.gold(bankGold))
                 )));
-        inventory.setItem(GOLD_WITHDRAW_SLOT, simpleItem(Material.RED_STAINED_GLASS_PANE,
+        inventory.setItem(GOLD_WITHDRAW_SLOT, simpleItem(Material.REDSTONE_BLOCK,
                 MessageUtil.get(plugin.getMessages(), "bank-withdraw-button"),
-                List.of(MessageUtil.get(plugin.getMessages(), "bank-withdraw-gold-lore").replace("%amount%", format.gold(bankGold)))));
+                List.of(MessageUtil.get(plugin.getMessages(), "bank-withdraw-gold-lore"))));
     }
 
     @EventHandler
@@ -105,53 +115,85 @@ public class BankGuiListener implements Listener {
 
         switch (slot) {
             case CLOSE_SLOT -> player.closeInventory();
-            case TOKENS_DEPOSIT_SLOT -> {
-                long amount = plugin.getBankManager().depositAllTokens(player);
-                if (amount > 0) {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-deposit-success")
-                            .replace("%amount%", format.tokens(amount)).replace("%currency%", "Tokens"));
-                } else {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-nothing-to-deposit"));
-                }
-                render(event.getInventory(), player);
-            }
-            case TOKENS_WITHDRAW_SLOT -> {
-                long amount = plugin.getBankManager().withdrawAllTokens(player);
-                if (amount > 0) {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-withdraw-success")
-                            .replace("%amount%", format.tokens(amount)).replace("%currency%", "Tokens"));
-                } else {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-nothing-to-withdraw"));
-                }
-                render(event.getInventory(), player);
-            }
-            case GOLD_DEPOSIT_SLOT -> {
-                double amount = plugin.getBankManager().depositAllGold(player);
-                if (amount > 0) {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-deposit-success")
-                            .replace("%amount%", format.gold(amount)).replace("%currency%", "Gold"));
-                } else {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-nothing-to-deposit"));
-                }
-                render(event.getInventory(), player);
-            }
-            case GOLD_WITHDRAW_SLOT -> {
-                double amount = plugin.getBankManager().withdrawAllGold(player);
-                if (amount > 0) {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-withdraw-success")
-                            .replace("%amount%", format.gold(amount)).replace("%currency%", "Gold"));
-                } else {
-                    player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-nothing-to-withdraw"));
-                }
-                render(event.getInventory(), player);
-            }
+            case TOKENS_DEPOSIT_SLOT -> requestAmount(player, true, true);
+            case TOKENS_WITHDRAW_SLOT -> requestAmount(player, false, true);
+            case GOLD_DEPOSIT_SLOT -> requestAmount(player, true, false);
+            case GOLD_WITHDRAW_SLOT -> requestAmount(player, false, false);
             default -> {
             }
         }
     }
 
+    private void requestAmount(Player player, boolean deposit, boolean tokens) {
+        player.closeInventory();
+        String promptKey = deposit
+                ? (tokens ? "bank-prompt-deposit-tokens" : "bank-prompt-deposit-gold")
+                : (tokens ? "bank-prompt-withdraw-tokens" : "bank-prompt-withdraw-gold");
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), promptKey));
+        plugin.getChatInputManager().awaitInput(player, (p, input) -> handleAmountInput(p, input, deposit, tokens));
+    }
+
+    private void handleAmountInput(Player player, String input, boolean deposit, boolean tokens) {
+        String trimmed = input.trim();
+        if (trimmed.equalsIgnoreCase("abbrechen")) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-input-cancelled"));
+            open(player);
+            return;
+        }
+
+        if (tokens) {
+            long amount;
+            try {
+                amount = Long.parseLong(trimmed);
+            } catch (NumberFormatException ex) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-invalid-amount"));
+                open(player);
+                return;
+            }
+            if (amount <= 0) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-invalid-amount"));
+                open(player);
+                return;
+            }
+            boolean success = deposit
+                    ? plugin.getBankManager().depositTokens(player, amount)
+                    : plugin.getBankManager().withdrawTokens(player, amount);
+            if (success) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), deposit ? "bank-deposit-success" : "bank-withdraw-success")
+                        .replace("%amount%", format.tokens(amount)).replace("%currency%", "Tokens"));
+            } else {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), deposit ? "bank-insufficient-wallet" : "bank-insufficient-bank"));
+            }
+        } else {
+            double amount;
+            try {
+                amount = Double.parseDouble(trimmed.replace(",", "."));
+            } catch (NumberFormatException ex) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-invalid-amount"));
+                open(player);
+                return;
+            }
+            if (amount <= 0) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "bank-invalid-amount"));
+                open(player);
+                return;
+            }
+            boolean success = deposit
+                    ? plugin.getBankManager().depositGold(player, amount)
+                    : plugin.getBankManager().withdrawGold(player, amount);
+            if (success) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), deposit ? "bank-deposit-success" : "bank-withdraw-success")
+                        .replace("%amount%", format.gold(amount)).replace("%currency%", "Gold"));
+            } else {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), deposit ? "bank-insufficient-wallet" : "bank-insufficient-bank"));
+            }
+        }
+
+        open(player);
+    }
+
     private void fillBorder(Inventory inventory) {
-        ItemStack filler = simpleItem(Material.GRAY_STAINED_GLASS_PANE, " ", null);
+        ItemStack filler = simpleItem(Material.BLACK_STAINED_GLASS_PANE, " ", null);
         int size = inventory.getSize();
         int rows = size / 9;
         for (int row = 0; row < rows; row++) {
