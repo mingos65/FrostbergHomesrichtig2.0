@@ -1,10 +1,10 @@
-package de.frostberg.homes.enderchest.gui;
+package de.frostberg.homes.stats.gui;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
-/** Markiert das Seiten-Auswahlmenue (nur bei mehr als 1 Enderchest-Seite noetig). */
-public class EnderchestSelectorHolder implements InventoryHolder {
+/** Markiert das /stats-Anzeige-Inventar - rein informativ, keine Interaktion ausser Schliessen. */
+public class StatsGuiHolder implements InventoryHolder {
 
     private Inventory inventory;
 

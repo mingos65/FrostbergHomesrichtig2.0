@@ -18,14 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * /ec-GUI: bei genau 1 erlaubter Seite direkt die Enderchest-Seite oeffnen,
- * bei mehreren zuerst ein Auswahlmenue. Die Seiten selbst sind ECHTE
- * Aufbewahrungs-Container (Klicks werden NICHT abgebrochen), Speichern
- * passiert beim Schliessen (InventoryCloseEvent).
+ * /ec-GUI: 36 Slots, die ersten 27 (Reihe 1-3) sind echter Speicher (Klicks
+ * dort NICHT abgebrochen), die letzte Reihe ist eine reine Navigationsleiste
+ * (Zurueck-Pfeil / Seiten-Anzeige / Weiter-Pfeil, Klicks dort abgebrochen).
+ * Kein separates Auswahlmenue mehr - bei mehreren erlaubten Seiten blaettert
+ * man direkt in der geoeffneten Seite durch.
  */
 public class EnderchestGuiListener implements Listener {
 
-    private static final int[] PAGE_SLOTS = {19, 20, 21, 22, 23, 24, 25, 29, 30};
+    private static final int WINDOW_SIZE = 36;
+    private static final int PREV_SLOT = 27;
+    private static final int INFO_SLOT = 31;
+    private static final int NEXT_SLOT = 35;
 
     private final FrostbergHomes plugin;
 
@@ -34,68 +38,81 @@ public class EnderchestGuiListener implements Listener {
     }
 
     public void openPage(Player player, int page) {
-        String name = plugin.getEnderchestManager().getPageName(player.getUniqueId(), page);
-        EnderchestGuiHolder holder = new EnderchestGuiHolder(player.getUniqueId(), page);
-        Inventory inventory = Bukkit.createInventory(holder, EnderchestManager.PAGE_SIZE, MessageUtil.color(name));
+        int limit = plugin.getEnderchestManager().getPageLimit(player);
+        int clampedPage = Math.max(0, Math.min(page, limit - 1));
+
+        EnderchestGuiHolder holder = new EnderchestGuiHolder(player.getUniqueId(), clampedPage);
+        String title = MessageUtil.get(plugin.getMessages(), "ec-title");
+        Inventory inventory = Bukkit.createInventory(holder, WINDOW_SIZE, MessageUtil.color(title));
         holder.setInventory(inventory);
-        inventory.setContents(plugin.getEnderchestManager().loadPage(player.getUniqueId(), page));
+
+        ItemStack[] stored = plugin.getEnderchestManager().loadPage(player.getUniqueId(), clampedPage);
+        for (int i = 0; i < stored.length; i++) {
+            inventory.setItem(i, stored[i]);
+        }
+
+        renderNav(inventory, clampedPage, limit);
+
         player.openInventory(inventory);
     }
 
-    public void openSelector(Player player) {
-        int limit = plugin.getEnderchestManager().getPageLimit(player);
-        EnderchestSelectorHolder holder = new EnderchestSelectorHolder();
-        Inventory inventory = Bukkit.createInventory(holder, 54,
-                MessageUtil.color(MessageUtil.get(plugin.getMessages(), "ec-selector-title")));
-        holder.setInventory(inventory);
-
-        fillBorder(inventory);
-
-        for (int i = 0; i < limit && i < PAGE_SLOTS.length; i++) {
-            String name = plugin.getEnderchestManager().getPageName(player.getUniqueId(), i);
-            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "ec-selector-lore"));
-            inventory.setItem(PAGE_SLOTS[i], simpleItem(Material.ENDER_CHEST, MessageUtil.color("&d") + name, lore));
+    private void renderNav(Inventory inventory, int page, int limit) {
+        ItemStack filler = simpleItem(Material.GRAY_STAINED_GLASS_PANE, " ", null);
+        for (int i = EnderchestManager.PAGE_SIZE; i < WINDOW_SIZE; i++) {
+            inventory.setItem(i, filler.clone());
         }
 
-        player.openInventory(inventory);
+        if (page > 0) {
+            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "ec-prev-lore"));
+            inventory.setItem(PREV_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "ec-prev"), lore));
+        }
+        if (page < limit - 1) {
+            List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "ec-next-lore"));
+            inventory.setItem(NEXT_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "ec-next"), lore));
+        }
+
+        String info = MessageUtil.get(plugin.getMessages(), "ec-page-indicator")
+                .replace("%page%", String.valueOf(page + 1))
+                .replace("%pages%", String.valueOf(limit));
+        inventory.setItem(INFO_SLOT, simpleItem(Material.ENDER_CHEST, info, null));
     }
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        if (event.getInventory().getHolder() instanceof EnderchestSelectorHolder) {
-            event.setCancelled(true);
-            if (event.getClickedInventory() == null || !event.getClickedInventory().equals(event.getView().getTopInventory())) {
-                return;
-            }
-            Player player = (Player) event.getWhoClicked();
-            int slot = event.getSlot();
-            for (int i = 0; i < PAGE_SLOTS.length; i++) {
-                if (PAGE_SLOTS[i] == slot) {
-                    openPage(player, i);
-                    return;
-                }
-            }
+        if (!(event.getInventory().getHolder() instanceof EnderchestGuiHolder holder)) {
+            return;
         }
-        // EnderchestGuiHolder: bewusst NICHT abbrechen, ist ein echter Container
+
+        boolean inTopInventory = event.getRawSlot() < event.getView().getTopInventory().getSize();
+        if (!inTopInventory) {
+            return;
+        }
+
+        int slot = event.getSlot();
+        if (slot < EnderchestManager.PAGE_SIZE) {
+            // Echter Speicher-Slot - normal erlaubt
+            return;
+        }
+
+        // Navigationsleiste - nie Items reinlegen/rausnehmen
+        event.setCancelled(true);
+
+        Player player = (Player) event.getWhoClicked();
+        int limit = plugin.getEnderchestManager().getPageLimit(player);
+
+        if (slot == PREV_SLOT && holder.getPage() > 0) {
+            plugin.getEnderchestManager().savePage(player.getUniqueId(), holder.getPage(), event.getInventory().getContents());
+            openPage(player, holder.getPage() - 1);
+        } else if (slot == NEXT_SLOT && holder.getPage() < limit - 1) {
+            plugin.getEnderchestManager().savePage(player.getUniqueId(), holder.getPage(), event.getInventory().getContents());
+            openPage(player, holder.getPage() + 1);
+        }
     }
 
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
         if (event.getInventory().getHolder() instanceof EnderchestGuiHolder holder) {
             plugin.getEnderchestManager().savePage(holder.getPlayerId(), holder.getPage(), event.getInventory().getContents());
-        }
-    }
-
-    private void fillBorder(Inventory inventory) {
-        ItemStack filler = simpleItem(Material.GRAY_STAINED_GLASS_PANE, " ", null);
-        int size = inventory.getSize();
-        int rows = size / 9;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (row == 0 || row == rows - 1 || col == 0 || col == 8) {
-                    inventory.setItem(row * 9 + col, filler.clone());
-                }
-            }
         }
     }
 

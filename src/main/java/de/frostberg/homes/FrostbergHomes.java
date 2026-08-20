@@ -1,7 +1,5 @@
 package de.frostberg.homes;
 
-import de.frostberg.homes.armorstand.commands.ArmorStandCommand;
-import de.frostberg.homes.armorstand.gui.ArmorStandGuiListener;
 import de.frostberg.homes.bank.BankManager;
 import de.frostberg.homes.bank.commands.BankCommand;
 import de.frostberg.homes.bank.gui.BankGuiListener;
@@ -63,6 +61,7 @@ import de.frostberg.homes.stats.PlaytimeManager;
 import de.frostberg.homes.stats.commands.SpielzeitCommand;
 import de.frostberg.homes.stats.commands.StatsCommand;
 import de.frostberg.homes.stats.commands.TopCommand;
+import de.frostberg.homes.stats.gui.StatsGuiListener;
 import de.frostberg.homes.staff.CommandWatcherListener;
 import de.frostberg.homes.staff.CommandWatcherManager;
 import de.frostberg.homes.staff.VanishListener;
@@ -75,6 +74,8 @@ import de.frostberg.homes.support.SupportManager;
 import de.frostberg.homes.support.commands.SupportCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
 import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
+import de.frostberg.homes.util.ChatInputListener;
+import de.frostberg.homes.util.ChatInputManager;
 import de.frostberg.homes.util.ClanPlaceholderExpansion;
 import de.frostberg.homes.util.CurrencyPlaceholderExpansion;
 import de.frostberg.homes.util.QuestPlaceholderExpansion;
@@ -104,7 +105,6 @@ public class FrostbergHomes extends JavaPlugin {
     private SupportManager supportManager;
     private ReportManager reportManager;
     private LagClearManager lagClearManager;
-    private ArmorStandGuiListener armorStandGuiListener;
     private BankManager bankManager;
     private BankGuiListener bankGuiListener;
     private PlaytimeManager playtimeManager;
@@ -115,6 +115,8 @@ public class FrostbergHomes extends JavaPlugin {
     private ShopManager shopManager;
     private ShopGuiListener shopGuiListener;
     private FarmweltGuiListener farmweltGuiListener;
+    private StatsGuiListener statsGuiListener;
+    private ChatInputManager chatInputManager;
     private FileConfiguration messages;
 
     @Override
@@ -140,7 +142,6 @@ public class FrostbergHomes extends JavaPlugin {
         this.supportManager = new SupportManager();
         this.reportManager = new ReportManager(this);
         this.lagClearManager = new LagClearManager(this);
-        this.armorStandGuiListener = new ArmorStandGuiListener(this);
         this.bankManager = new BankManager(this);
         this.bankGuiListener = new BankGuiListener(this);
         this.playtimeManager = new PlaytimeManager(this);
@@ -151,6 +152,8 @@ public class FrostbergHomes extends JavaPlugin {
         this.shopGuiListener = new ShopGuiListener(this);
         this.shopManager = new ShopManager(this);
         this.farmweltGuiListener = new FarmweltGuiListener(this);
+        this.statsGuiListener = new StatsGuiListener(this);
+        this.chatInputManager = new ChatInputManager();
 
         registerCommands();
         registerListeners();
@@ -307,7 +310,6 @@ public class FrostbergHomes extends JavaPlugin {
 
         getCommand("laggclear").setExecutor(new LagClearCommand(this));
 
-        getCommand("ast").setExecutor(new ArmorStandCommand(this));
 
         getCommand("bank").setExecutor(new BankCommand(this));
 
@@ -354,15 +356,15 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(questGuiListener, this);
         getServer().getPluginManager().registerEvents(new QuestProgressListener(this), this);
 
-        // ChatModeListener MUSS vor ChatFormatListener registriert werden (gleiche
-        // Prioritaet LOWEST, Bukkit fuehrt bei gleicher Prioritaet in Registrier-
-        // reihenfolge aus) - siehe Kommentar in ChatModeListener.
+        // ChatInputListener und ChatModeListener MUESSEN vor ChatFormatListener registriert
+        // werden (gleiche Prioritaet LOWEST, Bukkit fuehrt bei gleicher Prioritaet in
+        // Registrierreihenfolge aus) - siehe Kommentar in ChatModeListener.
+        getServer().getPluginManager().registerEvents(new ChatInputListener(this), this);
         getServer().getPluginManager().registerEvents(new ChatModeListener(this), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(this), this);
         getServer().getPluginManager().registerEvents(new VanishListener(this), this);
         getServer().getPluginManager().registerEvents(new CommandWatcherListener(this), this);
         getServer().getPluginManager().registerEvents(new SupportListener(this), this);
-        getServer().getPluginManager().registerEvents(armorStandGuiListener, this);
         getServer().getPluginManager().registerEvents(bankGuiListener, this);
         getServer().getPluginManager().registerEvents(new PlaytimeListener(this), this);
         getServer().getPluginManager().registerEvents(enderchestGuiListener, this);
@@ -370,6 +372,7 @@ public class FrostbergHomes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new HandelListener(this), this);
         getServer().getPluginManager().registerEvents(shopGuiListener, this);
         getServer().getPluginManager().registerEvents(farmweltGuiListener, this);
+        getServer().getPluginManager().registerEvents(statsGuiListener, this);
     }
 
     /**
@@ -454,10 +457,6 @@ public class FrostbergHomes extends JavaPlugin {
         return lagClearManager;
     }
 
-    public ArmorStandGuiListener getArmorStandGuiListener() {
-        return armorStandGuiListener;
-    }
-
     public BankManager getBankManager() {
         return bankManager;
     }
@@ -496,5 +495,13 @@ public class FrostbergHomes extends JavaPlugin {
 
     public FarmweltGuiListener getFarmweltGuiListener() {
         return farmweltGuiListener;
+    }
+
+    public StatsGuiListener getStatsGuiListener() {
+        return statsGuiListener;
+    }
+
+    public ChatInputManager getChatInputManager() {
+        return chatInputManager;
     }
 }

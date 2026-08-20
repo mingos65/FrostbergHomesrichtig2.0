@@ -189,11 +189,6 @@ commands:
     usage: /laggclear
     permission: lagclear.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
-  ast:
-    description: Oeffnet das Bearbeitungsmenue fuer den angeschauten Armor Stand
-    usage: /ast
-    permission: ast.use
-    permission-message: '&cDu hast keine Berechtigung dafuer.'
   bank:
     description: 'Eigene Bank fuer Tokens/Gold (Nutzung: /bank [hide])'
     usage: /bank [hide]
@@ -215,13 +210,13 @@ commands:
     permission: stats.top
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   ec:
-    description: 'Eigene Mehrseiten-Enderchest (Nutzung: /ec [name <seite> <name>])'
-    usage: /ec [name <seite> <name>]
+    description: Eigene Mehrseiten-Enderchest
+    usage: /ec
     permission: ec.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   enderchest:
     description: 'Alias fuer /ec'
-    usage: /enderchest [name <seite> <name>]
+    usage: /enderchest
     permission: ec.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
   handel:
@@ -497,9 +492,6 @@ permissions:
     default: op
   lagclear.use:
     description: Erlaubt /laggclear (manuelle Bodenitem-Bereinigung)
-    default: op
-  ast.use:
-    description: Erlaubt /ast (Armor-Stand-Editor)
     default: op
   bank.use:
     description: Erlaubt /bank
