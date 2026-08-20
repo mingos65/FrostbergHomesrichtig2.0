@@ -224,6 +224,16 @@ commands:
     usage: /enderchest [name <seite> <name>]
     permission: ec.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  rs:
+    description: Oeffnet den eigenen Extra-Rucksack
+    usage: /rs
+    permission: rucksack.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  rucksack:
+    description: 'Alias fuer /rs'
+    usage: /rucksack
+    permission: rucksack.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
   shop:
     description: 'Eigener Item-Shop (Nutzung: /shop [reload])'
     usage: /shop [reload]
@@ -500,6 +510,9 @@ permissions:
     default: true
   ec.use:
     description: Erlaubt /ec bzw. /enderchest
+    default: true
+  rucksack.use:
+    description: Erlaubt /rs bzw. /rucksack
     default: true
 
   shop.*:
