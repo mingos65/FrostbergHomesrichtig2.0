@@ -108,6 +108,23 @@ public class PlaytimeManager {
         return builder.toString();
     }
 
+    /** Wie format(), aber mit dezenter Farbe pro Einheit (Tage/Stunden/Minuten) - fuer Item-Lore statt Chat gedacht. */
+    public String formatColored(long totalSeconds) {
+        long days = totalSeconds / 86400;
+        long hours = (totalSeconds % 86400) / 3600;
+        long minutes = (totalSeconds % 3600) / 60;
+
+        List<String> parts = new ArrayList<>();
+        if (days > 0) {
+            parts.add("&b" + days + " Tage");
+        }
+        if (hours > 0 || days > 0) {
+            parts.add("&e" + hours + " Std");
+        }
+        parts.add("&f" + minutes + " Min");
+        return String.join(" &7| ", parts);
+    }
+
     private void save() {
         try {
             config.save(file);

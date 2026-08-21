@@ -1,6 +1,7 @@
 package de.frostberg.homes.stats.gui;
 
 import de.frostberg.homes.FrostbergHomes;
+import de.frostberg.homes.clan.model.Clan;
 import de.frostberg.homes.util.CurrencyBridge;
 import de.frostberg.homes.util.MessageUtil;
 import org.bukkit.Bukkit;
@@ -19,11 +20,23 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
-/** /stats-GUI: zeigt Spielzeit, Wallet- und Bankguthaben alles auf einen Blick, rein informativ. */
+/**
+ * /stats-GUI: zeigt Spielzeit, Wallet-, Bank- und Clan-Infos alles auf einen
+ * Blick, rein informativ ueber die Item-Lore - keine weiteren Klicks/GUIs
+ * ausser dem Schliessen-Button. Reihe 1 = persoenliche Werte (Spielzeit,
+ * Wallet, Clan), Reihe 2 = Bank.
+ */
 public class StatsGuiListener implements Listener {
 
-    private static final int CLOSE_SLOT = 16;
+    private static final int PLAYTIME_SLOT = 10;
+    private static final int WALLET_TOKENS_SLOT = 12;
+    private static final int WALLET_GOLD_SLOT = 14;
+    private static final int CLAN_SLOT = 15;
+    private static final int BANK_TOKENS_SLOT = 21;
+    private static final int BANK_GOLD_SLOT = 22;
+    private static final int CLOSE_SLOT = 31;
 
     private final FrostbergHomes plugin;
     private final DecimalFormat tokenFormat = new DecimalFormat("#,##0", DecimalFormatSymbols.getInstance(Locale.GERMANY));
@@ -37,7 +50,7 @@ public class StatsGuiListener implements Listener {
         StatsGuiHolder holder = new StatsGuiHolder();
         String title = MessageUtil.get(plugin.getMessages(), "stats-gui-title")
                 .replace("%player%", target.getName() != null ? target.getName() : "?");
-        Inventory inventory = Bukkit.createInventory(holder, 27, MessageUtil.color(title));
+        Inventory inventory = Bukkit.createInventory(holder, 36, MessageUtil.color(title));
         holder.setInventory(inventory);
 
         fillBorder(inventory);
@@ -45,34 +58,36 @@ public class StatsGuiListener implements Listener {
         boolean self = viewer.getUniqueId().equals(target.getUniqueId());
         boolean hidden = !self && plugin.getBankManager().isHidden(target.getUniqueId()) && !viewer.hasPermission("bank.viewhidden");
 
-        String time = plugin.getPlaytimeManager().format(plugin.getPlaytimeManager().getTotalSeconds(target.getUniqueId()));
-        inventory.setItem(10, simpleItem(Material.CLOCK, MessageUtil.get(plugin.getMessages(), "stats-gui-playtime-name"),
+        String time = plugin.getPlaytimeManager().formatColored(plugin.getPlaytimeManager().getTotalSeconds(target.getUniqueId()));
+        inventory.setItem(PLAYTIME_SLOT, simpleItem(Material.CLOCK, MessageUtil.get(plugin.getMessages(), "stats-gui-playtime-name"),
                 List.of(time)));
 
         if (target.isOnline() && target.getPlayer() != null) {
             Player online = target.getPlayer();
             long walletTokens = CurrencyBridge.readTokenBalance(online);
             double walletGold = CurrencyBridge.readGoldBalance(online);
-            inventory.setItem(11, simpleItem(Material.SUNFLOWER, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-tokens-name"),
+            inventory.setItem(WALLET_TOKENS_SLOT, simpleItem(Material.GOLD_NUGGET, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-tokens-name"),
                     List.of(walletTokens < 0 ? "?" : tokenFormat.format(walletTokens))));
-            inventory.setItem(12, simpleItem(Material.GOLD_INGOT, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-gold-name"),
+            inventory.setItem(WALLET_GOLD_SLOT, simpleItem(Material.GOLD_INGOT, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-gold-name"),
                     List.of(walletGold < 0 ? "?" : goldFormat.format(walletGold))));
         } else {
-            inventory.setItem(11, simpleItem(Material.SUNFLOWER, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-tokens-name"),
+            inventory.setItem(WALLET_TOKENS_SLOT, simpleItem(Material.GOLD_NUGGET, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-tokens-name"),
                     List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-offline"))));
-            inventory.setItem(12, simpleItem(Material.GOLD_INGOT, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-gold-name"),
+            inventory.setItem(WALLET_GOLD_SLOT, simpleItem(Material.GOLD_INGOT, MessageUtil.get(plugin.getMessages(), "stats-gui-wallet-gold-name"),
                     List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-offline"))));
         }
 
+        inventory.setItem(CLAN_SLOT, clanItem(target));
+
         if (hidden) {
-            inventory.setItem(14, simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-tokens-name"),
+            inventory.setItem(BANK_TOKENS_SLOT, simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-tokens-name"),
                     List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-hidden"))));
-            inventory.setItem(15, simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-gold-name"),
+            inventory.setItem(BANK_GOLD_SLOT, simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-gold-name"),
                     List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-hidden"))));
         } else {
-            inventory.setItem(14, simpleItem(Material.CHEST, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-tokens-name"),
+            inventory.setItem(BANK_TOKENS_SLOT, simpleItem(Material.GOLD_BLOCK, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-tokens-name"),
                     List.of(tokenFormat.format(plugin.getBankManager().getBankTokens(target.getUniqueId())))));
-            inventory.setItem(15, simpleItem(Material.CHEST, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-gold-name"),
+            inventory.setItem(BANK_GOLD_SLOT, simpleItem(Material.RAW_GOLD_BLOCK, MessageUtil.get(plugin.getMessages(), "stats-gui-bank-gold-name"),
                     List.of(goldFormat.format(plugin.getBankManager().getBankGold(target.getUniqueId())))));
         }
 
@@ -80,6 +95,21 @@ public class StatsGuiListener implements Listener {
         inventory.setItem(CLOSE_SLOT, simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "stats-gui-close"), closeLore));
 
         viewer.openInventory(inventory);
+    }
+
+    private ItemStack clanItem(OfflinePlayer target) {
+        Optional<Clan> clanOpt = plugin.getClanManager().getClanOf(target.getUniqueId());
+        if (clanOpt.isEmpty()) {
+            return simpleItem(Material.RED_BED, MessageUtil.get(plugin.getMessages(), "stats-gui-clan-name"),
+                    List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-no-clan")));
+        }
+        Clan clan = clanOpt.get();
+        String tagPart = clan.getTag() != null ? " &7[&f" + clan.getTag() + "&7]" : "";
+        List<String> lore = List.of(
+                "&f" + clan.getName() + tagPart,
+                MessageUtil.get(plugin.getMessages(), "stats-gui-clan-members").replace("%amount%", String.valueOf(clan.getMemberCount()))
+        );
+        return simpleItem(Material.RED_BED, MessageUtil.get(plugin.getMessages(), "stats-gui-clan-name"), lore);
     }
 
     @EventHandler
