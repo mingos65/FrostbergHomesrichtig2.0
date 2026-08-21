@@ -28,6 +28,9 @@ public class TradeSession {
     private boolean completed;
     private boolean cancelled;
 
+    private boolean awaitingInputA;
+    private boolean awaitingInputB;
+
     public TradeSession(UUID playerA, UUID playerB) {
         this.playerA = playerA;
         this.playerB = playerB;
@@ -122,5 +125,18 @@ public class TradeSession {
 
     public boolean isFinished() {
         return completed || cancelled;
+    }
+
+    /** True, waehrend diese Seite ihr Fenster geschlossen hat, um einen Betrag im Chat einzugeben - InventoryCloseEvent darf den Handel dann NICHT abbrechen. */
+    public boolean isAwaitingInput(UUID uuid) {
+        return isPlayerA(uuid) ? awaitingInputA : awaitingInputB;
+    }
+
+    public void setAwaitingInput(UUID uuid, boolean awaiting) {
+        if (isPlayerA(uuid)) {
+            awaitingInputA = awaiting;
+        } else {
+            awaitingInputB = awaiting;
+        }
     }
 }

@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -42,9 +41,6 @@ public class HandelGuiListener implements Listener {
     private static final int A_CONFIRM_SLOT = 46;
     private static final int CANCEL_SLOT = 49;
     private static final int B_CONFIRM_SLOT = 52;
-
-    private static final long TOKENS_STEP = 100;
-    private static final double GOLD_STEP = 1;
 
     private final FrostbergHomes plugin;
     private final DecimalFormat tokenFormat = new DecimalFormat("#,##0", DecimalFormatSymbols.getInstance(Locale.GERMANY));
@@ -158,19 +154,11 @@ public class HandelGuiListener implements Listener {
         boolean isGoldSlot = (slot == A_GOLD_SLOT && session.isPlayerA(uuid)) || (slot == B_GOLD_SLOT && session.isPlayerB(uuid));
 
         if (isTokensSlot) {
-            long current = session.getTokensOffered(uuid);
-            long delta = event.getClick() == ClickType.RIGHT ? -TOKENS_STEP : TOKENS_STEP;
-            session.setTokensOffered(uuid, current + delta);
-            session.resetConfirmations();
-            render(session);
+            requestAmount(clicker, session, true);
             return;
         }
         if (isGoldSlot) {
-            double current = session.getGoldOffered(uuid);
-            double delta = event.getClick() == ClickType.RIGHT ? -GOLD_STEP : GOLD_STEP;
-            session.setGoldOffered(uuid, current + delta);
-            session.resetConfirmations();
-            render(session);
+            requestAmount(clicker, session, false);
             return;
         }
 
@@ -219,7 +207,81 @@ public class HandelGuiListener implements Listener {
         if (session.isFinished()) {
             return;
         }
+        UUID uuid = event.getPlayer().getUniqueId();
+        if (session.isAwaitingInput(uuid)) {
+            // Wir haben das Fenster selbst geschlossen, um einen Betrag per Chat
+            // abzufragen - kein Verbindungsabbruch, also nicht abbrechen.
+            return;
+        }
         cancelTrade(session, "handel-cancelled-disconnect");
+    }
+
+    /** Bricht die laufende Session des Spielers ab, falls vorhanden - aufgerufen beim Quit, auch waehrend einer Chat-Betragseingabe. */
+    public void handleQuit(UUID uuid) {
+        TradeSession session = plugin.getTradeManager().getSession(uuid);
+        if (session != null && !session.isFinished()) {
+            cancelTrade(session, "handel-cancelled-disconnect");
+        }
+    }
+
+    private void requestAmount(Player player, TradeSession session, boolean tokens) {
+        UUID uuid = player.getUniqueId();
+        session.setAwaitingInput(uuid, true);
+        player.closeInventory();
+        player.sendMessage(MessageUtil.get(plugin.getMessages(), tokens ? "handel-prompt-tokens" : "handel-prompt-gold"));
+        plugin.getChatInputManager().awaitInput(player, (p, input) -> handleAmountInput(p, session, input, tokens));
+    }
+
+    private void handleAmountInput(Player player, TradeSession session, String input, boolean tokens) {
+        UUID uuid = player.getUniqueId();
+        session.setAwaitingInput(uuid, false);
+
+        if (session.isFinished()) {
+            return;
+        }
+
+        String trimmed = input.trim();
+        if (trimmed.equalsIgnoreCase("abbrechen")) {
+            player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-input-cancelled"));
+            player.openInventory(session.getInventory());
+            return;
+        }
+
+        if (tokens) {
+            long amount;
+            try {
+                amount = Long.parseLong(trimmed);
+            } catch (NumberFormatException ex) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-invalid-amount"));
+                player.openInventory(session.getInventory());
+                return;
+            }
+            if (amount < 0) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-invalid-amount"));
+                player.openInventory(session.getInventory());
+                return;
+            }
+            session.setTokensOffered(uuid, amount);
+        } else {
+            double amount;
+            try {
+                amount = Double.parseDouble(trimmed.replace(",", "."));
+            } catch (NumberFormatException ex) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-invalid-amount"));
+                player.openInventory(session.getInventory());
+                return;
+            }
+            if (amount < 0) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-invalid-amount"));
+                player.openInventory(session.getInventory());
+                return;
+            }
+            session.setGoldOffered(uuid, amount);
+        }
+
+        session.resetConfirmations();
+        render(session);
+        player.openInventory(session.getInventory());
     }
 
     private void inventoryStillOpen(TradeSession session, Runnable action) {
@@ -309,6 +371,10 @@ public class HandelGuiListener implements Listener {
             return;
         }
         session.setCancelled(true);
+        // Falls gerade eine Seite auf eine Chat-Betragseingabe wartet, deren Ergebnis nicht
+        // mehr verarbeiten - sonst wuerde ihre naechste normale Chatnachricht verschluckt.
+        plugin.getChatInputManager().cancel(session.getPlayerA());
+        plugin.getChatInputManager().cancel(session.getPlayerB());
 
         Player a = Bukkit.getPlayer(session.getPlayerA());
         Player b = Bukkit.getPlayer(session.getPlayerB());
