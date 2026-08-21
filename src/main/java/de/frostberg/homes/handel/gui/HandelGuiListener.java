@@ -91,7 +91,7 @@ public class HandelGuiListener implements Listener {
         inventory.setItem(B_CONFIRM_SLOT, confirmItem(session.isConfirmed(session.getPlayerB())));
 
         List<String> cancelLore = List.of(MessageUtil.get(plugin.getMessages(), "handel-cancel-lore"));
-        ItemStack cancelItem = simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "handel-cancel"), cancelLore);
+        ItemStack cancelItem = simpleItem(Material.ARROW, MessageUtil.get(plugin.getMessages(), "handel-cancel"), cancelLore);
         inventory.setItem(A_CANCEL_SLOT, cancelItem.clone());
         inventory.setItem(B_CANCEL_SLOT, cancelItem.clone());
     }
@@ -125,12 +125,19 @@ public class HandelGuiListener implements Listener {
         return simpleItem(material, MessageUtil.get(plugin.getMessages(), nameKey), lore);
     }
 
+    /** Grosser Block statt Glasscheibe, damit auf einen Blick sichtbar ist, ob DIESE Seite schon bestaetigt hat - zusaetzlich verzaubert-glaenzend im bestaetigten Zustand, gut sichtbar fuer beide Spieler. */
     private ItemStack confirmItem(boolean confirmed) {
-        Material material = confirmed ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE;
+        Material material = confirmed ? Material.EMERALD_BLOCK : Material.REDSTONE_BLOCK;
         String key = confirmed ? "handel-confirmed" : "handel-not-confirmed";
         String loreKey = confirmed ? "handel-confirm-lore-on" : "handel-confirm-lore-off";
         List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), loreKey));
-        return simpleItem(material, MessageUtil.get(plugin.getMessages(), key), lore);
+        ItemStack item = simpleItem(material, MessageUtil.get(plugin.getMessages(), key), lore);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setEnchantmentGlintOverride(confirmed);
+            item.setItemMeta(meta);
+        }
+        return item;
     }
 
     @EventHandler
