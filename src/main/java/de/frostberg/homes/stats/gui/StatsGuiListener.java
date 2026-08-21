@@ -33,9 +33,9 @@ public class StatsGuiListener implements Listener {
     private static final int PLAYTIME_SLOT = 10;
     private static final int WALLET_TOKENS_SLOT = 12;
     private static final int WALLET_GOLD_SLOT = 14;
-    private static final int CLAN_SLOT = 15;
+    private static final int CLAN_SLOT = 16;
     private static final int BANK_TOKENS_SLOT = 21;
-    private static final int BANK_GOLD_SLOT = 22;
+    private static final int BANK_GOLD_SLOT = 23;
     private static final int CLOSE_SLOT = 31;
 
     private final FrostbergHomes plugin;
