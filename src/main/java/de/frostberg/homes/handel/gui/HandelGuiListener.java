@@ -6,6 +6,7 @@ import de.frostberg.homes.util.CurrencyBridge;
 import de.frostberg.homes.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -35,6 +37,8 @@ public class HandelGuiListener implements Listener {
     private static final int[] A_ITEM_SLOTS = {10, 11, 12, 19, 20, 21, 28, 29, 30};
     private static final int[] B_ITEM_SLOTS = {14, 15, 16, 23, 24, 25, 32, 33, 34};
     private static final int[] DIVIDER_SLOTS = {4, 13, 22, 31, 40, 49};
+    private static final int HEAD_A_SLOT = 1;
+    private static final int HEAD_B_SLOT = 7;
     private static final int A_TOKENS_SLOT = 37;
     private static final int A_GOLD_SLOT = 38;
     private static final int B_GOLD_SLOT = 42;
@@ -64,6 +68,7 @@ public class HandelGuiListener implements Listener {
 
         fillBorder(inventory);
         fillDivider(inventory);
+        renderHeads(session);
         render(session);
 
         a.openInventory(inventory);
@@ -91,6 +96,26 @@ public class HandelGuiListener implements Listener {
         inventory.setItem(B_CANCEL_SLOT, cancelItem.clone());
     }
 
+    /** Kopf-Icons mit Skin/Name je Spieler oben links/rechts, damit auf einen Blick klar ist, welche Seite wem gehoert. */
+    private void renderHeads(TradeSession session) {
+        Inventory inventory = session.getInventory();
+        inventory.setItem(HEAD_A_SLOT, headItem(session.getPlayerA()));
+        inventory.setItem(HEAD_B_SLOT, headItem(session.getPlayerB()));
+    }
+
+    private ItemStack headItem(UUID uuid) {
+        OfflinePlayer owner = Bukkit.getOfflinePlayer(uuid);
+        String name = owner.getName() != null ? owner.getName() : "?";
+        ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+        if (item.getItemMeta() instanceof SkullMeta meta) {
+            meta.setOwningPlayer(owner);
+            meta.setDisplayName(MessageUtil.color(MessageUtil.get(plugin.getMessages(), "handel-side-name").replace("%player%", name)));
+            meta.setLore(List.of(MessageUtil.color(MessageUtil.get(plugin.getMessages(), "handel-side-lore"))));
+            item.setItemMeta(meta);
+        }
+        return item;
+    }
+
     private ItemStack currencyItem(Material material, String nameKey, String amount) {
         String raw = MessageUtil.get(plugin.getMessages(), "handel-currency-lore").replace("%amount%", amount);
         List<String> lore = new ArrayList<>();
@@ -103,7 +128,8 @@ public class HandelGuiListener implements Listener {
     private ItemStack confirmItem(boolean confirmed) {
         Material material = confirmed ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE;
         String key = confirmed ? "handel-confirmed" : "handel-not-confirmed";
-        List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), "handel-confirm-lore"));
+        String loreKey = confirmed ? "handel-confirm-lore-on" : "handel-confirm-lore-off";
+        List<String> lore = List.of(MessageUtil.get(plugin.getMessages(), loreKey));
         return simpleItem(material, MessageUtil.get(plugin.getMessages(), key), lore);
     }
 
@@ -142,13 +168,13 @@ public class HandelGuiListener implements Listener {
             return;
         }
         if (slot == A_CONFIRM_SLOT && session.isPlayerA(uuid)) {
-            session.setConfirmed(uuid, true);
+            session.setConfirmed(uuid, !session.isConfirmed(uuid));
             render(session);
             tryComplete(session);
             return;
         }
         if (slot == B_CONFIRM_SLOT && session.isPlayerB(uuid)) {
-            session.setConfirmed(uuid, true);
+            session.setConfirmed(uuid, !session.isConfirmed(uuid));
             render(session);
             tryComplete(session);
             return;
