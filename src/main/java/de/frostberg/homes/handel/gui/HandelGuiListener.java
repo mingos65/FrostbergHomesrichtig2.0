@@ -34,13 +34,15 @@ public class HandelGuiListener implements Listener {
 
     private static final int[] A_ITEM_SLOTS = {10, 11, 12, 19, 20, 21, 28, 29, 30};
     private static final int[] B_ITEM_SLOTS = {14, 15, 16, 23, 24, 25, 32, 33, 34};
+    private static final int[] DIVIDER_SLOTS = {4, 13, 22, 31, 40, 49};
     private static final int A_TOKENS_SLOT = 37;
     private static final int A_GOLD_SLOT = 38;
     private static final int B_GOLD_SLOT = 42;
     private static final int B_TOKENS_SLOT = 43;
-    private static final int A_CONFIRM_SLOT = 46;
-    private static final int CANCEL_SLOT = 49;
-    private static final int B_CONFIRM_SLOT = 52;
+    private static final int A_CANCEL_SLOT = 46;
+    private static final int A_CONFIRM_SLOT = 47;
+    private static final int B_CONFIRM_SLOT = 51;
+    private static final int B_CANCEL_SLOT = 52;
 
     private final FrostbergHomes plugin;
     private final DecimalFormat tokenFormat = new DecimalFormat("#,##0", DecimalFormatSymbols.getInstance(Locale.GERMANY));
@@ -61,6 +63,7 @@ public class HandelGuiListener implements Listener {
         session.setInventory(inventory);
 
         fillBorder(inventory);
+        fillDivider(inventory);
         render(session);
 
         a.openInventory(inventory);
@@ -83,8 +86,9 @@ public class HandelGuiListener implements Listener {
         inventory.setItem(B_CONFIRM_SLOT, confirmItem(session.isConfirmed(session.getPlayerB())));
 
         List<String> cancelLore = List.of(MessageUtil.get(plugin.getMessages(), "handel-cancel-lore"));
-        inventory.setItem(CANCEL_SLOT, simpleItem(Material.BARRIER,
-                MessageUtil.get(plugin.getMessages(), "handel-cancel"), cancelLore));
+        ItemStack cancelItem = simpleItem(Material.BARRIER, MessageUtil.get(plugin.getMessages(), "handel-cancel"), cancelLore);
+        inventory.setItem(A_CANCEL_SLOT, cancelItem.clone());
+        inventory.setItem(B_CANCEL_SLOT, cancelItem.clone());
     }
 
     private ItemStack currencyItem(Material material, String nameKey, String amount) {
@@ -133,7 +137,7 @@ public class HandelGuiListener implements Listener {
 
         int slot = event.getSlot();
 
-        if (slot == CANCEL_SLOT) {
+        if ((slot == A_CANCEL_SLOT && session.isPlayerA(uuid)) || (slot == B_CANCEL_SLOT && session.isPlayerB(uuid))) {
             cancelTrade(session, "handel-cancelled-by-player");
             return;
         }
@@ -261,6 +265,11 @@ public class HandelGuiListener implements Listener {
                 player.openInventory(session.getInventory());
                 return;
             }
+            if (amount > CurrencyBridge.readTokenBalance(player)) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-insufficient-wallet"));
+                player.openInventory(session.getInventory());
+                return;
+            }
             session.setTokensOffered(uuid, amount);
         } else {
             double amount;
@@ -273,6 +282,11 @@ public class HandelGuiListener implements Listener {
             }
             if (amount < 0) {
                 player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-invalid-amount"));
+                player.openInventory(session.getInventory());
+                return;
+            }
+            if (amount > CurrencyBridge.readGoldBalance(player)) {
+                player.sendMessage(MessageUtil.get(plugin.getMessages(), "handel-insufficient-wallet"));
                 player.openInventory(session.getInventory());
                 return;
             }
@@ -450,6 +464,14 @@ public class HandelGuiListener implements Listener {
                     inventory.setItem(row * 9 + col, filler.clone());
                 }
             }
+        }
+    }
+
+    /** Senkrechte Trennlinie in der Mittelspalte, damit sofort klar ist, welche Seite wem gehoert. */
+    private void fillDivider(Inventory inventory) {
+        ItemStack divider = simpleItem(Material.YELLOW_STAINED_GLASS_PANE, " ", null);
+        for (int slot : DIVIDER_SLOTS) {
+            inventory.setItem(slot, divider.clone());
         }
     }
 

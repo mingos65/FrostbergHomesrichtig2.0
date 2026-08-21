@@ -333,6 +333,7 @@ handel-currency-lore: "&7Angeboten&8: &f%amount%\n&7Klicke, um den Betrag im Cha
 handel-prompt-tokens: "%prefix%&eSchreibe die Anzahl an Tokens, die du anbieten möchtest, in den Chat. &7(&cabbrechen&7 zum Abbrechen)"
 handel-prompt-gold: "%prefix%&eSchreibe die Menge Gold, die du anbieten möchtest, in den Chat. &7(&cabbrechen&7 zum Abbrechen)"
 handel-invalid-amount: "%prefix%&cDas ist keine gültige Zahl."
+handel-insufficient-wallet: "%prefix%&cSo viel hast du nicht in deinem Wallet."
 handel-input-cancelled: "%prefix%&7Eingabe abgebrochen, dein Angebot bleibt unverändert."
 handel-confirmed: "&a&lBestätigt"
 handel-not-confirmed: "&c&lNicht bestätigt"

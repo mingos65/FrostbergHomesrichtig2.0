@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 /**
  * Stellt den relationalen Platzhalter %rel_frostbergvanish_suffix% bereit:
- * haengt "&7(V)" an, aber NUR wenn der Betrachter (viewer) selbst
+ * haengt " V" an, aber NUR wenn der Betrachter (viewer) selbst
  * frostberg.vanish hat UND das Ziel (target) gerade vanished ist - normale
  * Spieler sehen also nie, dass jemand vanished ist, nur Team-Kollegen. Wird
  * nur registriert, wenn PlaceholderAPI installiert ist (siehe
@@ -56,7 +56,7 @@ public class VanishPlaceholderExpansion extends PlaceholderExpansion implements 
         if (!plugin.getVanishManager().isVanished(target)) {
             return "";
         }
-        return MessageUtil.color(" &d(V)");
+        return MessageUtil.color(" &dV");
     }
 
     @Override
