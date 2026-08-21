@@ -31,7 +31,7 @@ public class LagClearManager {
     }
 
     public void start() {
-        long intervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.auto-interval-minutes", 10)) * 60L * 20L;
+        long intervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.auto-interval-minutes", 15)) * 60L * 20L;
         autoTask = Bukkit.getScheduler().runTaskTimer(plugin, this::runScheduledClear, intervalTicks, intervalTicks);
 
         long monitorIntervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.emergency-check-interval-seconds", 30)) * 20L;
@@ -47,11 +47,25 @@ public class LagClearManager {
         }
     }
 
-    /** /laggclear - sofortige manuelle Bereinigung, unabhaengig vom Zeitplan. */
+    /**
+     * /laggclear bzw. regulaerer/manueller Clear - Ansage bei Vorwarnzeit,
+     * danach zusaetzlich ein Countdown 5-4-3-2-1 in den letzten 5 Sekunden
+     * davor, dann wird geleert.
+     */
     public void manualClear() {
-        Bukkit.broadcastMessage(MessageUtil.get(plugin.getMessages(), "lagclear-warning"));
-        long leadTicks = Math.max(0, plugin.getConfig().getLong("lagclear.warning-lead-seconds", 5)) * 20L;
-        Bukkit.getScheduler().runTaskLater(plugin, this::clearItems, leadTicks);
+        long leadSeconds = Math.max(5, plugin.getConfig().getLong("lagclear.warning-lead-seconds", 60));
+        Bukkit.broadcastMessage(MessageUtil.get(plugin.getMessages(), "lagclear-warning")
+                .replace("%seconds%", String.valueOf(leadSeconds)));
+
+        long countdownStartTicks = (leadSeconds - 5) * 20L;
+        for (int secondsLeft = 5; secondsLeft >= 1; secondsLeft--) {
+            long delayTicks = countdownStartTicks + (5 - secondsLeft) * 20L;
+            final int displaySeconds = secondsLeft;
+            Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.broadcastMessage(
+                    MessageUtil.get(plugin.getMessages(), "lagclear-countdown").replace("%seconds%", String.valueOf(displaySeconds))), delayTicks);
+        }
+
+        Bukkit.getScheduler().runTaskLater(plugin, this::clearItems, leadSeconds * 20L);
     }
 
     private void runScheduledClear() {

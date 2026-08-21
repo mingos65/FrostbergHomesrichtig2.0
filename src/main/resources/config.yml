@@ -136,7 +136,7 @@ report:
   cooldown-seconds: 60
 lagclear:
   # Alle wie viele Minuten regulaer automatisch alle Bodenitems entfernt werden
-  auto-interval-minutes: 10
+  auto-interval-minutes: 15
   # Ab wie vielen gleichzeitig auf dem Boden liegenden Items ein Notfall-Clear
   # ausgeloest wird (mit laengerer Vorwarnzeit statt der kurzen regulaeren)
   emergency-threshold: 2000
@@ -144,5 +144,6 @@ lagclear:
   emergency-check-interval-seconds: 30
   # Vorwarnzeit in Sekunden bei einem Notfall-Clear
   emergency-warning-seconds: 180
-  # Vorwarnzeit in Sekunden bei einem regulaeren/manuellen Clear
-  warning-lead-seconds: 5
+  # Vorwarnzeit in Sekunden bei einem regulaeren/manuellen Clear - Ansage sofort,
+  # dann nochmal Countdown 5-4-3-2-1 in den letzten 5 Sekunden davor
+  warning-lead-seconds: 60

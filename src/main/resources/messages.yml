@@ -258,7 +258,8 @@ reports-empty: "%prefix%&7Keine Meldungen für &e%player% &7gefunden."
 reports-header: "&b&lMeldungen für %player% &7(%count%)"
 reports-entry: "&8▪ &e%reporter% &8» &f%reason% &8(&7%time%&8)"
 # ---------- Lag-Clear (/laggclear) ----------
-lagclear-warning: "%prefix%&eGleich werden alle Items, die auf dem Boden liegen, entfernt!"
+lagclear-warning: "%prefix%&eAlle Bodenitems werden in &c%seconds% Sekunden &eentfernt! Heb deine Sachen jetzt auf!"
+lagclear-countdown: "%prefix%&c&l%seconds%"
 lagclear-emergency-warning: "%prefix%&cSehr viele Bodenitems erkannt &8- &cin %minutes% Minuten werden sie automatisch entfernt. Heb deine Sachen jetzt auf!"
 lagclear-done: "%prefix%&7%amount% Bodenitems wurden entfernt."
 # ---------- Bank (/bank) ----------
