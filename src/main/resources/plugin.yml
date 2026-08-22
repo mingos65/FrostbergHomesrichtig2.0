@@ -239,6 +239,16 @@ commands:
     usage: /shop [reload]
     permission: shop.use
     permission-message: '&cDu hast keine Berechtigung dafuer.'
+  anvil:
+    description: Oeffnet einen virtuellen Amboss
+    usage: /anvil
+    permission: anvil.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
+  werkbank:
+    description: Oeffnet eine virtuelle Werkbank
+    usage: /werkbank
+    permission: werkbank.use
+    permission-message: '&cDu hast keine Berechtigung dafuer.'
 
 permissions:
   homes.*:
@@ -510,6 +520,12 @@ permissions:
     default: true
   handel.use:
     description: Erlaubt /handel, /handelaccept, /handeldeny
+    default: true
+  anvil.use:
+    description: Erlaubt /anvil
+    default: true
+  werkbank.use:
+    description: Erlaubt /werkbank
     default: true
 
   shop.*:

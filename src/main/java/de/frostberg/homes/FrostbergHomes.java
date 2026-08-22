@@ -73,6 +73,8 @@ import de.frostberg.homes.support.SupportListener;
 import de.frostberg.homes.support.SupportManager;
 import de.frostberg.homes.support.commands.SupportCommand;
 import de.frostberg.homes.tokens.commands.PayCommand;
+import de.frostberg.homes.utility.commands.AnvilCommand;
+import de.frostberg.homes.utility.commands.WerkbankCommand;
 import de.frostberg.homes.util.ChatColorPlaceholderExpansion;
 import de.frostberg.homes.util.ChatInputListener;
 import de.frostberg.homes.util.ChatInputManager;
@@ -331,6 +333,9 @@ public class FrostbergHomes extends JavaPlugin {
         ShopCommand shopCommand = new ShopCommand(this);
         getCommand("shop").setExecutor(shopCommand);
         getCommand("shop").setTabCompleter(shopCommand);
+
+        getCommand("anvil").setExecutor(new AnvilCommand(this));
+        getCommand("werkbank").setExecutor(new WerkbankCommand(this));
 
         // HomeCommand hoert zusaetzlich auf PlayerQuitEvent, um einen laufenden
         // Warmup-Countdown beim Verlassen des Servers sauber abzubrechen

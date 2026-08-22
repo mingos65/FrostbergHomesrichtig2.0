@@ -2,6 +2,7 @@ package de.frostberg.homes.stats.gui;
 
 import de.frostberg.homes.FrostbergHomes;
 import de.frostberg.homes.clan.model.Clan;
+import de.frostberg.homes.util.ColorUtil;
 import de.frostberg.homes.util.CurrencyBridge;
 import de.frostberg.homes.util.MessageUtil;
 import org.bukkit.Bukkit;
@@ -104,9 +105,12 @@ public class StatsGuiListener implements Listener {
                     List.of(MessageUtil.get(plugin.getMessages(), "stats-gui-no-clan")));
         }
         Clan clan = clanOpt.get();
-        String tagPart = clan.getTag() != null ? " &7[&f" + clan.getTag() + "&7]" : "";
+        // Gleiche Farbe wie im Tab (siehe ClanPlaceholderExpansion#colorizeTag), Standard Aqua ohne eigene Kauf-Farbe.
+        String colorCode = clan.getTagColor() != null ? clan.getTagColor() : "&b";
+        String coloredName = ColorUtil.applyColorCode(colorCode, clan.getName());
+        String tagPart = clan.getTag() != null ? " &7[" + ColorUtil.applyColorCode(colorCode, clan.getTag()) + "&7]" : "";
         List<String> lore = List.of(
-                "&f" + clan.getName() + tagPart,
+                coloredName + tagPart,
                 MessageUtil.get(plugin.getMessages(), "stats-gui-clan-members").replace("%amount%", String.valueOf(clan.getMemberCount()))
         );
         return simpleItem(Material.RED_BED, MessageUtil.get(plugin.getMessages(), "stats-gui-clan-name"), lore);

@@ -31,7 +31,7 @@ public class LagClearManager {
     }
 
     public void start() {
-        long intervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.auto-interval-minutes", 15)) * 60L * 20L;
+        long intervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.auto-interval-minutes", 30)) * 60L * 20L;
         autoTask = Bukkit.getScheduler().runTaskTimer(plugin, this::runScheduledClear, intervalTicks, intervalTicks);
 
         long monitorIntervalTicks = Math.max(1, plugin.getConfig().getLong("lagclear.emergency-check-interval-seconds", 30)) * 20L;

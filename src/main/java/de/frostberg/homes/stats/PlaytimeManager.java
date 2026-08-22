@@ -91,38 +91,18 @@ public class PlaytimeManager {
         return uuids.subList(0, Math.min(limit, uuids.size()));
     }
 
-    /** Formatiert Sekunden als "XT YStd ZMin" (nur die Einheiten, die > 0 sind). */
+    /** Formatiert Sekunden als "XStd YMin" - bewusst nie Tage/Wochen, damit die Zahl immer sofort vergleichbar ist. */
     public String format(long totalSeconds) {
-        long days = totalSeconds / 86400;
-        long hours = (totalSeconds % 86400) / 3600;
+        long hours = totalSeconds / 3600;
         long minutes = (totalSeconds % 3600) / 60;
-
-        StringBuilder builder = new StringBuilder();
-        if (days > 0) {
-            builder.append(days).append("T ");
-        }
-        if (hours > 0 || days > 0) {
-            builder.append(hours).append("Std ");
-        }
-        builder.append(minutes).append("Min");
-        return builder.toString();
+        return hours + "Std " + minutes + "Min";
     }
 
-    /** Wie format(), aber mit dezenter Farbe pro Einheit (Tage/Stunden/Minuten) - fuer Item-Lore statt Chat gedacht. */
+    /** Wie format(), aber mit dezenter Farbe pro Einheit (Stunden/Minuten) - fuer Item-Lore statt Chat gedacht. */
     public String formatColored(long totalSeconds) {
-        long days = totalSeconds / 86400;
-        long hours = (totalSeconds % 86400) / 3600;
+        long hours = totalSeconds / 3600;
         long minutes = (totalSeconds % 3600) / 60;
-
-        List<String> parts = new ArrayList<>();
-        if (days > 0) {
-            parts.add("&b" + days + " Tage");
-        }
-        if (hours > 0 || days > 0) {
-            parts.add("&e" + hours + " Std");
-        }
-        parts.add("&f" + minutes + " Min");
-        return String.join(" &7| ", parts);
+        return "&e" + hours + " Std &7| &f" + minutes + " Min";
     }
 
     private void save() {
